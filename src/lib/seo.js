@@ -1,6 +1,9 @@
 export const SITE_URL = 'https://arasolutions.in';
 export const SITE_NAME = 'ARA Solutions';
 
+/** Preview image shown when a page link is shared (WhatsApp, LinkedIn, ...). */
+export const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'ARA Solutions' };
+
 /** Every page on the site. Used by the sitemap and the old-link redirect. */
 export const ROUTES = [
   '/',
@@ -103,6 +106,14 @@ export function pageMetadata(path, canonical = path) {
     title: path === '/' ? { absolute: title } : title,
     description,
     alternates: { canonical },
-    openGraph: { title, description, url: canonical },
+    // Page-level openGraph replaces the layout's, so repeat the shared fields here.
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      siteName: SITE_NAME,
+      type: 'website',
+      images: [OG_IMAGE],
+    },
   };
 }
