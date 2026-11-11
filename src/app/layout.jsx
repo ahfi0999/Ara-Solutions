@@ -12,11 +12,11 @@ export const metadata = {
   },
   description:
     'ARA Solutions provides premier IT workforce and staffing solutions. IT Always The Right Choice.',
-  icons: { icon: '/logo-icon.png' },
+  icons: { icon: '/logo-mark.png', apple: '/logo-mark.png' },
   openGraph: {
     siteName: SITE_NAME,
     type: 'website',
-    images: ['/logo.png'],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'ARA Solutions' }],
   },
   twitter: { card: 'summary_large_image' },
 };

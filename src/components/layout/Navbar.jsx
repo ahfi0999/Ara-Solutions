@@ -52,14 +52,14 @@ function Dropdown({ entry, open, onOpen, onClose, active, currentPath }) {
         type="button"
         aria-expanded={open}
         onClick={() => (open ? onClose() : onOpen())}
-        className={`relative flex h-20 items-center gap-1 px-3 font-display text-[15px] font-medium transition-colors ${active || open ? 'text-navy' : 'text-slate-600 hover:text-navy'}`}
+        className={`relative flex h-20 items-center gap-1 whitespace-nowrap px-2 font-display text-[14px] font-medium transition-colors xl:px-3 xl:text-[15px] ${active || open ? 'text-navy' : 'text-slate-600 hover:text-navy'}`}
       >
         {entry.label}
         <ChevronDown
           aria-hidden="true"
           className={`size-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         />
-        {active && <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-brand" />}
+        {active && <span className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-brand xl:inset-x-3" />}
       </button>
       <AnimatePresence>
         {open && (
@@ -164,11 +164,11 @@ export default function Navbar() {
                 <li key={entry.href}>
                   <Link
                     href={entry.href}
-                    className={`relative flex h-20 items-center px-3 font-display text-[15px] font-medium transition-colors ${isActive(entry, currentPath) ? 'text-navy' : 'text-slate-600 hover:text-navy'}`}
+                    className={`relative flex h-20 items-center whitespace-nowrap px-2 font-display text-[14px] font-medium transition-colors xl:px-3 xl:text-[15px] ${isActive(entry, currentPath) ? 'text-navy' : 'text-slate-600 hover:text-navy'}`}
                   >
                     {entry.label}
                     {isActive(entry, currentPath) && (
-                      <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-brand" />
+                      <span className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-brand xl:inset-x-3" />
                     )}
                   </Link>
                 </li>
