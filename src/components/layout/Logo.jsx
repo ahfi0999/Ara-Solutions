@@ -1,5 +1,5 @@
 const HEIGHTS = {
-  header: 'h-9 xl:h-11',
+  header: 'h-8 xl:h-9',
   footer: 'h-8',
 };
 
