@@ -12,7 +12,7 @@ const ServiceNowPage = () => (
     <PageHero
       variant="page"
       badge="Enterprise Platform Readiness"
-      headline="Services Now"
+      headline="ServiceNow Training & Placement"
       subhead="From platform fundamentals to certified and job-ready — training built around the roles companies are actually hiring for."
       backgroundImage={images.servicenowHero}
       techVariant="circuit"
