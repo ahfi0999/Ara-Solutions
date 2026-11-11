@@ -36,7 +36,7 @@ const RpoOverview = () => {
             </div>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <a
-                href="#/contact"
+                href="/contact"
                 id="rpo-explore-btn"
                 onClick={(event) => {
                   event.preventDefault();
@@ -256,7 +256,7 @@ const RpoOverview = () => {
                 Close
               </button>
               <a
-                href="#/contact"
+                href="/contact"
                 onClick={(event) => {
                   event.preventDefault();
                   setVideoOpen(false);

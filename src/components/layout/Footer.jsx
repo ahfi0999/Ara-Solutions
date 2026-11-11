@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { ArrowUp, Check, Mail, MapPin, Phone, Send } from 'lucide-react';
 import DarkBackdrop from '../decor/DarkBackdrop';

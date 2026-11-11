@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import { ChevronIcon, CloseIcon, MenuIcon } from '../icons';
 import Logo from './Logo';
