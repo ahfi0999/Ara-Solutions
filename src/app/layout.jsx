@@ -1,5 +1,6 @@
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
+import WhatsAppButton from '../components/layout/WhatsAppButton';
 import { LegacyHashRedirect } from '../lib/router';
 import { SITE_NAME, SITE_URL } from '../lib/seo';
 import '../styles/index.css';
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
           <Footer />
+          <WhatsAppButton />
         </div>
       </body>
     </html>

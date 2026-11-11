@@ -101,7 +101,7 @@ export default function Footer() {
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-40 flex size-11 items-center justify-center rounded-full bg-navy text-white shadow-lift transition-colors hover:bg-brand"
+          className="fixed bottom-24 right-7 z-40 flex size-11 items-center justify-center rounded-full bg-navy text-white shadow-lift transition-colors hover:bg-brand"
         >
           <ArrowUp className="size-5" />
         </button>

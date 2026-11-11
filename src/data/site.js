@@ -5,6 +5,8 @@ export const site = {
   email: 'info@arasolutions.in',
   emailHref: 'mailto:info@arasolutions.in',
   location: 'Madhapur, Hyderabad, India',
+  /** WhatsApp number in international format, digits only (used for the floating chat button). */
+  whatsapp: '918019603000',
   /**
    * Social profiles. Icons only appear for entries with a real URL,
    * e.g. { linkedin: 'https://www.linkedin.com/company/...' }.
