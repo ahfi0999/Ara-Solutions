@@ -75,7 +75,8 @@ export async function POST(request) {
       body: JSON.stringify({
         model: settings.model,
         messages: [{ role: 'system', content: ASSISTANT_PROMPT }, ...messages],
-        max_tokens: 500,
+        // Generous limit: some models (e.g. gpt-oss) also spend tokens on hidden reasoning.
+        max_tokens: 1500,
         temperature: 0.4,
         stream: true,
       }),

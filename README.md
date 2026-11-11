@@ -73,7 +73,7 @@ The chat assistant works with any provider that offers an OpenAI-compatible API
    ```
    AI_BASE_URL=https://api.groq.com/openai/v1
    AI_API_KEY=your-key
-   AI_MODEL=llama-3.3-70b-versatile
+   AI_MODEL=openai/gpt-oss-120b
    ```
 3. To teach the assistant more (fees, batch dates, durations), edit `COMPANY_NOTES`
    in `src/data/assistant.js`. It is instructed never to invent details that aren't there.

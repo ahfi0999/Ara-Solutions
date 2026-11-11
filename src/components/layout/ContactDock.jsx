@@ -25,6 +25,58 @@ function whatsappMessage(path) {
 }
 const waLink = (text) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const phoneDigits = site.phone.replace(/\D/g, ''); // "918019603000"
+// Matches **bold**, the company email, the company phone (any spacing, optional +) and web links.
+const TOKEN = new RegExp(
+  [
+    String.raw`\*\*[^*]+\*\*`,
+    escapeRegExp(site.email),
+    String.raw`\+?` + phoneDigits.split('').join(String.raw`[\s-]?`),
+    String.raw`https?:\/\/[^\s)]+`,
+  ].join('|'),
+  'g',
+);
+
+/** Renders an assistant reply: **bold** becomes bold; phone, email and links become tappable. */
+function FormattedText({ text }) {
+  const parts = [];
+  let last = 0;
+  for (const match of text.matchAll(TOKEN)) {
+    if (match.index > last) parts.push(text.slice(last, match.index));
+    const token = match[0];
+    const key = match.index;
+    if (token.startsWith('**')) parts.push(<strong key={key}>{token.slice(2, -2)}</strong>);
+    else if (token === site.email)
+      parts.push(
+        <a key={key} href={site.emailHref} className="font-medium text-navy underline underline-offset-2">
+          {token}
+        </a>,
+      );
+    else if (token.startsWith('http'))
+      parts.push(
+        <a
+          key={key}
+          href={token}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-navy underline underline-offset-2"
+        >
+          {token}
+        </a>,
+      );
+    else
+      parts.push(
+        <a key={key} href={site.phoneHref} className="font-medium text-navy underline underline-offset-2">
+          {token}
+        </a>,
+      );
+    last = match.index + token.length;
+  }
+  parts.push(text.slice(last));
+  return parts;
+}
+
 function WhatsAppIcon({ className }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
@@ -110,7 +162,7 @@ function ChatPanel({ messages, pending, error, onSend, onClose }) {
             key={index}
             className={`max-w-[85%] whitespace-pre-line rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${message.role === 'user' ? 'ml-auto rounded-tr-sm bg-navy text-white' : 'rounded-tl-sm bg-white text-ink shadow-card'}`}
           >
-            {message.content}
+            {message.role === 'assistant' ? <FormattedText text={message.content} /> : message.content}
           </div>
         ))}
         {pending && messages.at(-1)?.role === 'user' && (
