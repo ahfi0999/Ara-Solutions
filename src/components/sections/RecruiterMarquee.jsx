@@ -46,12 +46,6 @@ export default function RecruiterMarquee({
         <Row names={TOP_RECRUITERS.slice(0, half)} duration={50} />
         <Row names={TOP_RECRUITERS.slice(half)} duration={55} reverse />
       </div>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mt-4 text-xs text-muted">
-          Shown to illustrate industry demand for these skills. Company names are trademarks of their
-          respective owners and do not imply affiliation with ARA Solutions.
-        </p>
-      </div>
     </section>
   );
 }
