@@ -1,14 +1,11 @@
 /**
- * Well-known companies in India that hire for ServiceNow, cybersecurity and AI/ML skills.
- * Shown as "Top companies hiring for these skills": an industry fact about demand,
- * NOT a claim that ARA alumni work there or that these companies are ARA clients.
+ * Companies where ARA Solutions' trained / placed alumni work (confirmed by ARA on 2026-11-11).
+ * Shown under the heading "Where our alumni work". Only list companies where this is true;
+ * remove a name if that changes.
  *
  * Logos are in public/logos/companies/, downloaded from Wikimedia Commons
  * (public domain / CC0 files), trimmed to their content. The names are trademarks of their owners.
  * `size` balances different logo shapes: sm = wide wordmarks, lg = compact or stacked marks.
- *
- * If you later collect a verified list of where your placed students work, add it as
- * a separate list and use the heading "Where our alumni work" for that list only.
  */
 export const TOP_RECRUITERS = [
   { name: 'Accenture', logo: 'accenture', size: 'md' },

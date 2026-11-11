@@ -31,7 +31,7 @@ function Row({ names, reverse = false, duration }) {
 
 /** Two rows of company logos scrolling in opposite directions. */
 export default function RecruiterMarquee({
-  title = 'Top companies hiring for ServiceNow, Cybersecurity & AI skills',
+  title = 'Where our alumni work',
   className = '',
 }) {
   const half = Math.ceil(TOP_RECRUITERS.length / 2);
