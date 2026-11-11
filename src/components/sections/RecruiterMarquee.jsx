@@ -1,12 +1,6 @@
 import { TOP_RECRUITERS } from '../../data/recruiters';
 
-const initials = (name) =>
-  name
-    .split(/\s+/)
-    .map((word) => word[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
+const LOGO_HEIGHT = { sm: 'h-7', md: 'h-8', lg: 'h-11' };
 
 function Row({ names, reverse = false, duration }) {
   // Rendered twice so the -50% scroll loops without a gap. The copy is hidden from screen readers.
@@ -16,16 +10,18 @@ function Row({ names, reverse = false, duration }) {
         className={`marquee flex shrink-0 gap-3 pr-3 ${reverse ? 'marquee-reverse' : ''}`}
         style={{ '--marquee-duration': `${duration}s` }}
       >
-        {[...names, ...names].map((name, index) => (
+        {[...names, ...names].map((company, index) => (
           <div
-            key={`${name}-${index}`}
+            key={`${company.logo}-${index}`}
             aria-hidden={index >= names.length}
-            className="flex h-14 shrink-0 items-center gap-3 rounded-xl border border-line bg-white px-4 shadow-[0_1px_2px_rgb(15_23_51/0.04)]"
+            className="flex h-16 w-44 shrink-0 items-center justify-center rounded-xl border border-line bg-white px-5 shadow-[0_1px_2px_rgb(15_23_51/0.04)] sm:w-48"
           >
-            <span className="flex size-8 items-center justify-center rounded-lg bg-mist font-display text-[11px] font-bold text-navy">
-              {initials(name)}
-            </span>
-            <span className="whitespace-nowrap font-display text-[15px] font-semibold text-ink">{name}</span>
+            <img
+              src={`/logos/companies/${company.logo}.svg`}
+              alt={company.name}
+              loading="lazy"
+              className={`${LOGO_HEIGHT[company.size] || LOGO_HEIGHT.md} w-auto max-w-full object-contain`}
+            />
           </div>
         ))}
       </div>
@@ -33,7 +29,7 @@ function Row({ names, reverse = false, duration }) {
   );
 }
 
-/** Two rows of company names scrolling in opposite directions. */
+/** Two rows of company logos scrolling in opposite directions. */
 export default function RecruiterMarquee({
   title = 'Top companies hiring for ServiceNow, Cybersecurity & AI skills',
   className = '',
