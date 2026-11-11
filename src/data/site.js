@@ -7,6 +7,8 @@ export const site = {
   location: 'Madhapur, Hyderabad, India',
   /** WhatsApp number in international format, digits only (used for the floating chat button). */
   whatsapp: '918019603000',
+  /** Video-call booking page (e.g. Calendly or Google Calendar booking). The "Video" button only shows when this is set. */
+  videoCallUrl: '',
   /**
    * Social profiles. Icons only appear for entries with a real URL,
    * e.g. { linkedin: 'https://www.linkedin.com/company/...' }.

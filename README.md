@@ -9,12 +9,12 @@ Built with **Next.js 16** (static export), **React 19**, **Tailwind CSS v4**, **
 ```bash
 npm install
 npm run dev       # local preview with live reload at http://localhost:3000
-npm run build     # production build: plain HTML files in out/
-npm run start     # serve the production build from out/
+npm run build     # production build
+npm run start     # run the production build locally
 npm run format    # format the source with Prettier
 ```
 
-The site is fully static, so `out/` can be deployed to any static host (Vercel, Netlify, S3, …).
+Deploy on Vercel (or any host that runs Next.js).
 Every page is pre-rendered to its own HTML file with a real URL (`/contact/`), its own title and
 description, plus `sitemap.xml` and `robots.txt`, so search engines can index each page.
 Old hash links (`/#/contact`) still work: they redirect to the new URL.
@@ -29,7 +29,7 @@ src/
   views/                  one component per page (company/, services/, training/)
   sections/               sections that belong to a single page
   components/
-    layout/               Navbar, NavDropdown, MobileNavGroup, Footer, Logo
+    layout/               Navbar, Footer, Logo, ContactDock (contact buttons + Ask ARA)
     sections/             reusable page sections: PageHero, CardGrid, CtaBand,
                           ProcessSteps, MarketContext, CareerPaths
     decor/                animated background artwork (glows, grids, waves)
@@ -59,3 +59,32 @@ public/                   logos and photography
 
 The contact form opens the visitor's email app with a pre-filled message to
 `info@arasolutions.in`. No backend is required.
+
+## "Ask ARA" AI assistant
+
+The chat assistant works with any provider that offers an OpenAI-compatible API
+(Groq, OpenAI, Anthropic/Claude, ...). It stays hidden until it is configured.
+
+1. Get an API key from your provider.
+2. Add three environment variables (see `.env.example` for provider examples):
+   - **Vercel:** Project → Settings → Environment Variables, then redeploy.
+   - **Local testing:** copy `.env.example` to `.env.local` and fill it in (never commit it).
+
+   ```
+   AI_BASE_URL=https://api.groq.com/openai/v1
+   AI_API_KEY=your-key
+   AI_MODEL=llama-3.3-70b-versatile
+   ```
+3. To teach the assistant more (fees, batch dates, durations), edit `COMPANY_NOTES`
+   in `src/data/assistant.js`. It is instructed never to invent details that aren't there.
+
+The API key is only used on the server (`src/app/api/chat/route.js`) and is never sent to the
+browser. Each visitor is limited to 20 messages per 10 minutes to protect against abuse.
+
+Because of this server function, deploy to a host that runs Next.js (e.g. Vercel). Pages are
+still pre-rendered as static HTML.
+
+## Contact details and buttons
+
+Phone, email, WhatsApp number, video-call booking link and social profiles are all in
+`src/data/site.js`. The "Video" button and social icons only appear once a link is filled in.
