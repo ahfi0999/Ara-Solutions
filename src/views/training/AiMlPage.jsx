@@ -4,6 +4,7 @@ import CardGrid from '../../components/sections/CardGrid';
 import CareerPaths from '../../components/sections/CareerPaths';
 import CtaBand from '../../components/sections/CtaBand';
 import MarketContext from '../../components/sections/MarketContext';
+import RecruiterMarquee from '../../components/sections/RecruiterMarquee';
 import PageHero from '../../components/sections/PageHero';
 import ModelTrainingScene from '../../components/illustrations/ModelTrainingScene';
 import { images } from '../../data/images';
@@ -83,6 +84,7 @@ const AiMlPage = () => (
       visual={<ModelTrainingScene />}
       imageAlt="Machine learning workspace showing model accuracy, loss curves and a training pipeline"
     />
+    <RecruiterMarquee className="bg-white py-16 sm:py-20" />
     <CardGrid
       kicker="Curriculum Breakdown"
       headline="What You'll Cover"

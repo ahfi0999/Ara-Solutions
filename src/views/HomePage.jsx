@@ -16,6 +16,7 @@ import {
   Target,
   UsersRound,
 } from 'lucide-react';
+import RecruiterMarquee from '../components/sections/RecruiterMarquee';
 import Button from '../components/ui/Button';
 import CountUp from '../components/ui/CountUp';
 import FadeUp from '../components/ui/FadeUp';
@@ -595,6 +596,7 @@ export default function HomePage() {
     <>
       <Hero />
       <StatsBar />
+      <RecruiterMarquee className="pt-20 sm:pt-24" />
       <Divisions />
       <Services />
       <Training />

@@ -4,6 +4,7 @@ import CardGrid from '../../components/sections/CardGrid';
 import CareerPaths from '../../components/sections/CareerPaths';
 import CtaBand from '../../components/sections/CtaBand';
 import MarketContext from '../../components/sections/MarketContext';
+import RecruiterMarquee from '../../components/sections/RecruiterMarquee';
 import PageHero from '../../components/sections/PageHero';
 import SecurityOpsScene from '../../components/illustrations/SecurityOpsScene';
 import { images } from '../../data/images';
@@ -82,6 +83,7 @@ const CyberSecurityPage = () => (
       visual={<SecurityOpsScene />}
       imageAlt="Security operations console showing live threat alerts and blocked events"
     />
+    <RecruiterMarquee className="bg-white py-16 sm:py-20" />
     <CardGrid
       kicker="Curriculum Breakdown"
       headline="What You'll Cover"

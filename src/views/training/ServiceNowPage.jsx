@@ -4,6 +4,7 @@ import CardGrid from '../../components/sections/CardGrid';
 import CareerPaths from '../../components/sections/CareerPaths';
 import CtaBand from '../../components/sections/CtaBand';
 import MarketContext from '../../components/sections/MarketContext';
+import RecruiterMarquee from '../../components/sections/RecruiterMarquee';
 import PageHero from '../../components/sections/PageHero';
 import ServiceDeskScene from '../../components/illustrations/ServiceDeskScene';
 import { images } from '../../data/images';
@@ -81,6 +82,7 @@ const ServiceNowPage = () => (
       visual={<ServiceDeskScene />}
       imageAlt="IT service desk showing incidents, requests, an approval workflow and SLA tracking"
     />
+    <RecruiterMarquee className="bg-white py-16 sm:py-20" />
     <CardGrid
       kicker="Curriculum Breakdown"
       headline="What You'll Cover"

@@ -3,6 +3,7 @@
 import CtaBand from '../../components/sections/CtaBand';
 import PageHero from '../../components/sections/PageHero';
 import ProcessSteps from '../../components/sections/ProcessSteps';
+import RecruiterMarquee from '../../components/sections/RecruiterMarquee';
 import { images } from '../../data/images';
 import SkillsGap from '../../sections/training/SkillsGap';
 import TrainingTracks from '../../sections/training/TrainingTracks';
@@ -49,6 +50,7 @@ const TrainingPlacementPage = ({ initialTrack }) => (
       ]}
     />
     <SkillsGap />
+    <RecruiterMarquee className="bg-white py-16 sm:py-20" />
     <TrainingTracks initialTrack={initialTrack} />
     <ProcessSteps
       headline="The Training-to-Placement Pathway"
