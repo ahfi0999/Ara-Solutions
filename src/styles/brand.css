@@ -47,7 +47,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  overflow-x: hidden;
+  overflow-x: clip; /* "clip", not "hidden": hidden breaks the sticky header */
 }
 body {
   color: #0f172a;
@@ -63,7 +63,7 @@ body {
     BlinkMacSystemFont,
     sans-serif;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip; /* "clip", not "hidden": hidden breaks the sticky header */
 }
 h1,
 h2,
