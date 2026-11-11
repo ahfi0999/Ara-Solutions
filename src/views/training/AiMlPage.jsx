@@ -147,11 +147,6 @@ const AiMlPage = () => (
           icon: 'brain',
           badgeColor: 'blue',
           cornerAccent: 'blue',
-          imageOverlay: {
-            text: ['Ideas', 'Models', 'Impact'],
-            hasUnderline: true,
-            position: 'top-right',
-          },
         },
         {
           title: 'Data Scientist',
@@ -168,10 +163,6 @@ const AiMlPage = () => (
           icon: 'code',
           badgeColor: 'blue',
           cornerAccent: 'blue',
-          imageOverlay: {
-            text: ['Build', 'Innovate', 'Automate'],
-            position: 'top-right',
-          },
         },
         {
           title: 'AI Security Analyst',
@@ -180,11 +171,6 @@ const AiMlPage = () => (
           icon: 'shield',
           badgeColor: 'red',
           cornerAccent: 'pink',
-          imageOverlay: {
-            text: ['Safer AI', 'Stronger', 'Tomorrow'],
-            position: 'top-left',
-            hasLockHud: true,
-          },
         },
       ]}
     />

@@ -238,22 +238,6 @@ const CareerPaths = ({
             loading="lazy"
             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
           />
-          {role.imageOverlay?.text && (
-            <div
-              className={`absolute top-4 ${role.imageOverlay.position === 'top-left' ? 'left-6 text-left' : 'right-6 text-right'} pointer-events-none select-none`}
-            >
-              <div className="font-['Sora'] font-bold text-sm sm:text-[15px] text-[#1E293B] leading-snug drop-shadow-xs">
-                {role.imageOverlay.text.map((item, index) => (
-                  <div key={index}>{item}</div>
-                ))}
-              </div>
-              {role.imageOverlay.hasUnderline && (
-                <div
-                  className={`w-5 h-[2.5px] bg-[#E71E28] rounded-full mt-1.5 ${role.imageOverlay.position === 'top-left' ? 'mr-auto' : 'ml-auto'}`}
-                />
-              )}
-            </div>
-          )}
         </div>
         <div className="relative p-6 sm:p-7 pt-11 sm:pt-12 pb-7 flex-1 flex flex-col justify-start">
           <div

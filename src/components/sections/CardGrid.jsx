@@ -16,7 +16,6 @@ import {
   Users,
 } from 'lucide-react';
 import OrbitBadge from '../decor/OrbitBadge';
-import SideAnnotations from '../decor/SideAnnotations';
 import { useRouter } from '../../lib/router';
 
 const CardGrid = ({
@@ -46,7 +45,6 @@ const CardGrid = ({
           <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/90 to-transparent pointer-events-none z-10" />
         </>
       )}
-      <SideAnnotations position="both" isLight={isLight} />
       <OrbitBadge position="top-right" isLight={isLight} size={150} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {headline && (
