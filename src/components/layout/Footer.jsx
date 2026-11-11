@@ -33,17 +33,17 @@ export default function Footer() {
 
   return (
     <footer className="bg-navy-deep text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6 lg:px-8 lg:pt-20">
-        <div className="grid gap-12 lg:grid-cols-12">
+      <div className="mx-auto max-w-7xl px-4 pb-8 pt-12 sm:px-6 lg:px-8 lg:pt-14">
+        <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Link href="/" aria-label="ARA Solutions home" className="inline-block">
-              <Logo variant="dark" size="md" />
+              <Logo variant="dark" size="footer" />
             </Link>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-400">
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
               Connecting businesses with the right technology talent, and helping people build careers through
               hands-on training and placement.
             </p>
-            <ul className="mt-6 space-y-3 text-sm">
+            <ul className="mt-5 space-y-2.5 text-sm">
               <li>
                 <a
                   href={site.phoneHref}
@@ -77,7 +77,7 @@ export default function Footer() {
             {COLUMNS.map((column) => (
               <div key={column.title}>
                 <h2 className="font-display text-sm font-semibold text-white">{column.title}</h2>
-                <ul className="mt-5 space-y-3 text-sm">
+                <ul className="mt-4 space-y-2.5 text-sm">
                   {column.links.map((link) => (
                     <li key={link.href}>
                       <Link href={link.href} className="text-slate-400 transition-colors hover:text-white">
@@ -91,9 +91,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 border-t border-white/10 pt-6 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} ARA Solutions. All rights reserved.</p>
-          <p className="font-display tracking-[0.14em] text-slate-400">IT ALWAYS THE RIGHT CHOICE</p>
         </div>
       </div>
 

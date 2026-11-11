@@ -3,6 +3,7 @@ const HEIGHTS = {
   md: 'h-10 sm:h-11',
   lg: 'h-12 sm:h-14',
   header: 'h-12',
+  footer: 'h-8',
 };
 
 /** Company logo. `variant="dark"` is for dark backgrounds (white lettering). */
