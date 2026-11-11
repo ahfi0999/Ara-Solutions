@@ -289,13 +289,13 @@ export default function ContactDock() {
             </button>
           ) : (
             <div className="w-[380px] rounded-2xl border border-line bg-white/95 p-3 shadow-lift backdrop-blur">
-              <div className="flex items-center justify-between px-1 pb-2">
+              <div className="relative flex items-center justify-center px-8 pb-2">
                 <p className="font-display text-[13px] font-semibold text-ink">Talk to ARA Solutions</p>
                 <button
                   type="button"
                   onClick={() => minimise(true)}
                   aria-label="Minimise"
-                  className="flex size-7 items-center justify-center rounded-full text-muted hover:bg-mist hover:text-ink"
+                  className="absolute right-0 top-1/2 flex size-7 -translate-y-[calc(50%+4px)] items-center justify-center rounded-full text-muted hover:bg-mist hover:text-ink"
                 >
                   <Minus className="size-4" />
                 </button>
