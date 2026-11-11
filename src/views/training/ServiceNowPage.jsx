@@ -5,6 +5,7 @@ import CareerPaths from '../../components/sections/CareerPaths';
 import CtaBand from '../../components/sections/CtaBand';
 import MarketContext from '../../components/sections/MarketContext';
 import PageHero from '../../components/sections/PageHero';
+import ServiceDeskScene from '../../components/illustrations/ServiceDeskScene';
 import { images } from '../../data/images';
 
 const ServiceNowPage = () => (
@@ -14,7 +15,7 @@ const ServiceNowPage = () => (
       badge="Enterprise Platform Readiness"
       headline="ServiceNow Training & Placement"
       subhead="From platform fundamentals to certified and job-ready — training built around the roles companies are actually hiring for."
-      backgroundImage={images.servicenowHero}
+      backgroundImage={images.trainingHero}
       techVariant="circuit"
       primaryCTA={{
         label: 'Contact Us',
@@ -77,8 +78,8 @@ const ServiceNowPage = () => (
         },
       ]}
       footerAnnotation="PEOPLE  ·  PLATFORMS  ·  PROGRESS"
-      image={images.servicenowDatacenter}
-      imageAlt="Enterprise datacenter servers and ServiceNow cloud operations"
+      visual={<ServiceDeskScene />}
+      imageAlt="IT service desk showing incidents, requests, an approval workflow and SLA tracking"
     />
     <CardGrid
       kicker="Curriculum Breakdown"

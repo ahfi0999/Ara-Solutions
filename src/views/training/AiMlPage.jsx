@@ -5,6 +5,7 @@ import CareerPaths from '../../components/sections/CareerPaths';
 import CtaBand from '../../components/sections/CtaBand';
 import MarketContext from '../../components/sections/MarketContext';
 import PageHero from '../../components/sections/PageHero';
+import ModelTrainingScene from '../../components/illustrations/ModelTrainingScene';
 import { images } from '../../data/images';
 
 const AiMlPage = () => (
@@ -14,7 +15,7 @@ const AiMlPage = () => (
       badge="Applied Intelligence & Generative AI"
       headline="AI/ML Training & Placement"
       subhead="Applied AI and machine learning skills, built around what employers are actually hiring for."
-      backgroundImage={images.aimlHero}
+      backgroundImage={images.aimlWorkspace}
       techVariant="wave-lines"
       primaryCTA={{
         label: 'Contact Us',
@@ -79,8 +80,8 @@ const AiMlPage = () => (
         },
       ]}
       footerAnnotation="PEOPLE . PLATFORMS . PROGRESS"
-      image={images.aimlWorkspace}
-      imageAlt="AI and Machine Learning engineer developing neural networks and LLM pipelines"
+      visual={<ModelTrainingScene />}
+      imageAlt="Machine learning workspace showing model accuracy, loss curves and a training pipeline"
     />
     <CardGrid
       kicker="Curriculum Breakdown"

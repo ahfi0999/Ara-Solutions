@@ -5,6 +5,7 @@ import CareerPaths from '../../components/sections/CareerPaths';
 import CtaBand from '../../components/sections/CtaBand';
 import MarketContext from '../../components/sections/MarketContext';
 import PageHero from '../../components/sections/PageHero';
+import SecurityOpsScene from '../../components/illustrations/SecurityOpsScene';
 import { images } from '../../data/images';
 
 const CyberSecurityPage = () => (
@@ -78,8 +79,8 @@ const CyberSecurityPage = () => (
         },
       ]}
       footerAnnotation="PEOPLE . PLATFORMS . PROGRESS"
-      image={images.cyberDatacenter}
-      imageAlt="Cybersecurity engineer inspecting server operations in high-tech datacenter"
+      visual={<SecurityOpsScene />}
+      imageAlt="Security operations console showing live threat alerts and blocked events"
     />
     <CardGrid
       kicker="Curriculum Breakdown"

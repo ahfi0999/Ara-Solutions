@@ -30,6 +30,7 @@ const MarketContext = ({
   ],
   footerAnnotation = 'PEOPLE . PLATFORMS . PROGRESS',
   image,
+  visual,
   imageAlt = 'Technology specialist working in enterprise operations center',
   card1Title,
   card1Icon = 'shield',
@@ -153,12 +154,18 @@ const MarketContext = ({
           <div className="relative z-10">
             <div className="relative rounded-[28px] sm:rounded-[32px] overflow-hidden border border-slate-200/90 shadow-[0_20px_50px_rgba(11,21,56,0.14)] bg-slate-950">
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#E71E28]/70 to-[#E71E28] z-10" />
-              <img
-                src={image}
-                alt={imageAlt}
-                loading="lazy"
-                className="w-full h-auto aspect-4/3 sm:aspect-16/11 object-cover object-center"
-              />
+              {visual ? (
+                <div role="img" aria-label={imageAlt} className="w-full aspect-[4/5] sm:aspect-[6/5]">
+                  {visual}
+                </div>
+              ) : (
+                <img
+                  src={image}
+                  alt={imageAlt}
+                  loading="lazy"
+                  className="w-full h-auto aspect-4/3 sm:aspect-16/11 object-cover object-center"
+                />
+              )}
             </div>
             {card1Title && (
               <motion.div
