@@ -81,3 +81,22 @@
     animation: none;
   }
 }
+
+/* Very slow zoom on hero photos so the first screen feels alive without drawing attention. */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+.hero-zoom {
+  animation: hero-zoom 24s ease-out both;
+  transform-origin: 70% 50%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom {
+    animation: none;
+  }
+}

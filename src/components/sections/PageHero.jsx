@@ -92,7 +92,7 @@ export default function PageHero({
           <img
             src={backgroundImage}
             alt=""
-            className="absolute inset-y-0 right-0 h-full w-full object-cover opacity-25 [mask-image:linear-gradient(to_right,transparent_0%,black_60%)] lg:w-[65%] lg:opacity-60"
+            className="hero-zoom absolute inset-y-0 right-0 h-full w-full object-cover opacity-25 [mask-image:linear-gradient(to_right,transparent_0%,black_60%)] lg:w-[65%] lg:opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-deep from-35% via-navy-deep/70 to-navy-deep/20" />
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-navy-deep to-transparent" />

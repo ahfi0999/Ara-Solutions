@@ -17,6 +17,7 @@ import {
   UsersRound,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
+import CountUp from '../components/ui/CountUp';
 import FadeUp from '../components/ui/FadeUp';
 import Reveal from '../components/ui/Reveal';
 import SectionHeading from '../components/ui/SectionHeading';
@@ -203,14 +204,14 @@ function Hero() {
         <img
           src={images.heroStaffing2}
           alt=""
-          className="absolute inset-y-0 right-0 h-full w-full object-cover object-[65%_center] opacity-30 [mask-image:linear-gradient(to_right,transparent_0%,black_55%)] lg:w-[68%] lg:opacity-90"
+          className="hero-zoom absolute inset-y-0 right-0 h-full w-full object-cover object-[65%_center] opacity-30 [mask-image:linear-gradient(to_right,transparent_0%,black_55%)] lg:w-[68%] lg:opacity-90"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-navy-deep from-30% via-navy-deep/60 to-navy-deep/0" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy-deep to-transparent" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 pb-32 pt-16 sm:px-6 sm:pt-20 lg:px-8 lg:pb-36 lg:pt-24">
-        <div className="max-w-[640px]">
+      <div className="mx-auto max-w-7xl px-4 pb-28 pt-14 sm:px-6 sm:pt-16 lg:px-8 lg:pb-28 lg:pt-16">
+        <div className="max-w-[720px]">
           <FadeUp>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[13px] font-medium text-slate-200">
               <span className="size-1.5 rounded-full bg-brand" />
@@ -218,18 +219,18 @@ function Hero() {
             </p>
           </FadeUp>
           <FadeUp delay={0.05}>
-            <h1 className="mt-6 font-display text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-[3.25rem]">
+            <h1 className="mt-5 font-display text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-[3rem]">
               Empowering businesses through talent.{' '}
               <span className="text-brand-light">Transforming careers</span> through technology.
             </h1>
           </FadeUp>
           <FadeUp delay={0.1}>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300">
               ARA Solutions provides IT and non-IT staffing for growing companies, and helps professionals
               build successful careers with ServiceNow, Cybersecurity and AI/ML training and placement.
             </p>
           </FadeUp>
-          <FadeUp delay={0.15} className="mt-9 flex flex-wrap gap-3">
+          <FadeUp delay={0.15} className="mt-8 flex flex-wrap gap-3">
             <Button href="/contact" size="lg" arrow>
               Hire Talent
             </Button>
@@ -252,7 +253,7 @@ function StatsBar() {
             <div key={stat.label} className="flex flex-col bg-white px-6 py-7 text-center sm:px-8">
               <dt className="order-2 mt-1 text-sm text-muted">{stat.label}</dt>
               <dd className="font-display text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-                {stat.value}
+                <CountUp value={stat.value} />
               </dd>
             </div>
           ))}
@@ -338,7 +339,7 @@ function Services() {
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((service, index) => (
-            <Reveal key={service.href} delay={index * 0.06}>
+            <Reveal key={service.href} delay={index * 0.1}>
               <Link
                 href={service.href}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-lift"
@@ -457,7 +458,7 @@ function WhyUs() {
           {REASONS.map((reason, index) => {
             const Icon = reason.icon;
             return (
-              <Reveal key={reason.title} delay={index * 0.05} className="bg-white p-7">
+              <Reveal key={reason.title} delay={index * 0.08} className="bg-white p-7">
                 <span className="flex size-11 items-center justify-center rounded-xl bg-brand-tint text-brand">
                   <Icon aria-hidden="true" className="size-5" />
                 </span>
@@ -489,7 +490,7 @@ function Process() {
         </div>
         <ol className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:col-span-8">
           {STEPS.map((step, index) => (
-            <Reveal as="li" key={step.title} delay={index * 0.06} className="border-t-2 border-line pt-6">
+            <Reveal as="li" key={step.title} delay={index * 0.1} className="border-t-2 border-line pt-6">
               <span className="font-display text-sm font-semibold text-brand">
                 Step {String(index + 1).padStart(2, '0')}
               </span>
@@ -513,7 +514,7 @@ function Testimonials() {
             <Reveal
               as="figure"
               key={item.name}
-              delay={index * 0.06}
+              delay={index * 0.1}
               className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-8"
             >
               <Quote aria-hidden="true" className="size-8 text-brand-light" />
