@@ -14,7 +14,7 @@ const TrainingPlacementPage = ({ initialTrack }) => (
       variant="page"
       badge="Enterprise Skill Readiness Tracks"
       headline="Training & Placement"
-      subhead="Industry-certified technical training tracks in ServiceNow, Cyber Security, and AI/ML engineering — engineered directly for enterprise day-one productivity."
+      subhead="Industry-certified technical training tracks in ServiceNow, Cyber Security, AI/ML engineering, and Full Stack Development with AI — engineered directly for enterprise day-one productivity."
       backgroundImage={images.trainingHero}
       techVariant="circuit"
       primaryCTA={{

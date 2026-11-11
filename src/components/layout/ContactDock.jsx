@@ -13,6 +13,8 @@ function whatsappMessage(path) {
     return "Hi ARA Solutions, I'm interested in ServiceNow training. Please share the details.";
   if (path.includes('cybersecurity'))
     return "Hi ARA Solutions, I'm interested in Cybersecurity training. Please share the details.";
+  if (path.includes('full-stack-ai'))
+    return "Hi ARA Solutions, I'm interested in Full Stack Development with AI training. Please share the details.";
   if (path.includes('ai-ml'))
     return "Hi ARA Solutions, I'm interested in AI & Machine Learning training. Please share the details.";
   if (path.includes('training-placement'))
@@ -141,7 +143,7 @@ function ChatPanel({ messages, pending, error, onSend, onClose }) {
       <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto bg-mist px-4 py-4">
         <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-white px-3.5 py-2.5 text-sm leading-relaxed text-ink shadow-card">
           Hi! I&apos;m ARA&apos;s assistant. Ask me about our staffing services or our ServiceNow,
-          Cybersecurity and AI/ML training.
+          Cybersecurity, AI/ML and Full Stack with AI training.
         </div>
         {messages.length === 0 && (
           <div className="flex flex-wrap gap-2 pt-1">

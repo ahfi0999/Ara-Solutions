@@ -29,7 +29,7 @@ const STATS = [
   { value: '13+', label: 'Years in IT staffing' },
   { value: '1,000+', label: 'Professionals placed' },
   { value: '98%', label: 'Client retention' },
-  { value: '3', label: 'Job-ready training tracks' },
+  { value: '4', label: 'Job-ready training tracks' },
 ];
 
 const DIVISIONS = [
@@ -49,7 +49,7 @@ const DIVISIONS = [
     icon: GraduationCap,
     eyebrow: 'For professionals',
     title: 'Training & Placement',
-    text: 'Build a technology career with industry-focused training, real-time projects and placement support, in ServiceNow, Cybersecurity and AI/ML.',
+    text: 'Build a technology career with industry-focused training, real-time projects and placement support, in ServiceNow, Cybersecurity, AI/ML and Full Stack with AI.',
     points: ['Hands-on labs and live projects', 'Interview preparation', 'Placement assistance'],
     cta: { label: 'Explore training programs', href: '/training-placement' },
   },
@@ -87,7 +87,7 @@ const TRACKS = [
     title: 'ServiceNow',
     text: 'Platform fundamentals, ITSM, scripting and workflows, with certification preparation.',
     topics: ['ServiceNow Fundamentals', 'Scripting & Development', 'ITSM & Workflows', 'Real-Time Projects'],
-    image: images.servicenowHero,
+    image: images.trainingHero,
     href: '/training-placement/servicenow',
   },
   {
@@ -99,8 +99,14 @@ const TRACKS = [
   {
     title: 'AI & Machine Learning',
     text: 'Become an ML engineer, data scientist or GenAI developer through project-based learning.',
-    image: images.aimlHero,
+    image: images.aimlWorkspace,
     href: '/training-placement/ai-ml',
+  },
+  {
+    title: 'Full Stack with AI',
+    text: 'Build complete web apps with React, Node.js and databases, and add AI features to them.',
+    image: '/images/blog-1.jpg',
+    href: '/training-placement/full-stack-ai',
   },
 ];
 
@@ -206,7 +212,8 @@ function Hero() {
           <FadeUp delay={0.1}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300">
               ARA Solutions provides IT and non-IT staffing for growing companies, and helps professionals
-              build successful careers with ServiceNow, Cybersecurity and AI/ML training and placement.
+              build successful careers with ServiceNow, Cybersecurity, AI/ML and Full Stack with AI training
+              and placement.
             </p>
           </FadeUp>
           <FadeUp delay={0.15} className="mt-8 flex flex-wrap gap-3">
@@ -371,7 +378,7 @@ function Training() {
                 src={featured.image}
                 alt=""
                 loading="lazy"
-                className="absolute inset-0 size-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03]"
+                className="absolute inset-0 size-full object-cover object-[center_85%] opacity-70 transition-transform duration-700 group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/80 to-navy-deep/20" />
               <div className="relative">

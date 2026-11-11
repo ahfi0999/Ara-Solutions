@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CircleCheck, Cloud, Cpu, ShieldCheck, X as XIcon } from 'lucide-react';
+import { ArrowRight, CircleCheck, Cloud, Cpu, ShieldCheck, X as XIcon, Code2 } from 'lucide-react';
 import { trainingTracks } from '../../data/trainingTracks';
 import { useRouter } from '../../lib/router';
 
@@ -21,6 +21,8 @@ const TrainingTracks = ({ initialTrack }) => {
         return <Cloud className="w-5 h-5" strokeWidth={2.2} />;
       case 'shield':
         return <ShieldCheck className="w-5 h-5" strokeWidth={2.2} />;
+      case 'code':
+        return <Code2 className="w-5 h-5" strokeWidth={2.2} />;
       case 'ai':
         return (
           <div className="relative flex items-center justify-center">
@@ -71,10 +73,7 @@ const TrainingTracks = ({ initialTrack }) => {
             </div>
           </div>
         </div>
-        <div
-          id="tracks-grid"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 relative"
-        >
+        <div id="tracks-grid" className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 relative">
           <div
             className="hidden lg:grid absolute -top-8 -right-6 grid-cols-6 gap-2.5 opacity-30 pointer-events-none -z-10"
             aria-hidden="true"
@@ -136,21 +135,7 @@ const TrainingTracks = ({ initialTrack }) => {
                 </div>
                 <button
                   type="button"
-                  onClick={() => {
-                    if (item.id === 'servicenow') {
-                      navigate('/training-placement/servicenow');
-                    } else {
-                      if (item.id === 'cybersecurity') {
-                        navigate('/training-placement/cybersecurity');
-                      } else {
-                        if (item.id === 'ai-ml') {
-                          navigate('/training-placement/ai-ml');
-                        } else {
-                          setActiveTrack(item);
-                        }
-                      }
-                    }
-                  }}
+                  onClick={() => navigate(`/training-placement/${item.id}`)}
                   className="flex items-center gap-2 text-xs sm:text-sm font-['Sora'] font-bold text-slate-200 pt-2 w-fit group/btn cursor-pointer transition-colors"
                 >
                   <span className="group-hover/btn:text-[#FF4D57] transition-colors">Learn More</span>

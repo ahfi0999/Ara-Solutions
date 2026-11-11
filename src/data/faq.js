@@ -14,7 +14,7 @@ export const FAQS = [
   },
   {
     q: 'What does the Training & Placement program include?',
-    a: 'Structured, lab-based training in ServiceNow, Cybersecurity or AI/ML, real-time projects, interview preparation and placement assistance with our hiring partners.',
+    a: 'Structured, lab-based training in ServiceNow, Cybersecurity, AI/ML or Full Stack with AI, real-time projects, interview preparation and placement assistance with our hiring partners.',
   },
   {
     q: 'Do you hire for non-IT roles?',

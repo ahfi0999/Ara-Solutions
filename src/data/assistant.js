@@ -13,7 +13,9 @@ const COMPANY_NOTES = `
 - Training tracks: ServiceNow (platform fundamentals, ITSM, scripting and workflows, Now Assist AI,
   System Administrator certification preparation), Cybersecurity (SOC analyst, security engineer,
   IAM, GRC, cloud security), AI & Machine Learning (ML engineer, AI engineer, data scientist,
-  GenAI application developer, AI security).
+  GenAI application developer, AI security), Full Stack Development with AI (React and Next.js,
+  Node.js and Express APIs, SQL and MongoDB, AI features with LLM APIs such as chatbots and RAG,
+  AI-assisted coding, Git/Docker/cloud deployment; roles: full stack, front end, back end, AI application developer).
 - Training includes hands-on labs, real-time projects, interview preparation and placement assistance.
 - Course fees, batch start dates, durations and timings: NOT listed here. Ask the visitor to contact
   the team for the latest details.

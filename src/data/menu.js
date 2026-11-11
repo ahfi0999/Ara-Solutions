@@ -2,6 +2,7 @@ import {
   Briefcase,
   Building2,
   Compass,
+  Code2,
   Cpu,
   Globe2,
   GraduationCap,
@@ -90,6 +91,12 @@ export const MENU = [
         href: '/training-placement/ai-ml',
         description: 'ML engineering and GenAI',
         icon: Cpu,
+      },
+      {
+        label: 'Full Stack with AI',
+        href: '/training-placement/full-stack-ai',
+        description: 'React, Node.js and AI-powered apps',
+        icon: Code2,
       },
       {
         label: 'All Programs',

@@ -18,6 +18,7 @@ export const ROUTES = [
   '/training-placement/servicenow',
   '/training-placement/cybersecurity',
   '/training-placement/ai-ml',
+  '/training-placement/full-stack-ai',
   '/services/international-consulting',
   '/careers',
   '/contact',
@@ -67,7 +68,7 @@ export const PAGE_META = {
   '/training-placement': {
     title: 'Training & Placement',
     description:
-      'Job-ready training in ServiceNow, cybersecurity and AI/ML with hands-on projects and direct placement support.',
+      'Job-ready training in ServiceNow, cybersecurity, AI/ML and full stack development with AI, with hands-on projects and placement support.',
   },
   '/training-placement/servicenow': {
     title: 'ServiceNow Training & Placement',
@@ -83,6 +84,11 @@ export const PAGE_META = {
     title: 'AI & Machine Learning Training & Placement',
     description:
       'Become an ML engineer, data scientist or GenAI developer with project-based training and placement support.',
+  },
+  '/training-placement/full-stack-ai': {
+    title: 'Full Stack Development with AI Training & Placement',
+    description:
+      'Learn React, Node.js, databases and AI features like chatbots and smart search, build deployed projects and get placement support.',
   },
   '/careers': {
     title: 'Careers',

@@ -47,4 +47,20 @@ export const trainingTracks = [
       'Production API Deployment with FastAPI & Docker',
     ],
   },
+  {
+    id: 'full-stack-ai',
+    number: '04',
+    title: 'Full Stack with AI',
+    description:
+      'Complete web applications with React, Node.js and databases, plus AI features and AI-assisted coding.',
+    accent: 'navy',
+    icon: 'code',
+    curriculum: [
+      'React & Next.js Front-End Development',
+      'Node.js & Express REST APIs with Authentication',
+      'SQL & MongoDB Data Modelling',
+      'AI Features with LLM APIs (Chatbots & RAG)',
+      'Git, Docker & Cloud Deployment',
+    ],
+  },
 ];
