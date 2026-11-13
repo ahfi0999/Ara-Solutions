@@ -9,6 +9,7 @@ import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { CountUp, EASE, Magnetic, SplitWords, useReducedMotionSafe } from '@/components/motion/primitives';
 import { TalentOrbit } from '@/components/visuals/TalentOrbit';
 import { HeroNetwork } from '@/components/visuals/HeroNetwork';
+import { MediaBackground } from '@/components/motion/MediaBackground';
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 18, filter: 'blur(6px)' },
@@ -39,6 +40,13 @@ export function Hero() {
         my.set(event.clientY - rect.top);
       }}
     >
+      <MediaBackground
+        video="/videos/hero-team.mp4"
+        poster="/videos/hero-team.jpg"
+        eager
+        control
+        overlayClassName="bg-gradient-to-r from-ink/90 via-ink/75 to-ink/55"
+      />
       {/* Background: drifting aurora, moving talent network, cursor light */}
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="blob-a absolute -right-[10%] -top-[20%] size-[70vw] max-w-[900px] rounded-full bg-[radial-gradient(circle,rgb(46_58_190/0.55),transparent_65%)] blur-3xl" />

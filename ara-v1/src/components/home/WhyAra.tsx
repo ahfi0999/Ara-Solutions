@@ -6,6 +6,7 @@ import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Spotlight } from '@/components/motion/primitives';
 import { cn } from '@/lib/cn';
+import { MediaBackground } from '@/components/motion/MediaBackground';
 
 function Card({ className, children }: { className?: string; children: React.ReactNode }) {
   return (
@@ -36,7 +37,8 @@ function CardTitle({ icon: Icon, title, text }: { icon: typeof Target; title: st
 /** Why companies and learners choose ARA. Genuine strengths only. */
 export function WhyAra() {
   return (
-    <section id="why-ara" className="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
+    <section id="why-ara" className="relative isolate overflow-hidden bg-ink py-20 text-white sm:py-28">
+      <MediaBackground video="/videos/why-meeting.mp4" poster="/videos/why-meeting.jpg" overlayClassName="bg-ink/80" />
       <div aria-hidden className="grid-lines absolute inset-0" />
       <Container className="relative">
         <SectionHeading
