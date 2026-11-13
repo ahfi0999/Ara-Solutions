@@ -88,7 +88,13 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} ARA Solutions. All rights reserved.</p>
+          <div className="space-y-1">
+            <p>© {year} ARA Solutions. All rights reserved.</p>
+            <p className="text-[12px] text-white/35">
+              Salesforce and ServiceNow are trademarks of their respective owners. ARA Solutions is an independent
+              training provider.
+            </p>
+          </div>
           <p className="font-mono text-[12px] uppercase tracking-[0.18em]">{site.tagline}</p>
         </div>
       </Container>

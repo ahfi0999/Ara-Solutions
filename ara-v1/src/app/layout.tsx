@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ContactDock } from '@/components/layout/ContactDock';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { ScrollProgress } from '@/components/motion/primitives';
+import { PageBackdrop } from '@/components/motion/PageBackdrop';
 import './globals.css';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'swap' });
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           // Static, trusted content defined above.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationJsonLd) }}
         />
+        <PageBackdrop />
         <SmoothScroll />
         <ScrollProgress />
         <EnquiryProvider>

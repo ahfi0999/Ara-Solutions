@@ -91,7 +91,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="border-y border-line bg-paper py-20 sm:py-28">
+      <section className="border-y border-line bg-paper/70 py-20 sm:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div>
             <SectionHeading eyebrow="The hiring challenge" title={about.hiringChallenge.title} />

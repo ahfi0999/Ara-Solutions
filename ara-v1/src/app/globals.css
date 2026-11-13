@@ -289,3 +289,49 @@
   background: radial-gradient(circle, rgb(229 35 45 / 0.3), transparent 65%);
   animation: drift-b 22s ease-in-out infinite;
 }
+
+/* ---------- Light-section background (PageBackdrop) ---------- */
+.backdrop-dots {
+  background-image: radial-gradient(rgb(13 17 80 / 0.14) 1.1px, transparent 1.6px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(to bottom, black, rgb(0 0 0 / 0.75));
+}
+/* Brighter, red-tinted dots plus a soft halo, revealed only around the pointer. */
+.backdrop-spot {
+  background-image:
+    radial-gradient(rgb(229 35 45 / 0.55) 1.5px, transparent 2px),
+    radial-gradient(420px circle at var(--mx, -999px) var(--my, -999px), rgb(229 35 45 / 0.07), transparent 65%);
+  background-size: 26px 26px, 100% 100%;
+  mask-image: radial-gradient(240px circle at var(--mx, -999px) var(--my, -999px), black, transparent 72%);
+  opacity: var(--spot, 0);
+  transition: opacity 0.5s ease;
+}
+.backdrop-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+}
+.backdrop-glow-a {
+  width: min(60vw, 820px);
+  aspect-ratio: 1;
+  right: -14%;
+  top: -18%;
+  background: radial-gradient(circle, rgb(46 58 190 / 0.16), transparent 68%);
+  animation: drift-a 26s ease-in-out infinite;
+}
+.backdrop-glow-b {
+  width: min(55vw, 760px);
+  aspect-ratio: 1;
+  left: -16%;
+  bottom: -22%;
+  background: radial-gradient(circle, rgb(229 35 45 / 0.11), transparent 68%);
+  animation: drift-b 30s ease-in-out infinite;
+}
+/* Reading pages: dots only in the side margins, none behind the text column; no spotlight. */
+.page-backdrop[data-calm] .backdrop-dots {
+  mask-image: linear-gradient(to right, black 0%, rgb(0 0 0 / 0.6) 12%, transparent 22%, transparent 78%, rgb(0 0 0 / 0.6) 88%, black 100%);
+}
+.page-backdrop[data-calm] .backdrop-spot {
+  display: none;
+}

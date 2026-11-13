@@ -1,12 +1,12 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
-import { EASE } from './primitives';
+import { EASE, useReducedMotionSafe } from './primitives';
 
 /** Section heading block: eyebrow, title and intro rise out of a mask one after another. */
 export function HeadingReveal({ children, className }: { children: ReactNode[]; className?: string }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   if (reduce) return <div className={className}>{children}</div>;
   return (
     <div className={className}>

@@ -57,7 +57,7 @@ export default function CareersPage() {
         </Container>
       </section>
 
-      <section id="openings" className="border-t border-line bg-paper py-20 sm:py-28">
+      <section id="openings" className="border-t border-line bg-paper/70 py-20 sm:py-28">
         <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div>
             <SectionHeading

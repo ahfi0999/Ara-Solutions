@@ -1,15 +1,16 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useSpring } from 'motion/react';
+import { motion, useScroll, useSpring } from 'motion/react';
 import { journey } from '@/content/home';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
+import { useReducedMotionSafe } from '@/components/motion/primitives';
 
 /** Learner journey with a progress line that fills as you scroll. */
 export function Journey() {
   const listRef = useRef<HTMLOListElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 60%'] });
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 

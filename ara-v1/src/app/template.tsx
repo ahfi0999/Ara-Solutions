@@ -1,10 +1,11 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
+import { useReducedMotionSafe } from '@/components/motion/primitives';
 
 /** Page transition: each page fades and rises in when you navigate. */
 export default function Template({ children }: { children: React.ReactNode }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   if (reduce) return children;
   return (
     <motion.div

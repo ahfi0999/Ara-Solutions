@@ -1,12 +1,12 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring } from 'motion/react';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from 'motion/react';
 import { approachSteps } from '@/content/company';
 import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { ButtonLink } from '@/components/ui/Button';
-import { EASE, useMediaQuery } from '@/components/motion/primitives';
+import { EASE, useMediaQuery, useReducedMotionSafe } from '@/components/motion/primitives';
 
 /**
  * "Discover · Deliver · Support" as a pinned scroll story: the section stays in view while
@@ -14,7 +14,7 @@ import { EASE, useMediaQuery } from '@/components/motion/primitives';
  */
 export function ApproachScroll() {
   const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const desktop = useMediaQuery('(min-width: 1024px) and (min-height: 700px)');
   const [active, setActive] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });

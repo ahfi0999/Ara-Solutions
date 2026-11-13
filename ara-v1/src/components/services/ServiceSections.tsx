@@ -114,7 +114,7 @@ export function ServicePillars({ service }: { service: Service }) {
   const { pillars } = service;
   const count = pillars.items.length;
   return (
-    <section className="border-y border-line bg-paper py-20 sm:py-28">
+    <section className="border-y border-line bg-paper/70 py-20 sm:py-28">
       <Container>
         <SectionHeading eyebrow={pillars.eyebrow} title={pillars.title} />
         <div

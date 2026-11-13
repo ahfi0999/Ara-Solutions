@@ -28,6 +28,10 @@ export type Program = {
   prerequisites: string;
   /** Optional confirmed details. Leave undefined to show "Ask an advisor". */
   details?: { duration?: string; mode?: string; fees?: string; nextBatch?: string };
+  /** Optional official product logo (path under /public) shown on the program card banner. */
+  logo?: string;
+  /** Optional photo (path under /public) shown as the program card banner. */
+  image?: string;
   highlights: string[];
   audience: { title: string; text: string }[];
   outcomes: string[];
@@ -42,6 +46,8 @@ export type Program = {
 export const programs: Program[] = [
   {
     slug: 'salesforce',
+    image: '/images/programs/salesforce.jpg',
+    logo: '/logos/programs/salesforce.svg',
     family: 'Enterprise platforms',
     name: 'Salesforce Admin & Developer with Agentforce',
     shortName: 'Salesforce',
@@ -237,6 +243,8 @@ export const programs: Program[] = [
   },
   {
     slug: 'servicenow',
+    image: '/images/programs/servicenow.webp',
+    logo: '/logos/programs/servicenow.svg',
     family: 'Enterprise platforms',
     name: 'ServiceNow Training & Placement',
     shortName: 'ServiceNow',
@@ -378,6 +386,7 @@ export const programs: Program[] = [
   },
   {
     slug: 'ai-ml',
+    image: '/images/programs/ai-ml.jpg',
     family: 'AI',
     name: 'AI & Machine Learning',
     shortName: 'AI & ML',
@@ -534,6 +543,7 @@ export const programs: Program[] = [
   },
   {
     slug: 'agentic-ai',
+    image: '/images/programs/agentic-ai.jpg',
     family: 'AI',
     name: 'Agentic AI Engineering',
     shortName: 'Agentic AI',
@@ -691,6 +701,7 @@ export const programs: Program[] = [
   },
   {
     slug: 'cybersecurity',
+    image: '/images/programs/cybersecurity.webp',
     family: 'Security',
     name: 'Cybersecurity Training & Placement',
     shortName: 'Cybersecurity',
@@ -810,6 +821,7 @@ export const programs: Program[] = [
   },
   {
     slug: 'full-stack-ai',
+    image: '/images/programs/full-stack-ai.jpg',
     family: 'Development',
     name: 'Full Stack Development with AI',
     shortName: 'Full Stack with AI',

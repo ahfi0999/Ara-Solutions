@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useReducedMotion } from 'motion/react';
 import { BadgeCheck, GraduationCap, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/cn';
+import { useReducedMotionSafe } from '@/components/motion/primitives';
 
 const STAGES = [
   { label: 'Sourced', value: 48 },
@@ -47,7 +47,7 @@ const STATUS_TONE: Record<string, string> = {
  * Shows both sides of the business in one picture. Illustrative only.
  */
 export function TalentConsole() {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [active, setActive] = useState(reduce ? STAGES.length - 1 : 0);
 
   useEffect(() => {

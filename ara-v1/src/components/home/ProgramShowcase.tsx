@@ -8,6 +8,7 @@ import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Spotlight, Tilt } from '@/components/motion/primitives';
 import { ProgramExplorer } from './ProgramExplorer';
+import { ProgramBanner } from '@/components/visuals/ProgramBanner';
 
 /** Program card: coloured glow per program, cursor spotlight and a gentle 3D tilt. */
 export function ProgramCard({ program }: { program: Program }) {
@@ -29,7 +30,9 @@ export function ProgramCard({ program }: { program: Program }) {
           />
           <div aria-hidden className="grid-lines absolute inset-0 opacity-50" />
 
-          <div className="relative flex items-center justify-between">
+          <ProgramBanner program={program} className="-mx-7 -mt-7 mb-6 sm:-mx-8 sm:-mt-8" />
+
+          <div className="absolute inset-x-7 top-7 flex items-center justify-between sm:inset-x-8">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white/75">
               <span className={cn('size-1.5 rounded-full', a.dot)} />
               {program.family}
@@ -40,7 +43,7 @@ export function ProgramCard({ program }: { program: Program }) {
           </div>
 
           <h3
-            className="relative mt-14 text-2xl font-semibold leading-tight tracking-tight sm:text-[1.7rem]"
+            className="relative text-2xl font-semibold leading-tight tracking-tight sm:text-[1.7rem]"
           >
             {program.name}
           </h3>

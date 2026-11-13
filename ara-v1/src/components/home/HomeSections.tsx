@@ -10,10 +10,12 @@ import { ServiceCards } from '@/components/services/ServiceSections';
 /** Staffing services overview. */
 export function ServicesOverview() {
   return (
-    <section className="border-t border-line bg-paper py-20 sm:py-28">
-      <Container>
+    <section className="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
+      <div aria-hidden className="grid-lines absolute inset-0" />
+      <Container className="relative">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
+            tone="dark"
             eyebrow="Staffing services"
             title={
               <>
@@ -24,13 +26,13 @@ export function ServicesOverview() {
           />
           <Link
             href="/company/approach/"
-            className="shrink-0 text-[15px] font-medium underline-offset-4 hover:underline"
+            className="shrink-0 text-[15px] font-medium text-white/80 underline-offset-4 hover:text-white hover:underline"
           >
             How we work →
           </Link>
         </div>
         <div className="mt-12">
-          <ServiceCards />
+          <ServiceCards dark />
         </div>
       </Container>
     </section>
@@ -75,10 +77,12 @@ export function ApproachPreview() {
 /** Three case studies with headline metrics. */
 export function CaseStudyPreview() {
   return (
-    <section className="border-t border-line bg-paper py-20 sm:py-28">
-      <Container>
+    <section className="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
+      <div aria-hidden className="grid-lines absolute inset-0" />
+      <Container className="relative">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
+            tone="dark"
             eyebrow="Case studies"
             title={
               <>
@@ -88,7 +92,7 @@ export function CaseStudyPreview() {
           />
           <Link
             href="/company/case-studies/"
-            className="shrink-0 text-[15px] font-medium underline-offset-4 hover:underline"
+            className="shrink-0 text-[15px] font-medium text-white/80 underline-offset-4 hover:text-white hover:underline"
           >
             All case studies →
           </Link>
@@ -98,15 +102,15 @@ export function CaseStudyPreview() {
             <Reveal key={study.id} delay={index * 0.06} className="h-full">
               <Link
                 href="/company/case-studies/"
-                className="flex h-full flex-col rounded-3xl border border-line bg-canvas p-7 transition-shadow hover:shadow-soft"
+                className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-7 transition-colors hover:border-white/25 hover:bg-white/[0.07]"
               >
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand">{study.tag}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-300">{study.tag}</p>
                 <h3 className="mt-4 text-xl font-semibold leading-snug tracking-tight">{study.title}</h3>
                 <dl className="mt-auto grid grid-cols-3 gap-2 pt-8">
                   {study.metrics.map((metric) => (
                     <div key={metric.label}>
                       <dd className="text-2xl font-semibold tracking-tight"><Figure value={metric.value} /></dd>
-                      <dt className="mt-0.5 text-[12px] leading-snug text-muted">{metric.label}</dt>
+                      <dt className="mt-0.5 text-[12px] leading-snug text-white/55">{metric.label}</dt>
                     </div>
                   ))}
                 </dl>

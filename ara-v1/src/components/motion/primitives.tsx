@@ -10,7 +10,7 @@ import {
   useInView,
   useMotionTemplate,
   useMotionValue,
-  useReducedMotion,
+  useReducedMotion as usePrefersReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -20,6 +20,18 @@ import { Children, useEffect, useRef, useState, type ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
+
+/**
+ * The visitor's reduced-motion preference, safe for server rendering. The server cannot know it,
+ * so the first browser render also reports `false` (matching the server HTML, so React can hydrate
+ * without a mismatch); the real preference applies right after the page mounts.
+ */
+export function useReducedMotionSafe() {
+  const prefers = usePrefersReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted ? Boolean(prefers) : false;
+}
 
 /** Headline that reveals word by word: each word rises out of a mask and sharpens from a blur. */
 export function SplitWords({
@@ -39,7 +51,7 @@ export function SplitWords({
   /** Animate when scrolled into view (default: on mount, for above-the-fold text). */
   inView?: boolean;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const ref = useRef<HTMLSpanElement>(null);
   const visible = useInView(ref, { once: true, margin: '0px 0px -12% 0px' });
   const show = !inView || visible;
@@ -78,7 +90,7 @@ export function Reveal({
   y?: number;
   as?: 'div' | 'li' | 'section' | 'article';
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const Component = motion[as];
   if (reduce) {
     const Static = as;
@@ -124,7 +136,7 @@ export function Stagger({
 export function CountUp({ value, suffix = '', className }: { value: number; suffix?: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: '0px 0px -10% 0px' });
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [display, setDisplay] = useState(value);
 
   useEffect(() => {
@@ -187,7 +199,7 @@ export function Spotlight({
 
 /** Subtle 3D tilt towards the cursor. */
 export function Tilt({ children, className, max = 6 }: { children: ReactNode; className?: string; max?: number }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
   const rotateX = useSpring(useTransform(py, [0, 1], [max, -max]), { stiffness: 200, damping: 20 });
@@ -214,7 +226,7 @@ export function Tilt({ children, className, max = 6 }: { children: ReactNode; cl
 
 /** Element drifts slightly towards the cursor (for primary buttons). */
 export function Magnetic({ children, className, strength = 0.25 }: { children: ReactNode; className?: string; strength?: number }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const x = useSpring(0, { stiffness: 250, damping: 18 });
   const y = useSpring(0, { stiffness: 250, damping: 18 });
   if (reduce) return <span className={cn('inline-flex', className)}>{children}</span>;
@@ -240,7 +252,7 @@ export function Magnetic({ children, className, strength = 0.25 }: { children: R
 /** Moves its content vertically at a different speed than the page (parallax). */
 export function Parallax({ children, className, offset = 60 }: { children: ReactNode; className?: string; offset?: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], [offset, -offset]);
   return (

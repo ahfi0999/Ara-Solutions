@@ -1,13 +1,14 @@
 'use client';
 
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { motion, useMotionTemplate, useMotionValue, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { stats } from '@/content/site';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
-import { CountUp, EASE, Magnetic, SplitWords } from '@/components/motion/primitives';
+import { CountUp, EASE, Magnetic, SplitWords, useReducedMotionSafe } from '@/components/motion/primitives';
 import { TalentOrbit } from '@/components/visuals/TalentOrbit';
+import { HeroNetwork } from '@/components/visuals/HeroNetwork';
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 18, filter: 'blur(6px)' },
@@ -17,7 +18,7 @@ const fadeUp = (delay: number) => ({
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const mx = useMotionValue(-1000);
   const my = useMotionValue(-1000);
   const spotlight = useMotionTemplate`radial-gradient(600px circle at ${mx}px ${my}px, rgb(255 255 255 / 0.07), transparent 60%)`;
@@ -38,12 +39,13 @@ export function Hero() {
         my.set(event.clientY - rect.top);
       }}
     >
-      {/* Background: drifting aurora, grid, cursor light */}
+      {/* Background: drifting aurora, moving talent network, cursor light */}
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="blob-a absolute -right-[10%] -top-[20%] size-[70vw] max-w-[900px] rounded-full bg-[radial-gradient(circle,rgb(46_58_190/0.55),transparent_65%)] blur-3xl" />
         <div className="blob-b absolute -bottom-[30%] -left-[15%] size-[60vw] max-w-[800px] rounded-full bg-[radial-gradient(circle,rgb(229_35_45/0.35),transparent_65%)] blur-3xl" />
         <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_40%,rgb(31_38_128/0.55),transparent)]" />
-        <div className="grid-lines absolute inset-0" />
+        <div className="grid-lines absolute inset-0 opacity-50" />
+        <HeroNetwork className="absolute inset-0 h-full w-full [mask-image:linear-gradient(to_right,rgb(0_0_0/0.5),black_55%)]" />
         {!reduce && <motion.div className="absolute inset-0" style={{ background: spotlight }} />}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" />
       </div>
