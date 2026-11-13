@@ -1,0 +1,291 @@
+@import 'tailwindcss';
+
+/*
+ * ARA design system.
+ * Brand navy + red come from the ARA logo. Program accents: sky (Salesforce),
+ * violet (Generative AI), rose (Agentic AI).
+ */
+@theme {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-ink: #0d1150; /* deep ARA navy: dark backgrounds */
+  --color-ink-2: #151a63; /* raised navy surface */
+  --color-navy: #1f2680; /* brand navy (logo), hover states */
+  --color-brand: #e5232d; /* brand red (logo) */
+  --color-brand-600: #c81a23;
+  --color-brand-300: #ff7a80;
+  --color-canvas: #f6f5f1; /* warm light background */
+  --color-paper: #ffffff;
+  --color-text: #0d1140;
+  --color-muted: #5b5f76;
+  --color-faint: #8a8da1;
+  --color-line: #e6e4dd;
+  --color-line-dark: rgb(255 255 255 / 0.1);
+
+  --shadow-soft: 0 1px 2px rgb(11 13 34 / 0.04), 0 12px 32px -16px rgb(11 13 34 / 0.18);
+  --shadow-lift: 0 2px 6px rgb(11 13 34 / 0.06), 0 28px 60px -24px rgb(11 13 34 / 0.35);
+  --shadow-glow: 0 0 0 1px rgb(255 255 255 / 0.08), 0 30px 80px -30px rgb(46 58 190 / 0.55);
+
+  --animate-marquee: marquee var(--marquee-duration, 50s) linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-canvas text-text;
+    overflow-x: clip;
+  }
+  ::selection {
+    @apply bg-brand text-white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* Above-the-fold entrance: pure CSS so content shows before JavaScript loads. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Soft aurora used behind dark heroes. */
+.aurora {
+  background:
+    radial-gradient(60% 50% at 78% 18%, rgb(46 58 190 / 0.5), transparent 70%),
+    radial-gradient(45% 45% at 15% 85%, rgb(229 35 45 / 0.22), transparent 70%),
+    radial-gradient(50% 60% at 50% 50%, rgb(31 38 128 / 0.6), transparent 80%), var(--color-ink);
+}
+
+/* Fine grid texture for dark sections. */
+.grid-lines {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(70% 60% at 50% 30%, black, transparent);
+}
+
+/* Text gradient for highlighted words. */
+.text-gradient {
+  background: linear-gradient(100deg, #ff9ea3 0%, #e5232d 45%, #ff6b72 75%, #ff9ea3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient border for featured cards. */
+.ring-gradient {
+  position: relative;
+}
+.ring-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    140deg,
+    rgb(255 255 255 / 0.35),
+    rgb(255 255 255 / 0.04) 40%,
+    rgb(229 35 45 / 0.45)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Motion layer ---------- */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Slowly drifting colour blobs behind dark heroes. */
+@keyframes drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-8%, 6%) scale(1.15);
+  }
+}
+@keyframes drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(10%, -8%) scale(0.9);
+  }
+}
+.blob-a {
+  animation: drift-a 18s ease-in-out infinite;
+}
+.blob-b {
+  animation: drift-b 22s ease-in-out infinite;
+}
+
+/* Gradient text that slowly shifts colour. */
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+.text-gradient {
+  background-size: 200% auto;
+  animation: shimmer 8s linear infinite;
+}
+
+/* Light sweep across primary buttons on hover. */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-shine:hover::after {
+  transform: translateX(120%);
+}
+
+/* Rotating gradient border for highlighted cards. */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes rotate-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+.border-flow {
+  position: relative;
+}
+.border-flow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle), transparent 0deg, rgb(255 122 128 / 0.9) 60deg, rgb(229 35 45 / 0.8) 120deg, transparent 180deg);
+  animation: rotate-angle 6s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Animated aurora: every .aurora section gets two slowly drifting colour blobs. */
+.aurora {
+  position: relative;
+  isolation: isolate;
+}
+.aurora::before,
+.aurora::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.aurora::before {
+  width: min(70vw, 900px);
+  aspect-ratio: 1;
+  right: -15%;
+  top: -35%;
+  background: radial-gradient(circle, rgb(46 58 190 / 0.5), transparent 65%);
+  animation: drift-a 18s ease-in-out infinite;
+}
+.aurora::after {
+  width: min(55vw, 700px);
+  aspect-ratio: 1;
+  left: -15%;
+  bottom: -40%;
+  background: radial-gradient(circle, rgb(229 35 45 / 0.3), transparent 65%);
+  animation: drift-b 22s ease-in-out infinite;
+}
