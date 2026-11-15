@@ -1,0 +1,21 @@
+# AWS Amplify Hosting custom headers for files served straight from /public.
+# Videos, photos and logos rarely change, so let browsers and the CDN keep them for a week
+# (they then stream smoothly from a server near the visitor instead of re-downloading).
+# If a file is replaced, give it a new name so visitors get the new version straight away.
+customHeaders:
+  - pattern: '/videos/**'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=604800, stale-while-revalidate=86400'
+  - pattern: '/images/**'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=604800, stale-while-revalidate=86400'
+  - pattern: '/logos/**'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=604800, stale-while-revalidate=86400'
+  - pattern: '**/*'
+    headers:
+      - key: X-Content-Type-Options
+        value: nosniff
