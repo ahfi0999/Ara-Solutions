@@ -9,7 +9,7 @@ Website for ARA Solutions, covering both sides of the business with the same str
 URLs match the original site (`/services/rpo/`, `/training-placement/servicenow/`, `/company/about/` ...), so existing
 links and search rankings carry over.
 
-Built with **Next.js 16** (App Router), **React 19**, **TypeScript**, **Tailwind CSS v4**, **Motion** and **Lucide** icons.
+Built with **Next.js 15** (App Router, kept on 15 because AWS Amplify Hosting officially supports up to 15), **React 19**, **TypeScript**, **Tailwind CSS v4**, **Motion** and **Lucide** icons.
 
 ## Run it
 
@@ -21,7 +21,28 @@ npm run start      # run the production build
 npm run typecheck  # TypeScript check
 ```
 
-Deploy on Vercel or any host that runs Next.js. All pages are pre-rendered; only `/api/enquiry` runs on the server.
+## Deploy (AWS Amplify Hosting, CI/CD)
+
+The site is hosted on **AWS Amplify Hosting** (account `fionasolutions`, region Mumbai `ap-south-1`).
+Build settings are in `amplify.yml` at the repository root (app root: `ara-v1`).
+
+| Git branch | Purpose | Deploys |
+| --- | --- | --- |
+| `dev` | Development | automatically on every push |
+| `qa` | Testing before release | automatically on every push |
+| `main` | Live website (arasolutions.in) | automatically on every push |
+
+Normal flow: work on `dev` → merge to `qa` and test → merge to `main` to go live.
+
+**Environment variables** are set per branch in the Amplify console (App settings → Environment variables),
+never committed to Git. The build copies them into `.env.production` so the server routes can read them:
+`AI_BASE_URL`, `AI_API_KEY`, `AI_MODEL` (Ask ARA chatbot) and the enquiry variables below.
+
+All pages are pre-rendered and served from the CDN; only `/api/enquiry` and `/api/chat` run on the server.
+
+**Domain**: `arasolutions.in` is registered and its DNS is managed at Hostinger (email is Google Workspace, keep the MX record).
+To go live, add the domain in Amplify (Hosting → Custom domains) and create the records it shows in Hostinger DNS:
+an `ALIAS` for `@`, a `CNAME` for `www` and the certificate-validation `CNAME`. Leave MX and TXT records unchanged.
 
 ## Connect the enquiry form (important)
 

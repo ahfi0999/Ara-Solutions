@@ -21,8 +21,9 @@ export default async function Image() {
         justifyContent: 'space-between',
         padding: 72,
         color: 'white',
-        background:
-          'radial-gradient(60% 60% at 85% 10%, rgba(46,58,190,0.6), transparent 70%), radial-gradient(50% 50% at 5% 100%, rgba(229,35,45,0.35), transparent 70%), #0d1150',
+        backgroundColor: '#0d1150',
+        backgroundImage:
+          'radial-gradient(60% 60% at 85% 10%, rgba(46,58,190,0.6), transparent 70%), radial-gradient(50% 50% at 5% 100%, rgba(229,35,45,0.35), transparent 70%)',
       }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
