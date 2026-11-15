@@ -1,28 +1,25 @@
 # AWS Amplify Hosting build settings (CI/CD).
 # Every push to a connected branch (main, dev, qa) builds and deploys that branch automatically.
-# The website lives in the ara-v1 folder of this repository.
 version: 1
-applications:
-  - appRoot: ara-v1
-    frontend:
-      phases:
-        preBuild:
-          commands:
-            - nvm install 22 && nvm use 22
-            - node --version
-            - npm ci
-        build:
-          commands:
-            # Server code (the enquiry form and the Ask ARA chatbot) reads these at run time.
-            # Amplify only exposes console environment variables during the build, so copy the
-            # ones the site uses into .env.production. Values stay in the Amplify console, never in Git.
-            - env | grep -E '^(AI_BASE_URL|AI_API_KEY|AI_MODEL|LEAD_WEBHOOK_URL|RESEND_API_KEY|LEAD_EMAIL_TO|LEAD_EMAIL_FROM|SALESFORCE_WEB_TO_LEAD_OID)=' >> .env.production || true
-            - npm run build
-      artifacts:
-        baseDirectory: .next
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - .next/cache/**/*
-          - node_modules/**/*
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm install 22 && nvm use 22
+        - node --version
+        - npm ci
+    build:
+      commands:
+        # Server code (the enquiry form and the Ask ARA chatbot) reads these at run time.
+        # Amplify only exposes console environment variables during the build, so copy the
+        # ones the site uses into .env.production. Values stay in the Amplify console, never in Git.
+        - env | grep -E '^(AI_BASE_URL|AI_API_KEY|AI_MODEL|LEAD_WEBHOOK_URL|RESEND_API_KEY|LEAD_EMAIL_TO|LEAD_EMAIL_FROM|SALESFORCE_WEB_TO_LEAD_OID)=' >> .env.production || true
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .next/cache/**/*
+      - node_modules/**/*

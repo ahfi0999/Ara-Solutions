@@ -1,24 +1,33 @@
 {
-  "name": "ara-solutions-website",
-  "private": true,
+  "name": "ara-solutions",
   "version": "1.0.0",
-  "type": "module",
+  "private": true,
+  "description": "ARA Solutions - Salesforce, AI and Agentic AI training website",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "prettier --write src"
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "framer-motion": "^14.12.0",
+    "lenis": "^1.3.27",
     "lucide-react": "^1.72.0",
-    "next": "^16.4.6",
+    "motion": "^14.13.0",
+    "next": "~15.5.29",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.5",
-    "prettier": "^3.9.10",
-    "tailwindcss": "^4.3.5"
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "prettier": "^3.10.1",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.9"
   }
 }

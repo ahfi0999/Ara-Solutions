@@ -3,7 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   trailingSlash: true,
   poweredByHeader: false,
-  // Keep Next.js from treating the parent folder's lockfile as this project's root.
+  // Pin the project root for Turbopack (avoids picking up a lockfile from a parent folder).
   turbopack: { root: import.meta.dirname },
   // Keep old links from the previous website working.
   async redirects() {
