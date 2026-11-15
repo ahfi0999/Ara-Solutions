@@ -38,7 +38,7 @@ function CardTitle({ icon: Icon, title, text }: { icon: typeof Target; title: st
 export function WhyAra() {
   return (
     <section id="why-ara" className="relative isolate overflow-hidden bg-ink py-20 text-white sm:py-28">
-      <MediaBackground video="/videos/why-meeting.mp4" poster="/videos/why-meeting.jpg" overlayClassName="bg-ink/80" />
+      <MediaBackground video="/videos/why-meeting.mp4" mobileVideo="/videos/why-meeting-mobile.mp4" poster="/videos/why-meeting.jpg" overlayClassName="bg-ink/80" />
       <div aria-hidden className="grid-lines absolute inset-0" />
       <Container className="relative">
         <SectionHeading

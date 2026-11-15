@@ -8,12 +8,14 @@ import { cn } from '@/lib/cn';
  * Looping, muted background video for a dark section, under a navy overlay so text stays readable.
  * - The poster (a still frame) shows first, so the section is never empty.
  * - The video only loads and plays while the section is on screen (`eager` starts loading at once, for the hero).
- * - Phones, data-saver connections and visitors who prefer reduced motion get the still image only.
+ * - Phones play a light version (`mobileVideo`, about 1 MB); larger screens play the HD version.
+ * - Visitors who prefer reduced motion get the still image only.
  * - An optional pause button (`control`) lets visitors stop the motion.
  * Place it as the first child of a `relative isolate` section.
  */
 export function MediaBackground({
   video,
+  mobileVideo,
   poster,
   eager = false,
   control = false,
@@ -21,6 +23,8 @@ export function MediaBackground({
   className,
 }: {
   video: string;
+  /** Light version for phones; falls back to `video` when not given. */
+  mobileVideo?: string;
   poster: string;
   eager?: boolean;
   control?: boolean;
@@ -29,18 +33,16 @@ export function MediaBackground({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [enabled, setEnabled] = useState(false);
+  const [source, setSource] = useState(video);
   const [paused, setPaused] = useState(false);
   const pausedRef = useRef(false);
 
   // Decide once on the client whether this visitor should get video at all.
   useEffect(() => {
-    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const allowed =
-      window.matchMedia('(min-width: 768px)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-      !connection?.saveData;
-    setEnabled(allowed);
-  }, []);
+    const large = window.matchMedia('(min-width: 768px)').matches;
+    setSource(large ? video : (mobileVideo ?? video));
+    setEnabled(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, [video, mobileVideo]);
 
   // Load and play only while on screen.
   useEffect(() => {
@@ -49,7 +51,13 @@ export function MediaBackground({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (!element.src) element.src = video;
+          if (!element.src) {
+            // iOS and Android only autoplay videos that are muted and inline.
+            element.muted = true;
+            element.setAttribute('muted', '');
+            element.setAttribute('playsinline', '');
+            element.src = source;
+          }
           if (!pausedRef.current) element.play().catch(() => {});
         } else {
           element.pause();
@@ -59,7 +67,7 @@ export function MediaBackground({
     );
     observer.observe(element);
     return () => observer.disconnect();
-  }, [enabled, video, eager]);
+  }, [enabled, source, eager]);
 
   const toggle = () => {
     const element = ref.current;

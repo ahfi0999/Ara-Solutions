@@ -42,6 +42,7 @@ export function Hero() {
     >
       <MediaBackground
         video="/videos/hero-team.mp4"
+        mobileVideo="/videos/hero-team-mobile.mp4"
         poster="/videos/hero-team.jpg"
         eager
         control

@@ -16,7 +16,7 @@ export function ClosingCta({
 }) {
   return (
     <section id="enquire" className="aurora relative isolate overflow-hidden py-20 text-white sm:py-28">
-      <MediaBackground video="/videos/cta-handshake.mp4" poster="/videos/cta-handshake.jpg" overlayClassName="bg-gradient-to-r from-ink/85 via-ink/80 to-ink/70" />
+      <MediaBackground video="/videos/cta-handshake.mp4" mobileVideo="/videos/cta-handshake-mobile.mp4" poster="/videos/cta-handshake.jpg" overlayClassName="bg-gradient-to-r from-ink/85 via-ink/80 to-ink/70" />
       <div aria-hidden className="grid-lines absolute inset-0 -z-10" />
       <Container className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
         <div>
