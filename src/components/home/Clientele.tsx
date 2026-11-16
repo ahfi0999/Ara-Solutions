@@ -4,16 +4,13 @@ import { Container, SectionHeading } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { LogoMarquee, type MarqueeLogo } from '@/components/home/LogoMarquee';
 
-/** Client logos were sized for a taller tile; the rolling tiles are a little shorter. */
-const CLIENT_SCALE = 0.78;
-const ALUMNI_HEIGHT = { sm: 22, md: 26, lg: 36 } as const;
+export const ALUMNI_HEIGHT = { sm: 24, md: 28, lg: 38 } as const;
 
 const CLIENTS: MarqueeLogo[] = clientele.map((client) => ({
   id: client.name,
   name: client.name,
   src: client.logo ? `/logos/clients/${client.logo}` : undefined,
-  caption: client.sector,
-  height: Math.round((client.height ?? 28) * CLIENT_SCALE),
+  height: client.height,
 }));
 
 /** LTIMindtree is already in the client row, so it is not repeated here. */
@@ -33,7 +30,7 @@ const ALUMNI: MarqueeLogo[] = alumniCompanies
  */
 export function Clientele({ alumni = true, className }: { alumni?: boolean; className?: string }) {
   return (
-    <section id="clients" className={cn('overflow-hidden py-20 sm:py-28', className)}>
+    <section id="clients" className={cn('py-20 sm:py-28', className)}>
       <Container>
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
@@ -49,31 +46,29 @@ export function Clientele({ alumni = true, className }: { alumni?: boolean; clas
             Hire with ARA
           </EnquiryButton>
         </div>
-      </Container>
 
-      <div className="mt-12">
-        <LogoMarquee items={CLIENTS} duration={70} captions label="Organisations we have recruited for" />
-      </div>
+        <div className="mt-12">
+          <LogoMarquee items={CLIENTS} duration={70} label="Organisations we have recruited for" />
+        </div>
 
-      {alumni && (
-        <>
-          <Container className="mt-14">
-            <p className="flex items-center gap-4 text-center font-mono text-[12px] uppercase tracking-[0.2em] text-muted">
+        {alumni && (
+          <>
+            <p className="mt-14 flex items-center gap-4 text-center font-mono text-[12px] uppercase tracking-[0.2em] text-muted">
               <span aria-hidden className="h-px flex-1 bg-text/15" />
               And where the professionals we trained now work
               <span aria-hidden className="h-px flex-1 bg-text/15" />
             </p>
-          </Container>
-          <div className="mt-8">
-            <LogoMarquee
-              items={ALUMNI}
-              duration={55}
-              reverse
-              label="Companies where professionals trained by ARA work"
-            />
-          </div>
-        </>
-      )}
+            <div className="mt-8">
+              <LogoMarquee
+                items={ALUMNI}
+                duration={55}
+                reverse
+                label="Companies where professionals trained by ARA work"
+              />
+            </div>
+          </>
+        )}
+      </Container>
     </section>
   );
 }

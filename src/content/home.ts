@@ -37,7 +37,9 @@ export const clientele: { name: string; sector: string; logo?: string; height?: 
   { name: 'DXC Technology', sector: 'Technology consulting', logo: 'dxc.svg', height: 44 },
   { name: 'LTIMindtree', sector: 'Technology consulting', logo: 'ltimindtree.svg', height: 28 },
   { name: 'Royal Cyber', sector: 'Technology consulting', logo: 'royalcyber.svg', height: 30 },
-  { name: 'CriticalRiver', sector: 'Digital engineering', logo: 'criticalriver.webp', height: 25 },
+  // The only CriticalRiver logo available is 253px wide, so it is kept small enough to stay sharp on
+  // high-resolution screens. Swap in a vector (SVG) logo from the client when available.
+  { name: 'CriticalRiver', sector: 'Digital engineering', logo: 'criticalriver.webp', height: 18 },
   { name: 'iLink Digital', sector: 'Digital engineering', logo: 'ilink.svg', height: 22 },
   { name: 'Mealsan Technology Solutions', sector: 'Digital engineering' },
   { name: 'Akkodis', sector: 'Talent & workforce solutions', logo: 'akkodis.svg', height: 22 },

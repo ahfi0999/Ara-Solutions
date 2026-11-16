@@ -12,6 +12,7 @@ import { ButtonLink } from '@/components/ui/Button';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { ClosingCta } from '@/components/home/ClosingCta';
 import { LogoMarquee } from '@/components/home/LogoMarquee';
+import { ALUMNI_HEIGHT } from '@/components/home/Clientele';
 
 export const metadata: Metadata = {
   title: 'Case Studies',
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/company/case-studies/' },
 };
 
-const ALUMNI_HEIGHT = { sm: 22, md: 26, lg: 36 } as const;
+// Logo heights shared with the home page's logo bands.
 
 /** Training outcomes: real figures only (from ARA's original website and the program list). */
 const TRAINING_FIGURES = [
@@ -157,19 +158,19 @@ export default function CaseStudiesPage() {
             Where the professionals we trained now work
             <span aria-hidden className="h-px flex-1 bg-text/15" />
           </p>
+          <div className="mt-8">
+            <LogoMarquee
+              label="Companies where professionals trained by ARA work"
+              duration={60}
+              items={alumniCompanies.map((company) => ({
+                id: company.logo,
+                name: company.name,
+                src: `/logos/alumni/${company.logo}.svg`,
+                height: ALUMNI_HEIGHT[company.size],
+              }))}
+            />
+          </div>
         </Container>
-        <div className="mt-8">
-          <LogoMarquee
-            label="Companies where professionals trained by ARA work"
-            duration={60}
-            items={alumniCompanies.map((company) => ({
-              id: company.logo,
-              name: company.name,
-              src: `/logos/alumni/${company.logo}.svg`,
-              height: ALUMNI_HEIGHT[company.size],
-            }))}
-          />
-        </div>
       </section>
 
       <ClosingCta
