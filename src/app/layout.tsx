@@ -45,6 +45,7 @@ const organisationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
   name: site.name,
+  legalName: site.legalName,
   url: site.url,
   logo: `${site.url}/logo-color.png`,
   slogan: site.tagline,
@@ -56,6 +57,7 @@ const organisationJsonLd = {
     addressRegion: site.address.region,
     addressCountry: 'IN',
   },
+  hasMap: site.mapsUrl,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

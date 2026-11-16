@@ -4,6 +4,8 @@
  */
 export const site = {
   name: 'ARA Solutions',
+  /** Registered company name, as on the Google Business Profile. */
+  legalName: 'ARA Solutions Pvt Ltd',
   tagline: 'IT Always The Right Choice',
   url: 'https://arasolutions.in',
   description:
@@ -20,7 +22,8 @@ export const site = {
     region: 'Telangana',
     country: 'India',
   },
-  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=ARA+Solutions+Madhapur+Hyderabad',
+  /** ARA's own Google Business Profile (address, directions, reviews). */
+  mapsUrl: 'https://share.google/iQ8UV8bwBoq7RLrGt',
   /** Social profiles. Icons only render for entries with a URL. */
   social: {
     linkedin: '',
