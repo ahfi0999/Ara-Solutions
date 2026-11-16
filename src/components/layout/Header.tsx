@@ -66,20 +66,20 @@ function Dropdown({
               wide ? 'w-[620px]' : 'w-[340px]',
             )}
           >
-            <div className="rounded-2xl border border-white/10 bg-ink-2/95 p-2 shadow-glow backdrop-blur-xl">
+            <div className="rounded-2xl border border-line bg-white p-2 text-text shadow-[0_24px_60px_-20px_rgb(0_0_0/0.55),0_0_0_1px_rgb(13_17_80/0.06)]">
               <ul className={cn('grid gap-1', wide && 'grid-cols-2')}>
                 {group.items.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="block rounded-xl px-4 py-3 transition-colors hover:bg-white/[0.06]"
+                      className="group/item block rounded-xl px-4 py-3 transition-colors hover:bg-canvas"
                     >
-                      <span className="flex items-center gap-2.5 text-[15px] font-medium text-white">
+                      <span className="flex items-center gap-2.5 text-[15px] font-semibold text-ink transition-colors group-hover/item:text-brand">
                         {item.dot && <span className={cn('size-1.5 rounded-full', item.dot)} />}
                         {item.label}
                       </span>
                       {item.description && (
-                        <span className={cn('mt-0.5 block text-[13px] text-white/50', item.dot && 'pl-4')}>
+                        <span className={cn('mt-0.5 block text-[13px] text-muted', item.dot && 'pl-4')}>
                           {item.description}
                         </span>
                       )}
@@ -90,7 +90,7 @@ function Dropdown({
               {group.footer && (
                 <Link
                   href={group.footer.href}
-                  className="mt-1 flex items-center justify-between rounded-xl bg-white/[0.04] px-4 py-3 text-sm text-white/80 transition-colors hover:bg-white/[0.08] hover:text-white"
+                  className="mt-1 flex items-center justify-between rounded-xl bg-canvas px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
                 >
                   {group.footer.label}
                   <ArrowRight aria-hidden className="size-4" />
