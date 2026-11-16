@@ -1,6 +1,7 @@
 import { Check, Globe2, ShieldCheck, Video } from 'lucide-react';
 import { hiringBarriers as BARRIERS, pillars } from '@/content/home';
 import { site } from '@/content/site';
+import { afterJoining } from '@/content/company';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { CountUp, Spotlight } from '@/components/motion/primitives';
@@ -8,13 +9,7 @@ import { cn } from '@/lib/cn';
 import { MediaBackground } from '@/components/motion/MediaBackground';
 
 /** After-joining partnership, from ARA's pitch deck ("Our commitment doesn't end at joining"). */
-const COMMITMENT = [
-  'Pre-hiring alignment',
-  'Active collaboration',
-  'Transition support',
-  'Proactive engagement',
-  'Continued commitment',
-];
+const COMMITMENT = afterJoining.map((step) => step.title);
 
 const ICONS: Record<string, typeof Video> = {
   'L1 interview + video': Video,

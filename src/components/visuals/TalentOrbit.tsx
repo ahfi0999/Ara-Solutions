@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { alumniCompanies } from '@/content/home';
+import { alumniCompanies, clientele } from '@/content/home';
 import { programs, LIST_LIMIT } from '@/content/programs';
 import { accent } from '@/lib/accent';
 import { cn } from '@/lib/cn';
@@ -19,14 +19,39 @@ const onCircle = (index: number, total: number, radius: number, offsetDeg = 0) =
   return { left: `${50 + radius * Math.cos(angle)}%`, top: `${50 + radius * Math.sin(angle)}%` };
 };
 
-const OUTER = alumniCompanies.filter((company) =>
-  ['accenture', 'deloitte', 'tcs', 'infosys', 'microsoft', 'amazon', 'ibm', 'wipro'].includes(company.logo),
-);
+/**
+ * Companies on the outer ring: organisations ARA has recruited for (clients first), mixed with companies
+ * where its alumni work. Only eight are on the ring at a time; the rest take turns (see `swapSlot`).
+ */
+const CLIENT_LOGOS = clientele
+  .filter((client) => client.logo)
+  .map((client) => ({
+    name: client.name,
+    src: `/logos/clients/${client.logo}`,
+    // Square or stacked logos get more height so they read as well as wide wordmarks.
+    tall: (client.height ?? 0) >= 40,
+  }));
+const ALUMNI_LOGOS = alumniCompanies
+  .filter((company) =>
+    ['accenture', 'deloitte', 'tcs', 'infosys', 'microsoft', 'amazon', 'ibm', 'wipro'].includes(company.logo),
+  )
+  .map((company) => ({
+    name: company.name,
+    src: `/logos/alumni/${company.logo}.svg`,
+    tall: company.size === 'lg',
+  }));
+/** The first eight clients, then the remaining clients and alumni companies taking turns. */
+const COMPANIES = [
+  ...CLIENT_LOGOS.slice(0, 8),
+  ...CLIENT_LOGOS.slice(8).flatMap((client, i) => [client, ALUMNI_LOGOS[i]].filter(Boolean)),
+  ...ALUMNI_LOGOS.slice(CLIENT_LOGOS.length - 8),
+];
+const OUTER_SLOTS = 8;
 
 /**
- * Hero visual: ARA at the centre, the skills it trains on the inner ring and companies
- * where its alumni work on the outer ring, both slowly orbiting. Pulses travel outwards
- * to show talent moving from training to companies.
+ * Hero visual: ARA at the centre, the skills it trains on the inner ring and companies (clients and
+ * where alumni work) on the outer ring, both slowly orbiting. Pulses travel outwards, and a beam
+ * shoots to one company at a time; every other beam swaps that logo for the next company.
  */
 export function TalentOrbit() {
   const reduce = useReducedMotionSafe();
@@ -38,6 +63,30 @@ export function TalentOrbit() {
   const [slots, setSlots] = useState(() => Array.from({ length: SLOTS }, (_, i) => i));
   // Which slot changes next, and which program goes into it (a sliding window, so no duplicates).
   const cursor = useRef({ slot: 0, next: SLOTS });
+  // outer[i] = index (into COMPANIES) of the company shown in outer ring position i.
+  const [outer, setOuter] = useState(() => Array.from({ length: OUTER_SLOTS }, (_, i) => i));
+  const outerRef = useRef(outer);
+  const nextCompany = useRef(OUTER_SLOTS % COMPANIES.length);
+
+  /** Puts the next company that is not already on the ring into `slot`. */
+  const swapSlot = (slot: number) => {
+    if (COMPANIES.length <= OUTER_SLOTS) return;
+    const shown = new Set(outerRef.current);
+    let n = nextCompany.current;
+    for (let guard = 0; shown.has(n) && guard < COMPANIES.length; guard += 1) n = (n + 1) % COMPANIES.length;
+    nextCompany.current = (n + 1) % COMPANIES.length;
+    const updated = outerRef.current.map((value, i) => (i === slot ? n : value));
+    outerRef.current = updated;
+    setOuter(updated);
+  };
+
+  // Load every logo up front so a swapped-in logo appears without a gap.
+  useEffect(() => {
+    COMPANIES.forEach((company) => {
+      const img = new window.Image();
+      img.src = company.src;
+    });
+  }, []);
 
   // More programs than slots: every few seconds one chip makes way for the next program,
   // so every course appears over time while the ring stays uncluttered.
@@ -63,12 +112,18 @@ export function TalentOrbit() {
     let last = -1;
     const timers: ReturnType<typeof setTimeout>[] = [];
     const fire = () => {
-      let index = Math.floor(Math.random() * OUTER.length);
-      if (index === last) index = (index + 1) % OUTER.length;
+      let index = Math.floor(Math.random() * OUTER_SLOTS);
+      if (index === last) index = (index + 1) % OUTER_SLOTS;
       last = index;
       id += 1;
+      const swap = id % 2 === 0;
       setBeam({ id, index });
-      timers.push(setTimeout(() => setHit(index), 650));
+      timers.push(
+        setTimeout(() => {
+          setHit(index);
+          if (swap) swapSlot(index);
+        }, 650),
+      );
       timers.push(setTimeout(() => setHit((current) => (current === index ? null : current)), 1500));
     };
     fire();
@@ -105,21 +160,25 @@ export function TalentOrbit() {
           <div
             key={beam.id}
             className="absolute left-1/2 top-1/2 h-0.5 w-[43%] origin-left"
-            style={{ transform: `rotate(${(beam.index / OUTER.length) * 360 + 12 - 90}deg)` }}
+            style={{ transform: `rotate(${(beam.index / OUTER_SLOTS) * 360 + 12 - 90}deg)` }}
           >
             <motion.div
               className="absolute inset-y-0 left-[24%] right-[12%] origin-left rounded-full bg-gradient-to-r from-brand/0 via-brand-300/70 to-brand-300"
               initial={{ scaleX: 0, opacity: 1 }}
               animate={{ scaleX: 1, opacity: [1, 1, 0] }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], opacity: { duration: 1.3, times: [0, 0.6, 1] } }}
+              transition={{
+                duration: 1.1,
+                ease: [0.22, 1, 0.36, 1],
+                opacity: { duration: 1.3, times: [0, 0.6, 1] },
+              }}
             />
           </div>
         )}
-        {OUTER.map((company, index) => (
+        {outer.map((companyIndex, index) => (
           <div
-            key={company.logo}
+            key={index}
             className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={onCircle(index, OUTER.length, 43, 12)}
+            style={onCircle(index, OUTER_SLOTS, 43, 12)}
           >
             <div className={cn(!reduce && '[animation:spin_50s_linear_infinite_reverse]')}>
               <div
@@ -130,12 +189,22 @@ export function TalentOrbit() {
                     : 'border-white/10',
                 )}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element -- small SVG logo */}
-                <img
-                  src={`/logos/alumni/${company.logo}.svg`}
-                  alt=""
-                  className={cn('w-auto max-w-full object-contain', company.size === 'lg' ? 'h-5 sm:h-7' : 'h-3 sm:h-[18px]')}
-                />
+                {/* Logos of any shape fit the same box; a swapped-in logo pops in. */}
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.img
+                    key={COMPANIES[companyIndex].src}
+                    src={COMPANIES[companyIndex].src}
+                    alt=""
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.6 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className={cn(
+                      'w-full object-contain',
+                      COMPANIES[companyIndex].tall ? 'h-[86%]' : 'h-[62%]',
+                    )}
+                  />
+                </AnimatePresence>
               </div>
             </div>
           </div>

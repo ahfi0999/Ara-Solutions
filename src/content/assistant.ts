@@ -1,4 +1,5 @@
-import { generalFaqs } from './home';
+import { clientele, generalFaqs, hiringProcess, pillars, roleGroups, sourcingChannels } from './home';
+import { afterJoining, capabilities, trainingApproach } from './company';
 import { programs } from './programs';
 import { services, roleCoverage } from './services';
 import { site } from './site';
@@ -9,11 +10,23 @@ import { site } from './site';
  * to let it answer those. It is told never to invent anything that is not written here.
  */
 const COMPANY_NOTES = `
-- ARA Solutions is an IT workforce and training company based in ${site.address.area}, ${site.address.city},
-  with 13+ years in the IT industry and 1,000+ professionals placed. Tagline: "${site.tagline}".
-- Two divisions: (1) IT & non-IT staffing for businesses, (2) Training & Placement for professionals.
+- ARA Solutions is a recruitment, technology training and IT consulting company based in ${site.address.area},
+  ${site.address.city}. Founded in 2022 by industry veterans, with 13+ years in the IT industry, 1,000+ professionals
+  placed and 10,000+ screened talent profiles. Global hubs: US, EU and Asia; clients in India, the USA and the UK.
+  Tagline: "${site.tagline}".
+- Core capabilities: ${capabilities.map((item) => `${item.title} (${item.text.replace(/\.$/, '')})`).join('; ')}.
+- Two divisions: (1) Staffing for businesses (IT and non-IT), (2) Training & Placement for professionals.
+- Organisations ARA has recruited for (you may name these, but do not add details about them):
+  ${clientele.map((client) => client.name).join(', ')}.
+- Four pillars: ${pillars.map((pillar) => `${pillar.title}: ${pillar.text}`).join(' ')}
+- Hiring process: ${hiringProcess.map((step, index) => `${index + 1}. ${step.title} (${step.short})`).join('; ')}.
+  Two sourcing channels: ${sourcingChannels.database.name.toLowerCase()} (${sourcingChannels.database.text.toLowerCase()}
+  ${sourcingChannels.database.time}) and the ${sourcingChannels.openMarket.name.toLowerCase()}
+  (${sourcingChannels.openMarket.text.toLowerCase()} ${sourcingChannels.openMarket.time}, through steps 3 to 5).
+- After joining: ${afterJoining.map((step) => `${step.title} (${step.text.replace(/\.$/, '')})`).join('; ')}.
+- Roles ARA recruits for: ${roleGroups.map((side) => `${side.title}: ${side.groups.map((group) => `${group.name} (${group.roles})`).join(', ')}`).join('. ')}.
 - Fulltime staffing covers IT roles (${roleCoverage.it.join('; ')}) and non-IT roles (${roleCoverage.nonIt.join('; ')}).
-- Training includes hands-on labs, real projects, interview preparation and placement assistance.
+- Training: ${trainingApproach.points.join(', ')}.
 - Course fees, batch start dates, durations and timings: NOT listed here. Ask the visitor to contact
   the team for the latest details.
 `;
@@ -42,7 +55,7 @@ How to answer:
 - Be warm, clear and brief: 2 to 4 short sentences, or a short list. Plain text only (no markdown
   headings or tables). Simple "-" bullet points are fine.
 - Only use the facts below. If something is not covered (fees, batch dates, salaries, guarantees,
-  specific clients), say you don't have that detail and offer to connect them with the team.
+  details about a particular client), say you don't have that detail and offer to connect them with the team.
 - Never promise jobs, salaries or placement guarantees.
 - When someone shows interest (wants to hire, join a course, or get fees/dates), invite them to
   WhatsApp the team (button below the chat), call ${site.phone} or email ${site.email}.

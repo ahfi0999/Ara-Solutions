@@ -1,8 +1,11 @@
-/** Company content (About, Approach, Careers). Wording follows ARA's original website. */
+/**
+ * Company content (About, Approach, Case studies, Careers). Wording follows ARA's original website
+ * and ARA's pitch deck.
+ */
 
 export const about = {
   intro:
-    'A professional recruitment, IT consulting and workforce solutions company based in Hyderabad, India, bridging talent capability with sustainable enterprise growth across domestic and global markets.',
+    'A recruitment, technology training and IT consulting company based in Hyderabad, India: we find the right people for companies, and we train professionals for the roles companies hire for.',
   whoWeAre: [
     'ARA Solutions is a professional recruitment, staffing and workforce solutions company based in Hyderabad, India, serving clients across domestic and international markets.',
     'We bridge the gap between organisational ambition and the people who make it real, with workforce models designed around the reality of each hire. Alongside staffing, our Training & Placement programs build job-ready talent in the technologies companies hire for.',
@@ -17,6 +20,39 @@ export const about = {
   },
 };
 
+/** ARA's core capabilities, from the pitch deck (slide 2). */
+export const capabilities = [
+  { title: 'Global talent', text: 'Executive search and specialised staffing.' },
+  { title: 'Tech upskilling', text: 'High-impact, industry-ready workforce training.' },
+  { title: 'IT consulting', text: 'Custom enterprise digital solutions.' },
+  { title: 'Academic alliances', text: 'Strategic learning programs and development.' },
+] as const;
+
+/** How ARA's training works, and why it is "shaped by hiring". */
+export const trainingApproach = {
+  title: 'Training shaped by real hiring',
+  paragraphs: [
+    'Because we recruit for companies every day, we know what employers screen for. Our programs teach exactly that, in the technologies companies are hiring for now.',
+    'Every program is hands-on, built around real projects, and finishes with interview preparation and placement assistance, so learners leave ready for the job, not just the exam.',
+  ],
+  points: [
+    'Hands-on labs in every module',
+    'Real projects and a capstone',
+    'Certification preparation where offered',
+    'Interview preparation',
+    'Placement assistance',
+  ],
+} as const;
+
+/** After joining: ARA's customer engagement journey, from the pitch deck (slide 9). */
+export const afterJoining = [
+  { title: 'Pre-hiring alignment', text: 'Agree on goals, roles and timelines.' },
+  { title: 'Active collaboration', text: 'Regular progress updates with your hiring team.' },
+  { title: 'Transition support', text: 'Offer, joining and onboarding support.' },
+  { title: 'Proactive engagement', text: 'Feedback after placement and early sight of your next hires.' },
+  { title: 'Continued commitment', text: 'Ongoing support as your workforce needs change.' },
+] as const;
+
 export const principles = [
   {
     title: 'The right talent',
@@ -29,24 +65,6 @@ export const principles = [
   {
     title: 'The right moment',
     text: 'Speed when speed matters, thoroughness always. A process that respects timelines without cutting corners on qualification.',
-  },
-];
-
-export const approachSteps = [
-  {
-    title: 'Discover',
-    tag: 'Clarity first',
-    text: 'We begin by understanding the business need, role context, technical and cultural requirements, and timeline. No search starts without clarity.',
-  },
-  {
-    title: 'Deliver',
-    tag: 'Right talent, right fit',
-    text: 'We apply the agreed staffing or recruitment model, running a targeted search, qualifying candidates and managing the interview process.',
-  },
-  {
-    title: 'Support',
-    tag: 'Long-term partnership',
-    text: 'Our role doesn’t end at offer acceptance. We coordinate onboarding, follow up post-placement and maintain an ongoing partnership.',
   },
 ];
 

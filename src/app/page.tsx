@@ -6,7 +6,6 @@ import { CaseStudyPreview, ServicesOverview } from '@/components/home/HomeSectio
 import { Clientele } from '@/components/home/Clientele';
 import { HiringFlow } from '@/components/home/HiringFlow';
 import { ProgramShowcase } from '@/components/home/ProgramShowcase';
-import { AlumniMarquee } from '@/components/home/AlumniMarquee';
 import { WhyAra } from '@/components/home/WhyAra';
 import { Faq } from '@/components/home/Faq';
 import { ClosingCta } from '@/components/home/ClosingCta';
@@ -31,15 +30,14 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <Hero />
       <Divisions />
-      {/* For businesses: what we offer, who trusts us, why ARA, how we hire, results. */}
+      {/* For businesses: what we offer, who trusts us (clients and where alumni work), why ARA, how we hire, results. */}
       <ServicesOverview />
       <Clientele />
       <WhyAra />
       <HiringFlow />
       <CaseStudyPreview />
-      {/* For professionals: programs and where alumni work. */}
+      {/* For professionals: the training programs. */}
       <ProgramShowcase />
-      <AlumniMarquee className="border-t border-line" />
       <Faq items={generalFaqs} />
       <ClosingCta />
     </>

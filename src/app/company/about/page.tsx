@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowUpRight, Check } from 'lucide-react';
-import { about, principles } from '@/content/company';
+import { ArrowUpRight, BookOpen, Check, Cog, GraduationCap, Handshake } from 'lucide-react';
+import { about, capabilities, principles, trainingApproach } from '@/content/company';
 import { programs } from '@/content/programs';
 import { services } from '@/content/services';
 import { stats } from '@/content/site';
@@ -10,7 +10,7 @@ import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { ButtonLink } from '@/components/ui/Button';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
-import { AlumniMarquee } from '@/components/home/AlumniMarquee';
+import { Clientele } from '@/components/home/Clientele';
 import { ClosingCta } from '@/components/home/ClosingCta';
 
 export const metadata: Metadata = {
@@ -31,6 +31,9 @@ const whatWeDo = [
     href: '/training-placement/',
   },
 ];
+
+/** Icons for the core capabilities, as on ARA's pitch deck. */
+const CAPABILITY_ICONS = [Handshake, GraduationCap, Cog, BookOpen];
 
 export default function AboutPage() {
   return (
@@ -91,10 +94,44 @@ export default function AboutPage() {
         </Container>
       </section>
 
+      {/* Core capabilities, from ARA's pitch deck. */}
+      <section className="pb-20 sm:pb-28">
+        <Container>
+          <SectionHeading
+            eyebrow="Core capabilities"
+            title={
+              <>
+                Connecting elite talent and technology to <em>accelerate growth</em>
+              </>
+            }
+            intro="Founded in 2022 by industry veterans, delivering global digital and workforce transformation."
+          />
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {capabilities.map((item, index) => {
+              const Icon = CAPABILITY_ICONS[index];
+              return (
+                <Reveal as="li" key={item.title} delay={index * 0.06} className="h-full">
+                  <div className="h-full rounded-2xl border border-line bg-paper p-7 shadow-soft">
+                    <span className="flex size-11 items-center justify-center rounded-xl bg-brand/[0.08] text-brand">
+                      <Icon aria-hidden className="size-5" />
+                    </span>
+                    <h3 className="mt-5 text-xl font-semibold tracking-tight">{item.title}</h3>
+                    <p className="mt-2 leading-relaxed text-muted">{item.text}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </ul>
+        </Container>
+      </section>
+
       <section className="border-y border-line bg-paper/70 py-20 sm:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div>
-            <SectionHeading eyebrow="The hiring challenge" title={about.hiringChallenge.title} />
+            <SectionHeading
+              eyebrow="For businesses: the hiring challenge"
+              title={about.hiringChallenge.title}
+            />
             <div className="mt-8 space-y-5 text-lg leading-relaxed text-muted">
               {about.hiringChallenge.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 24)}>{paragraph}</p>
@@ -117,7 +154,65 @@ export default function AboutPage() {
         </Container>
       </section>
 
+      {/* Training & Placement */}
       <section className="py-20 sm:py-28">
+        <Container className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+          <div>
+            <SectionHeading
+              eyebrow="For professionals: Training & Placement"
+              title={
+                <>
+                  Training shaped by <em>real hiring</em>
+                </>
+              }
+            />
+            <div className="mt-8 space-y-5 text-lg leading-relaxed text-muted">
+              {trainingApproach.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+              ))}
+            </div>
+            <ul className="mt-8 flex flex-wrap gap-2">
+              {trainingApproach.points.map((point) => (
+                <li
+                  key={point}
+                  className="flex items-center gap-2 rounded-full border border-line bg-paper px-3.5 py-1.5 text-[14px]"
+                >
+                  <Check aria-hidden className="size-4 text-brand" /> {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="content-center">
+            <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-muted">
+              {programs.length} career programs
+            </p>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {programs.map((program, index) => (
+                <Reveal as="li" key={program.slug} delay={index * 0.05} className="h-full">
+                  <Link
+                    href={`/training-placement/${program.slug}/`}
+                    className="group flex h-full items-center justify-between gap-3 rounded-2xl border border-line bg-paper p-5 shadow-soft transition-colors hover:border-brand/30"
+                  >
+                    <span>
+                      <span className="block font-semibold tracking-tight">{program.shortName}</span>
+                      <span className="mt-0.5 block text-[13px] text-muted">{program.highlights[0]}</span>
+                    </span>
+                    <ArrowUpRight
+                      aria-hidden
+                      className="size-5 shrink-0 text-muted transition-colors group-hover:text-brand"
+                    />
+                  </Link>
+                </Reveal>
+              ))}
+            </ul>
+            <ButtonLink href="/training-placement/" className="mt-6" arrow>
+              Explore training programs
+            </ButtonLink>
+          </div>
+        </Container>
+      </section>
+
+      <section className="border-t border-line py-20 sm:py-28">
         <Container>
           <SectionHeading
             eyebrow="Our operating principles"
@@ -173,7 +268,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <AlumniMarquee />
+      <Clientele className="border-t border-line" />
       <ClosingCta
         title="Start a conversation"
         intro="Tell us about your workforce requirements or career goals. We'll tell you how we'd approach them."

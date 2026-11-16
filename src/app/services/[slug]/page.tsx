@@ -12,6 +12,7 @@ import {
   ServiceStory,
 } from '@/components/services/ServiceSections';
 import { ClosingCta } from '@/components/home/ClosingCta';
+import { Clientele } from '@/components/home/Clientele';
 import { Container, SectionHeading } from '@/components/ui/Section';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -62,6 +63,7 @@ export default async function ServicePage({ params }: Props) {
       {(service.slug === 'fulltime-staffing' || service.slug === 'corp-to-corp') && (
         <EngagementComparison highlight={service.slug} />
       )}
+      <Clientele alumni={false} className="border-t border-line" />
       <ClosingCta defaultInterest={service.slug} title={service.closing.title} intro={service.closing.text} />
       <section className="py-20 sm:py-24">
         <Container>

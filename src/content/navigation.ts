@@ -20,9 +20,13 @@ export const navigation: NavEntry[] = [
     label: 'Company',
     match: '/company',
     items: [
-      { label: 'About us', href: '/company/about/', description: 'Who we are and how we work' },
-      { label: 'Our approach', href: '/company/approach/', description: 'Discover, deliver, support' },
-      { label: 'Case studies', href: '/company/case-studies/', description: 'Outcomes we have delivered' },
+      { label: 'About us', href: '/company/about/', description: 'Who we are: staffing and training' },
+      { label: 'Our approach', href: '/company/approach/', description: 'How we hire and how we train' },
+      {
+        label: 'Case studies',
+        href: '/company/case-studies/',
+        description: 'Hiring results and alumni careers',
+      },
     ],
   },
   {

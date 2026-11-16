@@ -1,17 +1,19 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Check } from 'lucide-react';
-import { approachSteps, deliveryStructures, processBenefits } from '@/content/company';
+import { afterJoining, deliveryStructures, processBenefits, trainingApproach } from '@/content/company';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { ButtonLink } from '@/components/ui/Button';
-import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { ClosingCta } from '@/components/home/ClosingCta';
+import { HiringFlow } from '@/components/home/HiringFlow';
+import { Journey } from '@/components/home/Journey';
 
 export const metadata: Metadata = {
   title: 'Our Approach',
   description:
-    'A disciplined process, flexible engagement and real accountability: how ARA Solutions discovers, delivers and supports every hire.',
+    'How ARA Solutions hires and how it trains: a two-channel recruitment process with support beyond joining, and a hands-on path from first class to placement.',
   alternates: { canonical: '/company/approach/' },
 };
 
@@ -22,45 +24,45 @@ export default function ApproachPage() {
         eyebrow="Our approach"
         title={
           <>
-            A disciplined process. Flexible engagement. <em>Real accountability.</em>
+            One standard for every hire <em>and every learner.</em>
           </>
         }
-        intro="End-to-end transparency, active candidate consultation and milestone-backed technical screening, so hiring stops being a gamble."
+        intro="A disciplined, transparent process for companies hiring with us, and a hands-on path from first class to placement for professionals training with us."
       >
         <div className="flex flex-wrap gap-3">
-          <EnquiryButton size="lg" arrow interest="hiring">
-            Discuss your requirement
-          </EnquiryButton>
-          <ButtonLink href="/company/case-studies/" variant="ghost-light" size="lg">
-            View case studies
+          <ButtonLink href="#how-we-hire" size="lg" arrow>
+            How we hire
+          </ButtonLink>
+          <ButtonLink href="#how-we-train" variant="ghost-light" size="lg">
+            How we train
           </ButtonLink>
         </div>
       </PageHero>
 
-      <section className="py-20 sm:py-28">
+      {/* For businesses */}
+      <HiringFlow eyebrow="For businesses: how we hire" approachLink={false} />
+
+      <section className="border-y border-line bg-paper/70 py-20 sm:py-28">
         <Container>
           <SectionHeading
-            eyebrow="Execution rigour"
+            eyebrow="Beyond placement"
             title={
               <>
-                Three steps. <em>No shortcuts.</em>
+                Our commitment doesn’t end <em>at joining</em>
               </>
             }
-            intro="A structured approach that ensures the right people, the right process and the right outcomes."
+            intro="Beyond recruitment, beyond placement: building partnerships that last."
           />
-          <ol className="mt-12 grid gap-4 md:grid-cols-3">
-            {approachSteps.map((step, index) => (
-              <Reveal key={step.title} delay={index * 0.08} className="h-full">
-                <li className="relative h-full overflow-hidden rounded-3xl border border-line bg-paper p-8 shadow-soft">
-                  <span className="font-mono text-sm text-brand">
-                    Step {String(index + 1).padStart(2, '0')}
+          <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {afterJoining.map((step, index) => (
+              <Reveal as="li" key={step.title} delay={index * 0.07} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-line bg-paper p-6 shadow-soft">
+                  <span className="flex size-9 items-center justify-center rounded-full bg-ink font-mono text-[12px] font-semibold text-white">
+                    {String(index + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="mt-6 text-3xl font-semibold tracking-tight">{step.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted">{step.text}</p>
-                  <p className="mt-6 inline-flex rounded-full bg-canvas px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-muted">
-                    {step.tag}
-                  </p>
-                </li>
+                  <h3 className="mt-5 text-lg font-semibold leading-tight tracking-tight">{step.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">{step.text}</p>
+                </div>
               </Reveal>
             ))}
           </ol>
@@ -119,10 +121,32 @@ export default function ApproachPage() {
         </Container>
       </section>
 
+      {/* For professionals */}
+      <div className="border-t border-line">
+        <Journey id="how-we-train" eyebrow="For professionals: how we train">
+          <p className="mt-6 text-lg leading-relaxed text-muted">{trainingApproach.paragraphs[0]}</p>
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {trainingApproach.points.map((point) => (
+              <li
+                key={point}
+                className="flex items-center gap-2 rounded-full border border-line bg-paper px-3.5 py-1.5 text-[14px]"
+              >
+                <Check aria-hidden className="size-4 text-brand" /> {point}
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/training-placement/"
+            className="mt-6 inline-block text-[15px] font-medium text-brand underline-offset-4 hover:underline"
+          >
+            Explore all training programs →
+          </Link>
+        </Journey>
+      </div>
+
       <ClosingCta
-        defaultInterest="hiring"
-        title="Put this process to work on your next hire."
-        intro="Whether you need a single specialist or a full recruitment pipeline, let's start with a discovery conversation."
+        title="Hiring, or building your career?"
+        intro="Tell us what you need. Our team will call you back with the right next step."
       />
     </>
   );

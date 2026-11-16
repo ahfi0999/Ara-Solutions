@@ -1,12 +1,10 @@
 import Link from 'next/link';
 import { Briefcase, CloudCog, Code2, Database, HeartPulse, Truck, Users } from 'lucide-react';
-import { approachSteps } from '@/content/company';
 import { roleGroups } from '@/content/home';
 import { caseStudies } from '@/content/records';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Figure } from '@/components/motion/primitives';
-import { ButtonLink } from '@/components/ui/Button';
 import { ServiceCards } from '@/components/services/ServiceSections';
 
 /** Staffing services overview. */
@@ -87,41 +85,6 @@ const ROLE_ICONS: Record<string, typeof Briefcase> = {
   'Healthcare & engineering': HeartPulse,
   'Commerce & operations': Truck,
 };
-
-/** Discover · Deliver · Support. */
-export function ApproachPreview() {
-  return (
-    <section className="py-20 sm:py-28">
-      <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-        <div>
-          <SectionHeading
-            eyebrow="Our approach"
-            title={
-              <>
-                Three steps. <em>No shortcuts.</em>
-              </>
-            }
-            intro="A structured process that respects your timelines without cutting corners on qualification."
-          />
-          <ButtonLink href="/company/approach/" variant="ghost-dark" className="mt-8" arrow>
-            See our approach
-          </ButtonLink>
-        </div>
-        <ol className="grid gap-4 sm:grid-cols-3">
-          {approachSteps.map((step, index) => (
-            <Reveal key={step.title} delay={index * 0.08} className="h-full">
-              <li className="h-full border-t-2 border-text pt-6">
-                <span className="font-mono text-sm text-brand">{String(index + 1).padStart(2, '0')}</span>
-                <h3 className="mt-3 text-2xl font-semibold tracking-tight">{step.title}</h3>
-                <p className="mt-2 leading-relaxed text-muted">{step.text}</p>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
-      </Container>
-    </section>
-  );
-}
 
 /** Three case studies with headline metrics. */
 export function CaseStudyPreview() {

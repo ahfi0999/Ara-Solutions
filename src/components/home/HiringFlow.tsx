@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'motion/react';
+import { AnimatePresence, motion, useInView } from 'motion/react';
 import { Check, Database, Search } from 'lucide-react';
 import { hiringProcess, sourcingChannels } from '@/content/home';
 import { cn } from '@/lib/cn';
@@ -48,9 +48,8 @@ const PATHS = {
 };
 
 /*
- * Animation order once the diagram scrolls into view: the first two steps, then both lanes draw at once.
+ * Drawing order once the diagram scrolls into view: the first two steps, then both lanes draw at once.
  * The database lane arrives first (the 2-4 hour path), the open-market lane follows, then the last steps.
- * After that a dot keeps travelling each lane, the fast one about three times as often.
  */
 const LINE = {
   head: { delay: 0.15, duration: 0.45 },
@@ -59,43 +58,220 @@ const LINE = {
   tail: { delay: 2.2, duration: 0.7 },
 };
 const CARD_DELAY = [0, 0.2, 0.9, 1.25, 1.6, 1.25, 2.45, 2.75];
-const DOTS_AFTER_MS = 3100;
-/** Seconds for one trip along each lane: slow and calm, the database dot about three times as fast. */
-const DOT_SECONDS = { fast: 4, slow: 12 };
+
+/*
+ * The candidate story, which starts once the lines are drawn and then repeats. Two candidates walk the whole
+ * process at the same time: the database candidate (red) goes straight from sourcing to submission; the
+ * open-market candidate (navy) stops at each check while a spinner runs. Every step a candidate passes lights
+ * up and gets a tick; arrival at "Profile submission" shows the time badge; arrival at "Offer & joining" pulses.
+ * Speeds are in diagram units per second (the diagram is 1000 units wide).
+ */
+type Lane = 'fast' | 'slow';
+const LANES: Lane[] = ['fast', 'slow'];
+const JOURNEY: Record<Lane, { d: string; steps: number[]; speed: number; color: string; time: string }> = {
+  fast: {
+    d: `${PATHS.head} ${PATHS.fast} ${PATHS.tail}`,
+    steps: [0, 1, 5, 6, 7],
+    speed: 190,
+    color: 'var(--color-brand)',
+    time: sourcingChannels.database.time,
+  },
+  slow: {
+    d: `${PATHS.head} ${PATHS.slow} ${PATHS.tail}`,
+    steps: [0, 1, 2, 3, 4, 5, 6, 7],
+    speed: 150,
+    color: 'var(--color-navy)',
+    time: sourcingChannels.openMarket.time,
+  },
+};
+const JOURNEY_AFTER_MS = 3100;
+/** Open-market checks where the navy candidate pauses before getting its tick. */
+const CHECK_STEPS = [2, 3, 4];
+const CHECK_MS = 1400;
+const GLOW_MS = 900;
+const HIRED_MS = 1800;
+/** Pause after both candidates are hired, before the story starts again. */
+const RESTART_MS = 2600;
+
+type Story = {
+  /** Steps that have been passed, with the candidate who passed first. */
+  ticks: Partial<Record<number, Lane>>;
+  /** Steps a candidate is passing through right now. */
+  glow: Partial<Record<number, Lane>>;
+  /** The open-market check currently running. */
+  checking: number | null;
+  /** Candidates who have reached "Profile submission". */
+  arrived: Lane[];
+  /** Hires so far in this round (drives the pulse on the last step). */
+  hires: number;
+  hiredFlash: boolean;
+};
+const EMPTY: Story = { ticks: {}, glow: {}, checking: null, arrived: [], hires: 0, hiredFlash: false };
 
 function pad(n: number) {
   return String(n).padStart(2, '0');
 }
 
-/** Desktop: the full flow diagram with drawn lines and travelling dots. */
+/** Centre of a step card, in diagram units. */
+function stepCentre(index: number) {
+  const [col, row] = PLACE[index];
+  return { x: px(COL[col]), y: py(ROW[row]) };
+}
+
+/** Distance along `path` at which it passes the centre of each step, searching forwards. */
+function stepDistances(path: SVGPathElement, steps: number[]) {
+  const total = path.getTotalLength();
+  const out: number[] = [];
+  let from = 0;
+  for (const step of steps) {
+    const c = stepCentre(step);
+    let best = from;
+    let bestGap = Infinity;
+    for (let l = from; l <= total; l += 2) {
+      const p = path.getPointAtLength(l);
+      const gap = Math.hypot(p.x - c.x, p.y - c.y);
+      if (gap < bestGap) {
+        bestGap = gap;
+        best = l;
+      } else if (bestGap < 4 && gap > bestGap + 20) break;
+    }
+    out.push(best);
+    from = best;
+  }
+  return out;
+}
+
+function Tick({ className }: { className?: string }) {
+  return (
+    <motion.span
+      initial={{ scale: 0, rotate: -40 }}
+      animate={{ scale: 1, rotate: 0 }}
+      exit={{ scale: 0, opacity: 0, transition: { duration: 0.2 } }}
+      transition={{ type: 'spring', stiffness: 420, damping: 16 }}
+      className={cn(
+        'flex size-6 items-center justify-center rounded-full bg-emerald-500 text-white shadow-[0_4px_12px_-2px_rgb(16_185_129/0.6)] ring-2 ring-paper',
+        className,
+      )}
+    >
+      <Check aria-hidden className="size-3.5" strokeWidth={3} />
+    </motion.span>
+  );
+}
+
+/** Desktop: the full flow diagram with drawn lines and two candidates walking the process. */
 function FlowDiagram() {
   const ref = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const fastRef = useRef<SVGElement>(null);
-  const slowRef = useRef<SVGElement>(null);
+  const journeyRefs = { fast: useRef<SVGPathElement>(null), slow: useRef<SVGPathElement>(null) };
+  const walkerRefs = { fast: useRef<SVGGElement>(null), slow: useRef<SVGGElement>(null) };
   const reduce = useReducedMotionSafe();
   const started = useInView(ref, { once: true, amount: 0.35 });
   const onScreen = useInView(ref, { amount: 0 });
-  const [dots, setDots] = useState(false);
+  const onScreenRef = useRef(false);
+  const [running, setRunning] = useState(false);
+  const [story, setStory] = useState<Story>(EMPTY);
   const show = started || reduce;
 
-  // Start the travelling dots once the drawing has finished.
+  useEffect(() => {
+    onScreenRef.current = onScreen;
+  }, [onScreen]);
+
+  // Start the candidates once the drawing has finished.
   useEffect(() => {
     if (!started || reduce) return;
-    const timer = setTimeout(() => setDots(true), DOTS_AFTER_MS);
+    const timer = setTimeout(() => setRunning(true), JOURNEY_AFTER_MS);
     return () => clearTimeout(timer);
   }, [started, reduce]);
+
+  // The candidate loop: moves both walkers every frame and updates the story when they pass a step.
   useEffect(() => {
-    if (!dots) return;
-    (fastRef.current as SVGAnimationElement | null)?.beginElement();
-    (slowRef.current as SVGAnimationElement | null)?.beginElement();
-  }, [dots]);
-  // Pause the dots while the diagram is off screen.
-  useEffect(() => {
-    if (!dots) return;
-    if (onScreen) svgRef.current?.unpauseAnimations();
-    else svgRef.current?.pauseAnimations();
-  }, [dots, onScreen]);
+    if (!running) return;
+    const paths = { fast: journeyRefs.fast.current, slow: journeyRefs.slow.current };
+    if (!paths.fast || !paths.slow) return;
+    const total = { fast: paths.fast.getTotalLength(), slow: paths.slow.getTotalLength() };
+    const stops = {
+      fast: stepDistances(paths.fast, JOURNEY.fast.steps),
+      slow: stepDistances(paths.slow, JOURNEY.slow.steps),
+    };
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const fresh = () => ({ d: 0, next: 0, pauseUntil: 0, pausedAt: -1, done: false });
+    const walk = { fast: fresh(), slow: fresh() };
+    let restartAt = 0;
+    let last = performance.now();
+    let frame = 0;
+
+    const place = (key: Lane) => {
+      const p = paths[key]!.getPointAtLength(walk[key].d);
+      walkerRefs[key].current?.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
+    };
+    const pass = (key: Lane, step: number) => {
+      setStory((s) => ({
+        ...s,
+        ticks: s.ticks[step] ? s.ticks : { ...s.ticks, [step]: key },
+        glow: { ...s.glow, [step]: key },
+        checking: s.checking === step ? null : s.checking,
+        arrived: step === 5 && !s.arrived.includes(key) ? [...s.arrived, key] : s.arrived,
+        hires: step === 7 ? s.hires + 1 : s.hires,
+        hiredFlash: step === 7 ? true : s.hiredFlash,
+      }));
+      timers.push(
+        setTimeout(
+          () =>
+            setStory((s) => (s.glow[step] === key ? { ...s, glow: { ...s.glow, [step]: undefined } } : s)),
+          GLOW_MS,
+        ),
+      );
+      if (step === 7) timers.push(setTimeout(() => setStory((s) => ({ ...s, hiredFlash: false })), HIRED_MS));
+    };
+
+    const loop = (now: number) => {
+      frame = requestAnimationFrame(loop);
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      if (!onScreenRef.current) return; // pause while the diagram is off screen
+      if (restartAt && now >= restartAt) {
+        restartAt = 0;
+        walk.fast = fresh();
+        walk.slow = fresh();
+        setStory(EMPTY);
+      }
+      for (const key of LANES) {
+        const w = walk[key];
+        if (w.done) continue;
+        if (w.pauseUntil) {
+          if (now < w.pauseUntil) continue;
+          w.pauseUntil = 0;
+          pass(key, w.pausedAt);
+          w.pausedAt = -1;
+        }
+        w.d = Math.min(total[key], w.d + JOURNEY[key].speed * dt);
+        while (w.next < stops[key].length && w.d >= stops[key][w.next]) {
+          const step = JOURNEY[key].steps[w.next];
+          w.next += 1;
+          if (key === 'slow' && CHECK_STEPS.includes(step)) {
+            w.d = stops[key][w.next - 1];
+            w.pauseUntil = now + CHECK_MS;
+            w.pausedAt = step;
+            setStory((s) => ({ ...s, checking: step, glow: { ...s.glow, [step]: key } }));
+            break;
+          }
+          pass(key, step);
+        }
+        if (w.d >= total[key] && !w.pauseUntil) w.done = true;
+        place(key);
+      }
+      if (!restartAt && walk.fast.done && walk.slow.done) restartAt = now + RESTART_MS;
+    };
+
+    place('fast');
+    place('slow');
+    frame = requestAnimationFrame(loop);
+    return () => {
+      cancelAnimationFrame(frame);
+      timers.forEach(clearTimeout);
+    };
+    // The refs are stable; the loop only needs to start once.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [running]);
 
   const appear = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 14 },
@@ -114,15 +290,27 @@ function FlowDiagram() {
       transition={{ duration: LINE[key].duration, delay: LINE[key].delay, ease: 'easeInOut' }}
     />
   );
+  const timeBadge = (key: Lane, top: string) => (
+    <motion.p
+      key={key}
+      initial={{ opacity: 0, y: 8, scale: 0.85 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.25 } }}
+      transition={{ type: 'spring', stiffness: 380, damping: 20 }}
+      style={{ left: `${COL[5] + 6.2}%`, top }}
+      className={cn(
+        'absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-[12px] font-semibold text-white shadow-soft',
+        key === 'fast' ? 'bg-brand' : 'bg-navy',
+      )}
+    >
+      <Check aria-hidden className="size-3.5" strokeWidth={3} />
+      {JOURNEY[key].time}
+    </motion.p>
+  );
 
   return (
     <div ref={ref} className="relative mt-14 hidden aspect-[1000/470] w-full lg:block">
-      <svg
-        ref={svgRef}
-        aria-hidden
-        viewBox={`0 0 ${W} ${H}`}
-        className="absolute inset-0 h-full w-full overflow-visible"
-      >
+      <svg aria-hidden viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 h-full w-full overflow-visible">
         {/* Light track, always visible, then the drawn colour on top. */}
         {Object.values(PATHS).map((d) => (
           <path key={d} d={d} fill="none" stroke="var(--color-line)" strokeWidth={2.5} />
@@ -131,32 +319,21 @@ function FlowDiagram() {
         {draw('fast', 'var(--color-brand)')}
         {draw('slow', 'var(--color-navy)')}
         {draw('tail', 'var(--color-ink)')}
-        {dots && (
-          <>
-            <g>
-              <circle r={13} fill="var(--color-brand)" opacity={0.18} />
-              <circle r={6} fill="var(--color-brand)" />
-              <animateMotion
-                ref={fastRef}
-                path={PATHS.fast}
-                dur={`${DOT_SECONDS.fast}s`}
-                begin="indefinite"
-                repeatCount="indefinite"
-              />
+        {/* Invisible full journeys, used to move the candidates. */}
+        <path ref={journeyRefs.fast} d={JOURNEY.fast.d} fill="none" stroke="none" />
+        <path ref={journeyRefs.slow} d={JOURNEY.slow.d} fill="none" stroke="none" />
+        {/* The candidates: a person icon with a soft pulsing halo. They pass behind the cards. */}
+        {running &&
+          LANES.map((key) => (
+            <g key={key} ref={walkerRefs[key]} transform={`translate(${px(COL[0])} ${MAIN})`}>
+              <circle r={17} fill={JOURNEY[key].color} opacity={0.16}>
+                <animate attributeName="r" values="14;21;14" dur="1.8s" repeatCount="indefinite" />
+              </circle>
+              <circle r={12.5} fill={JOURNEY[key].color} stroke="#fff" strokeWidth={2.5} />
+              <circle cy={-3.2} r={3.4} fill="#fff" />
+              <path d="M -6.2 6.6 Q 0 -1.4 6.2 6.6 Z" fill="#fff" />
             </g>
-            <g>
-              <circle r={13} fill="var(--color-navy)" opacity={0.16} />
-              <circle r={6} fill="var(--color-navy)" />
-              <animateMotion
-                ref={slowRef}
-                path={PATHS.slow}
-                dur={`${DOT_SECONDS.slow}s`}
-                begin="indefinite"
-                repeatCount="indefinite"
-              />
-            </g>
-          </>
-        )}
+          ))}
       </svg>
 
       {/* Lane labels. */}
@@ -188,20 +365,53 @@ function FlowDiagram() {
         <strong className="font-semibold text-navy">{sourcingChannels.openMarket.time}</strong>
       </motion.p>
 
+      {/* Time badges when each candidate reaches "Profile submission". */}
+      <AnimatePresence>
+        {story.arrived.includes('fast') && timeBadge('fast', '27%')}
+        {story.arrived.includes('slow') && timeBadge('slow', '64%')}
+      </AnimatePresence>
+      <AnimatePresence>
+        {story.hiredFlash && (
+          <motion.p
+            key="hired"
+            initial={{ opacity: 0, y: 10, scale: 0.85 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, transition: { duration: 0.3 } }}
+            transition={{ type: 'spring', stiffness: 380, damping: 20 }}
+            style={{ left: `${COL[7]}%`, top: '22%' }}
+            className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-emerald-500 px-2.5 py-1 text-[12px] font-semibold text-white shadow-soft"
+          >
+            <Check aria-hidden className="size-3.5" strokeWidth={3} />
+            Hired
+          </motion.p>
+        )}
+      </AnimatePresence>
+
       {/* The eight steps. */}
       <ol>
         {hiringProcess.map((step, index) => {
           const [col, row] = PLACE[index];
           const final = index === hiringProcess.length - 1;
+          const glow = story.glow[index];
+          const checking = story.checking === index;
           return (
             <motion.li
               key={step.title}
-              {...appear(CARD_DELAY[index])}
+              initial={reduce ? false : { opacity: 0, y: 14 }}
+              animate={show ? { opacity: 1, y: 0, scale: glow ? 1.05 : 1 } : undefined}
+              transition={{
+                duration: 0.55,
+                ease: EASE,
+                delay: CARD_DELAY[index],
+                scale: { duration: 0.35, ease: EASE, delay: 0 },
+              }}
               style={{ left: `${COL[col]}%`, top: `${ROW[row]}%`, width: '11.4%' }}
               className={cn(
-                'absolute -translate-x-1/2 -translate-y-1/2 rounded-2xl border p-3 text-center xl:p-3.5',
+                'absolute -translate-x-1/2 -translate-y-1/2 rounded-2xl border p-3 text-center transition-shadow duration-300 xl:p-3.5',
                 final ? 'border-brand bg-brand text-white shadow-lift' : 'border-line bg-paper shadow-soft',
-                index === 5 && 'ring-2 ring-brand/25',
+                glow === 'fast' && 'ring-4 ring-brand/35',
+                glow === 'slow' && 'ring-4 ring-navy/35',
+                !glow && index === 5 && 'ring-2 ring-brand/25',
               )}
             >
               <span
@@ -210,7 +420,14 @@ function FlowDiagram() {
                   final ? 'bg-white text-brand' : 'bg-ink text-white',
                 )}
               >
-                {pad(index + 1)}
+                {checking ? (
+                  <span
+                    aria-hidden
+                    className="size-3.5 animate-spin rounded-full border-2 border-white/30 border-t-white"
+                  />
+                ) : (
+                  pad(index + 1)
+                )}
               </span>
               <p className="mt-2 text-[13px] font-semibold leading-tight tracking-tight xl:text-[15px]">
                 {step.title}
@@ -230,11 +447,52 @@ function FlowDiagram() {
                   {sourcingChannels.outcome}
                 </p>
               )}
+              <AnimatePresence>
+                {story.ticks[index] && <Tick key="tick" className="absolute -right-2 -top-2" />}
+              </AnimatePresence>
+              {final && story.hires > 0 && (
+                <motion.span
+                  key={story.hires}
+                  aria-hidden
+                  initial={{ opacity: 0.8, scale: 1 }}
+                  animate={{ opacity: 0, scale: 1.3 }}
+                  transition={{ duration: 1.1, ease: 'easeOut' }}
+                  className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-brand"
+                />
+              )}
             </motion.li>
           );
         })}
       </ol>
     </div>
+  );
+}
+
+/** A tick that pops in when its step scrolls into view (phones and tablets). */
+function ScrollTick({
+  delay = 0.35,
+  small = false,
+  className,
+}: {
+  delay?: number;
+  small?: boolean;
+  className?: string;
+}) {
+  const reduce = useReducedMotionSafe();
+  return (
+    <motion.span
+      initial={reduce ? false : { scale: 0, rotate: -40 }}
+      whileInView={{ scale: 1, rotate: 0 }}
+      viewport={{ once: true, margin: '0px 0px -20% 0px' }}
+      transition={{ type: 'spring', stiffness: 420, damping: 16, delay }}
+      className={cn(
+        'flex shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-paper',
+        small ? 'size-5' : 'size-6',
+        className,
+      )}
+    >
+      <Check aria-hidden className={small ? 'size-3' : 'size-3.5'} strokeWidth={3} />
+    </motion.span>
   );
 }
 
@@ -263,6 +521,7 @@ function MobileStep({ index, final = false }: { index: number; final?: boolean }
             {final && `. ${sourcingChannels.outcome}.`}
           </p>
         </div>
+        <ScrollTick className="ml-auto" />
       </div>
     </Reveal>
   );
@@ -282,17 +541,21 @@ function FlowList() {
               <Database aria-hidden className="size-4 text-brand" /> {database.name}
             </p>
             <p className="mt-2 text-[14px] text-muted">{database.text}</p>
-            <p className="mt-auto pt-3 text-3xl font-semibold tracking-tight text-brand">{database.time}</p>
+            <p className="mt-auto flex items-center gap-2 pt-3 text-3xl font-semibold tracking-tight text-brand">
+              {database.time}
+              <ScrollTick delay={0.5} />
+            </p>
           </div>
           <div className="flex flex-col rounded-2xl border border-line bg-paper p-4 shadow-soft">
             <p className="flex items-center gap-2 font-semibold">
               <Search aria-hidden className="size-4 text-navy" /> {openMarket.name}
             </p>
             <ul className="mt-2 space-y-1.5 text-[14px] text-muted">
-              {[2, 3, 4].map((index) => (
-                <li key={index} className="flex gap-2">
+              {[2, 3, 4].map((index, i) => (
+                <li key={index} className="flex items-start gap-2">
                   <span className="font-mono text-[12px] text-brand">{pad(index + 1)}</span>
-                  {hiringProcess[index].title}
+                  <span className="flex-1">{hiringProcess[index].title}</span>
+                  <ScrollTick delay={0.5 + i * 0.45} small />
                 </li>
               ))}
             </ul>
@@ -307,14 +570,23 @@ function FlowList() {
   );
 }
 
-/** ARA's hiring process, from requirement to joining, with its two sourcing channels. */
-export function HiringFlow() {
+/**
+ * ARA's hiring process, from requirement to joining, with its two sourcing channels.
+ * `eyebrow` and `approachLink` let the Approach page reuse it (without linking to itself).
+ */
+export function HiringFlow({
+  eyebrow = 'How we hire',
+  approachLink = true,
+}: {
+  eyebrow?: string;
+  approachLink?: boolean;
+}) {
   return (
     <section id="how-we-hire" className="py-20 sm:py-28">
       <Container>
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
-            eyebrow="How we hire"
+            eyebrow={eyebrow}
             title={
               <>
                 From requirement <em>to recruitment</em>
@@ -322,14 +594,16 @@ export function HiringFlow() {
             }
             intro="Two sourcing channels. One complete hiring journey. Profiles from our own database reach you in hours; open-market candidates are fully assessed first."
           />
-          <ButtonLink
-            href="/company/approach/"
-            variant="ghost-dark"
-            arrow
-            className="shrink-0 self-start lg:self-auto"
-          >
-            See our approach
-          </ButtonLink>
+          {approachLink && (
+            <ButtonLink
+              href="/company/approach/"
+              variant="ghost-dark"
+              arrow
+              className="shrink-0 self-start lg:self-auto"
+            >
+              See our approach
+            </ButtonLink>
+          )}
         </div>
         <FlowDiagram />
         <FlowList />

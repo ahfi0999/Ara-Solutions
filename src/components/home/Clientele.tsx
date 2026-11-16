@@ -1,12 +1,39 @@
-import { clientele } from '@/content/home';
+import { alumniCompanies, clientele } from '@/content/home';
+import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
-import { Reveal } from '@/components/ui/Reveal';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
+import { LogoMarquee, type MarqueeLogo } from '@/components/home/LogoMarquee';
 
-/** "Organisations we have recruited for": client logos grouped by industry, from ARA's pitch deck. */
-export function Clientele() {
+/** Client logos were sized for a taller tile; the rolling tiles are a little shorter. */
+const CLIENT_SCALE = 0.78;
+const ALUMNI_HEIGHT = { sm: 22, md: 26, lg: 36 } as const;
+
+const CLIENTS: MarqueeLogo[] = clientele.map((client) => ({
+  id: client.name,
+  name: client.name,
+  src: client.logo ? `/logos/clients/${client.logo}` : undefined,
+  caption: client.sector,
+  height: Math.round((client.height ?? 28) * CLIENT_SCALE),
+}));
+
+/** LTIMindtree is already in the client row, so it is not repeated here. */
+const ALUMNI: MarqueeLogo[] = alumniCompanies
+  .filter((company) => company.logo !== 'ltimindtree')
+  .map((company) => ({
+    id: company.logo,
+    name: company.name,
+    src: `/logos/alumni/${company.logo}.svg`,
+    height: ALUMNI_HEIGHT[company.size],
+  }));
+
+/**
+ * Proof in one place: organisations ARA has recruited for (from ARA's pitch deck), rolling one way,
+ * and the companies where professionals trained by ARA now work, rolling the other way.
+ * `alumni={false}` shows the client row only (used on the staffing service pages).
+ */
+export function Clientele({ alumni = true, className }: { alumni?: boolean; className?: string }) {
   return (
-    <section id="clients" className="py-20 sm:py-28">
+    <section id="clients" className={cn('overflow-hidden py-20 sm:py-28', className)}>
       <Container>
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
@@ -22,37 +49,31 @@ export function Clientele() {
             Hire with ARA
           </EnquiryButton>
         </div>
-        <ul className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {clientele.map((client, index) => (
-            <Reveal
-              as="li"
-              key={client.name}
-              y={20}
-              delay={(index % 4) * 0.07 + Math.floor(index / 4) * 0.05}
-            >
-              <div className="flex h-28 flex-col items-center justify-center gap-3 rounded-2xl border border-line bg-paper px-4 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/25 hover:shadow-lift sm:h-32 sm:px-6">
-                <div className="flex h-14 w-full items-center justify-center">
-                  {client.logo ? (
-                    /* eslint-disable-next-line @next/next/no-img-element -- small logo files */
-                    <img
-                      src={`/logos/clients/${client.logo}`}
-                      alt={client.name}
-                      loading="lazy"
-                      style={{ '--logo-h': `${client.height ?? 28}px` } as React.CSSProperties}
-                      className="h-[calc(var(--logo-h)*0.8)] w-auto max-w-full object-contain sm:h-(--logo-h)"
-                    />
-                  ) : (
-                    <span className="text-balance text-center text-[15px] font-semibold leading-tight tracking-tight text-ink">
-                      {client.name}
-                    </span>
-                  )}
-                </div>
-                <p className="text-center text-[12px] leading-snug text-muted">{client.sector}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
       </Container>
+
+      <div className="mt-12">
+        <LogoMarquee items={CLIENTS} duration={70} captions label="Organisations we have recruited for" />
+      </div>
+
+      {alumni && (
+        <>
+          <Container className="mt-14">
+            <p className="flex items-center gap-4 text-center font-mono text-[12px] uppercase tracking-[0.2em] text-muted">
+              <span aria-hidden className="h-px flex-1 bg-text/15" />
+              And where the professionals we trained now work
+              <span aria-hidden className="h-px flex-1 bg-text/15" />
+            </p>
+          </Container>
+          <div className="mt-8">
+            <LogoMarquee
+              items={ALUMNI}
+              duration={55}
+              reverse
+              label="Companies where professionals trained by ARA work"
+            />
+          </div>
+        </>
+      )}
     </section>
   );
 }
