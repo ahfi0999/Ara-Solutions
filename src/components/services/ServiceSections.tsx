@@ -21,7 +21,11 @@ export function ServiceHero({ service }: { service: Service }) {
               </Link>
             </li>
             <ChevronRight aria-hidden className="size-3.5" />
-            <li>Services</li>
+            <li>
+              <Link href="/services/" className="hover:text-white">
+                Services
+              </Link>
+            </li>
             <ChevronRight aria-hidden className="size-3.5" />
             <li aria-current="page" className="text-white/80">
               {service.shortName}
@@ -288,30 +292,58 @@ export function ServiceCards({ exclude, dark = false }: { exclude?: string; dark
     <div className={cn('grid gap-4', list.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3')}>
       {list.map((service, index) => (
         <Reveal key={service.slug} delay={(index % 4) * 0.06} className="h-full">
-          <Spotlight className="h-full rounded-2xl" color={dark ? 'rgb(255 255 255 / 0.10)' : 'rgb(229 35 45 / 0.07)'}>
-          <Link
-            href={`/services/${service.slug}/`}
-            className={cn(
-              'group flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1',
-              dark
-                ? 'border border-white/10 bg-white/[0.04] text-white hover:border-white/25'
-                : 'border border-line bg-paper shadow-soft hover:shadow-lift',
-            )}
+          <Spotlight
+            className="h-full rounded-2xl"
+            color={dark ? 'rgb(255 255 255 / 0.10)' : 'rgb(229 35 45 / 0.07)'}
           >
-            <span className="flex items-start justify-between gap-4">
-              <span className="text-lg font-semibold leading-snug tracking-tight">{service.shortName}</span>
-              <ArrowUpRight
-                aria-hidden
-                className={cn(
-                  'size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5',
-                  dark ? 'text-white/50' : 'text-faint',
-                )}
-              />
-            </span>
-            <span className={cn('mt-3 text-[15px] leading-relaxed', dark ? 'text-white/60' : 'text-muted')}>
-              {service.summary}
-            </span>
-          </Link>
+            <Link
+              href={`/services/${service.slug}/`}
+              className={cn(
+                'group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1',
+                dark
+                  ? 'border border-white/10 bg-white/[0.04] text-white hover:border-white/25'
+                  : 'border border-line bg-paper shadow-soft hover:shadow-lift',
+              )}
+            >
+              {service.image && (
+                // Photo strip, as on the program cards: slow zoom on hover, fading into the card.
+                <span aria-hidden className="relative block h-36 overflow-hidden bg-ink sm:h-40">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- static card photo */}
+                  <img
+                    src={service.image}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <span
+                    className={cn(
+                      'absolute inset-0 bg-gradient-to-b',
+                      dark ? 'from-ink/40 via-ink/10 to-ink/80' : 'from-ink/30 via-transparent to-ink/20',
+                    )}
+                  />
+                </span>
+              )}
+              <span className="flex flex-1 flex-col p-6">
+                <span className="flex items-start justify-between gap-4">
+                  <span className="text-lg font-semibold leading-snug tracking-tight">
+                    {service.shortName}
+                  </span>
+                  <ArrowUpRight
+                    aria-hidden
+                    className={cn(
+                      'size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5',
+                      dark ? 'text-white/50' : 'text-faint',
+                    )}
+                  />
+                </span>
+                <span
+                  className={cn('mt-3 text-[15px] leading-relaxed', dark ? 'text-white/60' : 'text-muted')}
+                >
+                  {service.summary}
+                </span>
+              </span>
+            </Link>
           </Spotlight>
         </Reveal>
       ))}

@@ -40,19 +40,47 @@ function Dropdown({
         timer.current = setTimeout(onClose, 150);
       }}
     >
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-controls={id}
-        onClick={() => (open ? onClose() : onOpen())}
-        className={cn(
-          'flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] transition-colors',
-          active || open ? 'text-white' : 'text-white/70 hover:text-white',
-        )}
-      >
-        {group.label}
-        <ChevronDown aria-hidden className={cn('size-4 transition-transform', open && 'rotate-180')} />
-      </button>
+      {group.href ? (
+        // The label opens the overview page; the arrow opens the dropdown (touch screens, keyboard).
+        <div className="flex items-center">
+          <Link
+            href={group.href}
+            className={cn(
+              'rounded-full py-2 pl-3.5 pr-0.5 text-[15px] transition-colors',
+              active || open ? 'text-white' : 'text-white/70 hover:text-white',
+            )}
+          >
+            {group.label}
+          </Link>
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls={id}
+            aria-label={`Show ${group.label} menu`}
+            onClick={() => (open ? onClose() : onOpen())}
+            className={cn(
+              'mr-1 flex size-7 items-center justify-center rounded-full transition-colors',
+              active || open ? 'text-white' : 'text-white/70 hover:text-white',
+            )}
+          >
+            <ChevronDown aria-hidden className={cn('size-4 transition-transform', open && 'rotate-180')} />
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls={id}
+          onClick={() => (open ? onClose() : onOpen())}
+          className={cn(
+            'flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] transition-colors',
+            active || open ? 'text-white' : 'text-white/70 hover:text-white',
+          )}
+        >
+          {group.label}
+          <ChevronDown aria-hidden className={cn('size-4 transition-transform', open && 'rotate-180')} />
+        </button>
+      )}
       <AnimatePresence>
         {open && (
           <motion.div

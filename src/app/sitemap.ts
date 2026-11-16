@@ -6,6 +6,7 @@ import { site } from '@/content/site';
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     '/',
+    '/services/',
     ...services.map((s) => `/services/${s.slug}/`),
     '/training-placement/',
     ...programs.map((p) => `/training-placement/${p.slug}/`),

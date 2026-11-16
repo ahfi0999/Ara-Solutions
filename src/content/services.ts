@@ -14,6 +14,8 @@ export type Service = {
   headline: string;
   summary: string;
   cta: string;
+  /** Card photo (path under /public): CC0 photos from StockSnap, sources listed in SERVICE_PHOTO_SOURCES. */
+  image?: string;
   /** Three key promises shown beside the hero. */
   promises: { title: string; text: string }[];
   /** "Why it matters" story. */
@@ -34,6 +36,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: 'corp-to-corp',
+    image: '/images/services/corp-to-corp.jpg',
     name: 'Corp-to-Corp (C2C) Staffing',
     shortName: 'Corp to Corp Staffing',
     menuText: 'Contract experts for project needs',
@@ -98,6 +101,7 @@ export const services: Service[] = [
   },
   {
     slug: 'fulltime-staffing',
+    image: '/images/services/fulltime-staffing.jpg',
     name: 'Fulltime Staffing (IT & Non-IT)',
     shortName: 'Fulltime Staffing',
     menuText: 'Permanent IT and non-IT hires',
@@ -155,6 +159,7 @@ export const services: Service[] = [
   },
   {
     slug: 'rpo',
+    image: '/images/services/rpo.jpg',
     name: 'Recruitment Process Outsourcing (RPO)',
     shortName: 'Recruitment Process Outsourcing',
     menuText: 'A dedicated recruiting team for you',
@@ -249,6 +254,7 @@ export const services: Service[] = [
   },
   {
     slug: 'international-consulting',
+    image: '/images/services/international-consulting.jpg',
     name: 'International Consulting',
     shortName: 'International Consulting',
     menuText: 'Verified global talent',
@@ -400,3 +406,11 @@ export const engagementComparison = [
     href: '/services/fulltime-staffing/',
   },
 ];
+
+/** Where the service card photos come from (all CC0, free to use without attribution). */
+export const SERVICE_PHOTO_SOURCES = {
+  'corp-to-corp': 'https://stocksnap.io/photo/servers-woman-ZYGIOUX4QU',
+  'fulltime-staffing': 'https://stocksnap.io/photo/shaking-hands-GEKK2UOHCY',
+  rpo: 'https://stocksnap.io/photo/team-meeting-VQXYE2ZEHC',
+  'international-consulting': 'https://stocksnap.io/photo/global-map-UN4MECXXU6',
+} as const;

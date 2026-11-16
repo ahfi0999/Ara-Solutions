@@ -6,6 +6,7 @@ import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Figure } from '@/components/motion/primitives';
 import { ServiceCards } from '@/components/services/ServiceSections';
+import { cn } from '@/lib/cn';
 
 /** Staffing services overview. */
 export function ServicesOverview() {
@@ -34,46 +35,73 @@ export function ServicesOverview() {
         <div className="mt-12">
           <ServiceCards dark />
         </div>
-
-        {/* Roles we recruit for, from ARA's pitch deck. */}
-        <div className="mt-16 border-t border-white/10 pt-12">
-          <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-            <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              From core roles to niche skills
-            </h3>
-            <p className="text-white/60">Specialised IT, non-IT and industry recruitment.</p>
-          </div>
-          <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
-            {roleGroups.map((side, sideIndex) => (
-              <div key={side.title}>
-                <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-300">
-                  {side.title}
-                </p>
-                <ul className="mt-5 divide-y divide-white/10">
-                  {side.groups.map((group, index) => {
-                    const Icon = ROLE_ICONS[group.name] ?? Briefcase;
-                    return (
-                      <Reveal as="li" key={group.name} delay={sideIndex * 0.08 + index * 0.06} y={16}>
-                        <div className="flex gap-4 py-4">
-                          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.07] text-brand-300">
-                            <Icon aria-hidden className="size-5" />
-                          </span>
-                          <div>
-                            <p className="font-semibold">{group.name}</p>
-                            <p className="mt-0.5 text-[15px] leading-relaxed text-white/60">{group.roles}</p>
-                          </div>
-                        </div>
-                      </Reveal>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <p className="mt-10 text-white/70">From specialist hires to large-scale teams.</p>
-        </div>
+        <RoleGroups dark className="mt-16 border-t border-white/10 pt-12" />
       </Container>
     </section>
+  );
+}
+
+/**
+ * "From core roles to niche skills": the IT and non-IT roles ARA recruits for, from the pitch deck.
+ * Used on the home page (dark) and on the Staffing services page.
+ */
+export function RoleGroups({ dark = false, className }: { dark?: boolean; className?: string }) {
+  return (
+    <div className={className}>
+      <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+        <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">From core roles to niche skills</h3>
+        <p className={dark ? 'text-white/60' : 'text-muted'}>
+          Specialised IT, non-IT and industry recruitment.
+        </p>
+      </div>
+      <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
+        {roleGroups.map((side, sideIndex) => (
+          <div key={side.title}>
+            <p
+              className={cn(
+                'font-mono text-[12px] uppercase tracking-[0.18em]',
+                dark ? 'text-brand-300' : 'text-brand',
+              )}
+            >
+              {side.title}
+            </p>
+            <ul className={cn('mt-5 divide-y', dark ? 'divide-white/10' : 'divide-line')}>
+              {side.groups.map((group, index) => {
+                const Icon = ROLE_ICONS[group.name] ?? Briefcase;
+                return (
+                  <Reveal as="li" key={group.name} delay={sideIndex * 0.08 + index * 0.06} y={16}>
+                    <div className="flex gap-4 py-4">
+                      <span
+                        className={cn(
+                          'flex size-10 shrink-0 items-center justify-center rounded-xl',
+                          dark ? 'bg-white/[0.07] text-brand-300' : 'bg-brand/[0.08] text-brand',
+                        )}
+                      >
+                        <Icon aria-hidden className="size-5" />
+                      </span>
+                      <div>
+                        <p className="font-semibold">{group.name}</p>
+                        <p
+                          className={cn(
+                            'mt-0.5 text-[15px] leading-relaxed',
+                            dark ? 'text-white/60' : 'text-muted',
+                          )}
+                        >
+                          {group.roles}
+                        </p>
+                      </div>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p className={cn('mt-10', dark ? 'text-white/70' : 'text-text/80')}>
+        From specialist hires to large-scale teams.
+      </p>
+    </div>
   );
 }
 
