@@ -10,6 +10,7 @@ import { CountUp, EASE, Magnetic, SplitWords, useReducedMotionSafe } from '@/com
 import { TalentOrbit } from '@/components/visuals/TalentOrbit';
 import { HeroNetwork } from '@/components/visuals/HeroNetwork';
 import { MediaBackground } from '@/components/motion/MediaBackground';
+import { cn } from '@/lib/cn';
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 18, filter: 'blur(6px)' },
@@ -84,9 +85,12 @@ export function Hero() {
             <SplitWords delay={0.6}>through technology.</SplitWords>
           </h1>
 
-          <motion.p {...fadeUp(0.75)} className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-white/65">
-            IT and non-IT staffing, recruitment and consulting for growing companies, and industry-focused training
-            and placement for people building a tech career.
+          <motion.p
+            {...fadeUp(0.75)}
+            className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-white/65"
+          >
+            IT and non-IT staffing, recruitment and consulting for growing companies, and industry-focused
+            training and placement for people building a tech career.
           </motion.p>
 
           <motion.div {...fadeUp(0.9)} className="mt-9 flex flex-wrap gap-3">
@@ -116,10 +120,18 @@ export function Hero() {
       <Container className="mt-16 sm:mt-20">
         <motion.dl
           {...fadeUp(1.05)}
-          className="grid grid-cols-1 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur sm:grid-cols-3 sm:divide-x sm:divide-y-0"
+          className="grid grid-cols-2 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur lg:grid-cols-4"
         >
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex items-baseline gap-3 px-6 py-5 sm:flex-col sm:gap-1 sm:px-8 sm:py-6">
+          {stats.map((stat, index) => (
+            <div
+              key={stat.label}
+              className={cn(
+                'flex flex-col gap-1 border-white/10 px-5 py-5 sm:px-8 sm:py-6',
+                index % 2 === 0 && 'border-r',
+                index < 2 && 'border-b lg:border-b-0',
+                index === 1 && 'lg:border-r',
+              )}
+            >
               <dd className="order-1 text-3xl font-semibold tracking-tight sm:text-4xl">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </dd>

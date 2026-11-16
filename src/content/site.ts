@@ -32,11 +32,15 @@ export const site = {
   },
 } as const;
 
-/** Headline numbers from ARA's existing website. */
+/**
+ * Headline numbers: years and placements from ARA's original website,
+ * screened profiles and shortlist time from ARA's pitch deck.
+ */
 export const stats = [
   { value: 13, suffix: '+', label: 'Years in the IT industry' },
+  { value: 10000, suffix: '+', label: 'Screened talent profiles' },
   { value: 1000, suffix: '+', label: 'Professionals placed' },
-  { value: 17, suffix: '', label: 'Top companies where our alumni work' },
+  { value: 48, suffix: ' hrs', label: 'To a targeted shortlist' },
 ] as const;
 
 export const whatsappLink = (message: string) =>

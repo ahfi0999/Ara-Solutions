@@ -76,7 +76,7 @@ export default function AboutPage() {
               <Reveal
                 key={stat.label}
                 delay={index * 0.06}
-                className={index === 2 ? 'sm:col-span-2' : undefined}
+                className={stats.length % 2 === 1 && index === stats.length - 1 ? 'sm:col-span-2' : undefined}
               >
                 <div className="flex h-full flex-col justify-between rounded-3xl bg-ink p-7 text-white">
                   <dd className="text-5xl font-semibold tracking-[-0.04em]">

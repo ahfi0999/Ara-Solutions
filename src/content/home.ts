@@ -23,6 +23,30 @@ export const alumniCompanies = [
   { name: 'Oracle', logo: 'oracle', size: 'sm' },
 ] as const;
 
+/**
+ * Organisations ARA Solutions has recruited for, grouped as in ARA's pitch deck (client approved showing them).
+ * Logos: public/logos/clients/ (official logo files). `height` is the logo height in px, chosen so wide
+ * wordmarks and compact marks look equally weighted. A client without a logo shows its name as text.
+ */
+export const clientele: { name: string; sector: string; logo?: string; height?: number }[] = [
+  { name: 'Huntington Bank', sector: 'Banking & payments', logo: 'huntington.svg', height: 28 },
+  { name: 'Citizens Financial Group', sector: 'Banking & payments', logo: 'citizens.svg', height: 30 },
+  { name: 'American Express', sector: 'Banking & payments', logo: 'amex.svg', height: 56 },
+  { name: 'Vanguard', sector: 'Investment & insurance', logo: 'vanguard.svg', height: 29 },
+  { name: 'BlueCross BlueShield', sector: 'Investment & insurance', logo: 'bcbs.svg', height: 28 },
+  { name: 'DXC Technology', sector: 'Technology consulting', logo: 'dxc.svg', height: 44 },
+  { name: 'LTIMindtree', sector: 'Technology consulting', logo: 'ltimindtree.svg', height: 28 },
+  { name: 'Royal Cyber', sector: 'Technology consulting', logo: 'royalcyber.svg', height: 30 },
+  { name: 'CriticalRiver', sector: 'Digital engineering', logo: 'criticalriver.webp', height: 25 },
+  { name: 'iLink Digital', sector: 'Digital engineering', logo: 'ilink.svg', height: 22 },
+  { name: 'Mealsan Technology Solutions', sector: 'Digital engineering' },
+  { name: 'Akkodis', sector: 'Talent & workforce solutions', logo: 'akkodis.svg', height: 22 },
+  { name: 'Apex Systems', sector: 'Talent & workforce solutions', logo: 'apex.webp', height: 28 },
+  { name: 'Simplify Alpha', sector: 'Talent & workforce solutions', logo: 'simplifyalpha.svg', height: 36 },
+  { name: 'Heitmeyer Consulting', sector: 'Consulting', logo: 'heitmeyer.webp', height: 25 },
+  { name: 'Rice University', sector: 'Higher education', logo: 'rice.svg', height: 23 },
+];
+
 /** How a learner goes from first call to placement support. Based on ARA's existing services. */
 export const journey = [
   {
@@ -47,23 +71,115 @@ export const journey = [
   },
 ] as const;
 
-/** Homepage FAQ: hiring questions from ARA's original site, plus training questions. */
-export const generalFaqs = [
+/** The six barriers to better hiring, from ARA's pitch deck. */
+export const hiringBarriers = [
+  'Talent shortages',
+  'Unqualified profiles',
+  'Candidate drop-offs',
+  'Long hiring cycles',
+  'Rising hiring costs',
+  'Scalability challenges',
+] as const;
+
+/**
+ * Why ARA: the four company pillars from ARA's pitch deck, each with the hiring barriers it addresses.
+ * `big` is the large figure shown on the card, when the pillar has one.
+ */
+export const pillars = [
   {
-    q: 'How quickly can ARA Solutions provide candidates?',
-    a: 'For contract and Corp-to-Corp roles we keep pre-vetted talent ready across Java, Python, React, Cloud and Data, so a first shortlist usually arrives within 24 to 48 hours.',
+    title: '48-hour turnaround',
+    text: 'Targeted shortlists delivered fast: profiles from our own database in 2 to 4 hours, open-market candidates fully assessed within 48 hours.',
+    big: { value: '48', unit: 'H' },
+    solves: ['Talent shortages', 'Long hiring cycles'],
   },
   {
-    q: 'How do you verify candidate qualifications?',
-    a: 'We check identity documents, past employment directly with HR contacts and educational credentials. Technical skills are assessed and reviewed by senior engineers.',
+    title: '24×7 support',
+    text: 'Coverage across international time zones, so your hiring keeps moving while your team sleeps.',
+    big: { value: '24×', unit: '7' },
+    solves: ['Candidate drop-offs', 'Scalability challenges'],
+  },
+  {
+    title: 'L1 interview + video',
+    text: 'Every candidate is screened by a recruiter-led L1 interview, and the video is shared with you.',
+    solves: ['Unqualified profiles'],
+  },
+  {
+    title: 'Background check',
+    text: 'Employment, education and identity verified before a profile reaches you.',
+    solves: ['Unqualified profiles', 'Rising hiring costs'],
+  },
+] as const;
+
+/**
+ * ARA's hiring process from the pitch deck (slide 6): two sourcing channels, one complete hiring journey.
+ * Steps 3 to 5 are the open-market path; profiles from ARA's own database skip them.
+ */
+export const hiringProcess = [
+  { title: 'Requirement understanding', short: 'Role, skills & hiring needs' },
+  { title: 'Candidate sourcing', short: 'Two sourcing channels' },
+  { title: 'Profile screening', short: 'Skills, experience & fit' },
+  { title: 'L1 interview + video', short: 'Recruiter-led screening' },
+  { title: 'Background verification', short: 'Employment, education & identity' },
+  { title: 'Profile submission', short: 'Shortlisted profiles to you' },
+  { title: 'Client interview', short: 'Interviews & feedback' },
+  { title: 'Offer & joining', short: 'Offer closure & onboarding' },
+] as const;
+
+/** The two sourcing channels in ARA's hiring process. */
+export const sourcingChannels = {
+  database: { name: 'Our database', text: 'Direct submission in', time: '2–4 hrs' },
+  openMarket: { name: 'Open market', text: 'Full assessment in', time: '48 hrs' },
+  outcome: 'Successful talent deployment',
+} as const;
+
+/** Roles ARA recruits for, from the pitch deck: specialist IT and non-IT hiring. */
+export const roleGroups = [
+  {
+    title: 'IT & niche technology',
+    groups: [
+      { name: 'AI & Data', roles: 'AI, ML & GenAI · Data engineering & BI' },
+      { name: 'Cloud & Security', roles: 'Cloud, DevOps & SRE · Cybersecurity, GRC & IAM' },
+      { name: 'Enterprise & Software', roles: 'ERP, Salesforce & ServiceNow · Full stack & QA' },
+    ],
+  },
+  {
+    title: 'Non-IT & industry',
+    groups: [
+      { name: 'Corporate functions', roles: 'Finance & banking · HR & admin · Sales & support' },
+      { name: 'Healthcare & engineering', roles: 'Pharma & life sciences · Healthcare · Manufacturing' },
+      {
+        name: 'Commerce & operations',
+        roles: 'Retail & e-commerce · Logistics & supply chain · Volume hiring',
+      },
+    ],
+  },
+] as const;
+
+/** Homepage FAQ: hiring answers from ARA's pitch deck, plus training questions. */
+export const generalFaqs = [
+  {
+    q: 'How quickly can you share suitable candidates?',
+    a: 'Initial profiles are targeted in 2 to 4 hours from our database, and shortlisted profiles within 48 hours, subject to role complexity.',
+  },
+  {
+    q: 'How do you ensure candidate quality?',
+    a: 'Skill and experience screening, recruiter-led L1 interviews, video sharing and background verification of employment, education and identity.',
+  },
+  {
+    q: 'Can you handle niche and bulk hiring?',
+    a: 'Yes. We cover specialised IT roles, non-IT staffing and large-scale volume recruitment.',
+  },
+  {
+    q: 'Do you support international hiring?',
+    a: 'Yes. We recruit across India, the USA, the UK and European markets, subject to role requirements.',
+  },
+  {
+    q: 'What happens after shortlisting?',
+    a: 'We coordinate interviews and feedback, support offer discussions and follow up through joining and beyond.',
   },
   {
     q: 'Can contract engineers become permanent employees?',
     a: 'Yes. We offer contract-to-hire conversion on clear terms agreed upfront, with no surprise fees.',
-  },
-  {
-    q: 'Do you hire for non-IT roles?',
-    a: 'Yes. Our fulltime staffing covers both IT and non-IT positions, from engineering and leadership to sales, HR, finance, operations and support roles.',
   },
   {
     q: 'What does the Training & Placement program include?',

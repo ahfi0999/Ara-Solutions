@@ -51,7 +51,9 @@ export function ButtonLink({
   ...props
 }: Common & { href: string } & Omit<ComponentProps<'a'>, 'href' | 'className' | 'children'>) {
   const classes = cn(base, variants[variant], sizes[size], className);
-  const external = /^(https?:|tel:|mailto:)/.test(href);
+  // External links, phone/email and in-page "#section" links use a plain <a>
+  // (in-page links are then scrolled smoothly by the site's smooth-scroll).
+  const external = /^(https?:|tel:|mailto:|#)/.test(href);
   if (external) {
     return (
       <a

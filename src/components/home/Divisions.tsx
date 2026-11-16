@@ -1,20 +1,20 @@
-import Link from 'next/link';
-import { ArrowRight, Building2, GraduationCap } from 'lucide-react';
-import { programPreview } from '@/content/programs';
-import { services } from '@/content/services';
+import { Building2, GraduationCap } from 'lucide-react';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { ButtonLink } from '@/components/ui/Button';
 import { Spotlight } from '@/components/motion/primitives';
 
+/**
+ * "Choose your path": each card points to its own section further down the home page
+ * (the service and program links live there, so they are not repeated here).
+ */
 const DIVISIONS = [
   {
     icon: Building2,
     eyebrow: 'For businesses',
-    title: 'IT & Non-IT Staffing',
+    title: 'Staffing',
     text: 'Find the right people for your team. Contract staffing, permanent hiring, recruitment process outsourcing and international consulting.',
-    links: services.map((service) => ({ label: service.shortName, href: `/services/${service.slug}/` })),
-    cta: { label: 'Find the right talent', href: '/services/fulltime-staffing/' },
+    cta: { label: 'Explore staffing services', href: '#services' },
     dark: true,
   },
   {
@@ -22,16 +22,7 @@ const DIVISIONS = [
     eyebrow: 'For professionals',
     title: 'Training & Placement',
     text: 'Build a technology career with industry-focused training, real projects, interview preparation and placement assistance.',
-    links: [
-      ...programPreview().shown.map((program) => ({
-        label: program.shortName,
-        href: `/training-placement/${program.slug}/`,
-      })),
-      ...(programPreview().more > 0
-        ? [{ label: `+ ${programPreview().more} more programs`, href: '/training-placement/' }]
-        : []),
-    ],
-    cta: { label: 'Explore training programs', href: '/training-placement/' },
+    cta: { label: 'Explore training programs', href: '#programs' },
     dark: false,
   },
 ];
@@ -85,26 +76,6 @@ export function Divisions() {
                 >
                   {division.text}
                 </p>
-                <ul className="relative mt-8 grid gap-x-6 sm:grid-cols-2">
-                  {division.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className={`group flex items-center justify-between gap-3 border-b py-3 text-[15px] transition-colors ${
-                          division.dark
-                            ? 'border-white/10 text-white/85 hover:text-white'
-                            : 'border-line hover:text-navy'
-                        }`}
-                      >
-                        {link.label}
-                        <ArrowRight
-                          aria-hidden
-                          className="size-4 opacity-40 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
-                        />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
                 <div className="relative mt-auto pt-10">
                   <ButtonLink href={division.cta.href} variant={division.dark ? 'light' : 'primary'} arrow>
                     {division.cta.label}

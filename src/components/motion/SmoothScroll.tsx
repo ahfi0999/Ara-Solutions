@@ -16,7 +16,8 @@ export function SmoothScroll() {
     const lenis = new Lenis({
       autoRaf: true,
       lerp: 0.09,
-      anchors: { offset: -96 },
+      // Lenis already honours the page's scroll-padding-top / scroll-margin-top, so no extra offset here.
+      anchors: true,
       stopInertiaOnNavigate: true,
       // Let nested scroll areas (dialogs, mobile menu) scroll natively.
       prevent: (node) => node.closest('dialog, #mobile-menu, [data-lenis-prevent]') !== null,
@@ -28,7 +29,8 @@ export function SmoothScroll() {
   }, []);
 
   useEffect(() => {
-    if (!window.location.hash) (window.lenis as unknown as Lenis | undefined)?.scrollTo(0, { immediate: true });
+    if (!window.location.hash)
+      (window.lenis as unknown as Lenis | undefined)?.scrollTo(0, { immediate: true });
   }, [pathname]);
 
   return null;
