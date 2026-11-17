@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import Link from 'next/link';
-import { motion, useInView, type Easing, type TargetAndTransition } from 'motion/react';
+import { motion } from 'motion/react';
 import {
   ArrowRight,
   BadgeCheck,
@@ -16,7 +16,8 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { trainingPillars } from '@/content/home';
-import { Reveal, useReducedMotionSafe } from '@/components/motion/primitives';
+import { Reveal } from '@/components/motion/primitives';
+import { type SceneProps, typing, useScene, useSceneRun } from '@/components/motion/scene';
 
 const PILLAR_ICONS: LucideIcon[] = [
   FlaskConical,
@@ -26,26 +27,6 @@ const PILLAR_ICONS: LucideIcon[] = [
   Briefcase,
   MonitorPlay,
 ];
-
-/** What a scene needs: how many times it has played (0 = not yet) and whether to skip motion. */
-type SceneProps = { run: number; reduce: boolean };
-
-/**
- * Motion helpers for the scenes. Before the first play a scene rests at its start; each play remounts it
- * (keyed by `run`) so it animates from the start again; with reduced motion it simply shows the end state.
- */
-function useScene({ run, reduce }: SceneProps) {
-  return {
-    from: (start: TargetAndTransition) => (reduce ? false : start),
-    to: (end: TargetAndTransition) => (reduce || run > 0 ? end : undefined),
-  } as const;
-}
-
-/** Typewriter easing: jumps one character at a time. */
-const typing =
-  (characters: number): Easing =>
-  (t) =>
-    Math.round(t * characters) / characters;
 
 /** 01 Hands-on labs: a command types out in a terminal, the checks run, the lab completes. */
 function LabScene(props: SceneProps) {
@@ -268,14 +249,7 @@ function PillarCard({ index }: { index: number }) {
   const Icon = PILLAR_ICONS[index];
   const Scene = SCENES[index];
   const href = 'href' in pillar ? pillar.href : undefined;
-  const ref = useRef<HTMLDivElement>(null);
-  const seen = useInView(ref, { once: true, amount: 0.6 });
-  const reduce = useReducedMotionSafe();
-  const [run, setRun] = useState(0);
-  useEffect(() => {
-    if (seen) setRun((count) => (count === 0 ? 1 : count));
-  }, [seen]);
-  const replay = () => setRun((count) => count + 1);
+  const { ref, run, reduce, replay } = useSceneRun();
 
   const body: ReactNode = (
     <>

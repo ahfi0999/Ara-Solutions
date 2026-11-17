@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useInView } from 'motion/react';
-import { Check, Database, Search } from 'lucide-react';
+import { Check, Database, Search, Timer } from 'lucide-react';
 import { hiringProcess, sourcingChannels } from '@/content/home';
 import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
@@ -158,17 +158,216 @@ function Tick({ className }: { className?: string }) {
   );
 }
 
-/** Desktop: the full flow diagram with drawn lines and two candidates walking the process. */
+/*
+ * The candidates. Each round, ARA sources one requirement through both channels at once: a candidate from our
+ * database (red route) and one from the open market (navy route). Roles come from the site's own role list,
+ * so rounds alternate between IT and non-IT hiring. The people are illustrations, not real candidates.
+ */
+const REQUIREMENTS = [
+  'Salesforce Admin · 5 yrs',
+  'HR Executive · 3 yrs',
+  'Data Engineer · 4 yrs',
+  'Finance Analyst · 2 yrs',
+];
+const AVATARS = [
+  { bg: '#fde2e4', skin: '#c68863', hair: '#2b1d16', shirt: '#1f2680', hairStyle: 'short' },
+  { bg: '#e0e7ff', skin: '#8d5a3b', hair: '#1a1210', shirt: '#e5232d', hairStyle: 'long' },
+  { bg: '#dcfce7', skin: '#f1c7a5', hair: '#6b4226', shirt: '#0f766e', hairStyle: 'short' },
+  { bg: '#fef3c7', skin: '#a86b48', hair: '#231815', shirt: '#4338ca', hairStyle: 'bun' },
+  { bg: '#ede9fe', skin: '#e0ac85', hair: '#3b2416', shirt: '#be123c', hairStyle: 'long' },
+  { bg: '#cffafe', skin: '#6f4430', hair: '#120c0a', shirt: '#334155', hairStyle: 'short' },
+] as const;
+/** The open-market checks the navy candidate collects, in order (steps 3 to 5). */
+const SLOW_BADGES = [
+  { step: 2, label: 'Screened' },
+  { step: 3, label: 'L1 + video' },
+  { step: 4, label: 'Verified' },
+];
+/** Where each candidate's clock starts ("Candidate sourcing") and stops ("Profile submission"), as journey stops. */
+const CLOCK = { fast: [1, 2], slow: [1, 5] } as const;
+
+/** A small illustrated person (not a real candidate). */
+function Avatar({ variant, className }: { variant: number; className?: string }) {
+  const a = AVATARS[variant % AVATARS.length];
+  return (
+    <span className={cn('block overflow-hidden rounded-full', className)}>
+      <svg viewBox="0 0 40 40" className="size-full" aria-hidden>
+        <rect width="40" height="40" fill={a.bg} />
+        {a.hairStyle === 'long' && <path d="M11.5 21 Q11 8 20 8 Q29 8 28.5 21 L29 31 H11 Z" fill={a.hair} />}
+        <path d="M7 40 Q7 28.5 20 28.5 Q33 28.5 33 40 Z" fill={a.shirt} />
+        <rect x="17" y="23" width="6" height="7" rx="2.5" fill={a.skin} />
+        <circle cx="20" cy="18" r="7.2" fill={a.skin} />
+        <path
+          d="M12.8 17.5 Q12.6 9.6 20 9.6 Q27.4 9.6 27.2 17.5 Q25 13.6 20 13.4 Q15 13.6 12.8 17.5 Z"
+          fill={a.hair}
+        />
+        {a.hairStyle === 'bun' && <circle cx="20" cy="8.4" r="3.6" fill={a.hair} />}
+      </svg>
+    </span>
+  );
+}
+
+/** Typewriter easing: jumps one character at a time. */
+const typing =
+  (characters: number) =>
+  (t: number): number =>
+    Math.round(t * characters) / characters;
+
+/**
+ * The middle of the diagram: one requirement being sourced through both channels at the same time.
+ * It follows the candidates: the database finds a match and submits; the open market runs its three checks.
+ */
+function SourcingDesk({
+  story,
+  round,
+  still,
+  appearProps,
+}: {
+  story: Story;
+  round: number;
+  /** Reduced motion: show the finished state. */
+  still: boolean;
+  appearProps: object;
+}) {
+  const requirement = REQUIREMENTS[round % REQUIREMENTS.length];
+  const fastStatus =
+    still || story.arrived.includes('fast') ? 'done' : story.ticks[1] ? 'matching' : 'searching';
+  const slowDone = still || story.arrived.includes('slow');
+  return (
+    <motion.div
+      {...appearProps}
+      style={{ left: '44%', top: '40%', width: '35%' }}
+      className="absolute -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-line bg-paper/95 p-3 shadow-soft backdrop-blur xl:p-4"
+    >
+      <div className="flex items-center gap-2 rounded-xl border border-line bg-canvas px-3 py-1.5 text-[12px] xl:py-2 xl:text-[13px]">
+        <Search aria-hidden className="size-3.5 shrink-0 text-muted" />
+        <motion.span
+          key={round}
+          className="inline-block truncate whitespace-pre font-medium"
+          initial={still ? false : { clipPath: 'inset(0 100% 0 0)' }}
+          animate={{ clipPath: 'inset(0 0% 0 0)' }}
+          transition={{ duration: 1.2, ease: typing(requirement.length) }}
+        >
+          {requirement}
+        </motion.span>
+        <span aria-hidden className="h-3.5 w-px shrink-0 animate-pulse bg-ink/60" />
+        <span className="ml-auto hidden shrink-0 rounded-full bg-ink px-2 py-0.5 text-[10px] font-medium text-white xl:inline">
+          New requirement
+        </span>
+      </div>
+      <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-muted xl:mt-2.5">
+        Both channels, in parallel
+      </p>
+      <div className="mt-2 grid grid-cols-2 gap-2 xl:mt-2.5 xl:gap-2.5">
+        {/* Our database */}
+        <div className="rounded-xl border border-brand/25 bg-brand/[0.04] p-2.5">
+          <p className="flex items-center justify-between gap-1 text-[12px] font-semibold">
+            <span className="flex items-center gap-1.5">
+              <Database aria-hidden className="size-3.5 text-brand" />
+              {sourcingChannels.database.name}
+            </span>
+            <span className="hidden items-center gap-0.5 text-[10.5px] text-brand xl:flex">
+              <Timer aria-hidden className="size-3" /> {sourcingChannels.database.time}
+            </span>
+          </p>
+          <p className="mt-0.5 hidden text-[11px] leading-snug text-muted xl:block">
+            10,000+ screened talent profiles
+          </p>
+          <div className="mt-1.5 flex h-5 items-center gap-1.5 text-[11px] xl:mt-2">
+            {fastStatus === 'done' ? (
+              <span className="flex items-center gap-1 font-medium text-emerald-700">
+                <Check aria-hidden className="size-3.5" strokeWidth={3} /> Match submitted
+              </span>
+            ) : fastStatus === 'matching' ? (
+              <>
+                <span className="flex -space-x-1.5">
+                  {[0, 1, 2].map((i) => (
+                    <motion.span
+                      key={`${round}-${i}`}
+                      initial={{ opacity: 0, scale: 0.4 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.15, type: 'spring', stiffness: 500, damping: 22 }}
+                    >
+                      <Avatar variant={round * 2 + i + 2} className="size-5 ring-2 ring-paper" />
+                    </motion.span>
+                  ))}
+                </span>
+                <span className="text-muted">Matching profiles…</span>
+              </>
+            ) : (
+              <span className="flex items-center gap-1.5 text-muted">
+                <span
+                  aria-hidden
+                  className="size-3 animate-spin rounded-full border-2 border-brand/25 border-t-brand"
+                />
+                Searching…
+              </span>
+            )}
+          </div>
+        </div>
+        {/* Open market */}
+        <div className="rounded-xl border border-navy/20 bg-navy/[0.04] p-2.5">
+          <p className="flex items-center justify-between gap-1 text-[12px] font-semibold">
+            <span className="flex items-center gap-1.5">
+              <Search aria-hidden className="size-3.5 text-navy" />
+              {sourcingChannels.openMarket.name}
+            </span>
+            <span className="hidden items-center gap-0.5 text-[10.5px] text-navy xl:flex">
+              <Timer aria-hidden className="size-3" /> {sourcingChannels.openMarket.time}
+            </span>
+          </p>
+          <p className="mt-0.5 hidden text-[11px] leading-snug text-muted xl:block">
+            Full assessment, step by step
+          </p>
+          <div className="mt-1.5 flex flex-wrap gap-1 xl:mt-2">
+            {SLOW_BADGES.map((badge) => {
+              const passed = still || slowDone || Boolean(story.ticks[badge.step]);
+              const checking = !still && story.checking === badge.step;
+              return (
+                <span
+                  key={badge.label}
+                  className={cn(
+                    'flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10.5px] font-medium transition-colors duration-300',
+                    passed
+                      ? 'bg-emerald-500/15 text-emerald-700'
+                      : checking
+                        ? 'bg-navy text-white'
+                        : 'bg-ink/5 text-faint',
+                  )}
+                >
+                  {passed ? (
+                    <Check aria-hidden className="size-3" strokeWidth={3} />
+                  ) : checking ? (
+                    <span
+                      aria-hidden
+                      className="size-2.5 animate-spin rounded-full border-[1.5px] border-white/30 border-t-white"
+                    />
+                  ) : null}
+                  {badge.label}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/** Desktop: the full flow diagram with drawn lines, two candidates travelling it and the sourcing desk. */
 function FlowDiagram() {
   const ref = useRef<HTMLDivElement>(null);
   const journeyRefs = { fast: useRef<SVGPathElement>(null), slow: useRef<SVGPathElement>(null) };
-  const walkerRefs = { fast: useRef<SVGGElement>(null), slow: useRef<SVGGElement>(null) };
+  const trailRefs = { fast: useRef<SVGPathElement>(null), slow: useRef<SVGPathElement>(null) };
+  const travellerRefs = { fast: useRef<HTMLDivElement>(null), slow: useRef<HTMLDivElement>(null) };
+  const clockRefs = { fast: useRef<HTMLSpanElement>(null), slow: useRef<HTMLSpanElement>(null) };
   const reduce = useReducedMotionSafe();
   const started = useInView(ref, { once: true, amount: 0.35 });
   const onScreen = useInView(ref, { amount: 0 });
   const onScreenRef = useRef(false);
   const [running, setRunning] = useState(false);
   const [story, setStory] = useState<Story>(EMPTY);
+  const [round, setRound] = useState(0);
   const show = started || reduce;
 
   useEffect(() => {
@@ -182,16 +381,25 @@ function FlowDiagram() {
     return () => clearTimeout(timer);
   }, [started, reduce]);
 
-  // The candidate loop: moves both walkers every frame and updates the story when they pass a step.
+  // The candidate loop: moves both travellers every frame and updates the story when they pass a step.
   useEffect(() => {
     if (!running) return;
+    const box = ref.current;
     const paths = { fast: journeyRefs.fast.current, slow: journeyRefs.slow.current };
-    if (!paths.fast || !paths.slow) return;
+    if (!box || !paths.fast || !paths.slow) return;
     const total = { fast: paths.fast.getTotalLength(), slow: paths.slow.getTotalLength() };
     const stops = {
       fast: stepDistances(paths.fast, JOURNEY.fast.steps),
       slow: stepDistances(paths.slow, JOURNEY.slow.steps),
     };
+    // Diagram units to pixels (the box keeps the 1000 x 470 shape).
+    let scale = box.clientWidth / W;
+    const resize = new ResizeObserver(() => (scale = box.clientWidth / W));
+    resize.observe(box);
+    for (const key of LANES) {
+      const trail = trailRefs[key].current;
+      if (trail) trail.style.strokeDasharray = `${total[key]} ${total[key]}`;
+    }
     const timers: ReturnType<typeof setTimeout>[] = [];
     const fresh = () => ({ d: 0, next: 0, pauseUntil: 0, pausedAt: -1, done: false });
     const walk = { fast: fresh(), slow: fresh() };
@@ -199,9 +407,24 @@ function FlowDiagram() {
     let last = performance.now();
     let frame = 0;
 
+    const clockText = (key: Lane, d: number) => {
+      const [from, to] = CLOCK[key];
+      const f = Math.min(1, Math.max(0, (d - stops[key][from]) / (stops[key][to] - stops[key][from])));
+      if (f >= 1) return JOURNEY[key].time;
+      return `${Math.round(f * (key === 'fast' ? 3 : 48))}h`;
+    };
     const place = (key: Lane) => {
-      const p = paths[key]!.getPointAtLength(walk[key].d);
-      walkerRefs[key].current?.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
+      const w = walk[key];
+      const p = paths[key]!.getPointAtLength(w.d);
+      const traveller = travellerRefs[key].current;
+      if (traveller) {
+        traveller.style.transform = `translate(${(p.x * scale).toFixed(1)}px, ${(p.y * scale).toFixed(1)}px) translate(-50%, -50%)`;
+        traveller.style.opacity = w.done ? '0' : '1';
+      }
+      const trail = trailRefs[key].current;
+      if (trail) trail.style.strokeDashoffset = `${total[key] - w.d}`;
+      const clock = clockRefs[key].current;
+      if (clock) clock.textContent = clockText(key, w.d);
     };
     const pass = (key: Lane, step: number) => {
       setStory((s) => ({
@@ -233,10 +456,14 @@ function FlowDiagram() {
         walk.fast = fresh();
         walk.slow = fresh();
         setStory(EMPTY);
+        setRound((r) => r + 1);
       }
       for (const key of LANES) {
         const w = walk[key];
-        if (w.done) continue;
+        if (w.done) {
+          place(key);
+          continue;
+        }
         if (w.pauseUntil) {
           if (now < w.pauseUntil) continue;
           w.pauseUntil = 0;
@@ -267,6 +494,7 @@ function FlowDiagram() {
     frame = requestAnimationFrame(loop);
     return () => {
       cancelAnimationFrame(frame);
+      resize.disconnect();
       timers.forEach(clearTimeout);
     };
     // The refs are stable; the loop only needs to start once.
@@ -307,6 +535,7 @@ function FlowDiagram() {
       {JOURNEY[key].time}
     </motion.p>
   );
+  const requirementRole = REQUIREMENTS[round % REQUIREMENTS.length].split(' · ')[0];
 
   return (
     <div ref={ref} className="relative mt-14 hidden aspect-[1000/470] w-full lg:block">
@@ -319,27 +548,30 @@ function FlowDiagram() {
         {draw('fast', 'var(--color-brand)')}
         {draw('slow', 'var(--color-navy)')}
         {draw('tail', 'var(--color-ink)')}
+        {/* The lit trail each candidate leaves behind them. */}
+        {running &&
+          LANES.map((key) => (
+            <path
+              key={key}
+              ref={trailRefs[key]}
+              d={JOURNEY[key].d}
+              fill="none"
+              stroke={JOURNEY[key].color}
+              strokeWidth={9}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.16}
+            />
+          ))}
         {/* Invisible full journeys, used to move the candidates. */}
         <path ref={journeyRefs.fast} d={JOURNEY.fast.d} fill="none" stroke="none" />
         <path ref={journeyRefs.slow} d={JOURNEY.slow.d} fill="none" stroke="none" />
-        {/* The candidates: a person icon with a soft pulsing halo. They pass behind the cards. */}
-        {running &&
-          LANES.map((key) => (
-            <g key={key} ref={walkerRefs[key]} transform={`translate(${px(COL[0])} ${MAIN})`}>
-              <circle r={17} fill={JOURNEY[key].color} opacity={0.16}>
-                <animate attributeName="r" values="14;21;14" dur="1.8s" repeatCount="indefinite" />
-              </circle>
-              <circle r={12.5} fill={JOURNEY[key].color} stroke="#fff" strokeWidth={2.5} />
-              <circle cy={-3.2} r={3.4} fill="#fff" />
-              <path d="M -6.2 6.6 Q 0 -1.4 6.2 6.6 Z" fill="#fff" />
-            </g>
-          ))}
       </svg>
 
-      {/* Lane labels. */}
+      {/* Lane labels: the database label sits just above its line, so candidates can pass beneath it. */}
       <motion.p
         {...appear(0.85)}
-        style={{ left: `${(COL[1] + COL[5]) / 2}%`, top: `${ROW.top}%` }}
+        style={{ left: `${(COL[1] + COL[5]) / 2}%`, top: '3.5%' }}
         className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-brand/30 bg-paper px-4 py-2 text-[13px] shadow-soft xl:text-[14px]"
       >
         <Database aria-hidden className="size-4 text-brand" />
@@ -347,13 +579,7 @@ function FlowDiagram() {
         <span className="text-muted">{sourcingChannels.database.text}</span>
         <strong className="font-semibold text-brand">{sourcingChannels.database.time}</strong>
       </motion.p>
-      <motion.p
-        {...appear(0.7)}
-        style={{ left: `${(COL[1] + COL[5]) / 2}%`, top: `${ROW.main}%` }}
-        className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.18em] text-muted"
-      >
-        Both channels, in parallel
-      </motion.p>
+      <SourcingDesk story={story} round={round} still={reduce} appearProps={appear(0.7)} />
       <motion.p
         {...appear(2.05)}
         style={{ left: `${COL[3]}%`, top: `${ROW.label}%` }}
@@ -364,6 +590,82 @@ function FlowDiagram() {
         <span className="text-muted">{sourcingChannels.openMarket.text}</span>
         <strong className="font-semibold text-navy">{sourcingChannels.openMarket.time}</strong>
       </motion.p>
+
+      {/*
+       * The travelling candidates: a card with an illustrated person, the role, their checks and a clock.
+       * They pass behind the step cards, so each one goes "into" a step and comes out with a new badge.
+       */}
+      {running &&
+        LANES.map((key) => (
+          <div
+            key={key}
+            ref={travellerRefs[key]}
+            className="pointer-events-none absolute left-0 top-0 opacity-0 transition-opacity duration-500 will-change-transform"
+          >
+            <div
+              className={cn(
+                'flex w-[160px] items-center gap-2 rounded-xl border bg-paper/95 p-1.5 pr-2 shadow-lift backdrop-blur xl:w-[200px]',
+                key === 'fast' ? 'border-brand/40' : 'border-navy/30',
+              )}
+            >
+              <Avatar
+                variant={round * 2 + (key === 'fast' ? 0 : 1)}
+                className={cn('size-8 shrink-0 ring-2', key === 'fast' ? 'ring-brand' : 'ring-navy')}
+              />
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[11px] font-semibold leading-tight">{requirementRole}</p>
+                <div className="mt-0.5 flex items-center justify-between gap-1">
+                  {key === 'fast' ? (
+                    <p className="flex items-center gap-1 text-[10px] text-muted">
+                      <Check aria-hidden className="size-3 text-emerald-600" strokeWidth={3} />
+                      <span className="hidden xl:inline">Pre-screened</span>
+                      <span className="xl:hidden">Database</span>
+                    </p>
+                  ) : (
+                    <p className="flex gap-0.5">
+                      {SLOW_BADGES.map((badge) => {
+                        const passed = Boolean(story.ticks[badge.step]);
+                        return (
+                          <span
+                            key={badge.label}
+                            title={badge.label}
+                            className={cn(
+                              'flex h-4 min-w-4 items-center justify-center rounded px-1 text-[9px] font-medium leading-4 transition-colors duration-300',
+                              passed ? 'bg-emerald-500/15 text-emerald-700' : 'bg-ink/5 text-faint',
+                            )}
+                          >
+                            {/* Full labels where there is room; small tick chips on smaller laptops. */}
+                            <span className="hidden xl:inline">
+                              {passed ? '✓ ' : ''}
+                              {badge.label === 'L1 + video' ? 'L1' : badge.label}
+                            </span>
+                            <span className="xl:hidden">
+                              {passed ? (
+                                <Check aria-hidden className="size-2.5" strokeWidth={3.5} />
+                              ) : (
+                                <span aria-hidden className="block size-1.5 rounded-full bg-current" />
+                              )}
+                            </span>
+                          </span>
+                        );
+                      })}
+                    </p>
+                  )}
+                  {/* The clock: hours since sourcing started, until the profile is submitted. */}
+                  <span
+                    ref={clockRefs[key]}
+                    className={cn(
+                      'shrink-0 rounded px-1 font-mono text-[9.5px] leading-4 text-white',
+                      key === 'fast' ? 'bg-brand' : 'bg-navy',
+                    )}
+                  >
+                    0h
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
 
       {/* Time badges when each candidate reaches "Profile submission". */}
       <AnimatePresence>
