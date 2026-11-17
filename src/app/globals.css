@@ -31,7 +31,17 @@
   --animate-marquee: marquee var(--marquee-duration, 50s) linear infinite;
   --animate-float: float 7s ease-in-out infinite;
   --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-shine: shine 1s cubic-bezier(0.22, 1, 0.36, 1);
 
+  /* A soft beam of light sweeping across a photo (program cards). */
+  @keyframes shine {
+    from {
+      transform: translateX(-120%) skewX(-16deg);
+    }
+    to {
+      transform: translateX(380%) skewX(-16deg);
+    }
+  }
   @keyframes marquee {
     from {
       transform: translateX(0);

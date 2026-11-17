@@ -1,24 +1,40 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useInView } from 'motion/react';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { programs, type Program } from '@/content/programs';
 import { accent } from '@/lib/accent';
 import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
-import { Spotlight, Tilt } from '@/components/motion/primitives';
+import { Spotlight, Tilt, useReducedMotionSafe } from '@/components/motion/primitives';
 import { ProgramExplorer } from './ProgramExplorer';
 import { ProgramBanner } from '@/components/visuals/ProgramBanner';
 
 /** Program card: coloured glow per program, cursor spotlight and a gentle 3D tilt. */
 export function ProgramCard({ program }: { program: Program }) {
   const a = accent[program.accent];
+  const ref = useRef<HTMLAnchorElement>(null);
+  // Phones have no hover, so the photo's light sweep plays once as the card comes into view.
+  const seen = useInView(ref, { once: true, amount: 0.6 });
+  const [touch, setTouch] = useState(false);
+  useEffect(() => setTouch(window.matchMedia('(hover: none)').matches), []);
+  // Opening the course: the card presses in and the photo zooms, as if diving into the course page.
+  const [pressed, setPressed] = useState(false);
+  const reduce = useReducedMotionSafe();
   return (
     <Tilt className="h-full">
       <Spotlight className="h-full rounded-3xl" color="rgb(255 255 255 / 0.12)">
         <Link
+          ref={ref}
           href={`/training-placement/${program.slug}/`}
-          className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-ink p-7 text-white shadow-lift sm:p-8"
+          onPointerDown={() => setPressed(true)}
+          onPointerLeave={() => setPressed(false)}
+          onPointerCancel={() => setPressed(false)}
+          onClick={() => window.setTimeout(() => setPressed(false), 800)}
+          data-pressed={pressed || undefined}
+          className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-ink p-6 text-white shadow-lift transition-[scale] duration-200 motion-safe:data-[pressed]:scale-[0.975]"
         >
           <div aria-hidden className={cn('absolute inset-0 bg-gradient-to-br opacity-90', a.gradient)} />
           <div
@@ -30,36 +46,38 @@ export function ProgramCard({ program }: { program: Program }) {
           />
           <div aria-hidden className="grid-lines absolute inset-0 opacity-50" />
 
-          <ProgramBanner program={program} className="-mx-7 -mt-7 mb-6 sm:-mx-8 sm:-mt-8" />
+          <ProgramBanner
+            program={program}
+            className="-mx-6 -mt-6 mb-5"
+            shine={touch && seen}
+            pressed={pressed && !reduce}
+          />
 
-          <div className="absolute inset-x-7 top-7 flex items-center justify-between sm:inset-x-8">
+          <div className="absolute inset-x-6 top-5 flex items-center justify-between">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white/75">
               <span className={cn('size-1.5 rounded-full', a.dot)} />
               {program.family}
             </span>
-            <span className="flex size-10 items-center justify-center rounded-full border border-white/15 transition-all duration-500 group-hover:rotate-45 group-hover:border-white group-hover:bg-white group-hover:text-ink">
-              <ArrowUpRight aria-hidden className="size-5" />
+            <span className="flex size-9 items-center justify-center rounded-full border border-white/15 transition-all duration-500 group-hover:rotate-45 group-hover:border-white group-hover:bg-white group-hover:text-ink">
+              <ArrowUpRight aria-hidden className="size-4.5" />
             </span>
           </div>
 
-          <h3
-            className="relative text-2xl font-semibold leading-tight tracking-tight sm:text-[1.7rem]"
-          >
+          <h3 className="relative text-xl font-semibold leading-snug tracking-tight sm:text-[1.35rem]">
             {program.name}
           </h3>
-          <p className="relative mt-3 leading-relaxed text-white/65">{program.tagline}</p>
+          <p className="relative mt-2 line-clamp-2 text-[15px] leading-relaxed text-white/65">
+            {program.tagline}
+          </p>
 
-          <ul className="relative mt-auto space-y-2.5 pt-8">
+          <ul className="relative mt-auto space-y-1.5 pt-5">
             {program.highlights.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-[15px] text-white/85">
+              <li key={item} className="flex items-center gap-2 text-[14px] text-white/85">
                 <Check aria-hidden className={cn('size-4', a.textOnDark)} />
                 {item}
               </li>
             ))}
           </ul>
-          <p className="relative mt-6 border-t border-white/10 pt-5 text-sm text-white/50">
-            <span className="text-white/80 underline-offset-4 group-hover:underline">View curriculum</span>
-          </p>
         </Link>
       </Spotlight>
     </Tilt>
