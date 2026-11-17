@@ -6,12 +6,14 @@ import { cn } from '@/lib/cn';
 import { Container } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { ProgramVisual } from '@/components/visuals/ProgramVisual';
-import { Tilt } from '@/components/motion/primitives';
+import { SplitWords, Tilt } from '@/components/motion/primitives';
+import { ProgramHeroPhoto } from '@/components/program/ProgramHeroPhoto';
 
 export function ProgramHero({ program }: { program: Program }) {
   const a = accent[program.accent];
   return (
     <section className="aurora relative isolate overflow-hidden pb-16 pt-28 text-white sm:pb-24 sm:pt-36">
+      {program.image && <ProgramHeroPhoto src={program.image} />}
       <div aria-hidden className="grid-lines absolute inset-0 -z-10" />
       <div
         aria-hidden
@@ -40,12 +42,22 @@ export function ProgramHero({ program }: { program: Program }) {
 
         <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] [&>*]:min-w-0">
           <div>
-            <p className="fade-up inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-white/75 [animation-delay:60ms]">
-              <span className={cn('size-1.5 rounded-full', a.dot)} />
-              {program.family} · {program.level}
-            </p>
-            <h1 className="fade-up mt-6 text-balance text-4xl font-semibold leading-[1.04] tracking-[-0.04em] [animation-delay:120ms] sm:text-6xl">
-              {program.name}
+            <div className="fade-up flex flex-wrap items-center gap-3 [animation-delay:60ms]">
+              {program.logo && (
+                <span className="inline-flex h-9 items-center rounded-full bg-white px-4 shadow-soft">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- small SVG logo */}
+                  <img src={program.logo} alt={`${program.shortName} logo`} className="h-5 w-auto" />
+                </span>
+              )}
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-white/75 backdrop-blur">
+                <span className={cn('size-1.5 rounded-full', a.dot)} />
+                {program.family}
+              </p>
+            </div>
+            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-6xl">
+              <SplitWords delay={0.15} stagger={0.06}>
+                {program.name}
+              </SplitWords>
             </h1>
             <p className="fade-up mt-6 max-w-xl text-pretty text-lg leading-relaxed text-white/65 [animation-delay:180ms]">
               {program.summary}

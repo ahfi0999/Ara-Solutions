@@ -1,15 +1,5 @@
 import Link from 'next/link';
-import {
-  ArrowRight,
-  BadgeCheck,
-  Briefcase,
-  FlaskConical,
-  FolderKanban,
-  MessagesSquare,
-  MonitorPlay,
-  type LucideIcon,
-} from 'lucide-react';
-import { trainingPillars } from '@/content/home';
+import { ArrowRight, type LucideIcon } from 'lucide-react';
 import { trainingApproach } from '@/content/company';
 import { caseStudies } from '@/content/records';
 import { programs } from '@/content/programs';
@@ -18,6 +8,8 @@ import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { ButtonLink } from '@/components/ui/Button';
 import { CountUp, Figure } from '@/components/motion/primitives';
+import { MediaBackground } from '@/components/motion/MediaBackground';
+import { TrainingPillarCards } from '@/components/home/TrainingPillarCards';
 
 /**
  * A header band that starts one audience's half of the home page ("For businesses" / "For professionals"),
@@ -61,12 +53,17 @@ export function AudienceBand({
   );
 }
 
-const PILLAR_ICONS: LucideIcon[] = [FlaskConical, FolderKanban, BadgeCheck, MessagesSquare, Briefcase, MonitorPlay];
-
 /** "Why learn with ARA": what every program includes (the training twin of "Why ARA"). */
 export function TrainingPillars() {
   return (
     <section id="why-learn" className="relative isolate overflow-hidden bg-ink py-20 text-white sm:py-28">
+      {/* Free Mixkit clip 48166, "Group of college students working together in a classroom" (Mixkit licence). */}
+      <MediaBackground
+        video="/videos/learn-classroom.mp4"
+        mobileVideo="/videos/learn-classroom-mobile.mp4"
+        poster="/videos/learn-classroom.jpg"
+        overlayClassName="bg-ink/80"
+      />
       <div aria-hidden className="grid-lines absolute inset-0" />
       <div aria-hidden className="absolute -right-40 top-0 size-[520px] rounded-full bg-brand/20 blur-3xl" />
       <Container className="relative">
@@ -80,42 +77,7 @@ export function TrainingPillars() {
           }
           intro={trainingApproach.paragraphs[0]}
         />
-        <ol className="relative mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {trainingPillars.map((pillar, index) => {
-            const Icon = PILLAR_ICONS[index];
-            const href = 'href' in pillar ? pillar.href : undefined;
-            const body = (
-              <>
-                <span className="flex items-center justify-between">
-                  <span className="flex size-12 items-center justify-center rounded-xl bg-brand text-white shadow-[0_10px_30px_-10px_rgb(229_35_45/0.8)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:-rotate-6">
-                    <Icon aria-hidden className="size-6" />
-                  </span>
-                  <span className="font-mono text-sm text-white/30">{String(index + 1).padStart(2, '0')}</span>
-                </span>
-                <h3 className="mt-6 text-lg font-semibold tracking-tight">{pillar.title}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-white/60">{pillar.text}</p>
-                {href && (
-                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-[15px] font-medium text-brand-300 group-hover:text-white">
-                    See the platform <ArrowRight aria-hidden className="size-4" />
-                  </span>
-                )}
-              </>
-            );
-            const card =
-              'group flex h-full flex-col rounded-2xl border p-6 transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.07]';
-            return (
-              <Reveal as="li" key={pillar.title} delay={index * 0.08} className="h-full">
-                {href ? (
-                  <Link href={href} className={`${card} border-brand/40 bg-brand/[0.08]`}>
-                    {body}
-                  </Link>
-                ) : (
-                  <div className={`${card} border-white/10 bg-white/[0.04]`}>{body}</div>
-                )}
-              </Reveal>
-            );
-          })}
-        </ol>
+        <TrainingPillarCards />
         <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4">
           <ButtonLink href="/training-placement/" variant="light" arrow>
             Explore all programs

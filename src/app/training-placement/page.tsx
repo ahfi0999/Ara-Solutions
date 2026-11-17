@@ -119,7 +119,7 @@ export default function ProgramsPage() {
                 {programs.map((program) => {
                   const row = COMPARE[program.slug] ?? {
                     bestFor: program.tagline,
-                    coding: program.level,
+                    coding: 'Ask an advisor',
                     certification: Boolean(program.certifications?.length),
                     ai: program.family === 'AI' ? 'Core of the program' : '—',
                   };

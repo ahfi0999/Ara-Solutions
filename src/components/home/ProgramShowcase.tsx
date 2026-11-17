@@ -58,7 +58,6 @@ export function ProgramCard({ program }: { program: Program }) {
             ))}
           </ul>
           <p className="relative mt-6 border-t border-white/10 pt-5 text-sm text-white/50">
-            {program.level} ·{' '}
             <span className="text-white/80 underline-offset-4 group-hover:underline">View curriculum</span>
           </p>
         </Link>

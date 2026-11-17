@@ -74,7 +74,6 @@ export default async function ProgramPage({ params }: Props) {
     provider: { '@type': 'Organization', name: site.name, sameAs: site.url },
     teaches: program.outcomes,
     coursePrerequisites: program.prerequisites,
-    educationalLevel: program.level,
     syllabusSections: program.modules.map((module) => ({
       '@type': 'Syllabus',
       name: module.title,

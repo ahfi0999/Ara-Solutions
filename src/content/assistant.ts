@@ -41,7 +41,7 @@ const serviceFacts = services
 const programFacts = programs
   .map(
     (program) =>
-      `- ${program.name} (/training-placement/${program.slug}/): ${program.summary} Level: ${program.level}. ` +
+      `- ${program.name} (/training-placement/${program.slug}/): ${program.summary} ` +
       `Prerequisites: ${program.prerequisites} Modules: ${program.modules.map((module) => module.title).join(', ')}. ` +
       `Roles: ${program.roles.map((role) => role.title).join(', ')}.`,
   )

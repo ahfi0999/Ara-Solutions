@@ -3,7 +3,6 @@ import {
   BriefcaseBusiness,
   Check,
   Clock3,
-  GraduationCap,
   Layers,
   MessageCircle,
   Plus,
@@ -46,7 +45,6 @@ function Block({
 function GlanceCard({ program }: { program: Program }) {
   const ask = 'Ask an advisor';
   const facts = [
-    { icon: GraduationCap, label: 'Level', value: program.level },
     { icon: Layers, label: 'Format', value: program.details?.mode ?? 'Instructor-led with hands-on labs' },
     { icon: Clock3, label: 'Duration & batches', value: program.details?.duration ?? ask },
     { icon: Wallet, label: 'Fees', value: program.details?.fees ?? ask },

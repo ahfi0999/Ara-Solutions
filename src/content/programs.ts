@@ -24,7 +24,6 @@ export type Program = {
   tagline: string;
   summary: string;
   accent: 'sky' | 'violet' | 'rose' | 'emerald' | 'amber' | 'indigo';
-  level: string;
   prerequisites: string;
   /** Optional confirmed details. Leave undefined to show "Ask an advisor". */
   details?: { duration?: string; mode?: string; fees?: string; nextBatch?: string };
@@ -55,7 +54,6 @@ export const programs: Program[] = [
     summary:
       'Learn to configure, automate and build on the Salesforce Platform, then extend it with Agentforce, Salesforce’s agentic AI. Built around the work Salesforce teams actually hire for.',
     accent: 'sky',
-    level: 'Beginner to intermediate',
     prerequisites: 'No prior Salesforce experience needed. Basic computer and logical-thinking skills help.',
     highlights: ['Admin + Developer + Agentforce', 'Hands-on org practice', 'Certification preparation'],
     audience: [
@@ -252,7 +250,6 @@ export const programs: Program[] = [
     summary:
       'Learn the platform that runs IT, HR and customer service workflows at large enterprises: administration, ITSM, scripting and Now Assist AI, with structured preparation for the System Administrator certification.',
     accent: 'emerald',
-    level: 'Beginner to intermediate',
     prerequisites: 'No prior ServiceNow experience needed. Basic IT and logical-thinking skills help.',
     highlights: ['Admin + Developer + ITSM', 'Now Assist AI', 'CSA certification prep'],
     audience: [
@@ -394,7 +391,6 @@ export const programs: Program[] = [
     summary:
       'Build real AI applications: learn the machine-learning foundations, then work with large language models, retrieval-augmented generation (RAG) and deployment, the way AI engineering teams do.',
     accent: 'violet',
-    level: 'Beginner to intermediate',
     prerequisites: 'Comfort with basic programming concepts is helpful. Python is taught from the start.',
     highlights: ['ML + Generative AI', 'LLMs, RAG & fine-tuning', 'Portfolio of AI apps'],
     audience: [
@@ -551,7 +547,6 @@ export const programs: Program[] = [
     summary:
       'Go beyond chatbots. Learn to engineer AI agents and multi-agent systems that reason over tasks, call tools and APIs, remember context and operate safely in production.',
     accent: 'rose',
-    level: 'Intermediate',
     prerequisites: 'Basic Python. Learners new to AI can start with the AI & Machine Learning program first.',
     highlights: ['Agents, tools & MCP', 'Multi-agent orchestration', 'Guardrails & evaluation'],
     audience: [
@@ -709,7 +704,6 @@ export const programs: Program[] = [
     summary:
       'Security roles are among the hardest to fill in India. Learn how attackers operate, how to secure networks, cloud and identities, and how security operations teams detect and respond to threats.',
     accent: 'amber',
-    level: 'Beginner to intermediate',
     prerequisites: 'Basic computer networking knowledge helps. Fundamentals are covered at the start.',
     highlights: ['SOC & SIEM hands-on', 'Cloud & IAM security', 'Certification readiness'],
     audience: [
@@ -829,7 +823,6 @@ export const programs: Program[] = [
     summary:
       'Companies want developers who can own a feature end to end and use AI well. Learn React, Node.js and databases, add AI features to your apps, and code faster with AI tools while understanding what you ship.',
     accent: 'indigo',
-    level: 'Beginner to intermediate',
     prerequisites:
       'No prior web development experience needed. Logical thinking and enthusiasm to code help.',
     highlights: ['React + Node.js + databases', 'AI-powered apps', 'Deployed projects'],
