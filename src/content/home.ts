@@ -192,3 +192,54 @@ export const generalFaqs = [
     a: 'These depend on the program and batch. Request a callback or message us on WhatsApp and our team will share the current details.',
   },
 ] as const;
+
+/*
+ * Balanced home page (preview): content for the training half and the split FAQ.
+ * Every line comes from content already on the site (the learner journey, program FAQs and certifications).
+ */
+
+/** Why learn with ARA: what every program includes. */
+export const trainingPillars = [
+  {
+    title: 'Hands-on labs',
+    text: 'Concepts are taught through hands-on labs, so you practise every skill as you learn it.',
+  },
+  {
+    title: 'Real projects',
+    text: 'Industry-style projects and a capstone you can show to employers.',
+  },
+  {
+    title: 'Certification preparation',
+    text: 'Prepare for official exams such as Salesforce Administrator and ServiceNow CSA, where the program has one.',
+  },
+  {
+    title: 'Interview preparation',
+    text: 'Resume and LinkedIn reviews, mock interviews and guidance on how teams hire.',
+  },
+  {
+    title: 'Placement assistance',
+    text: 'Our team connects you with hiring opportunities, drawing on 13+ years in the IT industry.',
+  },
+] as const;
+
+/** FAQ split for the two audiences. */
+export const hiringFaqs = generalFaqs.filter((item) => !/training/i.test(item.q));
+export const trainingFaqs = [
+  ...generalFaqs.filter((item) => /training/i.test(item.q)),
+  {
+    q: 'Do I need prior experience?',
+    a: 'It depends on the program. Salesforce and ServiceNow start from the basics with no prior platform experience needed; the AI programs suit learners comfortable with basic programming. Each program page lists its prerequisites.',
+  },
+  {
+    q: 'Do you help with placement?',
+    a: 'Yes. Every program includes interview preparation and placement assistance: resume and LinkedIn reviews, mock interviews and connections to hiring opportunities.',
+  },
+  {
+    q: 'Are certification exams included?',
+    a: 'Programs prepare you for the official exams listed on each program page. Exam registration is done with the vendor directly; an advisor can explain the process and current exam fees.',
+  },
+  {
+    q: 'Which program is right for me?',
+    a: 'Answer the three questions in the program finder above, or talk to an advisor who will recommend a program based on your background and goals.',
+  },
+];
