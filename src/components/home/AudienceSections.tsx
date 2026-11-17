@@ -6,6 +6,7 @@ import {
   FlaskConical,
   FolderKanban,
   MessagesSquare,
+  MonitorPlay,
   type LucideIcon,
 } from 'lucide-react';
 import { trainingPillars } from '@/content/home';
@@ -60,9 +61,9 @@ export function AudienceBand({
   );
 }
 
-const PILLAR_ICONS: LucideIcon[] = [FlaskConical, FolderKanban, BadgeCheck, MessagesSquare, Briefcase];
+const PILLAR_ICONS: LucideIcon[] = [FlaskConical, FolderKanban, BadgeCheck, MessagesSquare, Briefcase, MonitorPlay];
 
-/** "Why learn with ARA": the five things every program includes (the training twin of "Why ARA"). */
+/** "Why learn with ARA": what every program includes (the training twin of "Why ARA"). */
 export function TrainingPillars() {
   return (
     <section id="why-learn" className="relative isolate overflow-hidden bg-ink py-20 text-white sm:py-28">
@@ -79,23 +80,38 @@ export function TrainingPillars() {
           }
           intro={trainingApproach.paragraphs[0]}
         />
-        <ol className="relative mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="relative mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {trainingPillars.map((pillar, index) => {
             const Icon = PILLAR_ICONS[index];
+            const href = 'href' in pillar ? pillar.href : undefined;
+            const body = (
+              <>
+                <span className="flex items-center justify-between">
+                  <span className="flex size-12 items-center justify-center rounded-xl bg-brand text-white shadow-[0_10px_30px_-10px_rgb(229_35_45/0.8)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:-rotate-6">
+                    <Icon aria-hidden className="size-6" />
+                  </span>
+                  <span className="font-mono text-sm text-white/30">{String(index + 1).padStart(2, '0')}</span>
+                </span>
+                <h3 className="mt-6 text-lg font-semibold tracking-tight">{pillar.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-white/60">{pillar.text}</p>
+                {href && (
+                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-[15px] font-medium text-brand-300 group-hover:text-white">
+                    See the platform <ArrowRight aria-hidden className="size-4" />
+                  </span>
+                )}
+              </>
+            );
+            const card =
+              'group flex h-full flex-col rounded-2xl border p-6 transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.07]';
             return (
               <Reveal as="li" key={pillar.title} delay={index * 0.08} className="h-full">
-                <div className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.07]">
-                  <span className="flex items-center justify-between">
-                    <span className="flex size-12 items-center justify-center rounded-xl bg-brand text-white shadow-[0_10px_30px_-10px_rgb(229_35_45/0.8)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:-rotate-6">
-                      <Icon aria-hidden className="size-6" />
-                    </span>
-                    <span className="font-mono text-sm text-white/30">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  </span>
-                  <h3 className="mt-6 text-lg font-semibold tracking-tight">{pillar.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-white/60">{pillar.text}</p>
-                </div>
+                {href ? (
+                  <Link href={href} className={`${card} border-brand/40 bg-brand/[0.08]`}>
+                    {body}
+                  </Link>
+                ) : (
+                  <div className={`${card} border-white/10 bg-white/[0.04]`}>{body}</div>
+                )}
               </Reveal>
             );
           })}

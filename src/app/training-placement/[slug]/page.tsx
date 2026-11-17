@@ -6,6 +6,7 @@ import { site } from '@/content/site';
 import { ProgramHero } from '@/components/program/ProgramHero';
 import { SectionNav } from '@/components/program/SectionNav';
 import { ProgramBody } from '@/components/program/ProgramBody';
+import { LmsIncluded } from '@/components/program/LmsIncluded';
 import { AlumniMarquee } from '@/components/home/AlumniMarquee';
 import { Journey } from '@/components/home/Journey';
 import { Faq } from '@/components/home/Faq';
@@ -56,6 +57,10 @@ export default async function ProgramPage({ params }: Props) {
       a: 'These depend on the batch. Request a callback or message us on WhatsApp and an advisor will share the current details.',
     },
     {
+      q: 'Are classes live or recorded?',
+      a: 'Both. Classes are live on Zoom with your trainer, and every class is recorded and added to your course on our learning platform, so you can watch it again or catch up on one you missed.',
+    },
+    {
       q: 'Do you provide placement assistance?',
       a: 'Yes. The program includes interview preparation and placement assistance, and our alumni work at leading companies including Accenture, Deloitte, TCS and Infosys.',
     },
@@ -88,6 +93,7 @@ export default async function ProgramPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }} />
       <ProgramHero program={program} />
+      <LmsIncluded />
       <SectionNav sections={sections} />
       <ProgramBody program={program} />
       <AlumniMarquee className="border-y border-line bg-paper" />

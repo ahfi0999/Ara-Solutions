@@ -220,12 +220,21 @@ export const trainingPillars = [
     title: 'Placement assistance',
     text: 'Our team connects you with hiring opportunities, drawing on 13+ years in the IT industry.',
   },
+  {
+    title: 'Our own learning platform',
+    text: 'Live Zoom classes, every class recorded, progress tracking and an AI study helper, in one place.',
+    href: '/training-placement/#learning-platform',
+  },
 ] as const;
 
 /** FAQ split for the two audiences. */
 export const hiringFaqs = generalFaqs.filter((item) => !/training/i.test(item.q));
 export const trainingFaqs = [
   ...generalFaqs.filter((item) => /training/i.test(item.q)),
+  {
+    q: 'Can I watch a class later?',
+    a: 'Yes. Every live class is recorded and added to your batch on our learning platform, so you can watch it again or catch up on one you missed.',
+  },
   {
     q: 'Do I need prior experience?',
     a: 'It depends on the program. Salesforce and ServiceNow start from the basics with no prior platform experience needed; the AI programs suit learners comfortable with basic programming. Each program page lists its prerequisites.',

@@ -11,6 +11,7 @@ import { ProgramFinder } from '@/components/home/ProgramFinder';
 import { ClosingCta } from '@/components/home/ClosingCta';
 import { AlumniMarquee } from '@/components/home/AlumniMarquee';
 import { Journey } from '@/components/home/Journey';
+import { LmsPlatform } from '@/components/program/LmsPlatform';
 
 export const metadata: Metadata = {
   title: 'Training & Placement: Salesforce, ServiceNow, AI, Cybersecurity & Full Stack',
@@ -151,6 +152,7 @@ export default function ProgramsPage() {
         </Container>
       </section>
 
+      <LmsPlatform />
       <ProgramFinder />
       <Journey />
       <AlumniMarquee className="border-t border-line" />

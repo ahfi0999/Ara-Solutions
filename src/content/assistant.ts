@@ -3,6 +3,7 @@ import { afterJoining, capabilities, trainingApproach } from './company';
 import { programs } from './programs';
 import { services, roleCoverage } from './services';
 import { site } from './site';
+import { lmsFeatures } from './lms';
 
 /**
  * What "Ask ARA" knows. It is built from the site's own content, so it stays in sync.
@@ -27,6 +28,8 @@ const COMPANY_NOTES = `
 - Roles ARA recruits for: ${roleGroups.map((side) => `${side.title}: ${side.groups.map((group) => `${group.name} (${group.roles})`).join(', ')}`).join('. ')}.
 - Fulltime staffing covers IT roles (${roleCoverage.it.join('; ')}) and non-IT roles (${roleCoverage.nonIt.join('; ')}).
 - Training: ${trainingApproach.points.join(', ')}.
+- Learning platform (ARA's own, included with every program): ${lmsFeatures.map((item) => `${item.title} (${item.text.replace(/\.$/, '')})`).join('; ')}.
+  How long course access lasts and whether certificates are issued are NOT listed here: ask the visitor to contact the team.
 - Course fees, batch start dates, durations and timings: NOT listed here. Ask the visitor to contact
   the team for the latest details.
 `;
