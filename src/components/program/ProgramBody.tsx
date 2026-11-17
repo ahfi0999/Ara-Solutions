@@ -1,15 +1,6 @@
-import {
-  Award,
-  BriefcaseBusiness,
-  Check,
-  Clock3,
-  Layers,
-  MessageCircle,
-  Plus,
-  Wallet,
-} from 'lucide-react';
+import { Award, BriefcaseBusiness, Check, Clock3, Layers, MessageCircle, Plus, Wallet } from 'lucide-react';
 import type { Program } from '@/content/programs';
-import { whatsappLink } from '@/content/site';
+import { trainingLine, whatsappLink } from '@/content/site';
 import { accent } from '@/lib/accent';
 import { cn } from '@/lib/cn';
 import { Reveal } from '@/components/ui/Reveal';
@@ -81,6 +72,7 @@ function GlanceCard({ program }: { program: Program }) {
         <a
           href={whatsappLink(
             `Hi ARA Solutions, I'm interested in the ${program.name} program. Please share fees and batch details.`,
+            trainingLine.whatsapp,
           )}
           target="_blank"
           rel="noopener noreferrer"

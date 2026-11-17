@@ -4,7 +4,7 @@ import { useId, useState, type FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { CheckCircle2, Loader2, MessageCircle, Phone } from 'lucide-react';
 import { BACKGROUNDS, INTERESTS, enquirySummary, validateEnquiry, type FieldErrors } from '@/lib/enquiry';
-import { site, whatsappLink } from '@/content/site';
+import { lineFor, staffingLine, trainingLine, whatsappLink, type ContactLine } from '@/content/site';
 import { cn } from '@/lib/cn';
 
 type Status = 'idle' | 'sending' | 'sent' | 'fallback';
@@ -65,6 +65,8 @@ export function EnquiryForm({
   const [errors, setErrors] = useState<FieldErrors>({});
   const [summary, setSummary] = useState('');
   const [notice, setNotice] = useState('');
+  // The phone line to offer after sending: training for a course, staffing for hiring, else the page's line.
+  const [line, setLine] = useState<ContactLine>(() => lineFor(pathname));
   const id = (name: string) => `${uid}-${name}`;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -80,6 +82,14 @@ export function EnquiryForm({
       return;
     }
     setErrors({});
+    const group = INTERESTS.find((item) => item.value === data.interest)?.group;
+    setLine(
+      group === 'Training & placement'
+        ? trainingLine
+        : group === 'Hire talent'
+          ? staffingLine
+          : lineFor(pathname),
+    );
     setSummary(enquirySummary(data));
     setStatus('sending');
 
@@ -120,8 +130,8 @@ export function EnquiryForm({
         <h3 className="mt-5 text-xl font-semibold tracking-tight">Thank you, we&apos;ve got your enquiry</h3>
         <p className="mt-2 max-w-sm text-muted">
           Our team will contact you on the number you shared. For anything urgent, call{' '}
-          <a href={site.phoneHref} className="font-medium text-text underline underline-offset-2">
-            {site.phone}
+          <a href={line.phoneHref} className="font-medium text-text underline underline-offset-2">
+            {line.phone}
           </a>
           .
         </p>
@@ -148,7 +158,7 @@ export function EnquiryForm({
         </p>
         <div className="mt-5 grid gap-2.5 sm:grid-cols-2">
           <a
-            href={whatsappLink(`Hi ARA Solutions, I'd like to enquire.\n\n${summary}`)}
+            href={whatsappLink(`Hi ARA Solutions, I'd like to enquire.\n\n${summary}`, line.whatsapp)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#1faa53] font-medium text-white transition-colors hover:bg-[#178f45]"
@@ -156,10 +166,10 @@ export function EnquiryForm({
             <MessageCircle className="size-5" aria-hidden /> Send on WhatsApp
           </a>
           <a
-            href={site.phoneHref}
+            href={line.phoneHref}
             className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-line bg-white font-medium text-text hover:border-text/30"
           >
-            <Phone className="size-4" aria-hidden /> Call {site.phone}
+            <Phone className="size-4" aria-hidden /> Call {line.phone}
           </a>
         </div>
         <button

@@ -7,7 +7,7 @@ import { ArrowUp, Mail, Minus, Phone, Send, Sparkles, X } from 'lucide-react';
 import { STARTER_QUESTIONS } from '@/content/assistant';
 import { getProgram } from '@/content/programs';
 import { getService } from '@/content/services';
-import { site, whatsappLink } from '@/content/site';
+import { lineFor, site, staffingLine, trainingLine, whatsappLink } from '@/content/site';
 import { cn } from '@/lib/cn';
 import { useEnquiry } from '@/components/enquiry/EnquiryProvider';
 
@@ -23,18 +23,26 @@ function whatsappMessage(path: string) {
   const serviceSlug = path.match(/\/services\/([^/]+)/)?.[1];
   const service = serviceSlug ? getService(serviceSlug) : undefined;
   if (service) return `Hi ARA Solutions, I'd like to discuss your ${service.name} service.`;
-  if (path.startsWith('/careers')) return "Hi ARA Solutions, I'd like to know about job openings at ARA Solutions.";
+  if (path.startsWith('/careers'))
+    return "Hi ARA Solutions, I'd like to know about job openings at ARA Solutions.";
   return "Hi ARA Solutions, I'd like to know more about your services.";
 }
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const phoneDigits = site.phone.replace(/\D/g, '');
-// Matches **bold**, the company email, the company phone (any spacing, optional +) and web links.
+const LINES = [staffingLine, trainingLine];
+const digitsOf = (value: string) => value.replace(/\D/g, '');
+/** A phone number in any spacing, with an optional +. */
+const phonePattern = (phone: string) =>
+  String.raw`\+?` +
+  digitsOf(phone)
+    .split('')
+    .join(String.raw`[\s-]?`);
+// Matches **bold**, the company email, either company phone line and web links.
 const TOKEN = new RegExp(
   [
     String.raw`\*\*[^*]+\*\*`,
     escapeRegExp(site.email),
-    String.raw`\+?` + phoneDigits.split('').join(String.raw`[\s-]?`),
+    ...LINES.map((line) => phonePattern(line.phone)),
     String.raw`https?:\/\/[^\s)]+`,
   ].join('|'),
   'g',
@@ -62,12 +70,15 @@ function FormattedText({ text }: { text: string }) {
           {token}
         </a>,
       );
-    else
+    else {
+      // A phone number: link it to whichever line it is.
+      const line = LINES.find((l) => digitsOf(token).endsWith(digitsOf(l.phone).slice(-10))) ?? staffingLine;
       parts.push(
-        <a key={index} href={site.phoneHref} className={link}>
+        <a key={index} href={line.phoneHref} className={link}>
           {token}
         </a>,
       );
+    }
     last = index + token.length;
   }
   parts.push(text.slice(last));
@@ -89,12 +100,15 @@ function ChatPanel({
   error,
   onSend,
   onClose,
+  whatsapp,
 }: {
   messages: Message[];
   pending: boolean;
   error: string;
   onSend: (text: string) => void;
   onClose: () => void;
+  /** WhatsApp number for the hand-off (the page's line). */
+  whatsapp: string;
 }) {
   const [draft, setDraft] = useState('');
   const listRef = useRef<HTMLDivElement>(null);
@@ -117,6 +131,7 @@ function ChatPanel({
     userQuestions.length
       ? `Hi ARA Solutions, I was chatting with Ask ARA on your website. My questions:\n${userQuestions.slice(-5).join('\n')}`
       : "Hi ARA Solutions, I'd like to talk to your team.",
+    whatsapp,
   );
 
   return (
@@ -239,6 +254,8 @@ function ChatPanel({
 /** Contact panel (call, WhatsApp, email) plus the "Ask ARA" assistant, as on the original site. */
 export function ContactDock() {
   const pathname = usePathname();
+  // Training & Placement pages use the training line; everything else the main (staffing) line.
+  const line = lineFor(pathname);
   const { open: openEnquiry } = useEnquiry();
   const [chatEnabled, setChatEnabled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -298,16 +315,22 @@ export function ContactDock() {
       if (!reply.trim()) throw new Error('No reply received.');
     } catch (err) {
       setMessages(history);
-      setError(`${(err as Error).message} You can also reach us on WhatsApp or call ${site.phone}.`);
+      setError(`${(err as Error).message} You can also reach us on WhatsApp or call ${line.phone}.`);
     } finally {
       setPending(false);
     }
   };
 
-  const wa = whatsappLink(whatsappMessage(pathname));
+  const wa = whatsappLink(whatsappMessage(pathname), line.whatsapp);
   const actions = [
-    { label: 'Call', href: site.phoneHref, icon: Phone, tone: 'text-text hover:border-navy' },
-    { label: 'WhatsApp', href: wa, icon: WhatsAppIcon, tone: 'text-[#128C4B] hover:border-[#25D366]', external: true },
+    { label: 'Call', href: line.phoneHref, icon: Phone, tone: 'text-text hover:border-navy' },
+    {
+      label: 'WhatsApp',
+      href: wa,
+      icon: WhatsAppIcon,
+      tone: 'text-[#128C4B] hover:border-[#25D366]',
+      external: true,
+    },
     { label: 'Email', href: site.emailHref, icon: Mail, tone: 'text-navy hover:border-navy' },
   ];
 
@@ -322,7 +345,14 @@ export function ContactDock() {
     <>
       <AnimatePresence>
         {open && (
-          <ChatPanel messages={messages} pending={pending} error={error} onSend={send} onClose={() => setOpen(false)} />
+          <ChatPanel
+            messages={messages}
+            pending={pending}
+            error={error}
+            onSend={send}
+            onClose={() => setOpen(false)}
+            whatsapp={line.whatsapp}
+          />
         )}
       </AnimatePresence>
 
@@ -426,7 +456,7 @@ export function ContactDock() {
           className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden"
         >
           <a
-            href={site.phoneHref}
+            href={line.phoneHref}
             className="flex h-16 flex-col items-center justify-center gap-1 text-[12px] font-semibold text-text"
           >
             <Phone className="size-5" />

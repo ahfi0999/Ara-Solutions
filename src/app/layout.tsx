@@ -51,6 +51,15 @@ const organisationJsonLd = {
   slogan: site.tagline,
   email: site.email,
   telephone: site.phone,
+  contactPoint: [
+    { '@type': 'ContactPoint', contactType: 'sales', name: 'Staffing & services', telephone: site.phone },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'admissions',
+      name: 'Training & placement',
+      telephone: site.training.phone,
+    },
+  ],
   address: {
     '@type': 'PostalAddress',
     addressLocality: `${site.address.area}, ${site.address.city}`,

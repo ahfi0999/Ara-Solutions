@@ -1,23 +1,29 @@
 import type { Metadata } from 'next';
-import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
-import { site, whatsappLink } from '@/content/site';
+import { GraduationCap, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { site, trainingLine, whatsappLink } from '@/content/site';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container } from '@/components/ui/Section';
 import { EnquiryForm } from '@/components/enquiry/EnquiryForm';
 
 export const metadata: Metadata = {
   title: 'Contact ARA Solutions',
-  description: `Talk to an ARA Solutions advisor about Salesforce, ServiceNow, AI, Cybersecurity and Full Stack training. Call ${site.phone} or visit us in Madhapur, Hyderabad.`,
+  description: `Talk to an ARA Solutions advisor about Salesforce, ServiceNow, AI, Cybersecurity and Full Stack training. Call ${site.phone} (staffing) or ${trainingLine.phone} (training), or visit us in Madhapur, Hyderabad.`,
   alternates: { canonical: '/contact/' },
 };
 
 const CHANNELS = [
-  { icon: Phone, label: 'Call us', value: site.phone, href: site.phoneHref },
+  { icon: Phone, label: 'Staffing & services', value: site.phone, href: site.phoneHref },
+  {
+    icon: GraduationCap,
+    label: 'Training & placement',
+    value: trainingLine.phone,
+    href: trainingLine.phoneHref,
+  },
   {
     icon: MessageCircle,
     label: 'WhatsApp',
     value: 'Chat with our team',
-    href: whatsappLink("Hi ARA Solutions, I'd like to know more about your programs."),
+    href: whatsappLink("Hi ARA Solutions, I'd like to talk to your team."),
   },
   { icon: Mail, label: 'Email', value: site.email, href: site.emailHref },
   {

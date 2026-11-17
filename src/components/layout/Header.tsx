@@ -28,7 +28,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { navigation, isGroup, type NavGroup, type NavIcon, type NavItem } from '@/content/navigation';
-import { site } from '@/content/site';
+import { lineFor, site } from '@/content/site';
 import { cn } from '@/lib/cn';
 import { useEnquiry } from '@/components/enquiry/EnquiryProvider';
 
@@ -171,11 +171,8 @@ function Dropdown({
           >
             <div className="flex overflow-hidden rounded-2xl border border-line bg-white text-text shadow-[0_24px_60px_-20px_rgb(0_0_0/0.55),0_0_0_1px_rgb(13_17_80/0.06)]">
               {/* The section name, written sideways down the left edge. */}
-              <div
-                aria-hidden
-                className="flex w-12 shrink-0 items-center justify-center border-r border-line bg-canvas"
-              >
-                <span className="rotate-180 font-mono text-[11px] font-semibold uppercase tracking-[0.35em] text-ink [writing-mode:vertical-rl]">
+              <div aria-hidden className="flex w-12 shrink-0 items-center justify-center bg-brand">
+                <span className="rotate-180 font-mono text-[11px] font-semibold uppercase tracking-[0.35em] text-white [writing-mode:vertical-rl]">
                   {group.strip}
                 </span>
               </div>
@@ -223,6 +220,7 @@ function Dropdown({
 
 export function Header() {
   const pathname = normalise(usePathname());
+  const line = lineFor(pathname);
   const { open } = useEnquiry();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -357,11 +355,11 @@ export function Header() {
 
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href={site.phoneHref}
+            href={line.phoneHref}
             className="hidden items-center gap-2 text-sm text-white/70 hover:text-white 2xl:flex"
           >
             <Phone aria-hidden className="size-4" />
-            {site.phone}
+            {line.phone}
           </a>
           <button
             type="button"
@@ -442,10 +440,10 @@ export function Header() {
                   Talk to us
                 </button>
                 <a
-                  href={site.phoneHref}
+                  href={line.phoneHref}
                   className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/15 text-white"
                 >
-                  <Phone aria-hidden className="size-4" /> {site.phone}
+                  <Phone aria-hidden className="size-4" /> {line.phone}
                 </a>
               </div>
             </div>

@@ -106,6 +106,7 @@ export default async function ProgramPage({ params }: Props) {
         }
       />
       <ClosingCta
+        line="training"
         defaultInterest={program.slug}
         title={`Ready to start ${program.shortName}?`}
         intro="Request a callback and an advisor will share the latest batch dates, fees and a detailed syllabus."
@@ -121,7 +122,10 @@ export default async function ProgramPage({ params }: Props) {
                 </>
               }
             />
-            <Link href="/training-placement/" className="shrink-0 text-[15px] font-medium underline-offset-4 hover:underline">
+            <Link
+              href="/training-placement/"
+              className="shrink-0 text-[15px] font-medium underline-offset-4 hover:underline"
+            >
               All {programs.length} programs →
             </Link>
           </div>

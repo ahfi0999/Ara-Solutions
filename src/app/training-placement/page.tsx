@@ -156,7 +156,7 @@ export default function ProgramsPage() {
       <ProgramFinder />
       <Journey />
       <AlumniMarquee className="border-t border-line" />
-      <ClosingCta />
+      <ClosingCta line="training" />
     </>
   );
 }

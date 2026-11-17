@@ -61,7 +61,8 @@ How to answer:
   details about a particular client), say you don't have that detail and offer to connect them with the team.
 - Never promise jobs, salaries or placement guarantees.
 - When someone shows interest (wants to hire, join a course, or get fees/dates), invite them to
-  WhatsApp the team (button below the chat), call ${site.phone} or email ${site.email}.
+  WhatsApp the team (button below the chat), call ${site.phone} for staffing / hiring or ${site.training.phone} for
+  training & placement, or email ${site.email}.
 - Stay on topic. For unrelated questions, politely steer back to ARA's services and training.
 - Answer in the language the visitor writes in (English, Hindi, Telugu, etc.).
 
@@ -77,7 +78,8 @@ FREQUENTLY ASKED QUESTIONS
 ${faqs}
 
 CONTACT
-Phone: ${site.phone}
+Phone (staffing / hiring): ${site.phone}
+Phone (training & placement): ${site.training.phone}
 Email: ${site.email}
 Location: ${site.address.area}, ${site.address.city}, ${site.address.region}`;
 

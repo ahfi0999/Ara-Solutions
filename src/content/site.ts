@@ -10,12 +10,19 @@ export const site = {
   url: 'https://arasolutions.in',
   description:
     'Career-focused training in Salesforce, ServiceNow, AI & Machine Learning, Agentic AI, Cybersecurity and Full Stack Development in Hyderabad, with hands-on projects, interview preparation and placement assistance.',
-  phone: '+91 80196 03000',
-  phoneHref: 'tel:+918019603000',
+  /** Main line (staffing / services): the footer, WhatsApp and every page outside Training & Placement. */
+  phone: '+91 90100 09225',
+  phoneHref: 'tel:+919010009225',
   email: 'info@arasolutions.in',
   emailHref: 'mailto:info@arasolutions.in',
   /** WhatsApp number, international format, digits only. */
-  whatsapp: '918019603000',
+  whatsapp: '919010009225',
+  /** Training & Placement line: used on the Training pages and for course enquiries (calls and WhatsApp). */
+  training: {
+    phone: '+91 90100 09226',
+    phoneHref: 'tel:+919010009226',
+    whatsapp: '919010009226',
+  },
   address: {
     area: 'Madhapur',
     city: 'Hyderabad',
@@ -43,5 +50,20 @@ export const stats = [
   { value: 48, suffix: ' hrs', label: 'To a targeted shortlist' },
 ] as const;
 
-export const whatsappLink = (message: string) =>
-  `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
+/** A phone line: the number as shown, its tel: link and its WhatsApp number. */
+export type ContactLine = { phone: string; phoneHref: string; whatsapp: string };
+
+export const staffingLine: ContactLine = {
+  phone: site.phone,
+  phoneHref: site.phoneHref,
+  whatsapp: site.whatsapp,
+};
+export const trainingLine: ContactLine = site.training;
+
+/** The line for a page: the training line inside Training & Placement, the main (staffing) line everywhere else. */
+export const lineFor = (pathname?: string | null): ContactLine =>
+  pathname?.startsWith('/training-placement') ? trainingLine : staffingLine;
+
+/** A WhatsApp chat link with a prepared message (the main line unless another number is given). */
+export const whatsappLink = (message: string, number: string = site.whatsapp) =>
+  `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
