@@ -5,30 +5,104 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowRight, ChevronDown, Menu, Phone, X } from 'lucide-react';
-import { navigation, isGroup, type NavGroup } from '@/content/navigation';
+import {
+  ArrowRight,
+  Bot,
+  Brain,
+  Building2,
+  ChevronDown,
+  Cloud,
+  Code2,
+  Globe2,
+  GraduationCap,
+  Handshake,
+  Menu,
+  Phone,
+  Route,
+  ShieldCheck,
+  Trophy,
+  UserCheck,
+  Users,
+  Workflow,
+  X,
+  type LucideIcon,
+} from 'lucide-react';
+import { navigation, isGroup, type NavGroup, type NavIcon, type NavItem } from '@/content/navigation';
 import { site } from '@/content/site';
 import { cn } from '@/lib/cn';
 import { useEnquiry } from '@/components/enquiry/EnquiryProvider';
 
 const normalise = (path: string) => (path.length > 1 ? path.replace(/\/+$/, '') : path);
 
+const NAV_ICONS: Record<NavIcon, LucideIcon> = {
+  about: Building2,
+  approach: Route,
+  cases: Trophy,
+  'corp-to-corp': Handshake,
+  'fulltime-staffing': UserCheck,
+  rpo: Users,
+  'international-consulting': Globe2,
+  salesforce: Cloud,
+  servicenow: Workflow,
+  'ai-ml': Brain,
+  'agentic-ai': Bot,
+  cybersecurity: ShieldCheck,
+  'full-stack-ai': Code2,
+  program: GraduationCap,
+};
+
+/** The small icon square beside a menu link; turns brand red while its link is highlighted. */
+function NavItemIcon({ item, dark = false }: { item: NavItem; dark?: boolean }) {
+  if (!item.icon) return null;
+  const Icon = NAV_ICONS[item.icon];
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        'flex size-9 shrink-0 items-center justify-center rounded-lg border transition-colors duration-200',
+        dark
+          ? 'border-white/10 bg-white/[0.06] text-white'
+          : cn(
+              'border-line bg-white group-hover/item:border-brand group-hover/item:bg-brand group-hover/item:text-white group-focus-visible/item:border-brand group-focus-visible/item:bg-brand group-focus-visible/item:text-white',
+              item.tone ?? 'text-ink',
+            ),
+      )}
+    >
+      <Icon className="size-[18px]" />
+    </span>
+  );
+}
+
+/** The red line under the menu names; it slides to whichever menu is open, hovered or current. */
+function NavUnderline() {
+  return (
+    <motion.span
+      layoutId="nav-underline"
+      data-nav-underline
+      aria-hidden
+      className="pointer-events-none absolute inset-x-3 -bottom-1 h-0.5 rounded-full bg-brand"
+      transition={{ type: 'spring', stiffness: 520, damping: 42 }}
+    />
+  );
+}
+
 function Dropdown({
   group,
   open,
   active,
+  underline,
   onOpen,
   onClose,
 }: {
   group: NavGroup;
   open: boolean;
   active: boolean;
+  underline: boolean;
   onOpen: () => void;
   onClose: () => void;
 }) {
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const id = `menu-${group.match.replace(/\W/g, '')}`;
-  const wide = group.items.length > 4;
   return (
     <li
       className="relative"
@@ -42,7 +116,8 @@ function Dropdown({
     >
       {group.href ? (
         // The label opens the overview page; the arrow opens the dropdown (touch screens, keyboard).
-        <div className="flex items-center">
+        <div className="relative flex items-center">
+          {underline && <NavUnderline />}
           <Link
             href={group.href}
             className={cn(
@@ -67,19 +142,22 @@ function Dropdown({
           </button>
         </div>
       ) : (
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-controls={id}
-          onClick={() => (open ? onClose() : onOpen())}
-          className={cn(
-            'flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] transition-colors',
-            active || open ? 'text-white' : 'text-white/70 hover:text-white',
-          )}
-        >
-          {group.label}
-          <ChevronDown aria-hidden className={cn('size-4 transition-transform', open && 'rotate-180')} />
-        </button>
+        <div className="relative">
+          {underline && <NavUnderline />}
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls={id}
+            onClick={() => (open ? onClose() : onOpen())}
+            className={cn(
+              'flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] transition-colors',
+              active || open ? 'text-white' : 'text-white/70 hover:text-white',
+            )}
+          >
+            {group.label}
+            <ChevronDown aria-hidden className={cn('size-4 transition-transform', open && 'rotate-180')} />
+          </button>
+        </div>
       )}
       <AnimatePresence>
         {open && (
@@ -89,41 +167,52 @@ function Dropdown({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.18 }}
-            className={cn(
-              'absolute left-1/2 top-full -translate-x-1/2 pt-3',
-              wide ? 'w-[620px]' : 'w-[340px]',
-            )}
+            className="absolute left-1/2 top-full z-10 w-[420px] -translate-x-1/2 pt-3"
           >
-            <div className="rounded-2xl border border-line bg-white p-2 text-text shadow-[0_24px_60px_-20px_rgb(0_0_0/0.55),0_0_0_1px_rgb(13_17_80/0.06)]">
-              <ul className={cn('grid gap-1', wide && 'grid-cols-2')}>
-                {group.items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="group/item block rounded-xl px-4 py-3 transition-colors hover:bg-canvas"
-                    >
-                      <span className="flex items-center gap-2.5 text-[15px] font-semibold text-ink transition-colors group-hover/item:text-brand">
-                        {item.dot && <span className={cn('size-1.5 rounded-full', item.dot)} />}
-                        {item.label}
-                      </span>
-                      {item.description && (
-                        <span className={cn('mt-0.5 block text-[13px] text-muted', item.dot && 'pl-4')}>
-                          {item.description}
+            <div className="flex overflow-hidden rounded-2xl border border-line bg-white text-text shadow-[0_24px_60px_-20px_rgb(0_0_0/0.55),0_0_0_1px_rgb(13_17_80/0.06)]">
+              {/* The section name, written sideways down the left edge. */}
+              <div
+                aria-hidden
+                className="flex w-12 shrink-0 items-center justify-center border-r border-line bg-canvas"
+              >
+                <span className="rotate-180 font-mono text-[11px] font-semibold uppercase tracking-[0.35em] text-ink [writing-mode:vertical-rl]">
+                  {group.strip}
+                </span>
+              </div>
+
+              <div className="min-w-0 flex-1 p-2">
+                <ul className="grid gap-0.5">
+                  {group.items.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="group/item flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-canvas focus-visible:bg-canvas"
+                      >
+                        <NavItemIcon item={item} />
+                        <span className="min-w-0">
+                          <span className="block text-[15px] font-semibold leading-tight text-ink transition-colors group-hover/item:text-brand">
+                            {item.label}
+                          </span>
+                          {item.description && (
+                            <span className="mt-0.5 block truncate text-[13px] text-muted">
+                              {item.description}
+                            </span>
+                          )}
                         </span>
-                      )}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              {group.footer && (
-                <Link
-                  href={group.footer.href}
-                  className="mt-1 flex items-center justify-between rounded-xl bg-canvas px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
-                >
-                  {group.footer.label}
-                  <ArrowRight aria-hidden className="size-4" />
-                </Link>
-              )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                {group.footer && (
+                  <Link
+                    href={group.footer.href}
+                    className="mt-1 flex items-center justify-between rounded-xl bg-canvas px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
+                  >
+                    {group.footer.label}
+                    <ArrowRight aria-hidden className="size-4" />
+                  </Link>
+                )}
+              </div>
             </div>
           </motion.div>
         )}
@@ -138,6 +227,12 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  // The red underline sits under the open menu, else the hovered link, else the section you are in.
+  const currentEntry = navigation.find((entry) =>
+    isGroup(entry) ? pathname.startsWith(entry.match) : pathname === normalise(entry.href),
+  );
+  const underlineAt = openGroup ?? hoveredLink ?? currentEntry?.label ?? null;
   const [hidden, setHidden] = useState(false);
   const headerHidden = hidden && !menuOpen && !openGroup;
 
@@ -224,7 +319,8 @@ export function Header() {
           />
         </Link>
 
-        <ul className="hidden items-center lg:flex">
+        {/* `relative`: the dropdown panels are centred on this whole bar. */}
+        <ul className="relative hidden items-center lg:flex" onMouseLeave={() => setHoveredLink(null)}>
           {navigation.map((entry) =>
             isGroup(entry) ? (
               <Dropdown
@@ -232,11 +328,18 @@ export function Header() {
                 group={entry}
                 open={openGroup === entry.label}
                 active={pathname.startsWith(entry.match)}
+                underline={underlineAt === entry.label}
                 onOpen={() => setOpenGroup(entry.label)}
                 onClose={() => setOpenGroup((current) => (current === entry.label ? null : current))}
               />
             ) : (
-              <li key={entry.href}>
+              <li
+                key={entry.href}
+                className="relative"
+                onMouseEnter={() => setHoveredLink(entry.label)}
+                onMouseLeave={() => setHoveredLink(null)}
+              >
+                {underlineAt === entry.label && <NavUnderline />}
                 <Link
                   href={entry.href}
                   aria-current={pathname === normalise(entry.href) ? 'page' : undefined}
@@ -302,9 +405,12 @@ export function Header() {
                       <li key={item.href}>
                         <Link
                           href={item.href}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[17px] text-white hover:bg-white/5"
+                          className={cn(
+                            'flex items-center gap-3 rounded-xl px-3 text-[17px] text-white hover:bg-white/5',
+                            item.icon ? 'py-2' : 'py-2.5 text-white/70',
+                          )}
                         >
-                          {item.dot && <span className={cn('size-1.5 rounded-full', item.dot)} />}
+                          <NavItemIcon item={item} dark />
                           {item.label}
                         </Link>
                       </li>
