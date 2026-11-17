@@ -194,7 +194,7 @@ export const generalFaqs = [
 ] as const;
 
 /*
- * Balanced home page (preview): content for the training half and the split FAQ.
+ * Home page: content for the training half and the split FAQ.
  * Every line comes from content already on the site (the learner journey, program FAQs and certifications).
  */
 

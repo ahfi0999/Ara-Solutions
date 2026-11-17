@@ -1,13 +1,18 @@
 import type { Metadata } from 'next';
-import { generalFaqs } from '@/content/home';
+import { Building2, GraduationCap } from 'lucide-react';
+import { hiringFaqs, trainingFaqs } from '@/content/home';
 import { Hero } from '@/components/home/Hero';
 import { Divisions } from '@/components/home/Divisions';
-import { CaseStudyPreview, ServicesOverview } from '@/components/home/HomeSections';
 import { Clientele } from '@/components/home/Clientele';
+import { ServicesOverview } from '@/components/home/HomeSections';
 import { HiringFlow } from '@/components/home/HiringFlow';
-import { ProgramShowcase } from '@/components/home/ProgramShowcase';
 import { WhyAra } from '@/components/home/WhyAra';
-import { Faq } from '@/components/home/Faq';
+import { ProgramShowcase } from '@/components/home/ProgramShowcase';
+import { Journey } from '@/components/home/Journey';
+import { ProgramFinder } from '@/components/home/ProgramFinder';
+import { AudienceBand, ResultsSplit, TrainingPillars } from '@/components/home/AudienceSections';
+import { FaqTabs } from '@/components/home/FaqTabs';
+import { AudienceSwitch } from '@/components/home/AudienceSwitch';
 import { ClosingCta } from '@/components/home/ClosingCta';
 
 export const metadata: Metadata = {
@@ -17,29 +22,58 @@ export const metadata: Metadata = {
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: generalFaqs.map((item) => ({
+  mainEntity: [...hiringFaqs, ...trainingFaqs].map((item) => ({
     '@type': 'Question',
     name: item.q,
     acceptedAnswer: { '@type': 'Answer', text: item.a },
   })),
 };
 
+/** The home page gives staffing and training equal weight: one half for businesses, one for professionals. */
 export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <Hero />
       <Divisions />
-      {/* For businesses: what we offer, who trusts us (clients and where alumni work), why ARA, how we hire, results. */}
-      <ServicesOverview />
+      {/* Proof for both audiences: clients we hire for, and where alumni work. */}
       <Clientele />
-      <WhyAra />
+
+      {/* ── For businesses ── */}
+      <AudienceBand
+        id="for-businesses"
+        label="For businesses"
+        title="Hire the right people, faster"
+        text="Staffing for IT and non-IT roles: contract, permanent, outsourced and international."
+        href="/services/"
+        cta="Explore staffing services"
+        icon={Building2}
+      />
+      <ServicesOverview />
       <HiringFlow />
-      <CaseStudyPreview />
-      {/* For professionals: the training programs. */}
+      <WhyAra />
+
+      {/* ── For professionals ── */}
+      <AudienceBand
+        id="for-professionals"
+        label="For professionals"
+        title="Build the career companies hire for"
+        text="Six career-focused programs with real projects, interview preparation and placement assistance."
+        href="/training-placement/"
+        cta="Explore all programs"
+        icon={GraduationCap}
+      />
       <ProgramShowcase />
-      <Faq items={generalFaqs} />
+      <TrainingPillars />
+      <Journey eyebrow="Your journey" id="journey" />
+      <ProgramFinder />
+
+      {/* ── Results and questions, for both ── */}
+      <ResultsSplit />
+      <FaqTabs />
       <ClosingCta />
+
+      <AudienceSwitch />
     </>
   );
 }

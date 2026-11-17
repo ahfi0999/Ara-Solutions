@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import { Briefcase, CloudCog, Code2, Database, HeartPulse, Truck, Users } from 'lucide-react';
 import { roleGroups } from '@/content/home';
-import { caseStudies } from '@/content/records';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
-import { Figure } from '@/components/motion/primitives';
 import { ServiceCards } from '@/components/services/ServiceSections';
 import { cn } from '@/lib/cn';
 
@@ -113,56 +111,3 @@ const ROLE_ICONS: Record<string, typeof Briefcase> = {
   'Healthcare & engineering': HeartPulse,
   'Commerce & operations': Truck,
 };
-
-/** Three case studies with headline metrics. */
-export function CaseStudyPreview() {
-  return (
-    <section className="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
-      <div aria-hidden className="grid-lines absolute inset-0" />
-      <Container className="relative">
-        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading
-            tone="dark"
-            eyebrow="Case studies"
-            title={
-              <>
-                Proven delivery <em>outcomes</em>
-              </>
-            }
-          />
-          <Link
-            href="/company/case-studies/"
-            className="shrink-0 text-[15px] font-medium text-white/80 underline-offset-4 hover:text-white hover:underline"
-          >
-            All case studies →
-          </Link>
-        </div>
-        <div className="mt-12 grid gap-4 lg:grid-cols-3">
-          {caseStudies.slice(0, 3).map((study, index) => (
-            <Reveal key={study.id} delay={index * 0.06} className="h-full">
-              <Link
-                href="/company/case-studies/"
-                className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-7 transition-colors hover:border-white/25 hover:bg-white/[0.07]"
-              >
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-300">
-                  {study.tag}
-                </p>
-                <h3 className="mt-4 text-xl font-semibold leading-snug tracking-tight">{study.title}</h3>
-                <dl className="mt-auto grid grid-cols-3 gap-2 pt-8">
-                  {study.metrics.map((metric) => (
-                    <div key={metric.label}>
-                      <dd className="text-2xl font-semibold tracking-tight">
-                        <Figure value={metric.value} />
-                      </dd>
-                      <dt className="mt-0.5 text-[12px] leading-snug text-white/55">{metric.label}</dt>
-                    </div>
-                  ))}
-                </dl>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
