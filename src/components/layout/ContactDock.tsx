@@ -271,7 +271,10 @@ export function ContactDock() {
       .then((response) => (response.ok ? response.json() : { enabled: false }))
       .then((data) => setChatEnabled(Boolean(data.enabled)))
       .catch(() => setChatEnabled(false));
-    setMinimised(sessionStorage.getItem('ara-dock-min') === '1');
+    // Start as the small round button on shorter laptops and tablets, so the box never covers the page;
+    // big screens start with it open. A visitor's own choice (for this visit) always wins.
+    const stored = sessionStorage.getItem('ara-dock-min');
+    setMinimised(stored !== null ? stored === '1' : window.innerHeight < 860 || window.innerWidth < 1280);
   }, []);
 
   useEffect(() => {

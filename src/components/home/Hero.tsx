@@ -34,7 +34,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative isolate overflow-hidden bg-ink pb-16 pt-32 text-white sm:pb-20 sm:pt-40"
+      className="relative isolate overflow-hidden bg-ink pb-16 pt-24 text-white [@media(max-width:639px)_and_(max-height:600px)]:pt-[5.25rem] sm:pb-20 sm:pt-[clamp(6.5rem,15vh,10rem)]"
       onPointerMove={(event) => {
         const rect = event.currentTarget.getBoundingClientRect();
         mx.set(event.clientX - rect.left);
@@ -64,7 +64,7 @@ export function Hero() {
         <motion.div style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}>
           <motion.p
             {...fadeUp(0)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] py-1.5 pl-1.5 pr-4 text-[13px] text-white/75 backdrop-blur"
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] py-1.5 pl-1.5 pr-4 text-[13px] text-white/75 backdrop-blur [@media(max-width:639px)_and_(max-height:600px)]:hidden"
           >
             <span className="relative flex size-5 items-center justify-center">
               <span className="absolute inset-0 animate-ping rounded-full bg-brand/40 [animation-duration:2.4s]" />
@@ -73,7 +73,7 @@ export function Hero() {
             IT staffing &amp; training · Hyderabad
           </motion.p>
 
-          <h1 className="mt-7 text-balance text-[2.4rem] font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-[4.1rem]">
+          <h1 className="mt-7 text-balance text-[length:clamp(1.95rem,9.4vw,2.4rem)] font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-[length:clamp(2.6rem,min(4.2vw,7.4vh),4.1rem)] [@media(max-height:760px)]:mt-5 [@media(max-width:639px)_and_(max-height:600px)]:mt-0 [@media(max-width:639px)_and_(max-height:600px)]:text-[length:clamp(1.7rem,8.4vw,2.05rem)]">
             <SplitWords delay={0.15}>Empowering businesses through talent.</SplitWords>{' '}
             <SplitWords
               delay={0.45}
@@ -87,13 +87,13 @@ export function Hero() {
 
           <motion.p
             {...fadeUp(0.75)}
-            className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-white/65"
+            className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 sm:text-lg [@media(max-height:760px)]:mt-4"
           >
             IT and non-IT staffing, recruitment and consulting for growing companies, and industry-focused
             training and placement for people building a tech career.
           </motion.p>
 
-          <motion.div {...fadeUp(0.9)} className="mt-9 flex flex-wrap gap-3">
+          <motion.div {...fadeUp(0.9)} className="mt-9 flex flex-wrap gap-3 [@media(max-height:760px)]:mt-6">
             <Magnetic>
               <EnquiryButton size="lg" arrow interest="hiring" title="Tell us about the talent you need">
                 Hire talent

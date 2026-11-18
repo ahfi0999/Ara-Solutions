@@ -12,7 +12,7 @@ import { ProgramHeroPhoto } from '@/components/program/ProgramHeroPhoto';
 export function ProgramHero({ program }: { program: Program }) {
   const a = accent[program.accent];
   return (
-    <section className="aurora relative isolate overflow-hidden pb-16 pt-28 text-white sm:pb-24 sm:pt-36">
+    <section className="aurora relative isolate overflow-hidden pb-16 pt-24 text-white sm:pb-24 sm:pt-[clamp(6.5rem,14vh,9rem)] [@media(max-width:639px)_and_(max-height:600px)]:pt-[5.25rem]">
       {program.image && <ProgramHeroPhoto src={program.image} />}
       <div aria-hidden className="grid-lines absolute inset-0 -z-10" />
       <div
@@ -20,7 +20,7 @@ export function ProgramHero({ program }: { program: Program }) {
         className={cn('absolute -right-32 top-10 -z-10 size-[480px] rounded-full blur-[120px]', a.glow)}
       />
       <Container>
-        <nav aria-label="Breadcrumb" className="fade-up">
+        <nav aria-label="Breadcrumb" className="fade-up [@media(max-width:639px)_and_(max-height:600px)]:hidden">
           <ol className="flex flex-wrap items-center gap-1.5 text-[13px] text-white/50">
             <li>
               <Link href="/" className="hover:text-white">
@@ -40,9 +40,9 @@ export function ProgramHero({ program }: { program: Program }) {
           </ol>
         </nav>
 
-        <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] [&>*]:min-w-0">
+        <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] [&>*]:min-w-0 [@media(max-height:800px)]:mt-6 [@media(max-width:639px)_and_(max-height:600px)]:mt-0">
           <div>
-            <div className="fade-up flex flex-wrap items-center gap-3 [animation-delay:60ms]">
+            <div className="fade-up flex flex-wrap items-center gap-3 [animation-delay:60ms] [@media(max-width:639px)_and_(max-height:600px)]:hidden">
               {program.logo && (
                 <span className="inline-flex h-9 items-center rounded-full bg-white px-4 shadow-soft">
                   {/* eslint-disable-next-line @next/next/no-img-element -- small SVG logo */}
@@ -54,15 +54,15 @@ export function ProgramHero({ program }: { program: Program }) {
                 {program.family}
               </p>
             </div>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-6xl">
+            <h1 className="mt-6 text-balance text-[length:clamp(1.85rem,8.6vw,2.25rem)] font-semibold leading-[1.04] tracking-[-0.04em] sm:text-[length:clamp(2.6rem,min(6vw,7.6vh),3.75rem)] [@media(max-height:800px)]:mt-4 [@media(max-width:639px)_and_(max-height:600px)]:mt-0">
               <SplitWords delay={0.15} stagger={0.06}>
                 {program.name}
               </SplitWords>
             </h1>
-            <p className="fade-up mt-6 max-w-xl text-pretty text-lg leading-relaxed text-white/65 [animation-delay:180ms]">
+            <p className="fade-up mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 [animation-delay:180ms] sm:text-lg [@media(max-height:800px)]:mt-4">
               {program.summary}
             </p>
-            <div className="fade-up mt-9 flex flex-wrap gap-3 [animation-delay:240ms]">
+            <div className="fade-up mt-9 flex flex-wrap gap-3 [animation-delay:240ms] [@media(max-height:800px)]:mt-6">
               <EnquiryButton
                 size="lg"
                 arrow

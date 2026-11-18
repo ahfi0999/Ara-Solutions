@@ -14,7 +14,7 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="aurora relative isolate overflow-hidden pb-20 pt-32 text-white sm:pb-24 sm:pt-40">
+    <section className="aurora relative isolate overflow-hidden pb-20 pt-24 text-white sm:pb-24 sm:pt-[clamp(6.5rem,15vh,10rem)] [@media(max-width:639px)_and_(max-height:600px)]:pt-[5.25rem]">
       <div aria-hidden className="grid-lines absolute inset-0 -z-10" />
       <Container>
         <SectionHeading
@@ -24,7 +24,7 @@ export function PageHero({
           title={title}
           intro={intro}
         />
-        {children && <div className="fade-up mt-9 [animation-delay:350ms]">{children}</div>}
+        {children && <div className="fade-up mt-9 [animation-delay:350ms] [@media(max-height:800px)]:mt-6">{children}</div>}
       </Container>
     </section>
   );
