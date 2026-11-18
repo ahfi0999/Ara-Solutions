@@ -3,13 +3,34 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { AnimatePresence, LayoutGroup, motion } from 'motion/react';
-import { ArrowRight, Search, X } from 'lucide-react';
+import {
+  ArrowRight,
+  BrainCircuit,
+  Cloud,
+  Code2,
+  Layers,
+  LayoutGrid,
+  Search,
+  ShieldCheck,
+  X,
+  type LucideIcon,
+} from 'lucide-react';
 import { programs, type Program } from '@/content/programs';
 import { cn } from '@/lib/cn';
 import { EASE } from '@/components/motion/primitives';
 import { ProgramCard } from './ProgramShowcase';
 
 const ALL = 'All programs';
+
+/** Each category's icon and colour (matching the program cards). New categories fall back to a neutral icon. */
+const FAMILY_STYLE: Record<string, { icon: LucideIcon; tone: string }> = {
+  [ALL]: { icon: LayoutGrid, tone: 'text-navy' },
+  'Enterprise platforms': { icon: Cloud, tone: 'text-sky-500' },
+  AI: { icon: BrainCircuit, tone: 'text-violet-500' },
+  Security: { icon: ShieldCheck, tone: 'text-amber-500' },
+  Development: { icon: Code2, tone: 'text-indigo-500' },
+};
+const styleFor = (name: string) => FAMILY_STYLE[name] ?? { icon: Layers, tone: 'text-navy' };
 
 /** Text a visitor might search for: name, family, tools, roles and module titles. */
 const searchText = (program: Program) =>
@@ -50,50 +71,58 @@ export function ProgramExplorer({ limit, search = false }: { limit?: number; sea
 
   return (
     <div>
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <LayoutGroup id="program-tabs">
-          <div
-            role="tablist"
-            aria-label="Program categories"
-            className="-mx-5 flex gap-1 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:px-0"
-          >
-            {families.map((item) => {
-              const active = item.name === family;
-              return (
-                <button
-                  key={item.name}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setFamily(item.name)}
-                  className={cn(
-                    'relative shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors',
-                    active ? 'text-white' : 'text-muted hover:text-text',
-                  )}
-                >
-                  {active && (
-                    <motion.span
-                      layoutId="program-tab-pill"
-                      className="absolute inset-0 rounded-full bg-ink"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                  <span className="relative flex items-center gap-2">
-                    {item.name}
-                    <span
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="min-w-0">
+          <p className="mb-2.5 text-[13px] font-medium text-muted">Browse by category</p>
+          <LayoutGroup id="program-tabs">
+            {/* One white bar, so it reads as a filter; on phones it scrolls sideways with faded edges. */}
+            <div className="-mx-5 px-5 sm:mx-0 sm:px-0">
+              <div
+                role="tablist"
+                aria-label="Program categories"
+                className="flex max-w-full gap-1 overflow-x-auto rounded-full border border-line bg-paper p-1.5 shadow-soft [scrollbar-width:none] max-sm:[mask-image:linear-gradient(to_right,transparent,black_14px,black_calc(100%-14px),transparent)] sm:inline-flex"
+              >
+                {families.map((item) => {
+                  const active = item.name === family;
+                  const { icon: Icon, tone } = styleFor(item.name);
+                  return (
+                    <button
+                      key={item.name}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      onClick={() => setFamily(item.name)}
                       className={cn(
-                        'rounded-full px-1.5 py-px text-[11px] tabular-nums',
-                        active ? 'bg-white/15 text-white' : 'bg-line text-muted',
+                        'relative shrink-0 rounded-full px-4 py-2.5 text-[15px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy',
+                        active ? 'text-white' : 'text-text/80 hover:bg-canvas hover:text-text',
                       )}
                     >
-                      {item.count}
-                    </span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </LayoutGroup>
+                      {active && (
+                        <motion.span
+                          layoutId="program-tab-pill"
+                          className="absolute inset-0 rounded-full bg-ink shadow-[0_8px_20px_-8px_rgb(11_13_34/0.6)]"
+                          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                        />
+                      )}
+                      <span className="relative flex items-center gap-2">
+                        <Icon aria-hidden className={cn('size-4 transition-colors', active ? 'text-white' : tone)} />
+                        {item.name}
+                        <span
+                          className={cn(
+                            'rounded-full px-1.5 py-px text-[11px] font-semibold tabular-nums transition-colors',
+                            active ? 'bg-brand text-white' : 'bg-ink/[0.06] text-muted',
+                          )}
+                        >
+                          {item.count}
+                        </span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </LayoutGroup>
+        </div>
 
         {search && (
           <label className="relative block w-full lg:w-80">
