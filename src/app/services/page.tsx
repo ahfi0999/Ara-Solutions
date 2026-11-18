@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { generalFaqs } from '@/content/home';
+import { seoFor } from '@/content/seo';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { ButtonLink } from '@/components/ui/Button';
@@ -13,9 +14,7 @@ import { Faq } from '@/components/home/Faq';
 import { ClosingCta } from '@/components/home/ClosingCta';
 
 export const metadata: Metadata = {
-  title: 'Staffing Services',
-  description:
-    'IT and non-IT staffing from ARA Solutions: contract (C2C), fulltime, recruitment process outsourcing and international consulting, with profiles in 2 to 4 hours from our database and shortlists within 48 hours from the open market.',
+  ...seoFor('/services/'),
   alternates: { canonical: '/services/' },
 };
 

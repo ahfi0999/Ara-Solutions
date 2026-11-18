@@ -6,7 +6,7 @@ import { Container } from '@/components/ui/Section';
 import { EnquiryForm } from '@/components/enquiry/EnquiryForm';
 
 export const metadata: Metadata = {
-  title: 'Contact ARA Solutions',
+  title: 'Contact Us',
   description: `Talk to an ARA Solutions advisor about Salesforce, ServiceNow, AI, Cybersecurity and Full Stack training. Call ${site.phone} (staffing) or ${trainingLine.phone} (training), or visit us in Madhapur, Hyderabad.`,
   alternates: { canonical: '/contact/' },
 };

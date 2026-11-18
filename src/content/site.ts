@@ -8,8 +8,6 @@ export const site = {
   legalName: 'ARA Solutions Pvt Ltd',
   tagline: 'IT Always The Right Choice',
   url: 'https://arasolutions.in',
-  description:
-    'Career-focused training in Salesforce, ServiceNow, AI & Machine Learning, Agentic AI, Cybersecurity and Full Stack Development in Hyderabad, with hands-on projects, interview preparation and placement assistance.',
   /** Main line (staffing / services): the footer, WhatsApp and every page outside Training & Placement. */
   phone: '+91 90100 09225',
   phoneHref: 'tel:+919010009225',

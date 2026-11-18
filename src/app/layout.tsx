@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google';
 import { site } from '@/content/site';
+import { homeSeo } from '@/content/seo';
 import { EnquiryProvider } from '@/components/enquiry/EnquiryProvider';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -23,10 +24,10 @@ const instrument = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'ARA Solutions | Salesforce, ServiceNow, AI & Cybersecurity Training in Hyderabad',
-    template: '%s | ARA Solutions',
+    default: `${homeSeo.title} | ${site.name}`,
+    template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description: homeSeo.description,
   applicationName: site.name,
   icons: { icon: '/logo-mark.png', apple: '/logo-mark.png' },
   openGraph: {

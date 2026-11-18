@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Check, Minus } from 'lucide-react';
 import { programs, type ProgramSlug } from '@/content/programs';
+import { seoFor } from '@/content/seo';
 import { accent } from '@/lib/accent';
 import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
@@ -14,9 +15,7 @@ import { Journey } from '@/components/home/Journey';
 import { LmsPlatform } from '@/components/program/LmsPlatform';
 
 export const metadata: Metadata = {
-  title: 'Training & Placement: Salesforce, ServiceNow, AI, Cybersecurity & Full Stack',
-  description:
-    'Compare ARA Solutions programs: Salesforce with Agentforce, ServiceNow, AI & Machine Learning, Agentic AI, Cybersecurity and Full Stack Development with AI.',
+  ...seoFor('/training-placement/'),
   alternates: { canonical: '/training-placement/' },
 };
 

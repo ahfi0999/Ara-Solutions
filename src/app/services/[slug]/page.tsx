@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getService, services } from '@/content/services';
 import { site } from '@/content/site';
+import { seoFor } from '@/content/seo';
 import {
   EngagementComparison,
   RoleCoverage,
@@ -27,11 +28,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
+  const path = `/services/${service.slug}/`;
+  const seo = seoFor(path);
+  const title = seo?.title ?? `${service.name} in Hyderabad`;
+  const description = seo?.description ?? `${service.summary} ARA Solutions, Hyderabad.`;
   return {
-    title: `${service.name} in Hyderabad`,
-    description: `${service.summary} ARA Solutions, Hyderabad.`,
-    alternates: { canonical: `/services/${service.slug}/` },
-    openGraph: { title: service.name, description: service.summary, url: `/services/${service.slug}/` },
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: { title, description, url: path },
   };
 }
 

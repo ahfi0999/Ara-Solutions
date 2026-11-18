@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getProgram, programs } from '@/content/programs';
 import { site } from '@/content/site';
+import { seoFor } from '@/content/seo';
 import { ProgramHero } from '@/components/program/ProgramHero';
 import { SectionNav } from '@/components/program/SectionNav';
 import { ProgramBody } from '@/components/program/ProgramBody';
@@ -26,12 +27,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const program = getProgram(slug);
   if (!program) return {};
-  const title = `${program.name} Course in Hyderabad`;
+  const path = `/training-placement/${program.slug}/`;
+  const seo = seoFor(path);
+  const title = seo?.title ?? `${program.name} Course in Hyderabad`;
+  const description =
+    seo?.description ??
+    `${program.summary} Hands-on projects, interview preparation and placement assistance at ARA Solutions, Hyderabad.`;
   return {
     title,
-    description: `${program.summary} Hands-on projects, interview preparation and placement assistance at ARA Solutions, Hyderabad.`,
-    alternates: { canonical: `/training-placement/${program.slug}/` },
-    openGraph: { title, description: program.tagline, url: `/training-placement/${program.slug}/` },
+    description,
+    alternates: { canonical: path },
+    openGraph: { title, description, url: path },
   };
 }
 
