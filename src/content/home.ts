@@ -169,9 +169,8 @@ export const roleGroups = [
 ] as const;
 
 /*
- * FAQ, one list per audience. The first five in each come from the SEO team's FAQ ("Frequently Asked
- * Questions About ARA Solutions"); the rest keep details from ARA's pitch deck and program pages that the
- * SEO set does not cover. All of them go into the home page's FAQ data for Google.
+ * FAQ, one list per audience, exactly as written by the SEO team ("Frequently Asked Questions About
+ * ARA Solutions"). All of them go into the home page's FAQ data for Google.
  */
 
 /** For businesses (home Hiring tab, Services page). */
@@ -196,18 +195,6 @@ export const hiringFaqs = [
     q: 'Does ARA Solutions provide international recruitment services?',
     a: 'Yes. We support relevant international recruitment and cross-border hiring requirements across selected markets, depending on the role and engagement requirements.',
   },
-  {
-    q: 'How quickly can you share suitable candidates?',
-    a: 'Initial profiles are targeted in 2 to 4 hours from our database, and shortlisted profiles within 48 hours, subject to role complexity.',
-  },
-  {
-    q: 'How do you ensure candidate quality?',
-    a: 'Skill and experience screening, recruiter-led L1 interviews, video sharing and background verification of employment, education and identity.',
-  },
-  {
-    q: 'Can contract engineers become permanent employees?',
-    a: 'Yes. We offer contract-to-hire conversion on clear terms agreed upfront, with no surprise fees.',
-  },
 ] as const;
 
 /** For professionals (home Training tab). */
@@ -231,18 +218,6 @@ export const trainingFaqs = [
   {
     q: 'Does ARA Solutions provide certification preparation?',
     a: 'Selected programs include preparation for relevant certification examinations, such as ServiceNow CSA and Salesforce Administrator, depending on the course structure.',
-  },
-  {
-    q: 'What are the training fees, duration and batch timings?',
-    a: 'These depend on the program and batch. Request a callback or message us on WhatsApp and our team will share the current details.',
-  },
-  {
-    q: 'Can I watch a class later?',
-    a: 'Yes. Every live class is recorded and added to your batch on our learning platform, so you can watch it again or catch up on one you missed.',
-  },
-  {
-    q: 'Which program is right for me?',
-    a: 'Answer the three questions in the program finder above, or talk to an advisor who will recommend a program based on your background and goals.',
   },
 ] as const;
 
