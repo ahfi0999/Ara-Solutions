@@ -113,7 +113,12 @@ export function ResultsSplit() {
         />
         <div className="mt-12 grid gap-5 lg:grid-cols-2">
           <Reveal className="h-full">
-            <div className="flex h-full flex-col rounded-3xl bg-ink p-8 text-white shadow-lift sm:p-10">
+            <div className="relative isolate flex h-full flex-col overflow-hidden rounded-3xl bg-ink p-8 text-white shadow-lift sm:p-10">
+              <div aria-hidden className="grid-lines absolute inset-0 -z-10 opacity-60" />
+              <div
+                aria-hidden
+                className="absolute -right-24 -top-24 -z-10 size-80 rounded-full bg-[radial-gradient(circle,rgb(46_58_190/0.5),transparent_65%)] blur-2xl"
+              />
               <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-brand-300">
                 For businesses
               </p>
@@ -122,9 +127,9 @@ export function ResultsSplit() {
                 {caseStudies.slice(0, 3).map((study) => (
                   <li
                     key={study.id}
-                    className="flex items-baseline gap-5 border-b border-white/10 pb-6 last:border-0"
+                    className="flex flex-col gap-1 border-b sm:flex-row sm:items-baseline sm:gap-5 border-white/10 pb-6 last:border-0"
                   >
-                    <span className="w-24 shrink-0 text-4xl font-semibold tracking-tight">
+                    <span className="shrink-0 text-[2rem] font-semibold tracking-tight sm:w-36 sm:text-4xl">
                       <Figure value={study.metrics[0].value} />
                     </span>
                     <span>
@@ -143,16 +148,23 @@ export function ResultsSplit() {
             </div>
           </Reveal>
           <Reveal className="h-full" delay={0.08}>
-            <div className="flex h-full flex-col rounded-3xl border border-line bg-paper p-8 shadow-soft sm:p-10">
-              <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-brand">For professionals</p>
+            <div className="surface-wine relative isolate flex h-full flex-col overflow-hidden rounded-3xl p-8 text-white shadow-lift sm:p-10">
+              <div aria-hidden className="grid-lines absolute inset-0 -z-10 opacity-60" />
+              <div
+                aria-hidden
+                className="absolute -right-24 -top-24 -z-10 size-80 rounded-full bg-[radial-gradient(circle,rgb(255_110_118/0.35),transparent_65%)] blur-2xl"
+              />
+              <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-white/75">
+                For professionals
+              </p>
               <h3 className="mt-2 text-2xl font-semibold tracking-tight">Careers built</h3>
               <ul className="mt-8 space-y-6">
                 {CAREER_FIGURES.map((figure) => (
                   <li
                     key={figure.label}
-                    className="flex items-baseline gap-5 border-b border-line pb-6 last:border-0"
+                    className="flex flex-col gap-1 border-b sm:flex-row sm:items-baseline sm:gap-5 border-white/15 pb-6 last:border-0"
                   >
-                    <span className="w-24 shrink-0 text-4xl font-semibold tracking-tight text-ink">
+                    <span className="shrink-0 text-[2rem] font-semibold tracking-tight sm:w-36 sm:text-4xl">
                       <CountUp value={figure.value} suffix={figure.suffix} />
                     </span>
                     <span className="font-medium">{figure.label}</span>
@@ -161,7 +173,7 @@ export function ResultsSplit() {
               </ul>
               <Link
                 href="/company/case-studies/#training-outcomes"
-                className="mt-auto inline-flex items-center gap-2 pt-6 text-[15px] font-medium text-brand hover:text-ink"
+                className="mt-auto inline-flex items-center gap-2 pt-6 text-[15px] font-medium text-white/85 hover:text-white"
               >
                 See training outcomes <ArrowRight aria-hidden className="size-4" />
               </Link>

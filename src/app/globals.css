@@ -123,6 +123,11 @@
     radial-gradient(50% 60% at 50% 50%, rgb(31 38 128 / 0.6), transparent 80%), var(--color-ink);
 }
 
+/* The professionals' colour for cards: a deep red that settles into wine, as heavy as the navy beside it. */
+.surface-wine {
+  background: linear-gradient(145deg, #a3151f 0%, #6d0f2a 52%, #2a0b33 100%);
+}
+
 /* Fine grid texture for dark sections. */
 .grid-lines {
   background-image:
