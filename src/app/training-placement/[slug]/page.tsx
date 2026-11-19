@@ -87,6 +87,18 @@ export default async function ProgramPage({ params }: Props) {
     })),
   };
 
+  // FAQ schema for Google: only this program's own questions. The three shared ones below them appear on
+  // every program page, and Google asks for a repeated question to be marked up on one page only.
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: program.faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  };
+
   // Up to 3 suggestions: same category first, so the list stays short however many courses exist.
   const others = programs.filter((item) => item.slug !== program.slug);
   const related = [
@@ -97,6 +109,9 @@ export default async function ProgramPage({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }} />
+      {program.faqs.length > 0 && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      )}
       <ProgramHero program={program} />
       <LmsIncluded />
       <SectionNav sections={sections} />

@@ -12,10 +12,12 @@ const TABS = [
   { key: 'training', label: 'Training', items: trainingFaqs },
 ] as const;
 
-/** FAQ with one tab per audience: hiring questions and training questions. */
+/**
+ * FAQ with one tab per audience: hiring questions and training questions. Both lists are always in the page
+ * (the closed tab is only hidden), because the home page's FAQ schema for Google lists every question.
+ */
 export function FaqTabs() {
   const [tab, setTab] = useState<(typeof TABS)[number]['key']>('hiring');
-  const current = TABS.find((t) => t.key === tab) ?? TABS[0];
   return (
     <section id="faq" className="py-20 sm:py-28">
       <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
@@ -37,10 +39,11 @@ export function FaqTabs() {
             {TABS.map((t) => (
               <button
                 key={t.key}
+                id={`faq-tab-${t.key}`}
                 type="button"
                 role="tab"
                 aria-selected={tab === t.key}
-                aria-controls="faq-panel"
+                aria-controls={`faq-panel-${t.key}`}
                 onClick={() => setTab(t.key)}
                 className={cn(
                   'relative rounded-full px-5 py-2 text-[15px] font-medium transition-colors',
@@ -59,16 +62,22 @@ export function FaqTabs() {
             ))}
           </div>
         </div>
-        <motion.div
-          key={tab}
-          id="faq-panel"
-          role="tabpanel"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <FaqList items={current.items} />
-        </motion.div>
+        <div>
+          {TABS.map((t) => (
+            <motion.div
+              key={t.key}
+              id={`faq-panel-${t.key}`}
+              role="tabpanel"
+              aria-labelledby={`faq-tab-${t.key}`}
+              hidden={tab !== t.key}
+              initial={false}
+              animate={tab === t.key ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <FaqList items={t.items} />
+            </motion.div>
+          ))}
+        </div>
       </Container>
     </section>
   );
