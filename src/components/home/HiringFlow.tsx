@@ -1,13 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { AnimatePresence, motion, useInView } from 'motion/react';
 import { Check, Database, Search, Timer } from 'lucide-react';
 import { hiringProcess, sourcingChannels } from '@/content/home';
 import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { ButtonLink } from '@/components/ui/Button';
-import { Reveal } from '@/components/ui/Reveal';
 import { EASE, useReducedMotionSafe } from '@/components/motion/primitives';
 
 /*
@@ -770,105 +769,477 @@ function FlowDiagram() {
   );
 }
 
-/** A tick that pops in when its step scrolls into view (phones and tablets). */
-function ScrollTick({
-  delay = 0.35,
-  small = false,
-  className,
-}: {
-  delay?: number;
-  small?: boolean;
-  className?: string;
-}) {
-  const reduce = useReducedMotionSafe();
+/*
+ * Phones and tablets: the same journey as a scroll story. A reading line sits 60% of the way down the screen;
+ * as the page scrolls, the open-market candidate (navy) follows it down the line and every step it reaches gets
+ * a tick. At "Candidate sourcing" the database candidate (red) dives into the database, races down its own line
+ * on the right and reaches "Profile submission" while the navy candidate is still on its first check; from there
+ * they travel on together. Everything follows the scroll, so nothing runs while the page is still.
+ */
+const READ_LINE = 0.6;
+/** Centre of the main line (px from the left edge) and of the database line (px from the right edge). */
+const RAIL_LEFT = 24;
+const RAIL_RIGHT = 20;
+type RedPhase = 'with' | 'jumping' | 'arrived' | 'joined';
+type PhoneStory = {
+  /** Steps the navy candidate has passed. */
+  passed: number;
+  /** The step card the navy candidate is inside (-1 for none). */
+  current: number;
+  red: RedPhase;
+};
+const PHONE_START: PhoneStory = { passed: 0, current: -1, red: 'with' };
+const PHONE_DONE: PhoneStory = { passed: hiringProcess.length, current: -1, red: 'joined' };
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const redHere = (story: PhoneStory) => story.red === 'arrived' || story.red === 'joined';
+
+function Pop({ children, className, still }: { children: ReactNode; className?: string; still: boolean }) {
   return (
     <motion.span
-      initial={reduce ? false : { scale: 0, rotate: -40 }}
-      whileInView={{ scale: 1, rotate: 0 }}
-      viewport={{ once: true, margin: '0px 0px -20% 0px' }}
-      transition={{ type: 'spring', stiffness: 420, damping: 16, delay }}
+      initial={still ? false : { opacity: 0, scale: 0.6 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.6, transition: { duration: 0.2 } }}
+      transition={{ type: 'spring', stiffness: 420, damping: 20 }}
       className={cn(
-        'flex shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-paper',
-        small ? 'size-5' : 'size-6',
+        'flex items-center gap-1 whitespace-nowrap rounded-full px-2 text-[12px] font-semibold leading-6 text-white',
         className,
       )}
     >
-      <Check aria-hidden className={small ? 'size-3' : 'size-3.5'} strokeWidth={3} />
+      <Check aria-hidden className="size-3.5" strokeWidth={3} />
+      {children}
     </motion.span>
   );
 }
 
-function MobileStep({ index, final = false }: { index: number; final?: boolean }) {
+function PhoneStep({
+  index,
+  story,
+  still,
+  cardRef,
+  children,
+}: {
+  index: number;
+  story: PhoneStory;
+  still: boolean;
+  cardRef: (el: HTMLDivElement | null) => void;
+  children?: ReactNode;
+}) {
   const step = hiringProcess[index];
+  const final = index === hiringProcess.length - 1;
+  const lane = CHECK_STEPS.includes(index);
+  const done = index < story.passed || (index === 5 && redHere(story));
+  const current = story.current === index;
+  const checking = current && lane && index >= story.passed;
   return (
-    <Reveal as="li" y={16}>
-      <div
+    <li className="relative">
+      {/* The stop on the line. */}
+      <span
+        aria-hidden
+        style={{ left: RAIL_LEFT }}
         className={cn(
-          'flex items-center gap-4 rounded-2xl border p-4',
+          'absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition-colors duration-300',
+          index < story.passed ? 'border-navy bg-navy' : 'border-line bg-paper',
+        )}
+      />
+      <div
+        ref={cardRef}
+        className={cn(
+          'relative z-20 ml-12 rounded-2xl border p-4 transition-shadow duration-300',
+          lane && 'mr-10',
           final ? 'border-brand bg-brand text-white shadow-lift' : 'border-line bg-paper shadow-soft',
+          current && (final ? 'ring-4 ring-brand/30' : 'ring-4 ring-navy/20'),
         )}
       >
-        <span
-          className={cn(
-            'flex size-9 shrink-0 items-center justify-center rounded-full font-mono text-[12px] font-semibold',
-            final ? 'bg-white text-brand' : 'bg-ink text-white',
-          )}
-        >
-          {pad(index + 1)}
-        </span>
-        <div>
-          <p className="font-semibold leading-tight">{step.title}</p>
-          <p className={cn('mt-0.5 text-[14px]', final ? 'text-white/85' : 'text-muted')}>
-            {step.short}
-            {final && `. ${sourcingChannels.outcome}.`}
-          </p>
+        <div className="flex items-center gap-3.5">
+          <span
+            className={cn(
+              'flex size-9 shrink-0 items-center justify-center rounded-full font-mono text-[12px] font-semibold',
+              final ? 'bg-white text-brand' : 'bg-ink text-white',
+            )}
+          >
+            {checking ? (
+              <span
+                aria-hidden
+                className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-white"
+              />
+            ) : (
+              pad(index + 1)
+            )}
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold leading-tight">{step.title}</p>
+            <p className={cn('mt-0.5 text-[14px]', final ? 'text-white/85' : 'text-muted')}>
+              {step.short}
+              {final && `. ${sourcingChannels.outcome}.`}
+            </p>
+          </div>
+          {/* The tick has its own fixed slot, so a card never changes size when it appears. */}
+          <span className="flex size-6 shrink-0 items-center justify-center">
+            <AnimatePresence>{done && <Tick key="tick" />}</AnimatePresence>
+          </span>
         </div>
-        <ScrollTick className="ml-auto" />
+        {/* Extras (the requirement, the arrival times) get a full-width row, lined up with the title. */}
+        {children && <div className="mt-2.5 pl-[50px]">{children}</div>}
+        {final && (
+          <AnimatePresence>
+            {story.passed >= hiringProcess.length && (
+              <Pop key="hired" still={still} className="absolute -top-3 right-4 bg-emerald-500 shadow-soft">
+                Hired
+              </Pop>
+            )}
+          </AnimatePresence>
+        )}
       </div>
-    </Reveal>
+    </li>
   );
 }
 
-/** Phones and tablets: the same flow, top to bottom, with the two channels side by side. */
-function FlowList() {
+/** Phones and tablets: the hiring journey as a scroll story, with both sourcing channels. */
+function FlowStory() {
+  const reduce = useReducedMotionSafe();
+  const boxRef = useRef<HTMLDivElement>(null);
+  const cards = useRef<(HTMLDivElement | null)[]>([]);
+  const forkRef = useRef<HTMLLIElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const railFillRef = useRef<HTMLDivElement>(null);
+  const redRailRef = useRef<HTMLDivElement>(null);
+  const redFillRef = useRef<HTMLDivElement>(null);
+  const navyRef = useRef<HTMLDivElement>(null);
+  const redRef = useRef<HTMLDivElement>(null);
+  const navyClockRef = useRef<HTMLSpanElement>(null);
+  const redClockRef = useRef<HTMLSpanElement>(null);
+  const chipRef = useRef<HTMLParagraphElement>(null);
+  const typed = useInView(chipRef, { once: true, margin: '0px 0px -30% 0px' });
+  const [live, setLive] = useState<PhoneStory>(PHONE_START);
+  const story = reduce ? PHONE_DONE : live;
   const { database, openMarket } = sourcingChannels;
+  const requirement = REQUIREMENTS[0];
+
+  useEffect(() => {
+    if (reduce) return;
+    const box = boxRef.current;
+    if (!box) return;
+    let frame = 0;
+    let railBox = '';
+    const update = () => {
+      frame = 0;
+      const b = box.getBoundingClientRect();
+      if (b.bottom < -innerHeight || b.top > innerHeight * 2) return;
+      const els = cards.current;
+      const fork = forkRef.current;
+      const redRail = redRailRef.current;
+      const navy = navyRef.current;
+      const red = redRef.current;
+      if (els.length < hiringProcess.length || els.some((el) => !el) || !fork || !redRail || !navy || !red)
+        return;
+      const rel = (el: Element) => {
+        const r = el.getBoundingClientRect();
+        return { top: r.top - b.top, bottom: r.bottom - b.top, mid: (r.top + r.bottom) / 2 - b.top };
+      };
+      const n = els.map((el) => rel(el!));
+      const forkBox = rel(fork);
+      const redRailBox = rel(redRail);
+      const read = innerHeight * READ_LINE - b.top;
+      const first = n[0].mid;
+      const last = n[n.length - 1].mid;
+      const navyY = Math.min(last, Math.max(first, read));
+      const pairX = RAIL_LEFT + 12;
+      const rightX = b.width - RAIL_RIGHT;
+
+      // The database candidate: dashes while the navy candidate goes from "Candidate sourcing" to its first check.
+      const from = n[1].mid;
+      const to = n[2].mid;
+      const waitY = n[5].top - 22;
+      let phase: RedPhase = 'joined';
+      let rx = pairX;
+      let ry = navyY;
+      let redClock = '';
+      if (read <= from) phase = 'with';
+      else if (read < to) {
+        phase = 'jumping';
+        const t = (read - from) / (to - from);
+        if (t < 0.35) {
+          const k = t / 0.35;
+          rx = lerp(pairX, rightX, k);
+          ry = lerp(from, forkBox.mid, k);
+        } else {
+          rx = rightX;
+          ry = lerp(forkBox.mid, waitY, (t - 0.35) / 0.65);
+        }
+        redClock = `${Math.round(t * 3)}h`;
+      } else if (read < n[5].mid) {
+        phase = 'arrived';
+        // Just before the navy candidate reaches "Profile submission", the red one crosses over to join it.
+        const k = clamp01((read - (n[5].mid - 60)) / 60);
+        rx = lerp(rightX, pairX, k);
+        ry = lerp(waitY, navyY, k);
+        redClock = database.time;
+      }
+
+      let passed = 0;
+      while (passed < n.length && read >= n[passed].mid) passed++;
+      const current = n.findIndex((r) => read >= r.top && read < r.bottom);
+      setLive((s) =>
+        s.passed === passed && s.current === current && s.red === phase ? s : { passed, current, red: phase },
+      );
+
+      const place = (el: HTMLElement, x: number, y: number) => {
+        el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -50%)`;
+        el.style.opacity = '1';
+      };
+      place(navy, RAIL_LEFT, navyY);
+      place(red, rx, ry);
+
+      const rail = railRef.current;
+      const nextRailBox = `${first.toFixed(0)}:${(last - first).toFixed(0)}`;
+      if (rail && nextRailBox !== railBox) {
+        railBox = nextRailBox;
+        rail.style.top = `${first}px`;
+        rail.style.height = `${last - first}px`;
+      }
+      if (railFillRef.current)
+        railFillRef.current.style.transform = `scaleY(${clamp01((navyY - first) / (last - first)).toFixed(4)})`;
+      const redFill =
+        phase === 'with'
+          ? 0
+          : phase === 'jumping'
+            ? clamp01((ry - redRailBox.top) / (redRailBox.bottom - redRailBox.top))
+            : 1;
+      if (redFillRef.current) redFillRef.current.style.transform = `scaleY(${redFill.toFixed(4)})`;
+
+      const navyClock = navyClockRef.current;
+      if (navyClock) {
+        navyClock.textContent =
+          read >= n[5].mid
+            ? openMarket.time
+            : `${Math.round(48 * clamp01((read - from) / (n[5].mid - from)))}h`;
+        navyClock.style.opacity = read > from ? '1' : '0';
+      }
+      const redClockEl = redClockRef.current;
+      if (redClockEl) {
+        if (redClock) redClockEl.textContent = redClock;
+        redClockEl.style.opacity = redClock ? '1' : '0';
+      }
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    schedule();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    const resize = new ResizeObserver(schedule);
+    resize.observe(box);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      resize.disconnect();
+    };
+  }, [reduce, database.time, openMarket.time]);
+
+  const cardRef = (index: number) => (el: HTMLDivElement | null) => {
+    cards.current[index] = el;
+  };
+  const step = (index: number, children?: ReactNode) => (
+    <PhoneStep key={index} index={index} story={story} still={reduce} cardRef={cardRef(index)}>
+      {children}
+    </PhoneStep>
+  );
+  const dbStatus = redHere(story) ? 'done' : story.red === 'jumping' ? 'matching' : 'searching';
+
   return (
-    <ol className="mt-12 space-y-3 lg:hidden">
-      <MobileStep index={0} />
-      <MobileStep index={1} />
-      <Reveal as="li" y={16}>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex flex-col rounded-2xl border border-brand/30 bg-paper p-4 shadow-soft">
-            <p className="flex items-center gap-2 font-semibold">
-              <Database aria-hidden className="size-4 text-brand" /> {database.name}
-            </p>
-            <p className="mt-2 text-[14px] text-muted">{database.text}</p>
-            <p className="mt-auto flex items-center gap-2 pt-3 text-3xl font-semibold tracking-tight text-brand">
-              {database.time}
-              <ScrollTick delay={0.5} />
-            </p>
+    <div ref={boxRef} className="relative isolate mt-12 md:mx-auto md:max-w-xl lg:hidden">
+      {/* The main line, filling in navy behind the candidate. */}
+      <div
+        aria-hidden
+        ref={railRef}
+        style={{ left: RAIL_LEFT, top: 40, bottom: 56 }}
+        className="absolute w-[3px] -translate-x-1/2 overflow-hidden rounded-full bg-line"
+      >
+        <div ref={railFillRef} className="size-full origin-top rounded-full bg-navy" />
+      </div>
+
+      <ol className="space-y-3">
+        {step(
+          0,
+          <p
+            ref={chipRef}
+            className="flex w-fit max-w-full items-center gap-1.5 rounded-lg border border-line bg-canvas px-2.5 py-1 text-[13px]"
+          >
+            <Search aria-hidden className="size-3.5 shrink-0 text-muted" />
+            <motion.span
+              className="inline-block truncate whitespace-pre font-medium"
+              initial={reduce ? false : { clipPath: 'inset(0 100% 0 0)' }}
+              animate={typed || reduce ? { clipPath: 'inset(0 0% 0 0)' } : undefined}
+              transition={{ duration: 1.2, ease: typing(requirement.length) }}
+            >
+              {requirement}
+            </motion.span>
+            <span aria-hidden className="h-3.5 w-px shrink-0 animate-pulse bg-ink/60" />
+          </p>,
+        )}
+        {step(1)}
+
+        {/* The two channels, side by side: the line splits here. */}
+        <li ref={forkRef} className="relative z-20 pt-1">
+          <p className="mb-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+            Both channels, in parallel
+          </p>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col rounded-2xl border border-navy/20 bg-paper p-3.5 shadow-soft">
+              <p className="flex items-center gap-1.5 text-[14px] font-semibold">
+                <Search aria-hidden className="size-4 shrink-0 text-navy" /> {openMarket.name}
+              </p>
+              <p className="mt-1 text-2xl font-semibold tracking-tight text-navy">{openMarket.time}</p>
+              <p className="text-[13px] leading-snug text-muted">Full assessment, step by step</p>
+              <div className="mt-auto flex flex-wrap gap-1 pt-2.5">
+                {SLOW_BADGES.map((badge) => {
+                  const passed = story.passed > badge.step;
+                  const checking = story.current === badge.step && !passed;
+                  return (
+                    <span
+                      key={badge.label}
+                      className={cn(
+                        'flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-medium transition-colors duration-300',
+                        passed
+                          ? 'bg-emerald-500/15 text-emerald-700'
+                          : checking
+                            ? 'bg-navy text-white'
+                            : 'bg-ink/5 text-faint',
+                      )}
+                    >
+                      {/* Same-width icon in every state, so the badges never re-wrap. */}
+                      <span aria-hidden className="flex size-3 items-center justify-center">
+                        {passed ? (
+                          <Check className="size-3" strokeWidth={3} />
+                        ) : checking ? (
+                          <span className="size-2.5 animate-spin rounded-full border-[1.5px] border-white/30 border-t-white" />
+                        ) : (
+                          <span className="size-1.5 rounded-full bg-current" />
+                        )}
+                      </span>
+                      {badge.label === 'L1 + video' ? (
+                        <>
+                          {/* Short label on phones, so the three badges fit on two lines. */}
+                          <span className="sm:hidden">L1</span>
+                          <span className="hidden sm:inline">{badge.label}</span>
+                        </>
+                      ) : (
+                        badge.label
+                      )}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex flex-col rounded-2xl border border-brand/30 bg-paper p-3.5 shadow-soft">
+              <p className="flex items-center gap-1.5 text-[14px] font-semibold">
+                <Database aria-hidden className="size-4 shrink-0 text-brand" /> {database.name}
+              </p>
+              <p className="mt-1 text-2xl font-semibold tracking-tight text-brand">{database.time}</p>
+              <p className="text-[13px] leading-snug text-muted">10,000+ screened talent profiles</p>
+              <div className="mt-auto flex min-h-7 items-center pt-2.5 text-[12px]">
+                {dbStatus === 'done' ? (
+                  <span className="flex items-center gap-1 font-medium text-emerald-700">
+                    <Check aria-hidden className="size-3.5" strokeWidth={3} /> Match submitted
+                  </span>
+                ) : dbStatus === 'matching' ? (
+                  <span className="flex items-center gap-1.5 text-muted">
+                    <span className="flex -space-x-1.5">
+                      {[0, 1, 2].map((i) => (
+                        <motion.span
+                          key={i}
+                          initial={{ opacity: 0, scale: 0.4 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: i * 0.12, type: 'spring', stiffness: 500, damping: 22 }}
+                        >
+                          <Avatar variant={i + 2} className="size-5 ring-2 ring-paper" />
+                        </motion.span>
+                      ))}
+                    </span>
+                    Matching…
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-1.5 text-muted">
+                    <span
+                      aria-hidden
+                      className="size-3 animate-spin rounded-full border-2 border-brand/25 border-t-brand"
+                    />
+                    Searching…
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col rounded-2xl border border-line bg-paper p-4 shadow-soft">
-            <p className="flex items-center gap-2 font-semibold">
-              <Search aria-hidden className="size-4 text-navy" /> {openMarket.name}
-            </p>
-            <ul className="mt-2 space-y-1.5 text-[14px] text-muted">
-              {[2, 3, 4].map((index, i) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="font-mono text-[12px] text-brand">{pad(index + 1)}</span>
-                  <span className="flex-1">{hiringProcess[index].title}</span>
-                  <ScrollTick delay={0.5 + i * 0.45} small />
-                </li>
-              ))}
-            </ul>
-            <p className="mt-auto pt-3 text-3xl font-semibold tracking-tight text-navy">{openMarket.time}</p>
+        </li>
+
+        {/* The open-market checks, with the database's fast line running down the right. */}
+        <li className="relative">
+          <div
+            aria-hidden
+            ref={redRailRef}
+            style={{ right: RAIL_RIGHT }}
+            className="absolute -bottom-3 -top-3 w-[3px] translate-x-1/2 overflow-hidden rounded-full bg-brand/15"
+          >
+            <div ref={redFillRef} className="size-full origin-top rounded-full bg-brand" />
           </div>
-        </div>
-      </Reveal>
-      <MobileStep index={5} />
-      <MobileStep index={6} />
-      <MobileStep index={7} final />
-    </ol>
+          <ol className="space-y-3">{CHECK_STEPS.map((index) => step(index))}</ol>
+        </li>
+
+        {step(
+          5,
+          <span className="flex h-6 gap-1.5">
+            <AnimatePresence>
+              {redHere(story) && (
+                <Pop key="fast" still={reduce} className="bg-brand">
+                  {database.time}
+                </Pop>
+              )}
+              {story.passed > 5 && (
+                <Pop key="slow" still={reduce} className="bg-navy">
+                  {openMarket.time}
+                </Pop>
+              )}
+            </AnimatePresence>
+          </span>,
+        )}
+        {step(6)}
+        {step(7)}
+      </ol>
+
+      {/* The two candidates (illustrations, not real people), with the clock since sourcing started. */}
+      {!reduce && (
+        <>
+          <div
+            ref={redRef}
+            aria-hidden
+            className="pointer-events-none absolute left-0 top-0 z-10 opacity-0 will-change-transform"
+          >
+            <Avatar variant={0} className="size-8 shadow-soft ring-2 ring-brand" />
+            <span
+              ref={redClockRef}
+              className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap rounded bg-brand px-1 font-mono text-[9.5px] leading-4 text-white opacity-0 transition-opacity duration-200"
+            >
+              0h
+            </span>
+          </div>
+          <div
+            ref={navyRef}
+            aria-hidden
+            className="pointer-events-none absolute left-0 top-0 z-10 opacity-0 will-change-transform"
+          >
+            <Avatar variant={1} className="size-8 shadow-soft ring-2 ring-navy" />
+            <span
+              ref={navyClockRef}
+              className="absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded bg-navy px-1 font-mono text-[9.5px] leading-4 text-white opacity-0 transition-opacity duration-200"
+            >
+              0h
+            </span>
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 
@@ -908,7 +1279,7 @@ export function HiringFlow({
           )}
         </div>
         <FlowDiagram />
-        <FlowList />
+        <FlowStory />
       </Container>
     </section>
   );

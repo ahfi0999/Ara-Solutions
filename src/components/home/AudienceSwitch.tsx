@@ -9,12 +9,38 @@ const PARTS = [
   { key: 'training', label: 'For professionals', target: 'for-professionals', icon: GraduationCap },
 ] as const;
 
+/** After this long without scrolling, a tucked-away switch comes back. */
+const IDLE_MS = 1200;
+
 /**
  * A small floating switch shown while the visitor is inside the two audience halves of the home page.
- * It shows which half they are in, and jumps to the other one.
+ * It shows which half they are in, and jumps to the other one. On phones and tablets it tucks away while the
+ * visitor scrolls down (so it never covers what they are reading) and returns when they scroll up or pause.
  */
 export function AudienceSwitch() {
   const [active, setActive] = useState<(typeof PARTS)[number]['key'] | null>(null);
+  const [tucked, setTucked] = useState(false);
+
+  useEffect(() => {
+    const small = window.matchMedia('(max-width: 1023px)');
+    let lastY = window.scrollY;
+    let idle: ReturnType<typeof setTimeout> | undefined;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
+      if (!small.matches) return;
+      if (dy > 2) setTucked(true);
+      else if (dy < -2) setTucked(false);
+      clearTimeout(idle);
+      idle = setTimeout(() => setTucked(false), IDLE_MS);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(idle);
+    };
+  }, []);
 
   useEffect(() => {
     const business = document.getElementById('for-businesses');
@@ -44,7 +70,7 @@ export function AudienceSwitch() {
 
   return (
     <AnimatePresence>
-      {active && (
+      {active && !tucked && (
         <motion.nav
           aria-label="Jump to"
           initial={{ opacity: 0, y: 20 }}
