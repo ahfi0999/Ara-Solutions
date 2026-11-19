@@ -32,6 +32,19 @@ export const metadata: Metadata = {
   // Google Search Console ownership (HTML tag method, from the SEO team). Keep it: removing it can undo the verification.
   verification: { google: 'JKPVx6ta2Aog6Jh_7MyTjdaqPh-1aQ7YDw8T0KneKNQ' },
   applicationName: site.name,
+  // Every page may be indexed and its links followed; Google may also show large image previews and full
+  // snippets. (The 404 page gets "noindex" from Next.js on top of this.)
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   // Favicons come from src/app/favicon.ico, icon.png and apple-icon.png (made from public/logo-mark.png).
   openGraph: {
     type: 'website',

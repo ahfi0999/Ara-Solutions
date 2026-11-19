@@ -1,7 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { services } from '@/content/services';
 import { Container } from '@/components/ui/Section';
 import { DarkHeroBackdrop } from '@/components/motion/DarkHeroBackdrop';
+
+/** A missing page must never be indexed (overrides the site-wide "index, follow"). */
+export const metadata: Metadata = { robots: { index: false, follow: true } };
 
 export default function NotFound() {
   return (
