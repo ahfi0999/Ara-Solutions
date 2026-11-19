@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { generalFaqs } from '@/content/home';
+import { hiringFaqs } from '@/content/home';
 import { seoFor } from '@/content/seo';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container, SectionHeading } from '@/components/ui/Section';
@@ -17,9 +17,6 @@ export const metadata: Metadata = {
   ...seoFor('/services/'),
   alternates: { canonical: '/services/' },
 };
-
-/** Hiring questions only; the training questions live on the training pages. */
-const HIRING_FAQS = generalFaqs.filter((item) => !/training/i.test(item.q));
 
 /** Staffing overview: what ARA provides for businesses, why, how it hires and who it has hired for. */
 export default function ServicesPage() {
@@ -67,7 +64,7 @@ export default function ServicesPage() {
       <HiringFlow />
       <EngagementComparison highlight="none" />
       <Faq
-        items={HIRING_FAQS}
+        items={hiringFaqs}
         title={
           <>
             Hiring questions, <em>answered.</em>

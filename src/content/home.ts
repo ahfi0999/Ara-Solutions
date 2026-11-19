@@ -168,8 +168,34 @@ export const roleGroups = [
   },
 ] as const;
 
-/** Homepage FAQ: hiring answers from ARA's pitch deck, plus training questions. */
-export const generalFaqs = [
+/*
+ * FAQ, one list per audience. The first five in each come from the SEO team's FAQ ("Frequently Asked
+ * Questions About ARA Solutions"); the rest keep details from ARA's pitch deck and program pages that the
+ * SEO set does not cover. All of them go into the home page's FAQ data for Google.
+ */
+
+/** For businesses (home Hiring tab, Services page). */
+export const hiringFaqs = [
+  {
+    q: 'What recruitment and staffing services does ARA Solutions offer?',
+    a: 'ARA Solutions offers fulltime staffing, contract staffing (Corp-to-Corp / C2C), IT and Non-IT recruitment, international recruitment support and background verification services.',
+  },
+  {
+    q: 'Does ARA Solutions recruit for both IT and Non-IT positions?',
+    a: 'Yes. We support recruitment across technology, software development, enterprise platforms, AI, data, cloud, cybersecurity, finance, HR, sales, healthcare, engineering and other business functions.',
+  },
+  {
+    q: 'Can ARA Solutions support specialised technical and bulk hiring requirements?',
+    a: 'We support specialised and volume recruitment requirements based on the skills, experience, hiring location, number of positions and agreed timelines.',
+  },
+  {
+    q: 'How does the recruitment process work?',
+    a: 'Our process typically includes requirement understanding, talent sourcing, candidate screening, initial evaluation, profile submission, interview coordination, offer support and joining follow-up.',
+  },
+  {
+    q: 'Does ARA Solutions provide international recruitment services?',
+    a: 'Yes. We support relevant international recruitment and cross-border hiring requirements across selected markets, depending on the role and engagement requirements.',
+  },
   {
     q: 'How quickly can you share suitable candidates?',
     a: 'Initial profiles are targeted in 2 to 4 hours from our database, and shortlisted profiles within 48 hours, subject to role complexity.',
@@ -179,30 +205,49 @@ export const generalFaqs = [
     a: 'Skill and experience screening, recruiter-led L1 interviews, video sharing and background verification of employment, education and identity.',
   },
   {
-    q: 'Can you handle niche and bulk hiring?',
-    a: 'Yes. We cover specialised IT roles, non-IT staffing and large-scale volume recruitment.',
-  },
-  {
-    q: 'Do you support international hiring?',
-    a: 'Yes. We recruit across India, the USA, the UK and European markets, subject to role requirements.',
-  },
-  {
-    q: 'What happens after shortlisting?',
-    a: 'We coordinate interviews and feedback, support offer discussions and follow up through joining and beyond.',
-  },
-  {
     q: 'Can contract engineers become permanent employees?',
     a: 'Yes. We offer contract-to-hire conversion on clear terms agreed upfront, with no surprise fees.',
   },
+] as const;
+
+/** For professionals (home Training tab). */
+export const trainingFaqs = [
   {
-    q: 'What does the Training & Placement program include?',
-    a: 'Structured, hands-on training in Salesforce, ServiceNow, AI & Machine Learning, Agentic AI, Cybersecurity or Full Stack Development, with real projects, interview preparation and placement assistance.',
+    q: 'What IT training programs are available at ARA Solutions?',
+    a: 'Our current programs include Salesforce, ServiceNow, AI & Machine Learning, Agentic AI, Cybersecurity and Full Stack Development with AI.',
+  },
+  {
+    q: 'Do the training programs include practical projects?',
+    a: 'Yes. Our programs incorporate hands-on learning, practical exercises and industry-oriented projects to help learners apply their technical knowledge.',
+  },
+  {
+    q: 'Does ARA Solutions provide placement assistance after training?',
+    a: 'Yes. We provide placement assistance, interview preparation and career guidance to help eligible learners explore relevant employment opportunities. Placement assistance does not guarantee employment.',
+  },
+  {
+    q: 'Are the courses suitable for freshers and working professionals?',
+    a: 'Program suitability depends on the course, your educational background, existing technical knowledge and career objectives. Our advisors can help you identify an appropriate program.',
+  },
+  {
+    q: 'Does ARA Solutions provide certification preparation?',
+    a: 'Selected programs include preparation for relevant certification examinations, such as ServiceNow CSA and Salesforce Administrator, depending on the course structure.',
   },
   {
     q: 'What are the training fees, duration and batch timings?',
     a: 'These depend on the program and batch. Request a callback or message us on WhatsApp and our team will share the current details.',
   },
+  {
+    q: 'Can I watch a class later?',
+    a: 'Yes. Every live class is recorded and added to your batch on our learning platform, so you can watch it again or catch up on one you missed.',
+  },
+  {
+    q: 'Which program is right for me?',
+    a: 'Answer the three questions in the program finder above, or talk to an advisor who will recommend a program based on your background and goals.',
+  },
 ] as const;
+
+/** Every FAQ, for the Ask ARA assistant's knowledge. */
+export const generalFaqs = [...hiringFaqs, ...trainingFaqs];
 
 /*
  * Home page: content for the training half and the split FAQ.
@@ -237,29 +282,3 @@ export const trainingPillars = [
     href: '/training-placement/#learning-platform',
   },
 ] as const;
-
-/** FAQ split for the two audiences. */
-export const hiringFaqs = generalFaqs.filter((item) => !/training/i.test(item.q));
-export const trainingFaqs = [
-  ...generalFaqs.filter((item) => /training/i.test(item.q)),
-  {
-    q: 'Can I watch a class later?',
-    a: 'Yes. Every live class is recorded and added to your batch on our learning platform, so you can watch it again or catch up on one you missed.',
-  },
-  {
-    q: 'Do I need prior experience?',
-    a: 'It depends on the program. Salesforce and ServiceNow start from the basics with no prior platform experience needed; the AI programs suit learners comfortable with basic programming. Each program page lists its prerequisites.',
-  },
-  {
-    q: 'Do you help with placement?',
-    a: 'Yes. Every program includes interview preparation and placement assistance: resume and LinkedIn reviews, mock interviews and connections to hiring opportunities.',
-  },
-  {
-    q: 'Are certification exams included?',
-    a: 'Programs prepare you for the official exams listed on each program page. Exam registration is done with the vendor directly; an advisor can explain the process and current exam fees.',
-  },
-  {
-    q: 'Which program is right for me?',
-    a: 'Answer the three questions in the program finder above, or talk to an advisor who will recommend a program based on your background and goals.',
-  },
-];
