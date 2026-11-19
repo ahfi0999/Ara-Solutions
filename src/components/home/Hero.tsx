@@ -62,18 +62,7 @@ export function Hero() {
 
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 [&>*]:min-w-0">
         <motion.div style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}>
-          <motion.p
-            {...fadeUp(0)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] py-1.5 pl-1.5 pr-4 text-[13px] text-white/75 backdrop-blur [@media(max-width:639px)_and_(max-height:600px)]:hidden"
-          >
-            <span className="relative flex size-5 items-center justify-center">
-              <span className="absolute inset-0 animate-ping rounded-full bg-brand/40 [animation-duration:2.4s]" />
-              <span className="size-2 rounded-full bg-brand" />
-            </span>
-            IT staffing &amp; training · Hyderabad
-          </motion.p>
-
-          <h1 className="mt-7 text-balance text-[length:clamp(1.95rem,9.4vw,2.4rem)] font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-[length:clamp(2.6rem,min(4.2vw,7.4vh),4.1rem)] [@media(max-height:760px)]:mt-5 [@media(max-width:639px)_and_(max-height:600px)]:mt-0 [@media(max-width:639px)_and_(max-height:600px)]:text-[length:clamp(1.7rem,8.4vw,2.05rem)]">
+          <h1 className="text-balance text-[length:clamp(1.95rem,9.4vw,2.4rem)] font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-[length:clamp(2.6rem,min(4.2vw,7.4vh),4.1rem)] [@media(max-width:639px)_and_(max-height:600px)]:text-[length:clamp(1.7rem,8.4vw,2.05rem)]">
             <SplitWords delay={0.15}>Empowering businesses through talent.</SplitWords>{' '}
             <SplitWords
               delay={0.45}
