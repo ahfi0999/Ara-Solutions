@@ -73,6 +73,17 @@ export const journey = [
   },
 ] as const;
 
+/**
+ * The finish line of the learner journey, celebrated when the progress line reaches it.
+ * Worded as the goal we work towards, never as a guaranteed job (we offer placement assistance).
+ */
+export const journeyFinale = {
+  label: 'Offer letter',
+  stamp: 'Offer accepted',
+  title: 'Offer in hand. Congratulations!',
+  text: 'The moment we work towards with every learner: your first offer in a new tech role.',
+} as const;
+
 /** The six barriers to better hiring, from ARA's pitch deck. */
 export const hiringBarriers = [
   'Talent shortages',
