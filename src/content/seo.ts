@@ -78,3 +78,11 @@ export const seoFor = (path: string): PageSeo | undefined => pages[path];
 
 /** Home page: also the site-wide fallback in the root layout. */
 export const homeSeo = pages['/'];
+
+/**
+ * When the site's content last changed in a real way (new copy, titles, pages), as YYYY-MM-DD.
+ * It goes into the sitemap as each page's "last modified" date, which Google uses to decide what to
+ * re-read first. Change it after a significant content update, not for small fixes or every deploy,
+ * or Google learns to ignore it.
+ */
+export const siteUpdated = '2026-11-19';
