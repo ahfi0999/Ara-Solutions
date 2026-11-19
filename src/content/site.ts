@@ -29,6 +29,8 @@ export const site = {
   },
   /** ARA's own Google Business Profile (address, directions, reviews). */
   mapsUrl: 'https://share.google/iQ8UV8bwBoq7RLrGt',
+  /** Google Tag Manager container, set up by the SEO team. It only runs on the live site (see TagManager). */
+  gtmId: 'GTM-NHXQT349',
   /** Social profiles. Icons only render for entries with a URL. */
   social: {
     linkedin: '',

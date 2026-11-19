@@ -6,6 +6,7 @@ import { EnquiryProvider } from '@/components/enquiry/EnquiryProvider';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ContactDock } from '@/components/layout/ContactDock';
+import { TagManager } from '@/components/layout/TagManager';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { ScrollProgress } from '@/components/motion/primitives';
 import { PageBackdrop } from '@/components/motion/PageBackdrop';
@@ -92,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <ContactDock />
         </EnquiryProvider>
+        <TagManager />
       </body>
     </html>
   );
