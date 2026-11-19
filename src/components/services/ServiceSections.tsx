@@ -7,11 +7,14 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Spotlight } from '@/components/motion/primitives';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { ButtonLink } from '@/components/ui/Button';
+import { DarkHeroBackdrop } from '@/components/motion/DarkHeroBackdrop';
+import { HeroPhoto } from '@/components/motion/HeroPhoto';
 
 export function ServiceHero({ service }: { service: Service }) {
   return (
     <section className="aurora relative isolate overflow-hidden pb-20 pt-28 text-white sm:pb-24 sm:pt-36">
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10" />
+      {service.image && <HeroPhoto src={service.image} />}
+      <DarkHeroBackdrop />
       <Container>
         <nav aria-label="Breadcrumb" className="fade-up">
           <ol className="flex flex-wrap items-center gap-1.5 text-[13px] text-white/50">

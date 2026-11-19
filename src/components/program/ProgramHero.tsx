@@ -7,14 +7,15 @@ import { Container } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { ProgramVisual } from '@/components/visuals/ProgramVisual';
 import { SplitWords, Tilt } from '@/components/motion/primitives';
-import { ProgramHeroPhoto } from '@/components/program/ProgramHeroPhoto';
+import { HeroPhoto } from '@/components/motion/HeroPhoto';
+import { DarkHeroBackdrop } from '@/components/motion/DarkHeroBackdrop';
 
 export function ProgramHero({ program }: { program: Program }) {
   const a = accent[program.accent];
   return (
     <section className="aurora relative isolate overflow-hidden pb-16 pt-24 text-white sm:pb-24 sm:pt-[clamp(6.5rem,14vh,9rem)] [@media(max-width:639px)_and_(max-height:600px)]:pt-[5.25rem]">
-      {program.image && <ProgramHeroPhoto src={program.image} />}
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10" />
+      {program.image && <HeroPhoto src={program.image} />}
+      <DarkHeroBackdrop />
       <div
         aria-hidden
         className={cn('absolute -right-32 top-10 -z-10 size-[480px] rounded-full blur-[120px]', a.glow)}

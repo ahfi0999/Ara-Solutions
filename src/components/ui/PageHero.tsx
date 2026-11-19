@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Container, SectionHeading } from './Section';
+import { DarkHeroBackdrop } from '@/components/motion/DarkHeroBackdrop';
 
 /** Dark header used at the top of inner pages. */
 export function PageHero({
@@ -15,7 +16,7 @@ export function PageHero({
 }) {
   return (
     <section className="aurora relative isolate overflow-hidden pb-20 pt-24 text-white sm:pb-24 sm:pt-[clamp(6.5rem,15vh,10rem)] [@media(max-width:639px)_and_(max-height:600px)]:pt-[5.25rem]">
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10" />
+      <DarkHeroBackdrop />
       <Container>
         <SectionHeading
           as="h1"

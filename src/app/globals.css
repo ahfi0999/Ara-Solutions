@@ -289,7 +289,7 @@
   right: -15%;
   top: -35%;
   background: radial-gradient(circle, rgb(46 58 190 / 0.5), transparent 65%);
-  animation: drift-a 18s ease-in-out infinite;
+  animation: aurora-a 16s ease-in-out infinite;
 }
 .aurora::after {
   width: min(55vw, 700px);
@@ -297,7 +297,57 @@
   left: -15%;
   bottom: -40%;
   background: radial-gradient(circle, rgb(229 35 45 / 0.3), transparent 65%);
-  animation: drift-b 22s ease-in-out infinite;
+  animation: aurora-b 19s ease-in-out infinite;
+}
+
+/* The aurora glows wander far enough to be seen moving: blue across the top, red along the bottom. */
+@keyframes aurora-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-22%, 14%) scale(1.18);
+  }
+  66% {
+    transform: translate(-8%, 26%) scale(0.92);
+  }
+}
+@keyframes aurora-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(26%, -16%) scale(1.15);
+  }
+  70% {
+    transform: translate(12%, -28%) scale(0.9);
+  }
+}
+@keyframes aurora-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(-35%, 18%) scale(1.25);
+    opacity: 0.9;
+  }
+}
+
+/* DarkHeroBackdrop: a third, violet glow drifting between the other two... */
+.hero-glow {
+  background: radial-gradient(circle, rgb(124 92 255 / 0.28), transparent 65%);
+  filter: blur(70px);
+  animation: aurora-c 21s ease-in-out infinite;
+}
+/* ...and a soft light under the mouse (position set by the component). */
+.hero-light {
+  background: radial-gradient(560px circle at var(--hx, 50%) var(--hy, -50%), rgb(255 255 255 / 0.075), transparent 60%);
+  opacity: var(--hl, 0);
+  transition: opacity 0.5s ease;
 }
 
 /* ---------- Light-section background (PageBackdrop) ---------- */

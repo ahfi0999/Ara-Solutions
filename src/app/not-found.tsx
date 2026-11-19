@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { services } from '@/content/services';
 import { Container } from '@/components/ui/Section';
+import { DarkHeroBackdrop } from '@/components/motion/DarkHeroBackdrop';
 
 export default function NotFound() {
   return (
-    <section className="aurora relative isolate flex min-h-[80vh] items-center pb-20 pt-32 text-white">
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10" />
+    <section className="aurora relative isolate flex min-h-[80vh] items-center overflow-hidden pb-20 pt-32 text-white">
+      <DarkHeroBackdrop />
       <Container className="text-center">
         <p className="font-mono text-sm text-brand-300">404</p>
         <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-6xl">
