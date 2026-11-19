@@ -35,71 +35,6 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: 'corp-to-corp',
-    image: '/images/services/corp-to-corp.jpg',
-    name: 'Corp-to-Corp (C2C) Staffing',
-    shortName: 'Corp to Corp Staffing',
-    menuText: 'Contract experts for project needs',
-    badge: 'Agile project staffing model',
-    headline: 'Corp-to-Corp (C2C) Staffing',
-    summary:
-      'Flexible consultant engagement. Niche technical skills deployed on demand. Built for enterprise project velocity without overhead.',
-    cta: 'Request C2C talent',
-    promises: [
-      {
-        title: 'Deployment speed',
-        text: 'Rapid contractor matching from pre-cleared, active contract engineers across niche tech stacks.',
-      },
-      {
-        title: 'Statutory compliance',
-        text: 'Clean vendor-to-vendor master service agreements (MSAs) and verified W9 / GST paperwork.',
-      },
-      {
-        title: 'Flexible engagements',
-        text: 'Scale engineering pods up or down smoothly as project milestones conclude.',
-      },
-    ],
-    story: {
-      eyebrow: 'On-demand expertise',
-      title: 'Specialists who contribute from day one',
-      paragraphs: [
-        'When a critical project demands specialised expertise, such as an enterprise migration, a security audit or a sudden surge in engineering workload, you need professionals who can contribute from day one, under an engagement structure that matches the project’s scope.',
-        'Our Corp-to-Corp model connects you with vetted consultants through compliant, structured vendor-to-vendor arrangements, keeping overhead low, deployment fast and accountability clear.',
-      ],
-      points: [
-        { title: 'Skilled experts', text: 'Ready to contribute from day one' },
-        { title: 'Compliant & structured', text: 'Vendor-to-vendor made simple' },
-        { title: 'Faster project delivery', text: 'Keep your momentum' },
-      ],
-    },
-    pillars: {
-      eyebrow: 'Workforce architecture',
-      title: 'The C2C model at a glance',
-      items: [
-        {
-          title: 'Search approach',
-          text: 'Fast, targeted sourcing for specific skill requirements, niche tech stacks and aggressive project timelines.',
-        },
-        {
-          title: 'Core support',
-          text: 'Vendor coordination, thorough rate negotiations, onboarding logistics and strict statutory compliance.',
-        },
-        {
-          title: 'Best suited for',
-          text: 'Projects with fixed scopes, specialised skill gaps, sudden workload surges or variable workforce needs.',
-        },
-        {
-          title: 'Business value',
-          text: 'Access high-calibre expertise immediately without the long-term overhead or commitments of a permanent hire.',
-        },
-      ],
-    },
-    closing: {
-      title: 'Need specialists for your next project?',
-      text: 'Tell us the skills and timeline. If your requirement is permanent, our Fulltime Staffing service offers end-to-end recruitment with retention support.',
-    },
-  },
-  {
     slug: 'fulltime-staffing',
     image: '/images/services/fulltime-staffing.jpg',
     name: 'Fulltime Staffing (IT & Non-IT)',
@@ -155,6 +90,71 @@ export const services: Service[] = [
     closing: {
       title: 'Start your search',
       text: 'Tell us about the role you need to fill. We’ll outline our candidate pipeline and timeline.',
+    },
+  },
+  {
+    slug: 'corp-to-corp',
+    image: '/images/services/corp-to-corp.jpg',
+    name: 'Contract Staffing',
+    shortName: 'Contract Staffing',
+    menuText: 'Contract experts for project needs',
+    badge: 'Agile project staffing model',
+    headline: 'Contract Staffing',
+    summary:
+      'Flexible consultant engagement. Niche technical skills deployed on demand. Built for enterprise project velocity without overhead.',
+    cta: 'Request contract talent',
+    promises: [
+      {
+        title: 'Deployment speed',
+        text: 'Rapid contractor matching from pre-cleared, active contract engineers across niche tech stacks.',
+      },
+      {
+        title: 'Statutory compliance',
+        text: 'Clean vendor-to-vendor master service agreements (MSAs) and verified W9 / GST paperwork.',
+      },
+      {
+        title: 'Flexible engagements',
+        text: 'Scale engineering pods up or down smoothly as project milestones conclude.',
+      },
+    ],
+    story: {
+      eyebrow: 'On-demand expertise',
+      title: 'Specialists who contribute from day one',
+      paragraphs: [
+        'When a critical project demands specialised expertise, such as an enterprise migration, a security audit or a sudden surge in engineering workload, you need professionals who can contribute from day one, under an engagement structure that matches the project’s scope.',
+        'Our Corp-to-Corp model connects you with vetted consultants through compliant, structured vendor-to-vendor arrangements, keeping overhead low, deployment fast and accountability clear.',
+      ],
+      points: [
+        { title: 'Skilled experts', text: 'Ready to contribute from day one' },
+        { title: 'Compliant & structured', text: 'Vendor-to-vendor made simple' },
+        { title: 'Faster project delivery', text: 'Keep your momentum' },
+      ],
+    },
+    pillars: {
+      eyebrow: 'Workforce architecture',
+      title: 'The C2C model at a glance',
+      items: [
+        {
+          title: 'Search approach',
+          text: 'Fast, targeted sourcing for specific skill requirements, niche tech stacks and aggressive project timelines.',
+        },
+        {
+          title: 'Core support',
+          text: 'Vendor coordination, thorough rate negotiations, onboarding logistics and strict statutory compliance.',
+        },
+        {
+          title: 'Best suited for',
+          text: 'Projects with fixed scopes, specialised skill gaps, sudden workload surges or variable workforce needs.',
+        },
+        {
+          title: 'Business value',
+          text: 'Access high-calibre expertise immediately without the long-term overhead or commitments of a permanent hire.',
+        },
+      ],
+    },
+    closing: {
+      title: 'Need specialists for your next project?',
+      text: 'Tell us the skills and timeline. If your requirement is permanent, our Fulltime Staffing service offers end-to-end recruitment with retention support.',
     },
   },
   {
@@ -380,19 +380,6 @@ export const roleCoverage = {
 /** Contract vs permanent comparison (from ARA's original site). */
 export const engagementComparison = [
   {
-    name: 'Corp to Corp (C2C)',
-    tagline: 'On-demand expertise for your project needs.',
-    points: [
-      'Vetted third-party consultants and contractors',
-      'Fast deployment, often within 3 to 5 business days',
-      'Milestone-based, with clear deliverables and scope',
-      'Vendor-to-vendor billing, no internal headcount increase',
-      'Scale up or down as project phases evolve',
-    ],
-    bestFor: 'Short- to mid-term project engagements',
-    href: '/services/corp-to-corp/',
-  },
-  {
     name: 'Fulltime Staffing',
     tagline: 'Permanent talent for lasting impact.',
     points: [
@@ -404,6 +391,19 @@ export const engagementComparison = [
     ],
     bestFor: 'Core roles and long-term team growth',
     href: '/services/fulltime-staffing/',
+  },
+  {
+    name: 'Contract Staffing (C2C)',
+    tagline: 'On-demand expertise for your project needs.',
+    points: [
+      'Vetted third-party consultants and contractors',
+      'Fast deployment, often within 3 to 5 business days',
+      'Milestone-based, with clear deliverables and scope',
+      'Vendor-to-vendor billing, no internal headcount increase',
+      'Scale up or down as project phases evolve',
+    ],
+    bestFor: 'Short- to mid-term project engagements',
+    href: '/services/corp-to-corp/',
   },
 ];
 

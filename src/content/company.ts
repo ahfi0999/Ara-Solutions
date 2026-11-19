@@ -60,7 +60,7 @@ export const principles = [
   },
   {
     title: 'The right model',
-    text: 'The engagement structure that matches your operational and financial reality, whether that is C2C, fulltime, RPO or consulting.',
+    text: 'The engagement structure that matches your operational and financial reality, whether that is contract, fulltime, RPO or consulting.',
   },
   {
     title: 'The right moment',
