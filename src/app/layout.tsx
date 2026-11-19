@@ -29,8 +29,10 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: homeSeo.description,
+  // Google Search Console ownership (HTML tag method, from the SEO team). Keep it: removing it can undo the verification.
+  verification: { google: 'JKPVx6ta2Aog6Jh_7MyTjdaqPh-1aQ7YDw8T0KneKNQ' },
   applicationName: site.name,
-  icons: { icon: '/logo-mark.png', apple: '/logo-mark.png' },
+  // Favicons come from src/app/favicon.ico, icon.png and apple-icon.png (made from public/logo-mark.png).
   openGraph: {
     type: 'website',
     siteName: site.name,
