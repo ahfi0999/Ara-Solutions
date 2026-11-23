@@ -1,5 +1,6 @@
-import { programPreview } from './programs';
 import { services } from './services';
+import { getProgram } from './programs';
+import { trackHref, trackPrograms, tracks } from './tracks';
 
 /** Icons available to menu links (mapped to icon components in the header). */
 export type NavIcon =
@@ -16,6 +17,7 @@ export type NavIcon =
   | 'agentic-ai'
   | 'cybersecurity'
   | 'full-stack-ai'
+  | 'workday'
   | 'program';
 
 export type NavItem = {
@@ -26,6 +28,22 @@ export type NavItem = {
   icon?: NavIcon;
   /** Colour class for the icon (program accent colours). */
   tone?: string;
+  /** A course without its own page yet: generic icon, links to its card on the track page. */
+  plain?: boolean;
+  /** Shown with a "New" badge. */
+  isNew?: boolean;
+};
+/** A category in a two-panel dropdown: listed on the left, its links shown on the right. */
+export type NavCategory = { label: string; href: string; note: string; icon?: NavIcon; items: NavItem[] };
+
+/** The icon shown beside each training track (phone menu). */
+const TRACK_ICONS: Record<string, NavIcon> = {
+  'servicenow-courses': 'servicenow',
+  'salesforce-courses': 'salesforce',
+  'workday-courses': 'workday',
+  security: 'cybersecurity',
+  'ai-and-data-courses': 'ai-ml',
+  'full-stack-courses': 'full-stack-ai',
 };
 /**
  * A menu with a dropdown. With `href`, the label itself opens that overview page (the dropdown still
@@ -38,6 +56,8 @@ export type NavGroup = {
   match: string;
   href?: string;
   items: NavItem[];
+  /** Optional two-panel dropdown: categories on the left, the hovered one's links on the right. */
+  categories?: NavCategory[];
   footer?: NavItem;
 };
 export type NavEntry = NavGroup | NavItem;
@@ -61,6 +81,40 @@ const PROGRAM_ICONS = [
   'cybersecurity',
   'full-stack-ai',
 ] as const;
+
+/** The Training menu: one category per track, courses in the client's order. */
+const trainingCategories: NavCategory[] = tracks.map((track) => {
+  const first = trackPrograms(track)[0];
+  return {
+    label: track.name,
+    href: track.page || !first ? trackHref(track) : `/training-placement/${first.program.slug}/`,
+    note: `${track.courses.length} ${track.courses.length === 1 ? 'course' : 'courses'}`,
+    icon: TRACK_ICONS[track.slug] ?? 'program',
+    items: track.courses.flatMap((course): NavItem[] => {
+      if (course.kind === 'course')
+        return [
+          {
+            label: course.name,
+            href: track.page ? `${trackHref(track)}#${course.id}` : '/training-placement/',
+            icon: 'program',
+            plain: true,
+            isNew: course.isNew,
+          },
+        ];
+      const program = getProgram(course.slug);
+      if (!program) return [];
+      return [
+        {
+          label: course.label ?? program.shortName,
+          href: `/training-placement/${program.slug}/`,
+          description: course.text ?? program.highlights[0],
+          icon: PROGRAM_ICONS.find((slug) => slug === program.slug) ?? 'program',
+          tone: tones[program.accent],
+        },
+      ];
+    }),
+  };
+});
 
 /** Main navigation, same structure as ARA's original website. */
 export const navigation: NavEntry[] = [
@@ -107,14 +161,9 @@ export const navigation: NavEntry[] = [
     strip: 'Training',
     match: '/training-placement',
     href: '/training-placement/',
-    items: programPreview().shown.map((program) => ({
-      label: program.shortName,
-      href: `/training-placement/${program.slug}/`,
-      description: program.highlights[0],
-      icon: PROGRAM_ICONS.find((slug) => slug === program.slug) ?? 'program',
-      tone: tones[program.accent],
-    })),
-    footer: { label: `All ${programPreview().total} programs`, href: '/training-placement/' },
+    categories: trainingCategories,
+    items: trainingCategories.flatMap((category) => category.items),
+    footer: { label: 'All training programs', href: '/training-placement/' },
   },
   { label: 'Careers', href: '/careers/' },
   { label: 'Contact', href: '/contact/' },

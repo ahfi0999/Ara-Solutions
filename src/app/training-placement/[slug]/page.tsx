@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { getProgram, programs } from '@/content/programs';
 import { site } from '@/content/site';
 import { seoFor } from '@/content/seo';
+import { getTrack, trackPages, trackPrograms } from '@/content/tracks';
+import { TrackPage } from '@/components/program/TrackPage';
 import { ProgramHero } from '@/components/program/ProgramHero';
 import { SectionNav } from '@/components/program/SectionNav';
 import { ProgramBody } from '@/components/program/ProgramBody';
@@ -20,11 +22,29 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return programs.map((program) => ({ slug: program.slug }));
+  // Program pages, plus a page for each multi-course training track (e.g. /training-placement/ai-and-data/).
+  return [
+    ...programs.map((program) => ({ slug: program.slug })),
+    ...trackPages().map((track) => ({ slug: track.slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const track = getTrack(slug);
+  if (track?.page) {
+    const path = `/training-placement/${track.slug}/`;
+    const title = `${track.name} Courses in Hyderabad`;
+    const description = track.intro;
+    return {
+      title,
+      description,
+      alternates: { canonical: path },
+      openGraph: { title, description, url: path },
+      // A track whose courses have no full program page yet stays out of Google until one exists.
+      ...(trackPrograms(track).length === 0 && { robots: { index: false, follow: true } }),
+    };
+  }
   const program = getProgram(slug);
   if (!program) return {};
   const path = `/training-placement/${program.slug}/`;
@@ -43,6 +63,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProgramPage({ params }: Props) {
   const { slug } = await params;
+  const track = getTrack(slug);
+  if (track?.page) return <TrackPage track={track} />;
   const program = getProgram(slug);
   if (!program) notFound();
 

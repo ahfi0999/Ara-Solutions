@@ -3,6 +3,7 @@ import { programs } from '@/content/programs';
 import { services } from '@/content/services';
 import { site } from '@/content/site';
 import { siteUpdated } from '@/content/seo';
+import { trackPages, trackPrograms } from '@/content/tracks';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
@@ -11,6 +12,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...services.map((s) => `/services/${s.slug}/`),
     '/training-placement/',
     ...programs.map((p) => `/training-placement/${p.slug}/`),
+    // Track pages with at least one full program page (others stay out until they have one).
+    ...trackPages()
+      .filter((t) => trackPrograms(t).length > 0)
+      .map((t) => `/training-placement/${t.slug}/`),
     '/company/about/',
     '/company/approach/',
     '/company/case-studies/',
