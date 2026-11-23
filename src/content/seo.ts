@@ -7,7 +7,8 @@ export type PageSeo = { title: string; description: string };
 
 const pages: Record<string, PageSeo> = {
   '/': {
-    title: 'IT & Non-IT Recruitment, Training & Placement',
+    // Title from the client (Nov 2026); the description is still the SEO sheet's.
+    title: 'Staffing, Training & Placement in Hyderabad',
     description:
       'ARA Solutions offers IT & Non-IT recruitment, staffing, industry-focused training and placement assistance in Hyderabad. Explore our services today.',
   },
@@ -85,4 +86,4 @@ export const homeSeo = pages['/'];
  * re-read first. Change it after a significant content update, not for small fixes or every deploy,
  * or Google learns to ignore it.
  */
-export const siteUpdated = '2026-11-19';
+export const siteUpdated = '2026-11-23';
