@@ -7,6 +7,9 @@ export const site = {
   /** Registered company name, as on the Google Business Profile. */
   legalName: 'ARA Solutions Pvt Ltd',
   tagline: 'IT Always The Right Choice',
+  /** The client's own one-line description of ARA: the home hero's line under the headline, and Google's company data. */
+  description:
+    'ARA Solutions connects growing businesses with the right talent while helping aspiring professionals build in-demand technology skills through practical training, hands-on learning, and placement assistance.',
   url: 'https://arasolutions.in',
   /** Main line (staffing / services): the footer, WhatsApp and every page outside Training & Placement. */
   phone: '+91 90100 09225',
@@ -40,11 +43,11 @@ export const site = {
 } as const;
 
 /**
- * Headline numbers: years and placements from ARA's original website,
- * screened profiles and shortlist time from ARA's pitch deck.
+ * Headline numbers: years from the client (two decades in the IT industry, Nov 2026), placements from ARA's
+ * original website, screened profiles and shortlist time from ARA's pitch deck.
  */
 export const stats = [
-  { value: 13, suffix: '+', label: 'Years in the IT industry' },
+  { value: 20, suffix: '+', label: 'Years in the IT industry' },
   { value: 10000, suffix: '+', label: 'Screened talent profiles' },
   { value: 1000, suffix: '+', label: 'Professionals placed' },
   { value: 48, suffix: ' hrs', label: 'To a targeted shortlist' },

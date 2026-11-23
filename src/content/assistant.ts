@@ -12,7 +12,7 @@ import { lmsFeatures } from './lms';
  */
 const COMPANY_NOTES = `
 - ARA Solutions is a recruitment, technology training and IT consulting company based in ${site.address.area},
-  ${site.address.city}. Founded in 2022 by industry veterans, with 13+ years in the IT industry, 1,000+ professionals
+  ${site.address.city}. Founded in 2022 by industry veterans, with two decades in the IT industry, 1,000+ professionals
   placed and 10,000+ screened talent profiles. Global hubs: US, EU and Asia; clients in India, the USA and the UK.
   Tagline: "${site.tagline}".
 - Core capabilities: ${capabilities.map((item) => `${item.title} (${item.text.replace(/\.$/, '')})`).join('; ')}.

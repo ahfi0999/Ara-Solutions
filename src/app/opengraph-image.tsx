@@ -37,7 +37,7 @@ export default async function Image() {
         </div>
       </div>
       <div style={{ display: 'flex', gap: 16 }}>
-        {['13+ years in IT', '1,000+ professionals placed', 'Placement assistance'].map((item) => (
+        {['Two decades in IT', '1,000+ professionals placed', 'Placement assistance'].map((item) => (
           <div
             key={item}
             style={{

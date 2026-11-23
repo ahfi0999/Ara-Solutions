@@ -17,7 +17,7 @@ const DIVISIONS = [
     icon: Building2,
     eyebrow: 'For businesses',
     title: 'Staffing',
-    text: 'Find the right people for your team. Contract staffing, permanent hiring, recruitment process outsourcing and international consulting.',
+    text: 'Recruitment and staffing solutions that help organisations identify, evaluate and engage professionals for technical and business-critical roles.',
     cta: { label: 'Explore staffing services', href: '#services' },
     photo: '/images/services/fulltime-staffing.jpg',
   },
@@ -26,7 +26,7 @@ const DIVISIONS = [
     icon: GraduationCap,
     eyebrow: 'For professionals',
     title: 'Training & Placement',
-    text: 'Build a technology career with industry-focused training, real projects, interview preparation and placement assistance.',
+    text: 'Career-focused IT training with practical learning, real-world projects, interview preparation and placement assistance.',
     cta: { label: 'Explore training programs', href: '#programs' },
     photo: '/videos/learn-classroom.jpg',
   },
@@ -45,7 +45,7 @@ export function Divisions() {
               Two divisions. <em>One goal:</em> the right person in the right role.
             </>
           }
-          intro="Whether you're hiring skilled professionals or building your own tech career, we've got you covered."
+          intro="ARA Solutions brings recruitment expertise and technology-focused learning together. We work with organisations seeking qualified professionals and individuals looking to develop the skills required in today's evolving technology landscape."
         />
         <div className="mt-14 grid gap-5 lg:grid-cols-2">
           {DIVISIONS.map((division, index) => {

@@ -66,6 +66,7 @@ const organisationJsonLd = {
   url: site.url,
   logo: `${site.url}/logo-color.png`,
   slogan: site.tagline,
+  description: site.description,
   email: site.email,
   telephone: site.phone,
   contactPoint: [

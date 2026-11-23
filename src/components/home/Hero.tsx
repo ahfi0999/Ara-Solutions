@@ -2,7 +2,7 @@
 
 import { motion, useMotionTemplate, useMotionValue, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
-import { stats } from '@/content/site';
+import { site, stats } from '@/content/site';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
@@ -78,8 +78,7 @@ export function Hero() {
             {...fadeUp(0.75)}
             className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 sm:text-lg [@media(max-height:760px)]:mt-4"
           >
-            IT and non-IT staffing, recruitment and consulting for growing companies, and industry-focused
-            training and placement for people building a tech career.
+            {site.description}
           </motion.p>
 
           <motion.div {...fadeUp(0.9)} className="mt-9 flex flex-wrap gap-3 [@media(max-height:760px)]:mt-6">

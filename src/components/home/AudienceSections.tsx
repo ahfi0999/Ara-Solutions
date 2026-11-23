@@ -83,7 +83,7 @@ export function TrainingPillars() {
             Explore all programs
           </ButtonLink>
           <p className="text-white/60">
-            Built on 13+ years in the IT industry and 1,000+ professionals placed.
+            Built on two decades in the IT industry and 1,000+ professionals placed.
           </p>
         </div>
       </Container>

@@ -69,7 +69,7 @@ export const journey = [
   },
   {
     title: 'Placement assistance',
-    text: 'Our team helps connect you with hiring opportunities, drawing on 13+ years in the IT industry.',
+    text: 'Our team helps connect you with hiring opportunities, drawing on two decades in the IT industry.',
   },
 ] as const;
 
@@ -249,7 +249,7 @@ export const trainingPillars = [
   },
   {
     title: 'Placement assistance',
-    text: 'Our team connects you with hiring opportunities, drawing on 13+ years in the IT industry.',
+    text: 'Our team connects you with hiring opportunities, drawing on two decades in the IT industry.',
   },
   {
     title: 'Our own learning platform',
