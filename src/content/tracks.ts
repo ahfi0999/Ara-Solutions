@@ -1,18 +1,18 @@
-import { getProgram, type Program, type ProgramSlug } from './programs';
+import { getProgram, type PageSlug, type Program } from './programs';
 
 /**
  * Training tracks and their courses, from the client's course list (Nov 2026), in the client's order.
- * A course is either a full program with its own page (`program`), or a course listed without a page
- * yet (`course`): it leads to its track page, where visitors can ask an advisor about it. Courses the
- * client marked "(New)" get a New badge.
+ * A course is either a page with its full syllabus (`program`: a flagship program in programs.ts or a
+ * course in courses/), or a course listed without a page yet (`course`): it leads to its card on the
+ * track page, where visitors can ask an advisor about it. `label` is the client's name for the course
+ * in the menu. Courses the client marked "(New)" get a New badge.
  *
- * PREVIEW: which existing program page stands for which course is our mapping (to confirm), e.g.
- * the ServiceNow program page is shown as "ServiceNow Masters & AI". Turn a `course` into a `program`
- * once its full content exists in programs.ts.
+ * Which flagship program page stands for which course is our mapping (to confirm), e.g. the
+ * ServiceNow program page is shown as "ServiceNow Masters & AI".
  */
 
 export type TrackCourse =
-  | { kind: 'program'; slug: ProgramSlug; label?: string; text?: string }
+  | { kind: 'program'; slug: PageSlug; label?: string; text?: string; isNew?: boolean }
   | { kind: 'course'; id: string; name: string; isNew?: boolean };
 
 export type Track = {
@@ -32,14 +32,14 @@ export const tracks: Track[] = [
     intro:
       'ServiceNow courses for administrators, developers, consultants and analysts: from the core platform and ITSM to HR Service Delivery, CRM, GRC and AI.',
     courses: [
-      { kind: 'course', id: 'servicenow-admin-platform', name: 'ServiceNow Admin Platform' },
-      { kind: 'course', id: 'servicenow-itsm-development', name: 'ServiceNow ITSM Development' },
+      { kind: 'program', slug: 'servicenow-admin-platform', label: 'ServiceNow Admin Platform' },
+      { kind: 'program', slug: 'servicenow-itsm-development', label: 'ServiceNow ITSM Development' },
       { kind: 'program', slug: 'servicenow', label: 'ServiceNow Masters & AI' },
-      { kind: 'course', id: 'servicenow-hrsd', name: 'ServiceNow HRSD' },
-      { kind: 'course', id: 'servicenow-crm', name: 'ServiceNow CRM', isNew: true },
-      { kind: 'course', id: 'servicenow-grc', name: 'ServiceNow GRC' },
-      { kind: 'course', id: 'servicenow-fdse', name: 'ServiceNow FDSE' },
-      { kind: 'course', id: 'servicenow-ba', name: 'ServiceNow BA' },
+      { kind: 'program', slug: 'servicenow-hrsd', label: 'ServiceNow HRSD' },
+      { kind: 'program', slug: 'servicenow-crm', label: 'ServiceNow CRM', isNew: true },
+      { kind: 'program', slug: 'servicenow-grc', label: 'ServiceNow GRC' },
+      { kind: 'program', slug: 'servicenow-fdse', label: 'ServiceNow FDSE' },
+      { kind: 'program', slug: 'servicenow-ba', label: 'ServiceNow BA' },
     ],
     page: true,
   },
@@ -49,10 +49,10 @@ export const tracks: Track[] = [
     intro:
       'Salesforce courses for administrators, developers and business analysts, including Agentforce, the platform’s AI agents.',
     courses: [
-      { kind: 'course', id: 'salesforce-admin', name: 'Salesforce Admin' },
+      { kind: 'program', slug: 'salesforce-admin', label: 'Salesforce Admin' },
       { kind: 'program', slug: 'salesforce', label: 'Salesforce Masters & Agentforce' },
-      { kind: 'course', id: 'salesforce-fde', name: 'Salesforce FDE', isNew: true },
-      { kind: 'course', id: 'salesforce-ba', name: 'Salesforce BA' },
+      { kind: 'program', slug: 'salesforce-fde', label: 'Salesforce FDE', isNew: true },
+      { kind: 'program', slug: 'salesforce-ba', label: 'Salesforce BA' },
     ],
     page: true,
   },
@@ -61,9 +61,9 @@ export const tracks: Track[] = [
     name: 'Workday',
     intro: 'Workday courses for HCM, Finance and Integration roles.',
     courses: [
-      { kind: 'course', id: 'workday-hcm', name: 'Workday Techno-functional (HCM)' },
-      { kind: 'course', id: 'workday-finance', name: 'Workday Finance', isNew: true },
-      { kind: 'course', id: 'workday-integration', name: 'Workday Integration', isNew: true },
+      { kind: 'program', slug: 'workday-hcm', label: 'Workday Techno-functional (HCM)' },
+      { kind: 'program', slug: 'workday-finance', label: 'Workday Finance', isNew: true },
+      { kind: 'program', slug: 'workday-integration', label: 'Workday Integration', isNew: true },
     ],
     page: true,
   },
@@ -81,11 +81,11 @@ export const tracks: Track[] = [
       'Courses for the roles companies are hiring for in AI and data: machine learning, data science, data engineering, data analytics, AI engineering and AI product ownership.',
     courses: [
       { kind: 'program', slug: 'ai-ml', label: 'AI/ML' },
-      { kind: 'course', id: 'data-science', name: 'Data Science' },
-      { kind: 'course', id: 'data-engineering', name: 'Data Engineering' },
-      { kind: 'course', id: 'data-analytics', name: 'Data Analytics' },
+      { kind: 'program', slug: 'data-science', label: 'Data Science' },
+      { kind: 'program', slug: 'data-engineering', label: 'Data Engineering' },
+      { kind: 'program', slug: 'data-analytics', label: 'Data Analytics' },
       { kind: 'program', slug: 'agentic-ai', label: 'AI Engineering' },
-      { kind: 'course', id: 'ai-product-owner', name: 'AI Product Owner' },
+      { kind: 'program', slug: 'ai-product-owner', label: 'AI Product Owner' },
     ],
     page: true,
   },
@@ -95,15 +95,15 @@ export const tracks: Track[] = [
     intro:
       'Full stack development with AI built in, in the stack you want to work in: Python, Java or MERN (React and Node.js), plus business analysis with generative AI.',
     courses: [
-      { kind: 'course', id: 'python-full-stack', name: 'Python Full Stack with AI' },
-      { kind: 'course', id: 'java-full-stack', name: 'Java Full Stack with AI' },
+      { kind: 'program', slug: 'python-full-stack', label: 'Python Full Stack with AI' },
+      { kind: 'program', slug: 'java-full-stack', label: 'Java Full Stack with AI' },
       {
         kind: 'program',
         slug: 'full-stack-ai',
         label: 'MERN Stack with AI',
         text: 'React + Node.js + databases',
       },
-      { kind: 'course', id: 'business-analyst-genai', name: 'Business Analyst with GenAI' },
+      { kind: 'program', slug: 'business-analyst-genai', label: 'Business Analyst with GenAI' },
     ],
     page: true,
   },
@@ -120,6 +120,10 @@ export const trackPrograms = (track: Track) =>
     const program = getProgram(course.slug);
     return program ? [{ entry: course, program }] : [];
   }) as { entry: Extract<TrackCourse, { kind: 'program' }>; program: Program }[];
+
+/** The track that lists a course or program (the first one, if several do). */
+export const trackOf = (slug: string) =>
+  tracks.find((track) => track.courses.some((course) => course.kind === 'program' && course.slug === slug));
 
 /** A track's courses listed without their own page yet. */
 export const trackListedCourses = (track: Track) =>

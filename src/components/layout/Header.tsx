@@ -126,7 +126,12 @@ function MenuLink({ item, compact = false }: { item: NavItem; compact?: boolean 
           )}
         </span>
         {item.description && (
-          <span className={cn('mt-0.5 block truncate text-muted', compact ? 'text-[12px]' : 'text-[13px]')}>
+          <span
+            className={cn(
+              'mt-0.5 block text-muted',
+              compact ? 'line-clamp-2 text-[12px]' : 'truncate text-[13px]',
+            )}
+          >
             {item.description}
           </span>
         )}
@@ -143,8 +148,10 @@ function CategoryMenu({ group }: { group: NavGroup & { categories: NonNullable<N
   const pathname = usePathname();
   const start = Math.max(
     0,
-    group.categories.findIndex((category) =>
-      category.items.some((item) => pathname.startsWith(item.href.split('#')[0])),
+    group.categories.findIndex(
+      (category) =>
+        pathname.startsWith(category.href) ||
+        category.items.some((item) => pathname.startsWith(item.href.split('#')[0])),
     ),
   );
   const [active, setActive] = useState(start);
@@ -190,22 +197,26 @@ function CategoryMenu({ group }: { group: NavGroup & { categories: NonNullable<N
             </li>
           ))}
         </ul>
-        {current.items.length > 1 && (
+        {/* One link at the bottom: the track's own page ("See all 8 ServiceNow courses"), or, for a track
+            with a single course, the Training page. */}
+        {current.items.length > 1 ? (
           <Link
             href={current.href}
-            className="mx-3 mt-2 inline-flex items-center gap-1.5 self-start text-[13px] font-medium text-brand hover:underline"
-          >
-            View the {current.label} track <ArrowRight aria-hidden className="size-3.5" />
-          </Link>
-        )}
-        {group.footer && (
-          <Link
-            href={group.footer.href}
             className="mt-auto flex items-center justify-between rounded-xl bg-canvas px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
           >
-            {group.footer.label}
+            See all {current.items.length} {current.label} courses
             <ArrowRight aria-hidden className="size-4" />
           </Link>
+        ) : (
+          group.footer && (
+            <Link
+              href={group.footer.href}
+              className="mt-auto flex items-center justify-between rounded-xl bg-canvas px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
+            >
+              {group.footer.label}
+              <ArrowRight aria-hidden className="size-4" />
+            </Link>
+          )
         )}
       </div>
     </div>
@@ -346,8 +357,10 @@ export function Header() {
   // Phone menu: which training track is open. Undefined = the track of the page you are on.
   const [openTrack, setOpenTrack] = useState<string | null | undefined>(undefined);
   const trainingCategories = navigation.filter(isGroup).find((group) => group.categories)?.categories ?? [];
-  const currentTrack = trainingCategories.find((category) =>
-    category.items.some((item) => !item.plain && pathname === normalise(item.href)),
+  const currentTrack = trainingCategories.find(
+    (category) =>
+      pathname === normalise(category.href) ||
+      category.items.some((item) => pathname === normalise(item.href.split('#')[0])),
   )?.label;
   const expandedTrack = openTrack === undefined ? currentTrack : openTrack;
   useEffect(() => {
@@ -592,9 +605,9 @@ export function Header() {
                                   <li>
                                     <Link
                                       href={category.href}
-                                      className="flex items-center gap-1.5 rounded-xl px-3 py-2.5 text-[15px] font-medium text-brand-300"
+                                      className="mx-1 mt-2 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-[15px] font-semibold text-white transition-colors hover:border-white/40"
                                     >
-                                      View the {category.label} track{' '}
+                                      See all {category.items.length} {category.label} courses
                                       <ArrowRight aria-hidden className="size-4" />
                                     </Link>
                                   </li>

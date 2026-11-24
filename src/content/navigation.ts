@@ -103,6 +103,18 @@ const trainingCategories: NavCategory[] = tracks.map((track) => {
         ];
       const program = getProgram(course.slug);
       if (!program) return [];
+      // Track courses keep the simple icon, with a short line from their page; the flagship programs keep their icon.
+      if (!PROGRAM_ICONS.some((slug) => slug === program.slug))
+        return [
+          {
+            label: course.label ?? program.shortName,
+            href: `/training-placement/${program.slug}/`,
+            description: course.text ?? program.highlights[0],
+            icon: 'program',
+            plain: true,
+            isNew: course.isNew,
+          },
+        ];
       return [
         {
           label: course.label ?? program.shortName,

@@ -39,7 +39,7 @@ export function LmsPlatform() {
   };
 
   return (
-    <section id="learning-platform" className="border-y border-line bg-paper py-20 sm:py-28">
+    <section id="learning-platform" className="overflow-x-clip border-y border-line bg-paper py-20 sm:py-28">
       <Container>
         <div
           ref={ref}

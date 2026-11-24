@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getProgram, programs } from '@/content/programs';
+import { allPrograms, getProgram, programs } from '@/content/programs';
 import { site } from '@/content/site';
 import { seoFor } from '@/content/seo';
-import { getTrack, trackPages, trackPrograms } from '@/content/tracks';
+import { getTrack, trackOf, trackPages, trackPrograms } from '@/content/tracks';
 import { TrackPage } from '@/components/program/TrackPage';
 import { ProgramHero } from '@/components/program/ProgramHero';
 import { SectionNav } from '@/components/program/SectionNav';
@@ -22,9 +22,9 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  // Program pages, plus a page for each multi-course training track (e.g. /training-placement/ai-and-data/).
+  // Program and course pages, plus a page for each multi-course training track (e.g. /training-placement/ai-and-data-courses/).
   return [
-    ...programs.map((program) => ({ slug: program.slug })),
+    ...allPrograms.map((program) => ({ slug: program.slug })),
     ...trackPages().map((track) => ({ slug: track.slug })),
   ];
 }
@@ -49,7 +49,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!program) return {};
   const path = `/training-placement/${program.slug}/`;
   const seo = seoFor(path);
-  const title = seo?.title ?? `${program.name} Course in Hyderabad`;
+  // Programs have titles from the SEO team (seo.ts); a course without one uses its short name,
+  // e.g. "ServiceNow HRSD Course in Hyderabad".
+  const title = seo?.title ?? `${program.shortName} Course in Hyderabad`;
   const description =
     seo?.description ??
     `${program.summary} Hands-on projects, interview preparation and placement assistance at ARA Solutions, Hyderabad.`;
@@ -67,6 +69,7 @@ export default async function ProgramPage({ params }: Props) {
   if (track?.page) return <TrackPage track={track} />;
   const program = getProgram(slug);
   if (!program) notFound();
+  const programTrack = trackOf(program.slug);
 
   const sections = [
     { id: 'overview', label: 'Overview' },
@@ -121,12 +124,18 @@ export default async function ProgramPage({ params }: Props) {
     })),
   };
 
-  // Up to 3 suggestions: same category first, so the list stays short however many courses exist.
-  const others = programs.filter((item) => item.slug !== program.slug);
+  // Up to 3 suggestions: other courses in the same track first, then the same category, then the
+  // flagship programs, so the list stays short however many courses exist.
+  const sameTrack = programTrack ? trackPrograms(programTrack).map(({ program: item }) => item) : [];
   const related = [
-    ...others.filter((item) => item.family === program.family),
-    ...others.filter((item) => item.family !== program.family),
-  ].slice(0, 3);
+    ...new Set([
+      ...sameTrack,
+      ...allPrograms.filter((item) => item.family === program.family),
+      ...programs,
+    ]),
+  ]
+    .filter((item) => item.slug !== program.slug)
+    .slice(0, 3);
 
   return (
     <>
@@ -134,7 +143,7 @@ export default async function ProgramPage({ params }: Props) {
       {program.faqs.length > 0 && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
-      <ProgramHero program={program} />
+      <ProgramHero program={program} track={programTrack?.page ? programTrack : undefined} />
       <LmsIncluded />
       <SectionNav sections={sections} />
       <ProgramBody program={program} />
@@ -169,7 +178,7 @@ export default async function ProgramPage({ params }: Props) {
               href="/training-placement/"
               className="shrink-0 text-[15px] font-medium underline-offset-4 hover:underline"
             >
-              All {programs.length} programs →
+              All training programs →
             </Link>
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

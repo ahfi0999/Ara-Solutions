@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Check } from 'lucide-react';
 import { caseStudies } from '@/content/records';
 import { alumniCompanies } from '@/content/home';
-import { programs } from '@/content/programs';
+import { allPrograms } from '@/content/programs';
 import { stats } from '@/content/site';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container, SectionHeading } from '@/components/ui/Section';
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 /** Training outcomes: real figures only (from ARA's original website and the program list). */
 const TRAINING_FIGURES = [
   ...stats.filter((stat) => /placed|years/i.test(stat.label)),
-  { value: programs.length, suffix: '', label: 'Career-focused training programs' },
+  { value: allPrograms.length, suffix: '', label: 'Career-focused training courses' },
 ];
 
 export default function CaseStudiesPage() {

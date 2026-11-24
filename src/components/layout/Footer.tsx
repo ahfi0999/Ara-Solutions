@@ -13,10 +13,11 @@ const extraCompanyLinks = [
 
 export function Footer() {
   const year = new Date().getFullYear();
+  // A menu with categories (Training) lists its categories here, not every course in them.
   const columns = navigation.filter(isGroup).map((group) => ({
     title: group.label,
     links: [
-      ...group.items,
+      ...(group.categories?.map(({ label, href }) => ({ label, href })) ?? group.items),
       ...(group.footer ? [group.footer] : []),
       ...(group.label === 'Company' ? extraCompanyLinks : []),
     ],
@@ -91,7 +92,7 @@ export function Footer() {
           <div className="space-y-1">
             <p>© {year} ARA Solutions. All rights reserved.</p>
             <p className="text-[12px] text-white/35">
-              Salesforce and ServiceNow are trademarks of their respective owners. ARA Solutions is an independent
+              Salesforce, ServiceNow and Workday are trademarks of their respective owners. ARA Solutions is an independent
               training provider.
             </p>
           </div>

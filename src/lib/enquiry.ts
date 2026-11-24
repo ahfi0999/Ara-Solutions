@@ -1,22 +1,37 @@
 /** Shared enquiry form definition and validation, used by the browser form and the API route. */
-import { programs } from '@/content/programs';
+import { allPrograms } from '@/content/programs';
 import { services } from '@/content/services';
+import { tracks, trackPrograms } from '@/content/tracks';
 
 export type Interest = {
   value: string;
   label: string;
   group: 'Hire talent' | 'Training & placement' | 'Other';
+  /** Sub-heading in the form's list, e.g. "ServiceNow courses" (defaults to the group). */
+  section?: string;
 };
+
+/** Every course and program, track by track in the menu's order and with the menu's names. */
+const trainingInterests: Interest[] = [
+  ...tracks.flatMap((track) =>
+    trackPrograms(track).map(({ entry, program }) => ({
+      value: program.slug,
+      label: entry.label ?? program.name,
+      group: 'Training & placement' as const,
+      section: `${track.name} courses`,
+    })),
+  ),
+];
+// Anything not listed in a track still gets an option.
+for (const program of allPrograms)
+  if (!trainingInterests.some((item) => item.value === program.slug))
+    trainingInterests.push({ value: program.slug, label: program.name, group: 'Training & placement' });
 
 /** Options come straight from the service and program lists, so they never get out of sync. */
 export const INTERESTS: readonly Interest[] = [
   ...services.map((service) => ({ value: service.slug, label: service.name, group: 'Hire talent' as const })),
   { value: 'hiring', label: 'Other hiring requirement', group: 'Hire talent' },
-  ...programs.map((program) => ({
-    value: program.slug,
-    label: program.name,
-    group: 'Training & placement' as const,
-  })),
+  ...trainingInterests,
   { value: 'not-sure', label: 'Not sure yet, help me choose', group: 'Other' },
 ];
 

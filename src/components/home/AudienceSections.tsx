@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, type LucideIcon } from 'lucide-react';
 import { trainingApproach } from '@/content/company';
 import { caseStudies } from '@/content/records';
-import { programs } from '@/content/programs';
+import { allPrograms } from '@/content/programs';
 import { stats } from '@/content/site';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
@@ -94,7 +94,7 @@ export function TrainingPillars() {
 /** Training figures: real numbers only (from ARA's original website and the program list). */
 const CAREER_FIGURES = [
   ...stats.filter((stat) => /placed|years/i.test(stat.label)),
-  { value: programs.length, suffix: '', label: 'Career-focused programs' },
+  { value: allPrograms.length, suffix: '', label: 'Career-focused courses' },
 ];
 
 /** Results for both audiences, side by side: hiring case studies and careers built. */

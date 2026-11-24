@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import type { Program } from '@/content/programs';
+import { trackHref, type Track } from '@/content/tracks';
 import { accent } from '@/lib/accent';
 import { cn } from '@/lib/cn';
 import { Container } from '@/components/ui/Section';
@@ -10,11 +11,13 @@ import { SplitWords, Tilt } from '@/components/motion/primitives';
 import { HeroPhoto } from '@/components/motion/HeroPhoto';
 import { DarkHeroBackdrop } from '@/components/motion/DarkHeroBackdrop';
 
-export function ProgramHero({ program }: { program: Program }) {
+/** `track`: the training track page this program belongs to, shown in the breadcrumb. */
+export function ProgramHero({ program, track }: { program: Program; track?: Track }) {
   const a = accent[program.accent];
+  const photo = program.image ?? program.heroImage;
   return (
     <section className="aurora relative isolate overflow-hidden pb-16 pt-24 text-white sm:pb-24 sm:pt-[clamp(6.5rem,14vh,9rem)] [@media(max-width:639px)_and_(max-height:600px)]:pt-[5.25rem]">
-      {program.image && <HeroPhoto src={program.image} />}
+      {photo && <HeroPhoto src={photo} />}
       <DarkHeroBackdrop />
       <div
         aria-hidden
@@ -35,6 +38,16 @@ export function ProgramHero({ program }: { program: Program }) {
               </Link>
             </li>
             <ChevronRight aria-hidden className="size-3.5" />
+            {track && (
+              <>
+                <li>
+                  <Link href={trackHref(track)} className="hover:text-white">
+                    {track.name} courses
+                  </Link>
+                </li>
+                <ChevronRight aria-hidden className="size-3.5" />
+              </>
+            )}
             <li aria-current="page" className="text-white/80">
               {program.shortName}
             </li>

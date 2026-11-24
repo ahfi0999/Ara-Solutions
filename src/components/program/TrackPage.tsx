@@ -6,14 +6,14 @@ import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { ClosingCta } from '@/components/home/ClosingCta';
 
 /**
- * A training track (e.g. ServiceNow): its full programs as the usual program cards, then its other
- * courses as cards with an "Ask about this course" button (a "New" badge where the client marked one).
- * Each course card has an anchor (#id) so the menu can link straight to it.
+ * A training track (e.g. ServiceNow): every course with its own page as the usual program card, in the
+ * client's order (a "New" badge where the client marked one), then any course without a page yet as a
+ * card with an "Ask about this course" button. Each card has an anchor (#slug) so links can point at it.
  */
 export function TrackPage({ track }: { track: Track }) {
   const programs = trackPrograms(track);
   const courses = trackListedCourses(track);
-  const fresh = track.courses.filter((course) => course.kind === 'course' && course.isNew).length;
+  const fresh = track.courses.filter((course) => course.isNew).length;
   return (
     <>
       <PageHero eyebrow="Training track" title={`${track.name} courses`} intro={track.intro}>
@@ -28,19 +28,21 @@ export function TrackPage({ track }: { track: Track }) {
           {programs.length > 0 && (
             <>
               <SectionHeading
-                eyebrow="Full programs"
+                eyebrow="Choose your course"
                 title={
                   <>
-                    Programs with the full <em>syllabus</em>
+                    Every course, with its full <em>syllabus</em>
                   </>
                 }
-                intro="Curriculum, projects, certifications and careers, each on its own page."
+                intro="Open a course for its curriculum, tools, projects, certifications and the roles it prepares you for."
               />
-              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {programs.map(({ program }) => (
-                  <ProgramCard key={program.slug} program={program} />
+              <ul className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {programs.map(({ entry, program }) => (
+                  <li key={program.slug} id={program.slug} className="scroll-mt-32">
+                    <ProgramCard program={program} isNew={entry.isNew} />
+                  </li>
                 ))}
-              </div>
+              </ul>
             </>
           )}
 

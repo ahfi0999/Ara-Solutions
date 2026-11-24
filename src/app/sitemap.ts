@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { programs } from '@/content/programs';
+import { allPrograms } from '@/content/programs';
 import { services } from '@/content/services';
 import { site } from '@/content/site';
 import { siteUpdated } from '@/content/seo';
@@ -11,7 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/services/',
     ...services.map((s) => `/services/${s.slug}/`),
     '/training-placement/',
-    ...programs.map((p) => `/training-placement/${p.slug}/`),
+    // Program and course pages, each with its full syllabus.
+    ...allPrograms.map((p) => `/training-placement/${p.slug}/`),
     // Track pages with at least one full program page (others stay out until they have one).
     ...trackPages()
       .filter((t) => trackPrograms(t).length > 0)

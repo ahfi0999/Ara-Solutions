@@ -7,6 +7,9 @@ import { BACKGROUNDS, INTERESTS, enquirySummary, validateEnquiry, type FieldErro
 import { lineFor, staffingLine, trainingLine, whatsappLink, type ContactLine } from '@/content/site';
 import { cn } from '@/lib/cn';
 
+/** The list's sub-headings in order: hiring, then one per training track, then "Other". */
+const SECTIONS = [...new Set(INTERESTS.map((item) => item.section ?? item.group))];
+
 type Status = 'idle' | 'sending' | 'sent' | 'fallback';
 
 const inputBase =
@@ -243,9 +246,9 @@ export function EnquiryForm({
             <option value="" disabled>
               Choose an option
             </option>
-            {(['Hire talent', 'Training & placement', 'Other'] as const).map((group) => (
-              <optgroup key={group} label={group}>
-                {INTERESTS.filter((item) => item.group === group).map((item) => (
+            {SECTIONS.map((section) => (
+              <optgroup key={section} label={section}>
+                {INTERESTS.filter((item) => (item.section ?? item.group) === section).map((item) => (
                   <option key={item.value} value={item.value}>
                     {item.label}
                   </option>

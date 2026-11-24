@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useInView } from 'motion/react';
 import { ArrowUpRight, Check } from 'lucide-react';
-import { programs, type Program } from '@/content/programs';
+import { allPrograms, type Program } from '@/content/programs';
 import { accent } from '@/lib/accent';
 import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
@@ -13,7 +13,8 @@ import { ProgramExplorer } from './ProgramExplorer';
 import { ProgramBanner } from '@/components/visuals/ProgramBanner';
 
 /** Program card: coloured glow per program, cursor spotlight and a gentle 3D tilt. */
-export function ProgramCard({ program }: { program: Program }) {
+/** `isNew`: show a "New" badge (courses the client marked new). */
+export function ProgramCard({ program, isNew = false }: { program: Program; isNew?: boolean }) {
   const a = accent[program.accent];
   const ref = useRef<HTMLAnchorElement>(null);
   // Phones have no hover, so the photo's light sweep plays once as the card comes into view.
@@ -54,9 +55,16 @@ export function ProgramCard({ program }: { program: Program }) {
           />
 
           <div className="absolute inset-x-6 top-5 flex items-center justify-between">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white/75">
-              <span className={cn('size-1.5 rounded-full', a.dot)} />
-              {program.family}
+            <span className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white/75">
+                <span className={cn('size-1.5 rounded-full', a.dot)} />
+                {program.family}
+              </span>
+              {isNew && (
+                <span className="rounded-full bg-brand px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
+                  New
+                </span>
+              )}
             </span>
             <span className="flex size-9 items-center justify-center rounded-full border border-white/15 transition-all duration-500 group-hover:rotate-45 group-hover:border-white group-hover:bg-white group-hover:text-ink">
               <ArrowUpRight aria-hidden className="size-4.5" />
@@ -94,19 +102,19 @@ function Heading() {
             Build your <em>technology career</em>
           </>
         }
-        intro={`${programs.length} career-focused programs with hands-on projects, interview preparation and placement assistance.`}
+        intro={`${allPrograms.length} career-focused courses with hands-on projects, interview preparation and placement assistance.`}
       />
       <Link
         href="/training-placement/"
         className="shrink-0 text-[15px] font-medium text-text underline-offset-4 hover:underline"
       >
-        Compare all programs →
+        See all courses →
       </Link>
     </div>
   );
 }
 
-/** Homepage training section: category tabs + grid, first 6 programs, "View all" when there are more. */
+/** Homepage training section: track tabs + grid, the first 6 courses (flagship programs first), "View all" when there are more. */
 export function ProgramShowcase() {
   return (
     <section id="programs" className="py-20 sm:py-28">

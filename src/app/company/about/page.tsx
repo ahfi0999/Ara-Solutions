@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight, BookOpen, Check, Cog, GraduationCap, Handshake } from 'lucide-react';
 import { about, capabilities, principles, trainingApproach } from '@/content/company';
-import { programs } from '@/content/programs';
+import { allPrograms } from '@/content/programs';
+import { trackHref, trackPrograms, tracks } from '@/content/tracks';
 import { services } from '@/content/services';
 import { stats } from '@/content/site';
 import { PageHero } from '@/components/ui/PageHero';
@@ -27,7 +28,7 @@ const whatWeDo = [
   })),
   {
     title: 'Training & Placement',
-    text: `${programs.length} career-focused programs`,
+    text: `${allPrograms.length} career-focused courses`,
     href: '/training-placement/',
   },
 ];
@@ -184,26 +185,35 @@ export default function AboutPage() {
           </div>
           <div className="content-center">
             <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-muted">
-              {programs.length} career programs
+              {allPrograms.length} courses in {tracks.length} tracks
             </p>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {programs.map((program, index) => (
-                <Reveal as="li" key={program.slug} delay={index * 0.05} className="h-full">
-                  <Link
-                    href={`/training-placement/${program.slug}/`}
-                    className="group flex h-full items-center justify-between gap-3 rounded-2xl border border-line bg-paper p-5 shadow-soft transition-colors hover:border-brand/30"
-                  >
-                    <span>
-                      <span className="block font-semibold tracking-tight">{program.shortName}</span>
-                      <span className="mt-0.5 block text-[13px] text-muted">{program.highlights[0]}</span>
-                    </span>
-                    <ArrowUpRight
-                      aria-hidden
-                      className="size-5 shrink-0 text-muted transition-colors group-hover:text-brand"
-                    />
-                  </Link>
-                </Reveal>
-              ))}
+              {tracks.map((track, index) => {
+                const courses = trackPrograms(track);
+                return (
+                  <Reveal as="li" key={track.slug} delay={index * 0.05} className="h-full">
+                    <Link
+                      href={
+                        track.page
+                          ? trackHref(track)
+                          : `/training-placement/${courses[0]?.program.slug ?? ''}/`
+                      }
+                      className="group flex h-full items-center justify-between gap-3 rounded-2xl border border-line bg-paper p-5 shadow-soft transition-colors hover:border-brand/30"
+                    >
+                      <span>
+                        <span className="block font-semibold tracking-tight">{track.name}</span>
+                        <span className="mt-0.5 block text-[13px] text-muted">
+                          {courses.length} {courses.length === 1 ? 'course' : 'courses'}
+                        </span>
+                      </span>
+                      <ArrowUpRight
+                        aria-hidden
+                        className="size-5 shrink-0 text-muted transition-colors group-hover:text-brand"
+                      />
+                    </Link>
+                  </Reveal>
+                );
+              })}
             </ul>
             <ButtonLink href="/training-placement/" className="mt-6" arrow>
               Explore training programs

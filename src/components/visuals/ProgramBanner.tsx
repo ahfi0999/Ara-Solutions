@@ -1,4 +1,26 @@
-import { Bot, BrainCircuit, Code2, Layers, ShieldCheck, type LucideIcon } from 'lucide-react';
+import {
+  Blocks,
+  Bot,
+  BrainCircuit,
+  Cable,
+  ChartColumn,
+  ClipboardList,
+  Code2,
+  Coffee,
+  Compass,
+  Database,
+  FlaskConical,
+  Headset,
+  Landmark,
+  Layers,
+  Rocket,
+  Settings2,
+  ShieldCheck,
+  Terminal,
+  Users,
+  Workflow,
+  type LucideIcon,
+} from 'lucide-react';
 import type { Program } from '@/content/programs';
 import { cn } from '@/lib/cn';
 
@@ -6,17 +28,39 @@ import { cn } from '@/lib/cn';
 const FAMILY_ICON: Record<Program['family'], LucideIcon> = {
   'Enterprise platforms': Layers,
   AI: BrainCircuit,
+  Data: Database,
   Security: ShieldCheck,
   Development: Code2,
+  'Business analysis': ClipboardList,
 };
 
 /** Specific icons for programs that share a family but deserve their own picture. */
 const PROGRAM_ICON: Partial<Record<Program['slug'], LucideIcon>> = {
   'agentic-ai': Bot,
+  'servicenow-admin-platform': Settings2,
+  'servicenow-itsm-development': Workflow,
+  'servicenow-hrsd': Users,
+  'servicenow-crm': Headset,
+  'servicenow-grc': ShieldCheck,
+  'servicenow-fdse': Rocket,
+  'servicenow-ba': ClipboardList,
+  'salesforce-admin': Settings2,
+  'salesforce-fde': Rocket,
+  'salesforce-ba': ClipboardList,
+  'workday-hcm': Users,
+  'workday-finance': Landmark,
+  'workday-integration': Cable,
+  'data-science': FlaskConical,
+  'data-engineering': Database,
+  'data-analytics': ChartColumn,
+  'ai-product-owner': Compass,
+  'python-full-stack': Terminal,
+  'java-full-stack': Coffee,
+  'business-analyst-genai': Blocks,
 };
 
 /** Banner backgrounds per accent (written out in full so Tailwind can detect them). */
-const BANNER_BG: Record<Program['accent'], string> = {
+export const BANNER_BG: Record<Program['accent'], string> = {
   sky: 'from-sky-500/45 via-sky-700/25 to-ink',
   emerald: 'from-emerald-500/40 via-emerald-700/25 to-ink',
   violet: 'from-violet-500/45 via-violet-700/25 to-ink',

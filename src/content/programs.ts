@@ -3,12 +3,20 @@
  * Cybersecurity and Full Stack with AI. ServiceNow, Cybersecurity, AI & ML and Full Stack content
  * follows ARA's existing website.
  *
+ * The other courses in each training track have the same kind of page; their content is in courses/.
+ *
  * Fees, durations and batch dates are intentionally NOT listed: visitors are asked to speak
  * with an advisor. Add them to `details` once confirmed and they will appear on the page.
  */
 
+import { courses, type CourseSlug } from './courses';
+
+/** The six flagship programs: the ones on the home page, the Training page and in the site's counts. */
 export type ProgramSlug =
   'salesforce' | 'servicenow' | 'ai-ml' | 'agentic-ai' | 'cybersecurity' | 'full-stack-ai';
+
+/** Any page under /training-placement/<slug>/ with a full syllabus: a flagship program or a course. */
+export type PageSlug = ProgramSlug | CourseSlug;
 
 export type Module = {
   title: string;
@@ -16,9 +24,11 @@ export type Module = {
   topics: string[];
 };
 
-export type Program = {
-  slug: ProgramSlug;
-  family: 'Enterprise platforms' | 'AI' | 'Security' | 'Development';
+export type ProgramFamily = 'Enterprise platforms' | 'AI' | 'Data' | 'Security' | 'Development' | 'Business analysis';
+
+export type Program<Slug extends string = PageSlug> = {
+  slug: Slug;
+  family: ProgramFamily;
   name: string;
   shortName: string;
   tagline: string;
@@ -29,8 +39,10 @@ export type Program = {
   details?: { duration?: string; mode?: string; fees?: string; nextBatch?: string };
   /** Optional official product logo (path under /public) shown on the program card banner. */
   logo?: string;
-  /** Optional photo (path under /public) shown as the program card banner. */
+  /** Optional photo (path under /public) shown as the program card banner and behind the page hero. */
   image?: string;
+  /** Optional photo behind the page hero only (the card keeps its coloured banner with the course name). */
+  heroImage?: string;
   highlights: string[];
   audience: { title: string; text: string }[];
   outcomes: string[];
@@ -42,7 +54,7 @@ export type Program = {
   faqs: { q: string; a: string }[];
 };
 
-export const programs: Program[] = [
+export const programs: Program<ProgramSlug>[] = [
   {
     slug: 'salesforce',
     image: '/images/programs/salesforce.jpg',
@@ -933,7 +945,10 @@ export const programs: Program[] = [
   },
 ];
 
-export const getProgram = (slug: string) => programs.find((program) => program.slug === slug);
+/** Every page with a full syllabus: the flagship programs, then the courses in each track (courses/). */
+export const allPrograms: Program[] = [...programs, ...courses];
+
+export const getProgram = (slug: string) => allPrograms.find((program) => program.slug === slug);
 
 /** Most programs listed in compact places: menus, footer, homepage cards and the hero orbit. */
 export const LIST_LIMIT = 6;
