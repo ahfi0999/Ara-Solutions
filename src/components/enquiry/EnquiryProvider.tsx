@@ -14,7 +14,7 @@ import { X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { EnquiryForm } from './EnquiryForm';
 
-type OpenOptions = { interest?: string; title?: string; subtitle?: string };
+type OpenOptions = { interest?: string; title?: string };
 type EnquiryContextValue = { open: (options?: OpenOptions) => void };
 
 const EnquiryContext = createContext<EnquiryContextValue | null>(null);
@@ -55,7 +55,7 @@ export function EnquiryProvider({ children }: { children: ReactNode }) {
       {children}
       <dialog
         ref={dialogRef}
-        aria-labelledby="enquiry-title"
+        aria-labelledby={options.title ? 'enquiry-title' : 'enquiry-label'}
         onClick={(event) => event.target === dialogRef.current && close()}
         className="m-auto w-[min(560px,calc(100%-1.5rem))] max-h-[calc(100dvh-1.5rem)] overflow-y-auto rounded-3xl bg-paper p-0 text-text shadow-lift backdrop:bg-ink/70 backdrop:backdrop-blur-sm open:animate-[dialog-in_0.25s_ease-out]"
       >
@@ -68,14 +68,15 @@ export function EnquiryProvider({ children }: { children: ReactNode }) {
           >
             <X className="size-5" aria-hidden />
           </button>
-          <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand">Talk to us</p>
-          <h2 id="enquiry-title" className="mt-2 pr-10 text-2xl font-semibold tracking-tight">
-            {options.title ?? 'Get a call back from our team'}
-          </h2>
-          <p className="mt-2 text-muted">
-            {options.subtitle ??
-              'Share a few details and our team will get back to you, whether you are hiring or looking to start a training program.'}
+          <p id="enquiry-label" className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand">
+            Talk to us
           </p>
+          {/* A button may name what the visitor came about (e.g. a course); there is no generic heading. */}
+          {options.title && (
+            <h2 id="enquiry-title" className="mt-2 pr-10 text-2xl font-semibold tracking-tight">
+              {options.title}
+            </h2>
+          )}
           <div className="mt-6">
             <EnquiryForm key={formKey} defaultInterest={options.interest} compact onDone={close} />
           </div>
