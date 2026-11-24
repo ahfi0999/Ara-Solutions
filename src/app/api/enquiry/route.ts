@@ -1,4 +1,5 @@
 import { BACKGROUNDS, INTERESTS, enquirySummary, labelFor, validateEnquiry } from '@/lib/enquiry';
+import { appendRow } from '@/lib/sheets';
 
 /**
  * Receives enquiry-form submissions and delivers them to every channel that is configured:
@@ -6,6 +7,9 @@ import { BACKGROUNDS, INTERESTS, enquirySummary, labelFor, validateEnquiry } fro
  *   LEAD_WEBHOOK_URL               JSON POST (Google Apps Script / Sheets, Zapier, Make, a CRM...)
  *   RESEND_API_KEY + LEAD_EMAIL_TO Email via Resend (LEAD_EMAIL_FROM optional)
  *   SALESFORCE_WEB_TO_LEAD_OID     Salesforce Web-to-Lead (creates a Lead in your org)
+ *   GOOGLE_SHEETS_ID +             A new row in a Google Sheet, written by a service account the sheet
+ *   GOOGLE_SHEETS_CLIENT_EMAIL +   is shared with (GOOGLE_SHEETS_TAB optional, default Sheet1)
+ *   GOOGLE_SHEETS_PRIVATE_KEY
  *
  * If nothing is configured the endpoint answers 503 NOT_CONFIGURED and the form tells the
  * visitor honestly, offering WhatsApp instead. It never pretends a lead was saved.
@@ -62,6 +66,28 @@ async function toEmail(apiKey: string, to: string, lead: Lead) {
   if (!response.ok) throw new Error(`email responded ${response.status}`);
 }
 
+/** One row per enquiry: Received (IST) | Name | Phone | Email | Interested in | I am a | Message | Page. */
+async function toSheet(lead: Lead, receivedAt: string) {
+  await appendRow(
+    {
+      sheetId: process.env.GOOGLE_SHEETS_ID!,
+      clientEmail: process.env.GOOGLE_SHEETS_CLIENT_EMAIL!,
+      privateKey: process.env.GOOGLE_SHEETS_PRIVATE_KEY!,
+      tab: process.env.GOOGLE_SHEETS_TAB || undefined,
+    },
+    [
+      new Date(receivedAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      lead.name,
+      lead.phone,
+      lead.email,
+      labelFor(INTERESTS, lead.interest),
+      lead.background ? labelFor(BACKGROUNDS, lead.background) : '',
+      lead.message,
+      lead.source,
+    ],
+  );
+}
+
 async function toSalesforce(oid: string, lead: Lead) {
   const [first, ...rest] = lead.name.split(' ');
   const form = new URLSearchParams({
@@ -116,6 +142,12 @@ export async function POST(request: Request) {
     deliveries.push(toEmail(process.env.RESEND_API_KEY, process.env.LEAD_EMAIL_TO, data));
   if (process.env.SALESFORCE_WEB_TO_LEAD_OID)
     deliveries.push(toSalesforce(process.env.SALESFORCE_WEB_TO_LEAD_OID, data));
+  if (
+    process.env.GOOGLE_SHEETS_ID &&
+    process.env.GOOGLE_SHEETS_CLIENT_EMAIL &&
+    process.env.GOOGLE_SHEETS_PRIVATE_KEY
+  )
+    deliveries.push(toSheet(data, receivedAt));
 
   if (deliveries.length === 0) {
     return Response.json(

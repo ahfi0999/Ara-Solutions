@@ -13,7 +13,7 @@ frontend:
         # Server code (the enquiry form and the Ask ARA chatbot) reads these at run time.
         # Amplify only exposes console environment variables during the build, so copy the
         # ones the site uses into .env.production. Values stay in the Amplify console, never in Git.
-        - env | grep -E '^(AI_BASE_URL|AI_API_KEY|AI_MODEL|LEAD_WEBHOOK_URL|RESEND_API_KEY|LEAD_EMAIL_TO|LEAD_EMAIL_FROM|SALESFORCE_WEB_TO_LEAD_OID)=' >> .env.production || true
+        - env | grep -E '^(AI_BASE_URL|AI_API_KEY|AI_MODEL|LEAD_WEBHOOK_URL|RESEND_API_KEY|LEAD_EMAIL_TO|LEAD_EMAIL_FROM|SALESFORCE_WEB_TO_LEAD_OID|GOOGLE_SHEETS_ID|GOOGLE_SHEETS_CLIENT_EMAIL|GOOGLE_SHEETS_PRIVATE_KEY|GOOGLE_SHEETS_TAB)=' >> .env.production || true
         - npm run build
   artifacts:
     baseDirectory: .next
