@@ -13,7 +13,7 @@ import { HeroPhoto } from '@/components/motion/HeroPhoto';
 export function ServiceHero({ service }: { service: Service }) {
   return (
     <section className="aurora relative isolate overflow-hidden pb-20 pt-28 text-white sm:pb-24 sm:pt-36">
-      {service.image && <HeroPhoto src={service.image} />}
+      {service.image && <HeroPhoto src={service.image} alt={service.imageAlt ?? service.name} />}
       <DarkHeroBackdrop />
       <Container>
         <nav aria-label="Breadcrumb" className="fade-up">
@@ -314,7 +314,8 @@ export function ServiceCards({ exclude, dark = false }: { exclude?: string; dark
                   {/* eslint-disable-next-line @next/next/no-img-element -- static card photo */}
                   <img
                     src={service.image}
-                    alt=""
+                    alt={service.imageAlt ?? service.name}
+                    title={service.imageAlt ?? service.name}
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"

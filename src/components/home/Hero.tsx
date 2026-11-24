@@ -45,6 +45,7 @@ export function Hero() {
         video="/videos/hero-team.mp4"
         mobileVideo="/videos/hero-team-mobile.mp4"
         poster="/videos/hero-team.jpg"
+        alt="IT professionals working together at a laptop"
         eager
         control
         overlayClassName="bg-gradient-to-r from-ink/90 via-ink/75 to-ink/55"

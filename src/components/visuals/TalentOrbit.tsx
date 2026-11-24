@@ -194,7 +194,8 @@ export function TalentOrbit() {
                   <motion.img
                     key={COMPANIES[companyIndex].src}
                     src={COMPANIES[companyIndex].src}
-                    alt=""
+                    alt={COMPANIES[companyIndex].name}
+                    title={COMPANIES[companyIndex].name}
                     initial={{ opacity: 0, scale: 0.6 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.6 }}
@@ -244,7 +245,7 @@ export function TalentOrbit() {
 
       {/* Centre */}
       <div className="absolute left-1/2 top-1/2 flex size-[22%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white shadow-[0_0_80px_-10px_rgb(229_35_45/0.6)]">
-        <Image src="/logo-mark.png" alt="" width={512} height={512} className="h-[58%] w-auto" priority />
+        <Image src="/logo-mark.png" alt="ARA Solutions" title="ARA Solutions" width={512} height={512} className="h-[58%] w-auto" priority />
       </div>
     </div>
   );

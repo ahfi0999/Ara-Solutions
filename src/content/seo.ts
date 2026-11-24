@@ -50,7 +50,7 @@ const pages: Record<string, PageSeo> = {
   '/training-placement/servicenow/': {
     title: 'ServiceNow Training & Placement in Hyderabad',
     description:
-      'Learn ServiceNow administration, ITSM, ITOM, scripting and Now Assist AI in Hyderabad, with hands-on projects, CSA exam preparation and placement assistance.',
+      'ServiceNow training in Hyderabad covering admin, development, HRSD and AI: 31 modules with hands-on labs, CSA, CAD and CIS-HR exam prep and placement support.',
   },
   '/training-placement/ai-ml/': {
     title: 'AI & Machine Learning Course in Hyderabad',
@@ -77,6 +77,36 @@ const pages: Record<string, PageSeo> = {
     title: 'Workday HCM Course in Hyderabad',
     description:
       'Workday HCM techno-functional course in Hyderabad: Core HCM, staffing, compensation, security, reports, calculated fields and EIB, with placement support.',
+  },
+  '/training-placement/workday-finance/': {
+    title: 'Workday Finance Course in Hyderabad',
+    description:
+      'Workday Finance course in Hyderabad: FDM, worktags, general ledger, procure to pay, receivables and month-end close, with hands-on labs and placement support.',
+  },
+  '/training-placement/workday-integration/': {
+    title: 'Workday Integration Course in Hyderabad',
+    description:
+      'Workday Integration course in Hyderabad: EIB, Core Connectors, Workday Studio, XSLT, SOAP, REST and RaaS, with hands-on projects and placement support.',
+  },
+  '/training-placement/servicenow-hrsd/': {
+    title: 'ServiceNow HRSD Training in Hyderabad',
+    description:
+      'ServiceNow HRSD training in Hyderabad: HR cases, SLAs, lifecycle events and Employee Center, with CIS-HR exam prep, live classes and placement support.',
+  },
+  '/training-placement/servicenow-crm/': {
+    title: 'ServiceNow CSM Training in Hyderabad',
+    description:
+      'ServiceNow CSM training in Hyderabad: a ServiceNow CRM course on cases, workspace, portal, Virtual Agent, Now Assist and CIS-CSM prep, with placement support.',
+  },
+  '/training-placement/servicenow-admin-platform/': {
+    title: 'ServiceNow Admin Course in Hyderabad',
+    description:
+      'ServiceNow admin course in Hyderabad: users, ACLs, incident, problem and change, service catalog and Flow Designer, with CSA exam prep and placement support.',
+  },
+  '/training-placement/servicenow-itsm-development/': {
+    title: 'ServiceNow Developer Course in Hyderabad',
+    description:
+      'ServiceNow developer course in Hyderabad: JavaScript, Glide API, ITSM scripting, integrations and portals, with CAD and CIS-ITSM prep and placement support.',
   },
 };
 

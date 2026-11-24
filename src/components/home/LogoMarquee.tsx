@@ -64,7 +64,8 @@ export function LogoMarquee({
                   /* eslint-disable-next-line @next/next/no-img-element -- small logo files */
                   <img
                     src={item.src}
-                    alt={copy ? '' : item.name}
+                    alt={item.name}
+                    title={item.name}
                     decoding="async"
                     style={{ height: item.height ?? 28 }}
                     className="max-h-11 w-auto max-w-full object-contain"

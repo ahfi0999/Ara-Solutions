@@ -28,6 +28,7 @@ export function ClosingCta({
         video="/videos/cta-handshake.mp4"
         mobileVideo="/videos/cta-handshake-mobile.mp4"
         poster="/videos/cta-handshake.jpg"
+        alt="Candidate and employer shaking hands"
         overlayClassName="bg-gradient-to-r from-ink/85 via-ink/80 to-ink/70"
       />
       <div aria-hidden className="grid-lines absolute inset-0 -z-10" />

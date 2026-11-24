@@ -120,7 +120,8 @@ export function ProgramBanner({
         {/* eslint-disable-next-line @next/next/no-img-element -- static card photo */}
         <img
           src={program.image}
-          alt=""
+          alt={`${program.shortName} course at ARA Solutions, Hyderabad`}
+          title={`${program.shortName} course at ARA Solutions, Hyderabad`}
           loading="lazy"
           decoding="async"
           className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -134,7 +135,12 @@ export function ProgramBanner({
           <div className="absolute inset-x-0 bottom-4 flex justify-center">
             <div className="flex h-12 items-center justify-center rounded-xl bg-white px-5 shadow-[0_18px_40px_-16px_rgb(0_0_0/0.7)] transition-[translate,box-shadow] duration-500 ease-out group-hover:-translate-y-1.5 group-hover:shadow-[0_24px_48px_-14px_rgb(0_0_0/0.85)]">
               {/* eslint-disable-next-line @next/next/no-img-element -- small SVG logo */}
-              <img src={program.logo} alt="" className="h-9 w-auto max-w-36 object-contain" />
+              <img
+                src={program.logo}
+                alt={`${program.shortName} logo`}
+                title={`${program.shortName} logo`}
+                className="h-9 w-auto max-w-36 object-contain"
+              />
             </div>
           </div>
         )}

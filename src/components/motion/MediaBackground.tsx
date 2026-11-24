@@ -17,6 +17,7 @@ export function MediaBackground({
   video,
   mobileVideo,
   poster,
+  alt,
   eager = false,
   control = false,
   overlayClassName = 'bg-ink/75',
@@ -26,6 +27,8 @@ export function MediaBackground({
   /** Light version for phones; falls back to `video` when not given. */
   mobileVideo?: string;
   poster: string;
+  /** Alt text and title of the poster photo. */
+  alt: string;
   eager?: boolean;
   control?: boolean;
   overlayClassName?: string;
@@ -82,7 +85,7 @@ export function MediaBackground({
     <>
       <div aria-hidden className={cn('absolute inset-0 -z-20 overflow-hidden', className)}>
         {/* eslint-disable-next-line @next/next/no-img-element -- poster behind the video */}
-        <img src={poster} alt="" className="absolute inset-0 size-full object-cover" fetchPriority={eager ? 'high' : 'auto'} />
+        <img src={poster} alt={alt} title={alt} className="absolute inset-0 size-full object-cover" fetchPriority={eager ? 'high' : 'auto'} />
         {enabled && (
           <video
             ref={ref}

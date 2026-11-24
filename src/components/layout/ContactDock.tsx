@@ -148,7 +148,7 @@ function ChatPanel({
       <header className="flex items-center gap-3 bg-ink px-4 py-3.5 text-white">
         <span className="flex size-9 items-center justify-center rounded-full bg-white">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-mark.png" alt="" className="size-6" />
+          <img src="/logo-mark.png" alt="ARA Solutions" title="ARA Solutions" className="size-6" />
         </span>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold">Ask ARA</p>

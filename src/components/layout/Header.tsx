@@ -451,6 +451,7 @@ export function Header() {
           <Image
             src="/logo-white.png"
             alt="ARA Solutions"
+            title="ARA Solutions"
             width={1200}
             height={164}
             priority

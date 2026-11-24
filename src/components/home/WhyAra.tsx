@@ -10,6 +10,7 @@ export function WhyAra() {
         video="/videos/why-meeting.mp4"
         mobileVideo="/videos/why-meeting-mobile.mp4"
         poster="/videos/why-meeting.jpg"
+        alt="Business team in a boardroom meeting"
         overlayClassName="bg-ink/80"
       />
       <div aria-hidden className="grid-lines absolute inset-0" />

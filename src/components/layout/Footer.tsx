@@ -35,6 +35,7 @@ export function Footer() {
             <Image
               src="/logo-white.png"
               alt="ARA Solutions"
+              title="ARA Solutions"
               width={1200}
               height={164}
               className="h-8 w-auto"

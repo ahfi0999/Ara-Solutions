@@ -20,6 +20,7 @@ const DIVISIONS = [
     text: 'Recruitment and staffing solutions that help organisations identify, evaluate and engage professionals for technical and business-critical roles.',
     cta: { label: 'Explore staffing services', href: '#services' },
     photo: '/images/services/fulltime-staffing.jpg',
+    photoAlt: 'Recruiter shaking hands with a new hire',
   },
   {
     key: 'training',
@@ -29,6 +30,7 @@ const DIVISIONS = [
     text: 'Career-focused IT training with practical learning, real-world projects, interview preparation and placement assistance.',
     cta: { label: 'Explore training programs', href: '#programs' },
     photo: '/videos/learn-classroom.jpg',
+    photoAlt: 'Learners in a classroom training session with a trainer',
   },
 ] as const;
 
@@ -59,7 +61,8 @@ export function Divisions() {
                   {/* eslint-disable-next-line @next/next/no-img-element -- static card photo */}
                   <img
                     src={division.photo}
-                    alt=""
+                    alt={division.photoAlt}
+                    title={division.photoAlt}
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 -z-10 size-full object-cover transition-transform duration-700 ease-out group-hover/spot:scale-105"

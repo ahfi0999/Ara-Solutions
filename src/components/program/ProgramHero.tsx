@@ -17,7 +17,7 @@ export function ProgramHero({ program, track }: { program: Program; track?: Trac
   const photo = program.image ?? program.heroImage;
   return (
     <section className="aurora relative isolate overflow-hidden pb-16 pt-24 text-white sm:pb-24 sm:pt-[clamp(6.5rem,14vh,9rem)] [@media(max-width:639px)_and_(max-height:600px)]:pt-[5.25rem]">
-      {photo && <HeroPhoto src={photo} />}
+      {photo && <HeroPhoto src={photo} alt={`${program.shortName} course at ARA Solutions, Hyderabad`} />}
       <DarkHeroBackdrop />
       <div
         aria-hidden
@@ -60,7 +60,12 @@ export function ProgramHero({ program, track }: { program: Program; track?: Trac
               {program.logo && (
                 <span className="inline-flex h-9 items-center rounded-full bg-white px-4 shadow-soft">
                   {/* eslint-disable-next-line @next/next/no-img-element -- small SVG logo */}
-                  <img src={program.logo} alt={`${program.shortName} logo`} className="h-5 w-auto" />
+                  <img
+                    src={program.logo}
+                    alt={`${program.shortName} logo`}
+                    title={`${program.shortName} logo`}
+                    className="h-5 w-auto"
+                  />
                 </span>
               )}
               <p className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-white/75 backdrop-blur">

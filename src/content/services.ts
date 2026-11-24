@@ -16,6 +16,8 @@ export type Service = {
   cta: string;
   /** Card photo (path under /public): CC0 photos from StockSnap, sources listed in SERVICE_PHOTO_SOURCES. */
   image?: string;
+  /** Alt text and title of `image`: what the photo shows, and the service. */
+  imageAlt?: string;
   /** Three key promises shown beside the hero. */
   promises: { title: string; text: string }[];
   /** "Why it matters" story. */
@@ -37,6 +39,7 @@ export const services: Service[] = [
   {
     slug: 'fulltime-staffing',
     image: '/images/services/fulltime-staffing.jpg',
+    imageAlt: 'Recruiter shaking hands with a new hire, full-time staffing by ARA Solutions',
     name: 'Fulltime Staffing (IT & Non-IT)',
     shortName: 'Fulltime Staffing',
     menuText: 'Permanent IT and non-IT hires',
@@ -95,6 +98,7 @@ export const services: Service[] = [
   {
     slug: 'corp-to-corp',
     image: '/images/services/corp-to-corp.jpg',
+    imageAlt: 'IT consultants with tablets in a data centre, corp-to-corp staffing by ARA Solutions',
     name: 'Contract Staffing',
     shortName: 'Contract Staffing',
     menuText: 'Contract experts for project needs',
@@ -160,6 +164,7 @@ export const services: Service[] = [
   {
     slug: 'rpo',
     image: '/images/services/rpo.jpg',
+    imageAlt: 'Recruitment team working together on laptops, recruitment process outsourcing by ARA Solutions',
     name: 'Recruitment Process Outsourcing (RPO)',
     shortName: 'Recruitment Process Outsourcing',
     menuText: 'A dedicated recruiting team for you',
@@ -255,6 +260,7 @@ export const services: Service[] = [
   {
     slug: 'international-consulting',
     image: '/images/services/international-consulting.jpg',
+    imageAlt: 'Globe showing countries, international consulting by ARA Solutions',
     name: 'International Consulting',
     shortName: 'International Consulting',
     menuText: 'Verified global talent',

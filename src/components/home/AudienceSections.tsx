@@ -62,6 +62,7 @@ export function TrainingPillars() {
         video="/videos/learn-classroom.mp4"
         mobileVideo="/videos/learn-classroom-mobile.mp4"
         poster="/videos/learn-classroom.jpg"
+        alt="Learners in a classroom training session with a trainer"
         overlayClassName="bg-ink/80"
       />
       <div aria-hidden className="grid-lines absolute inset-0" />

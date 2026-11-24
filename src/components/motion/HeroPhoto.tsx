@@ -8,13 +8,14 @@ import { useReducedMotionSafe } from '@/components/motion/primitives';
  * It drifts in very slowly so the banner never feels static; visitors who prefer reduced motion get a still photo.
  * The photos are about 1,000px wide, so a slight blur keeps them soft rather than pixelated on large screens.
  */
-export function HeroPhoto({ src }: { src: string }) {
+export function HeroPhoto({ src, alt }: { src: string; /** Alt text and title of the photo. */ alt: string }) {
   const reduce = useReducedMotionSafe();
   return (
     <div aria-hidden className="absolute inset-0 -z-20 overflow-hidden">
       <motion.img
         src={src}
-        alt=""
+        alt={alt}
+        title={alt}
         fetchPriority="high"
         className="absolute inset-0 size-full object-cover blur-[2px]"
         initial={{ scale: 1.06 }}
