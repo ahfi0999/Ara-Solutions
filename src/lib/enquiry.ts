@@ -81,8 +81,8 @@ export function validateEnquiry(raw: Record<string, unknown>): { data?: EnquiryI
   if (digits.length < 10 || digits.length > 13) errors.phone = 'Please enter a valid phone number.';
   if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email))
     errors.email = 'Please enter a valid email address.';
-  if (!INTERESTS.some((item) => item.value === data.interest))
-    errors.interest = 'Please choose what you are interested in.';
+  // The form no longer asks; a button or page may send the course or service the visitor came about.
+  if (data.interest && !INTERESTS.some((item) => item.value === data.interest)) data.interest = '';
   if (data.background && !BACKGROUNDS.some((item) => item.value === data.background)) data.background = '';
   if (!data.consent) errors.consent = 'Please agree so our team can contact you.';
 
@@ -100,7 +100,7 @@ export function enquirySummary(
     `Name: ${data.name}`,
     `Phone: ${data.phone}`,
     data.email && `Email: ${data.email}`,
-    `Interested in: ${labelFor(INTERESTS, data.interest)}`,
+    data.interest && `Interested in: ${labelFor(INTERESTS, data.interest)}`,
     data.background && `Background: ${labelFor(BACKGROUNDS, data.background)}`,
     data.message && `Message: ${data.message}`,
   ]

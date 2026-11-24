@@ -3,12 +3,9 @@
 import { useId, useState, type FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { CheckCircle2, Loader2, MessageCircle, Phone } from 'lucide-react';
-import { BACKGROUNDS, INTERESTS, enquirySummary, validateEnquiry, type FieldErrors } from '@/lib/enquiry';
+import { INTERESTS, enquirySummary, validateEnquiry, type FieldErrors } from '@/lib/enquiry';
 import { lineFor, staffingLine, trainingLine, whatsappLink, type ContactLine } from '@/content/site';
 import { cn } from '@/lib/cn';
-
-/** The list's sub-headings in order: hiring, then one per training track, then "Other". */
-const SECTIONS = [...new Set(INTERESTS.map((item) => item.section ?? item.group))];
 
 type Status = 'idle' | 'sending' | 'sent' | 'fallback';
 
@@ -230,63 +227,9 @@ export function EnquiryForm({
           className={invalid('email')}
         />
       </Field>
-      <div className={cn('grid gap-4', !compact && 'sm:grid-cols-2')}>
-        <Field id={id('interest')} label="I'm interested in" error={errors.interest}>
-          <select
-            id={id('interest')}
-            name="interest"
-            defaultValue={defaultInterest}
-            aria-invalid={!!errors.interest}
-            aria-describedby={describedBy('interest')}
-            className={cn(
-              invalid('interest'),
-              'appearance-none bg-[url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 fill=%27none%27 stroke=%27%235b5f76%27 stroke-width=%272%27%3E%3Cpath d=%27m4 6 4 4 4-4%27/%3E%3C/svg%3E")] bg-[position:right_0.9rem_center] bg-no-repeat pr-10',
-            )}
-          >
-            <option value="" disabled>
-              Choose an option
-            </option>
-            {SECTIONS.map((section) => (
-              <optgroup key={section} label={section}>
-                {INTERESTS.filter((item) => (item.section ?? item.group) === section).map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
-        </Field>
-        <Field id={id('background')} label="I am a" optional>
-          <select
-            id={id('background')}
-            name="background"
-            defaultValue=""
-            className={cn(
-              inputBase,
-              'border-line appearance-none bg-[url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 fill=%27none%27 stroke=%27%235b5f76%27 stroke-width=%272%27%3E%3Cpath d=%27m4 6 4 4 4-4%27/%3E%3C/svg%3E")] bg-[position:right_0.9rem_center] bg-no-repeat pr-10',
-            )}
-          >
-            <option value="">Select</option>
-            {BACKGROUNDS.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-        </Field>
-      </div>
-      {!compact && (
-        <Field id={id('message')} label="Anything you'd like us to know?" optional>
-          <textarea
-            id={id('message')}
-            name="message"
-            rows={3}
-            maxLength={1000}
-            placeholder="Roles you are hiring for, or your background and goals"
-            className={cn(inputBase, 'resize-y border-line')}
-          />
-        </Field>
+      {/* What the visitor came about (the course or service of the button or page), sent without asking. */}
+      {defaultInterest && defaultInterest !== 'not-sure' && (
+        <input type="hidden" name="interest" value={defaultInterest} />
       )}
 
       {/* Honeypot: hidden from people, bots tend to fill it in. */}

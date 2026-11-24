@@ -58,7 +58,7 @@ async function toEmail(apiKey: string, to: string, lead: Lead) {
       from: process.env.LEAD_EMAIL_FROM || 'ARA Website <onboarding@resend.dev>',
       to: to.split(',').map((address) => address.trim()),
       reply_to: lead.email || undefined,
-      subject: `New enquiry: ${labelFor(INTERESTS, lead.interest)} - ${lead.name}`,
+      subject: `New enquiry${lead.interest ? `: ${labelFor(INTERESTS, lead.interest)}` : ''} - ${lead.name}`,
       text: `${enquirySummary(lead)}\nPage: ${lead.source}`,
     }),
     signal: AbortSignal.timeout(10_000),
