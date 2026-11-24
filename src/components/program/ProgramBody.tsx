@@ -1,4 +1,19 @@
-import { Award, BriefcaseBusiness, Check, Clock3, Layers, MessageCircle, Plus, Wallet } from 'lucide-react';
+import Link from 'next/link';
+import {
+  ArrowRight,
+  Award,
+  BookOpen,
+  BriefcaseBusiness,
+  Check,
+  Clock3,
+  Code2,
+  FlaskConical,
+  Layers,
+  MapPin,
+  MessageCircle,
+  Plus,
+  Wallet,
+} from 'lucide-react';
 import type { Program } from '@/content/programs';
 import { trainingLine, whatsappLink } from '@/content/site';
 import { accent } from '@/lib/accent';
@@ -35,11 +50,23 @@ function Block({
 /** "Program at a glance": facts plus the main calls to action. Sticky on desktop. */
 function GlanceCard({ program }: { program: Program }) {
   const ask = 'Ask an advisor';
+  const labs = program.modules.every((module) => module.lab);
   const facts = [
     { icon: Layers, label: 'Format', value: program.details?.mode ?? 'Instructor-led with hands-on labs' },
+    ...(labs
+      ? [
+          {
+            icon: BookOpen,
+            label: 'Syllabus',
+            value: `${program.modules.length} modules with hands-on labs, ${program.projects.length} projects${program.capstone ? ' + capstone' : ''}`,
+          },
+        ]
+      : []),
+    ...(program.details?.coding ? [{ icon: Code2, label: 'Coding', value: program.details.coding }] : []),
     { icon: Clock3, label: 'Duration & batches', value: program.details?.duration ?? ask },
     { icon: Wallet, label: 'Fees', value: program.details?.fees ?? ask },
     { icon: BriefcaseBusiness, label: 'Career support', value: 'Interview prep + placement assistance' },
+    ...(program.details?.location ? [{ icon: MapPin, label: 'Where', value: program.details.location }] : []),
   ];
   return (
     <div className="rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-7">
@@ -85,12 +112,54 @@ function GlanceCard({ program }: { program: Program }) {
   );
 }
 
-export function ProgramBody({ program }: { program: Program }) {
+/** "Is this course right for you?": which course of the track to start with, by background. */
+export type CourseChooser = {
+  trackName: string;
+  trackHref: string;
+  rows: { background: string; slug: string; name: string }[];
+};
+
+export function ProgramBody({ program, chooser }: { program: Program; chooser?: CourseChooser }) {
   const a = accent[program.accent];
+  const about = program.about;
   return (
     <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_340px] lg:gap-16">
       <div className="min-w-0 space-y-12">
-        <Block id="overview" eyebrow="Overview" title="Who this program is for">
+        <Block
+          id="overview"
+          eyebrow="Overview"
+          title={about ? `About the ${program.shortName} course` : 'Who this program is for'}
+        >
+          {about && (
+            <>
+              <div className="max-w-3xl space-y-4 text-[17px] leading-relaxed text-text/80">
+                {about.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              {about.why && (
+                <>
+                  <h3 className="mt-10 text-xl font-semibold tracking-tight">{about.whyTitle}</h3>
+                  <ul className="mt-5 grid gap-3.5">
+                    {about.why.map((point) => (
+                      <li key={point} className="flex gap-3 text-[15px] leading-relaxed">
+                        <span
+                          className={cn(
+                            'mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full',
+                            a.soft,
+                          )}
+                        >
+                          <Check aria-hidden className="size-3" strokeWidth={3} />
+                        </span>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              <h3 className="mb-5 mt-12 text-xl font-semibold tracking-tight">Who this course is for</h3>
+            </>
+          )}
           <div className="grid gap-4 sm:grid-cols-3">
             {program.audience.map((item, index) => (
               <Reveal key={item.title} delay={index * 0.06} className="h-full">
@@ -124,7 +193,11 @@ export function ProgramBody({ program }: { program: Program }) {
         <Block
           id="curriculum"
           eyebrow="Curriculum"
-          title={`${program.modules.length} modules, from fundamentals to career-ready`}
+          title={
+            about
+              ? `${program.shortName} syllabus: ${program.modules.length} modules`
+              : `${program.modules.length} modules, from fundamentals to career-ready`
+          }
         >
           <ol className="space-y-3">
             {program.modules.map((module, index) => (
@@ -150,6 +223,15 @@ export function ProgramBody({ program }: { program: Program }) {
                       </li>
                     ))}
                   </ul>
+                  {module.lab && (
+                    <p className="-mt-2 flex gap-2.5 px-5 pb-6 text-[14.5px] leading-relaxed sm:pl-[4.25rem] sm:pr-6">
+                      <FlaskConical aria-hidden className={cn('mt-0.5 size-4 shrink-0', a.text)} />
+                      <span>
+                        <span className="font-semibold">Hands-on lab: </span>
+                        <span className="text-muted">{module.lab}</span>
+                      </span>
+                    </p>
+                  )}
                 </details>
               </li>
             ))}
@@ -177,6 +259,19 @@ export function ProgramBody({ program }: { program: Program }) {
               </li>
             ))}
           </ul>
+          {program.skills && (
+            <>
+              <h3 className="mt-10 text-xl font-semibold tracking-tight">Skills you will gain</h3>
+              <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                {program.skills.map((skill) => (
+                  <li key={skill} className="flex gap-3 text-[15px] leading-relaxed">
+                    <Check aria-hidden className={cn('mt-1 size-4 shrink-0', a.text)} strokeWidth={3} />
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </Block>
 
         <Block id="projects" eyebrow="Projects" title="Build things you can show employers">
@@ -188,7 +283,24 @@ export function ProgramBody({ program }: { program: Program }) {
                     Project {String(index + 1).padStart(2, '0')}
                   </span>
                   <h3 className="mt-3 text-lg font-semibold leading-snug tracking-tight">{project.title}</h3>
-                  <p className="mt-2 text-[14.5px] leading-relaxed text-white/60">{project.text}</p>
+                  {project.problem ? (
+                    <dl className="mt-3 space-y-3 text-[14.5px] leading-relaxed">
+                      {[
+                        ['The problem', project.problem],
+                        ['What you build', project.text],
+                        ['Result', project.result],
+                      ].map(([label, value]) =>
+                        value ? (
+                          <div key={label}>
+                            <dt className="text-[12px] font-medium uppercase tracking-wide text-white/40">{label}</dt>
+                            <dd className="mt-0.5 text-white/70">{value}</dd>
+                          </div>
+                        ) : null,
+                      )}
+                    </dl>
+                  ) : (
+                    <p className="mt-2 text-[14.5px] leading-relaxed text-white/60">{project.text}</p>
+                  )}
                   <ul className="mt-auto flex flex-wrap gap-1.5 pt-6">
                     {project.stack.map((item) => (
                       <li
@@ -206,10 +318,27 @@ export function ProgramBody({ program }: { program: Program }) {
               </Reveal>
             ))}
           </div>
+          {program.capstone && (
+            <div className="mt-4 rounded-2xl border border-line bg-paper p-6">
+              <p className={cn('font-mono text-[12px] uppercase tracking-[0.18em]', a.text)}>Capstone project</p>
+              <p className="mt-2 text-[15px] leading-relaxed">{program.capstone}</p>
+            </div>
+          )}
         </Block>
 
         {program.certifications && (
-          <Block id="certifications" eyebrow="Certifications" title="Prepare for official certifications">
+          <Block
+            id="certifications"
+            eyebrow="Certifications"
+            title={
+              program.certificationIntro
+                ? 'Certifications this course prepares you for'
+                : 'Prepare for official certifications'
+            }
+          >
+            {program.certificationIntro && (
+              <p className="mb-6 max-w-3xl text-[15px] leading-relaxed text-muted">{program.certificationIntro}</p>
+            )}
             <ul className="grid gap-3 sm:grid-cols-2">
               {program.certifications.map((cert) => (
                 <li key={cert.name} className="flex gap-4 rounded-2xl border border-line bg-paper p-5">
@@ -221,23 +350,116 @@ export function ProgramBody({ program }: { program: Program }) {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-sm text-faint">
-              Certification exams are booked directly with the certifying organisation. Exam fees are not
-              included unless an advisor confirms otherwise.
-            </p>
+            {!program.certificationIntro && (
+              <p className="mt-4 text-sm text-faint">
+                Certification exams are booked directly with the certifying organisation. Exam fees are not
+                included unless an advisor confirms otherwise.
+              </p>
+            )}
           </Block>
         )}
 
-        <Block id="careers" eyebrow="Career outcomes" title="Roles this program prepares you for">
+        <Block
+          id="careers"
+          eyebrow="Career outcomes"
+          title={program.careers ? `${program.shortName} careers and salaries` : 'Roles this program prepares you for'}
+        >
           <ul className="grid gap-3 sm:grid-cols-2">
             {program.roles.map((role) => (
               <li key={role.title} className="rounded-2xl border border-line bg-paper p-5">
-                <p className="text-[17px] font-semibold tracking-tight">{role.title}</p>
+                <div className="flex items-start justify-between gap-3">
+                  <p className="text-[17px] font-semibold tracking-tight">{role.title}</p>
+                  {role.level && (
+                    <span className="shrink-0 rounded-full bg-canvas px-2.5 py-1 text-[12px] text-muted">
+                      {role.level}
+                    </span>
+                  )}
+                </div>
                 <p className="mt-1 text-[15px] text-muted">{role.text}</p>
               </li>
             ))}
           </ul>
+
+          {program.careers && (
+            <>
+              <h3 className="mt-12 text-xl font-semibold tracking-tight">Salary snapshot</h3>
+              <div className="mt-5 overflow-x-auto rounded-2xl border border-line bg-paper">
+                <table className="w-full min-w-[480px] text-left">
+                  <caption className="sr-only">{program.shortName} salaries in India</caption>
+                  <thead>
+                    <tr className="border-b border-line text-[13px] text-muted">
+                      <th scope="col" className="p-4 font-medium">Role</th>
+                      <th scope="col" className="p-4 font-medium">Experience</th>
+                      <th scope="col" className="p-4 font-medium">Annual salary in India</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {program.careers.salaries.map((row) => (
+                      <tr key={row.role} className="border-b border-line last:border-0">
+                        <th scope="row" className="p-4 text-[15px] font-semibold tracking-tight">{row.role}</th>
+                        <td className="p-4 text-[15px]">{row.experience}</td>
+                        <td className="p-4 text-[15px] font-medium tabular-nums">{row.pay}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-3 text-sm text-faint">{program.careers.salaryNote}</p>
+
+              <h3 className="mt-12 text-xl font-semibold tracking-tight">Career path</h3>
+              <ol className="mt-5 grid gap-3 sm:grid-cols-3">
+                {program.careers.path.map((step, index) => (
+                  <li key={step.stage} className="rounded-2xl border border-line bg-paper p-5">
+                    <p className={cn('font-mono text-[12px] uppercase tracking-[0.18em]', a.text)}>
+                      Step {index + 1}
+                    </p>
+                    <p className="mt-2 font-semibold tracking-tight">{step.stage}</p>
+                    <p className="mt-1 text-[15px] leading-relaxed text-muted">{step.roles}</p>
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
         </Block>
+
+        {chooser && (
+          <Block id="fit" eyebrow="Is this course right for you?" title={`Compare our ${chooser.trackName} courses`}>
+            <ul className="grid gap-3">
+              {chooser.rows.map((row) => {
+                const current = row.slug === program.slug;
+                return (
+                  <li key={row.slug}>
+                    <Link
+                      href={`/training-placement/${row.slug}/`}
+                      aria-current={current ? 'page' : undefined}
+                      className={cn(
+                        'group flex items-center justify-between gap-6 rounded-2xl border bg-paper p-5 transition-colors',
+                        current ? 'border-ink' : 'border-line hover:border-ink/30',
+                      )}
+                    >
+                      <span>
+                        <span className="block text-[15px] text-muted">{row.background}</span>
+                        <span className="mt-1 block text-[17px] font-semibold tracking-tight">
+                          Choose {row.name}
+                          {current && <span className="ml-2 text-[13px] font-normal text-muted">(this course)</span>}
+                        </span>
+                      </span>
+                      <ArrowRight
+                        aria-hidden
+                        className="size-5 shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-ink"
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="mt-4">
+              <Link href={chooser.trackHref} className="text-[15px] font-medium underline-offset-4 hover:underline">
+                Compare all {chooser.trackName} courses →
+              </Link>
+            </p>
+          </Block>
+        )}
       </div>
 
       <aside

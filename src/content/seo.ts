@@ -72,6 +72,12 @@ const pages: Record<string, PageSeo> = {
     description:
       'Learn full stack development with React, Node.js, SQL, MongoDB and AI integration. Build and deploy practical projects with placement assistance in Hyderabad.',
   },
+  // From our keyword research for the client's Workday HCM page document (24 Nov 2026).
+  '/training-placement/workday-hcm/': {
+    title: 'Workday HCM Course in Hyderabad',
+    description:
+      'Workday HCM techno-functional course in Hyderabad: Core HCM, staffing, compensation, security, reports, calculated fields and EIB, with placement support.',
+  },
 };
 
 /** The search title and description for a page path (with trailing slash), if the sheet has one. */
@@ -86,4 +92,4 @@ export const homeSeo = pages['/'];
  * re-read first. Change it after a significant content update, not for small fixes or every deploy,
  * or Google learns to ignore it.
  */
-export const siteUpdated = '2026-11-23';
+export const siteUpdated = '2026-11-24';

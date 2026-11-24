@@ -22,6 +22,8 @@ export type Module = {
   title: string;
   summary: string;
   topics: string[];
+  /** Optional hands-on lab for the module (from a trainer or client course document). */
+  lab?: string;
 };
 
 export type ProgramFamily = 'Enterprise platforms' | 'AI' | 'Data' | 'Security' | 'Development' | 'Business analysis';
@@ -36,7 +38,34 @@ export type Program<Slug extends string = PageSlug> = {
   accent: 'sky' | 'violet' | 'rose' | 'emerald' | 'amber' | 'indigo';
   prerequisites: string;
   /** Optional confirmed details. Leave undefined to show "Ask an advisor". */
-  details?: { duration?: string; mode?: string; fees?: string; nextBatch?: string };
+  details?: {
+    duration?: string;
+    mode?: string;
+    fees?: string;
+    nextBatch?: string;
+    /** Shown in "at a glance" only when set. */
+    coding?: string;
+    location?: string;
+  };
+  /**
+   * Optional page heading (H1) written for search, e.g. "Workday HCM Course: …". Defaults to `name`.
+   * The fields below it, also optional, come from the client's page documents; a page shows each
+   * section only when it is set.
+   */
+  h1?: string;
+  /** "About the course": paragraphs, plus an optional "why learn it" list. */
+  about?: { paragraphs: string[]; whyTitle?: string; why?: string[] };
+  skills?: string[];
+  /** A final project that brings the course together, shown after the projects. */
+  capstone?: string;
+  /** Shown above the certification list, e.g. who can take the exams. */
+  certificationIntro?: string;
+  /** Salaries (with their source) and a career path, shown with the roles. */
+  careers?: {
+    salaries: { role: string; experience: string; pay: string }[];
+    salaryNote: string;
+    path: { stage: string; roles: string }[];
+  };
   /** Optional official product logo (path under /public) shown on the program card banner. */
   logo?: string;
   /** Optional photo (path under /public) shown as the program card banner and behind the page hero. */
@@ -48,9 +77,10 @@ export type Program<Slug extends string = PageSlug> = {
   outcomes: string[];
   modules: Module[];
   tools: string[];
-  projects: { title: string; text: string; stack: string[] }[];
+  /** `text` is what you build; `problem` and `result`, when set, frame it as a client brief. */
+  projects: { title: string; text: string; stack: string[]; problem?: string; result?: string }[];
   certifications?: { name: string; note: string }[];
-  roles: { title: string; text: string }[];
+  roles: { title: string; text: string; level?: string }[];
   faqs: { q: string; a: string }[];
 };
 

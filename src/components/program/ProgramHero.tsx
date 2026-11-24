@@ -70,7 +70,7 @@ export function ProgramHero({ program, track }: { program: Program; track?: Trac
             </div>
             <h1 className="mt-6 text-balance text-[length:clamp(1.85rem,8.6vw,2.25rem)] font-semibold leading-[1.04] tracking-[-0.04em] sm:text-[length:clamp(2.6rem,min(6vw,7.6vh),3.75rem)] [@media(max-height:800px)]:mt-4 [@media(max-width:639px)_and_(max-height:600px)]:mt-0">
               <SplitWords delay={0.15} stagger={0.06}>
-                {program.name}
+                {program.h1 ?? program.name}
               </SplitWords>
             </h1>
             <p className="fade-up mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 [animation-delay:180ms] sm:text-lg [@media(max-height:800px)]:mt-4">

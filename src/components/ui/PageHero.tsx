@@ -7,17 +7,21 @@ export function PageHero({
   eyebrow,
   title,
   intro,
+  breadcrumb,
   children,
 }: {
   eyebrow: string;
   title: ReactNode;
   intro?: ReactNode;
+  /** Shown above the heading, e.g. a breadcrumb trail. */
+  breadcrumb?: ReactNode;
   children?: ReactNode;
 }) {
   return (
     <section className="aurora relative isolate overflow-hidden pb-20 pt-24 text-white sm:pb-24 sm:pt-[clamp(6.5rem,15vh,10rem)] [@media(max-width:639px)_and_(max-height:600px)]:pt-[5.25rem]">
       <DarkHeroBackdrop />
       <Container>
+        {breadcrumb && <div className="fade-up mb-8 [@media(max-height:800px)]:mb-5">{breadcrumb}</div>}
         <SectionHeading
           as="h1"
           tone="dark"
