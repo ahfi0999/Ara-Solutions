@@ -7,10 +7,11 @@ export type PageSeo = { title: string; description: string };
 
 const pages: Record<string, PageSeo> = {
   '/': {
-    // Title from the client (Nov 2026); the description is still the SEO sheet's.
+    // Title and description from the client (Nov 2026). The description is the client's full sentence (207
+    // characters) on purpose: Google shows about the first 160 and cuts the rest.
     title: 'Staffing, Training & Placement in Hyderabad',
     description:
-      'ARA Solutions offers IT & Non-IT recruitment, staffing, industry-focused training and placement assistance in Hyderabad. Explore our services today.',
+      'ARA Solutions connects growing businesses with the right talent while helping aspiring professionals build in-demand technology skills through practical training, hands-on learning, and placement assistance.',
   },
   '/services/': {
     title: 'IT & Non-IT Recruitment & Staffing Services',
@@ -107,6 +108,21 @@ const pages: Record<string, PageSeo> = {
     title: 'ServiceNow Developer Course in Hyderabad',
     description:
       'ServiceNow developer course in Hyderabad: JavaScript, Glide API, ITSM scripting, integrations and portals, with CAD and CIS-ITSM prep and placement support.',
+  },
+  '/training-placement/servicenow-grc/': {
+    title: 'ServiceNow GRC Training in Hyderabad',
+    description:
+      'ServiceNow GRC training in Hyderabad: policy and compliance, risk, audit, continuous monitoring and third-party risk, with CIS-RC prep and placement support.',
+  },
+  '/training-placement/servicenow-fdse/': {
+    title: 'ServiceNow AI Agents Course in Hyderabad',
+    description:
+      'ServiceNow AI agents course in Hyderabad: build apps, AI skills and agents with AI Agent Studio and AI Skill Kit, with CAD exam prep and placement support.',
+  },
+  '/training-placement/servicenow-ba/': {
+    title: 'ServiceNow Business Analyst Course Hyderabad',
+    description:
+      'ServiceNow Business Analyst course in Hyderabad: ITSM processes, discovery, user stories and UAT. No coding needed, with CSA practice and placement support.',
   },
 };
 

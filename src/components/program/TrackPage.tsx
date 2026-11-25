@@ -1,5 +1,18 @@
 import Link from 'next/link';
-import { ArrowRight, ChevronRight, Phone } from 'lucide-react';
+import {
+  ArrowRight,
+  Award,
+  BadgeCheck,
+  BriefcaseBusiness,
+  Check,
+  ChevronRight,
+  Code2,
+  FlaskConical,
+  Handshake,
+  Phone,
+  Terminal,
+  Video,
+} from 'lucide-react';
 import { getProgram } from '@/content/programs';
 import { site, trainingLine } from '@/content/site';
 import { getHub, type TrackHub } from '@/content/hubs';
@@ -18,6 +31,9 @@ import { ClosingCta } from '@/components/home/ClosingCta';
 import { AlumniMarquee } from '@/components/home/AlumniMarquee';
 import { Journey } from '@/components/home/Journey';
 import { Faq } from '@/components/home/Faq';
+import { Reveal, Spotlight } from '@/components/motion/primitives';
+import { CourseMap, PathSteps, SalaryBar } from '@/components/program/HubVisuals';
+import { cn } from '@/lib/cn';
 
 /**
  * A training track (e.g. ServiceNow): every course with its own page as the usual program card, in the
@@ -44,6 +60,21 @@ export function TrackPage({ track }: { track: Track }) {
           )
         }
         intro={hub?.hero.intro ?? track.intro}
+        aside={
+          hub && (
+            <CourseMap
+              name={track.name}
+              logo={programs[0]?.program.logo}
+              courses={programs.map(({ entry, program }) => ({
+                slug: program.slug,
+                label: program.shortName.startsWith(`${track.name} `)
+                  ? program.shortName.slice(track.name.length + 1)
+                  : program.shortName,
+                isNew: entry.isNew,
+              }))}
+            />
+          )
+        }
         breadcrumb={
           hub && (
             <nav aria-label="Breadcrumb">
@@ -116,10 +147,12 @@ export function TrackPage({ track }: { track: Track }) {
                 }
               />
               <ul className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {programs.map(({ entry, program }) => (
-                  <li key={program.slug} id={program.slug} className="scroll-mt-32">
-                    <ProgramCard program={program} isNew={entry.isNew} />
-                  </li>
+                {programs.map(({ entry, program }, index) => (
+                  <Reveal as="li" key={program.slug} delay={(index % 3) * 0.08}>
+                    <div id={program.slug} className="h-full scroll-mt-32">
+                      <ProgramCard program={program} isNew={entry.isNew} />
+                    </div>
+                  </Reveal>
                 ))}
               </ul>
             </>
@@ -205,9 +238,61 @@ function AccentTitle({ text, accent }: { text: string; accent: string }) {
 const courseName = (slug: string) => getProgram(slug)?.name ?? slug;
 const courseHref = (slug: string) => `/training-placement/${slug}/`;
 
+/** Icons for the four "Why ARA" points, in order: hiring-led training, live classes, labs and projects, placement. */
+const BENEFIT_ICONS = [BriefcaseBusiness, Video, FlaskConical, Handshake];
+
+/** "Coding" column: a coloured badge for no coding, coding taught in the course, or coding required. */
+function CodingBadge({ text }: { text: string }) {
+  const kind = /^no coding/i.test(text) ? 'none' : /required/i.test(text) ? 'required' : 'taught';
+  const Icon = kind === 'none' ? Check : kind === 'required' ? Terminal : Code2;
+  return (
+    <span
+      className={cn(
+        'inline-flex items-start gap-1.5 rounded-xl px-2.5 py-1 text-[13px] font-medium leading-snug',
+        kind === 'none' && 'bg-emerald-50 text-emerald-700',
+        kind === 'taught' && 'bg-sky-50 text-sky-700',
+        kind === 'required' && 'bg-amber-50 text-amber-800',
+      )}
+    >
+      <Icon aria-hidden className="mt-0.5 size-3.5 shrink-0" strokeWidth={2.5} />
+      {text}
+    </span>
+  );
+}
+
+/** The low and high ends of a pay range such as "₹2.7 L to ₹10 L", in lakh. */
+function payRange(pay: string): [number, number] | null {
+  const numbers = pay.match(/\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+  return numbers.length >= 2 ? [numbers[0], numbers[1]] : null;
+}
+
+/** The salary bars' shared scale: the highest pay, rounded up to the next 5 lakh. */
+function salaryScale(hub: TrackHub) {
+  const top = Math.max(...hub.careers.salaries.map((row) => payRange(row.pay)?.[1] ?? 0));
+  return Math.max(5, Math.ceil(top / 5) * 5);
+}
+
+/** Certifications grouped by the course that prepares you for them, in the order they first appear. */
+function certificationGroups(hub: TrackHub) {
+  const groups: { slug: string; names: string[] }[] = [];
+  for (const row of hub.certifications.rows) {
+    const group = groups.find((item) => item.slug === row.slug);
+    if (group) group.names.push(row.name);
+    else groups.push({ slug: row.slug, names: [row.name] });
+  }
+  return groups;
+}
+
 const tableWrap = 'mt-10 overflow-x-auto rounded-3xl border border-line bg-paper shadow-soft';
 const th = 'p-5 font-medium';
 const td = 'p-5 align-top text-[15px]';
+/** A table cell that becomes a stacked line of a card on phones (the comparison table). */
+const tdStack = `${td} max-md:block max-md:px-0 max-md:pb-0 max-md:pt-4`;
+
+/** A cell's column name, shown only on phones, where the table's header row is hidden. */
+function PhoneLabel({ children }: { children: string }) {
+  return <span className="mb-1.5 block text-[12px] font-medium text-faint md:hidden">{children}</span>;
+}
 
 function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
   return (
@@ -225,9 +310,9 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
             intro="Who each course suits, coding, certification paths and the roles it prepares you for."
           />
           <div className={tableWrap}>
-            <table className="w-full min-w-[900px] text-left">
+            <table className="w-full text-left md:min-w-[900px]">
               <caption className="sr-only">Comparison of ARA Solutions {track.name} courses</caption>
-              <thead>
+              <thead className="max-md:hidden">
                 <tr className="border-b border-line text-[13px] text-muted">
                   <th scope="col" className={th}>Course</th>
                   <th scope="col" className={th}>Best for</th>
@@ -237,9 +322,19 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
                 </tr>
               </thead>
               <tbody>
-                {hub.compare.map((row) => (
-                  <tr key={row.slug} className="border-b border-line last:border-0">
-                    <th scope="row" className="p-5 align-top">
+                {hub.compare.map((row, index) => (
+                  <Reveal
+                    as="tr"
+                    key={row.slug}
+                    y={16}
+                    delay={index * 0.06}
+                    className="group border-b border-line transition-colors last:border-0 hover:bg-canvas/70 max-md:block max-md:p-5"
+                  >
+                    <th scope="row" className="relative p-5 align-top max-md:block max-md:p-0">
+                      <span
+                        aria-hidden
+                        className="absolute inset-y-3 left-0 w-1 scale-y-0 rounded-full bg-brand transition-transform duration-300 group-hover:scale-y-100"
+                      />
                       <Link
                         href={courseHref(row.slug)}
                         className="text-[15px] font-semibold tracking-tight hover:underline"
@@ -247,11 +342,32 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
                         {courseName(row.slug)}
                       </Link>
                     </th>
-                    <td className={`${td} text-muted`}>{row.bestFor}</td>
-                    <td className={td}>{row.coding}</td>
-                    <td className={td}>{row.certifications.join(', ')}</td>
-                    <td className={`${td} text-muted`}>{row.roles.join(', ')}</td>
-                  </tr>
+                    <td className={`${tdStack} text-muted`}>
+                      <PhoneLabel>Best for</PhoneLabel>
+                      {row.bestFor}
+                    </td>
+                    <td className={tdStack}>
+                      <PhoneLabel>Coding</PhoneLabel>
+                      <CodingBadge text={row.coding} />
+                    </td>
+                    <td className={tdStack}>
+                      <PhoneLabel>Certification paths</PhoneLabel>
+                      <ul className="flex flex-wrap gap-1.5">
+                        {row.certifications.map((name) => (
+                          <li
+                            key={name}
+                            className="rounded-lg border border-line bg-canvas px-2.5 py-0.5 text-[13px] font-medium"
+                          >
+                            {name}
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+                    <td className={`${tdStack} text-muted`}>
+                      <PhoneLabel>Top roles</PhoneLabel>
+                      {row.roles.join(', ')}
+                    </td>
+                  </Reveal>
                 ))}
               </tbody>
             </table>
@@ -265,13 +381,19 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
           <SectionHeading eyebrow="Where to start" title={hub.chooser.title} intro={hub.chooser.intro} />
           <div>
             <ul className="grid gap-3">
-              {hub.chooser.rows.map((row) => (
-                <li key={row.background}>
+              {hub.chooser.rows.map((row, index) => (
+                <Reveal as="li" key={row.background} y={18} delay={index * 0.06}>
                   <Link
                     href={courseHref(row.slug)}
-                    className="group flex items-center justify-between gap-6 rounded-2xl border border-line bg-paper p-5 shadow-soft transition-colors hover:border-ink/30 sm:p-6"
+                    className="group flex items-center justify-between gap-4 rounded-2xl border border-line bg-paper p-5 shadow-soft transition-[border-color,box-shadow,translate] duration-300 hover:-translate-y-0.5 hover:border-ink/30 hover:shadow-lift sm:gap-6 sm:p-6"
                   >
-                    <span>
+                    <span
+                      aria-hidden
+                      className="flex size-10 shrink-0 items-center justify-center rounded-full bg-canvas font-mono text-[13px] font-semibold text-muted transition-colors duration-300 group-hover:bg-brand group-hover:text-white"
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="flex-1">
                       <span className="block text-[15px] text-muted">{row.background}</span>
                       <span className="mt-1 block text-lg font-semibold tracking-tight">
                         Start with {courseName(row.slug)}
@@ -282,7 +404,7 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
                       className="size-5 shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-ink"
                     />
                   </Link>
-                </li>
+                </Reveal>
               ))}
             </ul>
             <p className="mt-4 text-[15px] text-muted">{hub.chooser.note}</p>
@@ -295,42 +417,54 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
         <Container>
           <SectionHeading eyebrow="Careers" title={hub.careers.title} intro={hub.careers.intro} />
           <div className={tableWrap}>
-            <table className="w-full min-w-[560px] text-left">
+            <table className="w-full text-left md:min-w-[560px]">
               <caption className="sr-only">{hub.careers.title}</caption>
-              <thead>
+              <thead className="max-md:hidden">
                 <tr className="border-b border-line text-[13px] text-muted">
                   <th scope="col" className={th}>Role</th>
                   <th scope="col" className={th}>Experience</th>
                   <th scope="col" className={th}>Annual salary in India</th>
+                  <th scope="col" className={cn(th, 'hidden w-[34%] md:table-cell')}>
+                    <span className="flex justify-between gap-4">
+                      <span>₹0</span>
+                      <span>₹{salaryScale(hub)} L a year</span>
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {hub.careers.salaries.map((row) => (
-                  <tr key={row.role} className="border-b border-line last:border-0">
-                    <th scope="row" className="p-5 text-[15px] font-semibold tracking-tight">
-                      {row.role}
-                    </th>
-                    <td className={td}>{row.experience}</td>
-                    <td className={`${td} font-medium tabular-nums`}>{row.pay}</td>
-                  </tr>
-                ))}
+                {hub.careers.salaries.map((row, index) => {
+                  const range = payRange(row.pay);
+                  return (
+                    <tr
+                      key={row.role}
+                      className="border-b border-line transition-colors last:border-0 hover:bg-canvas/70 max-md:grid max-md:grid-cols-2 max-md:gap-x-4 max-md:gap-y-1 max-md:p-5"
+                    >
+                      <th scope="row" className="p-5 text-[15px] font-semibold tracking-tight max-md:col-span-2 max-md:p-0">
+                        {row.role}
+                      </th>
+                      <td className={`${td} max-md:p-0 max-md:text-muted`}>{row.experience}</td>
+                      <td className={`${td} font-medium tabular-nums max-md:p-0 max-md:text-right`}>{row.pay}</td>
+                      <td className="p-5 align-middle max-md:col-span-2 max-md:p-0 max-md:pt-3">
+                        {range && (
+                          <SalaryBar
+                            min={range[0]}
+                            max={range[1]}
+                            scale={salaryScale(hub)}
+                            delay={index * 0.15}
+                          />
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
           <p className="mt-4 text-sm text-faint">{hub.careers.salaryNote}</p>
 
           <h3 className="mt-14 text-xl font-semibold tracking-tight">Your {track.name} career path</h3>
-          <ol className="mt-6 grid gap-5 md:grid-cols-3">
-            {hub.careers.path.map((step, index) => (
-              <li key={step.stage} className="rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-7">
-                <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand">
-                  Step {index + 1}
-                </p>
-                <p className="mt-3 text-lg font-semibold tracking-tight">{step.stage}</p>
-                <p className="mt-2 leading-relaxed text-muted">{step.roles}</p>
-              </li>
-            ))}
-          </ol>
+          <PathSteps steps={hub.careers.path} />
         </Container>
       </section>
 
@@ -339,29 +473,40 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
         <Container className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 [&>*]:min-w-0">
           <SectionHeading eyebrow="Certifications" title={hub.certifications.title} intro={hub.certifications.intro} />
           <div>
-            <div className="overflow-x-auto rounded-3xl border border-line bg-paper shadow-soft">
-              <table className="w-full min-w-[480px] text-left">
-                <caption className="sr-only">{hub.certifications.title}</caption>
-                <thead>
-                  <tr className="border-b border-line text-[13px] text-muted">
-                    <th scope="col" className={th}>Certification</th>
-                    <th scope="col" className={th}>Course</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {hub.certifications.rows.map((row) => (
-                    <tr key={row.name} className="border-b border-line last:border-0">
-                      <td className="px-5 py-4 text-[15px]">{row.name}</td>
-                      <td className="px-5 py-4 text-[15px]">
-                        <Link href={courseHref(row.slug)} className="font-medium hover:underline">
-                          {getProgram(row.slug)?.shortName ?? row.slug}
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {certificationGroups(hub).map((group, index) => (
+                <Reveal
+                  as="li"
+                  key={group.slug}
+                  y={20}
+                  delay={(index % 4) * 0.07}
+                  className="group rounded-2xl border border-line bg-paper p-5 shadow-soft transition-[border-color,box-shadow,translate] duration-300 hover:-translate-y-1 hover:border-ink/25 hover:shadow-lift"
+                >
+                  <div className="flex items-center gap-3">
+                    <span
+                      aria-hidden
+                      className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-ink text-white transition-[rotate,scale] duration-300 group-hover:rotate-[-8deg] group-hover:scale-110"
+                    >
+                      <Award className="size-4" />
+                    </span>
+                    <Link
+                      href={courseHref(group.slug)}
+                      className="text-[15px] font-semibold tracking-tight hover:underline"
+                    >
+                      {getProgram(group.slug)?.shortName ?? group.slug}
+                    </Link>
+                  </div>
+                  <ul className="mt-4 grid gap-2">
+                    {group.names.map((name) => (
+                      <li key={name} className="flex items-start gap-2 text-[14.5px] leading-snug">
+                        <BadgeCheck aria-hidden className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              ))}
+            </ul>
             <p className="mt-4 text-sm text-faint">{hub.certifications.note}</p>
           </div>
         </Container>
@@ -372,12 +517,26 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
         <Container>
           <SectionHeading eyebrow="Why ARA" title={hub.benefits.title} />
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {hub.benefits.items.map((item) => (
-              <li key={item.title} className="rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-7">
-                <h3 className="text-lg font-semibold tracking-tight">{item.title}</h3>
-                <p className="mt-2 leading-relaxed text-muted">{item.text}</p>
-              </li>
-            ))}
+            {hub.benefits.items.map((item, index) => {
+              const Icon = BENEFIT_ICONS[index % BENEFIT_ICONS.length];
+              return (
+                <Reveal as="li" key={item.title} delay={index * 0.08} className="h-full">
+                  <Spotlight
+                    color="rgb(229 35 45 / 0.07)"
+                    className="group h-full rounded-3xl border border-line bg-paper p-6 shadow-soft transition-[border-color,box-shadow,translate] duration-300 hover:-translate-y-1 hover:border-ink/25 hover:shadow-lift sm:p-7"
+                  >
+                    <span
+                      aria-hidden
+                      className="flex size-12 items-center justify-center rounded-2xl bg-ink text-white transition-[background-color,rotate,scale] duration-300 group-hover:rotate-[-6deg] group-hover:scale-110 group-hover:bg-brand"
+                    >
+                      <Icon className="size-5" />
+                    </span>
+                    <h3 className="mt-5 text-lg font-semibold tracking-tight">{item.title}</h3>
+                    <p className="mt-2 leading-relaxed text-muted">{item.text}</p>
+                  </Spotlight>
+                </Reveal>
+              );
+            })}
           </ul>
         </Container>
       </section>
@@ -421,8 +580,8 @@ function OtherTracks({ current }: { current: Track }) {
           }
         />
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {others.map((item) => (
-            <li key={item.href}>
+          {others.map((item, index) => (
+            <Reveal as="li" key={item.href} y={16} delay={(index % 3) * 0.06}>
               <Link
                 href={item.href}
                 className="group flex items-center justify-between gap-4 rounded-2xl border border-line bg-paper px-5 py-4 shadow-soft transition-colors hover:border-ink/30"
@@ -436,7 +595,7 @@ function OtherTracks({ current }: { current: Track }) {
                   className="size-4 shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-ink"
                 />
               </Link>
-            </li>
+            </Reveal>
           ))}
         </ul>
         <p className="mt-6">

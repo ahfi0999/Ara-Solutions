@@ -8,6 +8,7 @@ export function PageHero({
   title,
   intro,
   breadcrumb,
+  aside,
   children,
 }: {
   eyebrow: string;
@@ -15,6 +16,8 @@ export function PageHero({
   intro?: ReactNode;
   /** Shown above the heading, e.g. a breadcrumb trail. */
   breadcrumb?: ReactNode;
+  /** A visual beside the heading on wide screens (hidden on phones and tablets). */
+  aside?: ReactNode;
   children?: ReactNode;
 }) {
   return (
@@ -22,14 +25,15 @@ export function PageHero({
       <DarkHeroBackdrop />
       <Container>
         {breadcrumb && <div className="fade-up mb-8 [@media(max-height:800px)]:mb-5">{breadcrumb}</div>}
-        <SectionHeading
-          as="h1"
-          tone="dark"
-          eyebrow={eyebrow}
-          title={title}
-          intro={intro}
-        />
-        {children && <div className="fade-up mt-9 [animation-delay:350ms] [@media(max-height:800px)]:mt-6">{children}</div>}
+        <div className={aside ? 'grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] [&>*]:min-w-0' : undefined}>
+          <div>
+            <SectionHeading as="h1" tone="dark" eyebrow={eyebrow} title={title} intro={intro} />
+            {children && (
+              <div className="fade-up mt-9 [animation-delay:350ms] [@media(max-height:800px)]:mt-6">{children}</div>
+            )}
+          </div>
+          {aside && <div className="hidden lg:block">{aside}</div>}
+        </div>
       </Container>
     </section>
   );

@@ -88,7 +88,7 @@ export function Reveal({
   className?: string;
   delay?: number;
   y?: number;
-  as?: 'div' | 'li' | 'section' | 'article';
+  as?: 'div' | 'li' | 'section' | 'article' | 'tr';
 }) {
   const reduce = useReducedMotionSafe();
   const Component = motion[as];
