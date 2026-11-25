@@ -3,6 +3,8 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   trailingSlash: true,
   poweredByHeader: false,
+  // Image qualities in use: the default 75, and 90 for the certification badges (small text on them stays sharp).
+  images: { qualities: [75, 90] },
   // Pin the project root for Turbopack (avoids picking up a lockfile from a parent folder).
   turbopack: { root: import.meta.dirname },
   // Keep old links from the previous website working.

@@ -26,7 +26,13 @@ export type TrackHub = {
   why: { title: string; text: string };
   compare: HubCompareRow[];
   /** "If you have … start with …" rows: the course slug to start with for each background. */
-  chooser: { title: string; intro: string; rows: { background: string; slug: string }[]; note: string };
+  chooser: {
+    title: string;
+    intro: string;
+    /** `label`: the short button text in the course finder; `background`: the full sentence. */
+    rows: { label: string; background: string; slug: string }[];
+    note: string;
+  };
   careers: {
     title: string;
     intro: string;
@@ -34,7 +40,13 @@ export type TrackHub = {
     salaryNote: string;
     path: { stage: string; roles: string }[];
   };
-  certifications: { title: string; intro: string; rows: { name: string; slug: string }[]; note: string };
+  certifications: {
+    title: string;
+    intro: string;
+    /** badge: the official badge image in public/images/certifications/, where the issuer publishes one. */
+    rows: { name: string; slug: string; badge?: string }[];
+    note: string;
+  };
   benefits: { title: string; items: { title: string; text: string }[] };
   faqs: { q: string; a: string }[];
   closing: { title: string; intro: string };
@@ -85,9 +97,21 @@ const workday: TrackHub = {
     intro:
       'Every ARA Workday course starts from the Workday foundations, so you do not need Workday experience. Pick the course that builds on what you already know.',
     rows: [
-      { background: 'You have an HR, payroll or HRIS background', slug: 'workday-hcm' },
-      { background: 'You have an accounting or finance background', slug: 'workday-finance' },
-      { background: 'You have a development or integration background', slug: 'workday-integration' },
+      {
+        label: 'HR, payroll or HRIS',
+        background: 'You have an HR, payroll or HRIS background',
+        slug: 'workday-hcm',
+      },
+      {
+        label: 'Accounting or finance',
+        background: 'You have an accounting or finance background',
+        slug: 'workday-finance',
+      },
+      {
+        label: 'Development or integration',
+        background: 'You have a development or integration background',
+        slug: 'workday-integration',
+      },
     ],
     note: 'Freshers with an HR, commerce or technical degree can join the matching course too.',
   },
@@ -186,10 +210,6 @@ const workday: TrackHub = {
       q: 'Do I need coding for Workday?',
       a: 'Not for Workday HCM or Financials. Workday Integrations uses XML, XSLT and APIs, which are taught in the course.',
     },
-    {
-      q: 'Can I learn Workday HCM and Integrations together?',
-      a: 'Yes. Many Workday consultants combine a functional area such as HCM with integrations, and integration roles often pay more because fewer people have the technical skills.',
-    },
   ],
   closing: {
     title: 'Talk to a Workday course advisor',
@@ -221,7 +241,11 @@ const servicenow: TrackHub = {
       bestFor: 'Freshers and graduates; IT support and help desk staff',
       coding: 'No coding needed',
       certifications: ['CSA'],
-      roles: ['ServiceNow Administrator', 'ServiceNow ITSM Support Specialist', 'ServiceNow Platform Support Analyst'],
+      roles: [
+        'ServiceNow Administrator',
+        'ServiceNow ITSM Support Specialist',
+        'ServiceNow Platform Support Analyst',
+      ],
     },
     {
       slug: 'servicenow-itsm-development',
@@ -232,7 +256,8 @@ const servicenow: TrackHub = {
     },
     {
       slug: 'servicenow',
-      bestFor: 'Freshers, graduates and IT support staff who want admin, development, HRSD and AI in one course',
+      bestFor:
+        'Freshers, graduates and IT support staff who want admin, development, HRSD and AI in one course',
       coding: 'Taught from the basics (JavaScript)',
       certifications: ['CSA', 'CAD', 'CIS-HR', 'Now Assist and Agentic AI executive micro-certifications'],
       roles: ['ServiceNow Administrator', 'ServiceNow Developer', 'ServiceNow HRSD Developer'],
@@ -242,7 +267,11 @@ const servicenow: TrackHub = {
       bestFor: 'HR professionals and ServiceNow administrators',
       coding: 'No coding needed',
       certifications: ['CIS-HR'],
-      roles: ['ServiceNow HRSD Consultant', 'ServiceNow HRSD Developer', 'ServiceNow HRSD Technical Consultant'],
+      roles: [
+        'ServiceNow HRSD Consultant',
+        'ServiceNow HRSD Developer',
+        'ServiceNow HRSD Technical Consultant',
+      ],
     },
     {
       slug: 'servicenow-crm',
@@ -278,14 +307,42 @@ const servicenow: TrackHub = {
     intro:
       'Pick the course that builds on what you already know. HRSD, CRM and GRC are easier with ServiceNow admin basics, so an advisor can tell you whether to take ServiceNow Admin first.',
     rows: [
-      { background: 'You are new to ServiceNow and want one focused course', slug: 'servicenow-admin-platform' },
-      { background: 'You want admin, development, HRSD and AI in one course', slug: 'servicenow' },
-      { background: 'You know ServiceNow admin and want to code', slug: 'servicenow-itsm-development' },
-      { background: 'You have an HR background', slug: 'servicenow-hrsd' },
-      { background: 'You work in customer service or CRM', slug: 'servicenow-crm' },
-      { background: 'You work in audit, risk or compliance', slug: 'servicenow-grc' },
-      { background: 'You are a developer and want to build AI agents', slug: 'servicenow-fdse' },
-      { background: 'You prefer requirements and analysis to configuration', slug: 'servicenow-ba' },
+      {
+        label: 'New to ServiceNow',
+        background: 'You are new to ServiceNow and want one focused course',
+        slug: 'servicenow-admin-platform',
+      },
+      {
+        label: 'Everything in one course',
+        background: 'You want admin, development, HRSD and AI in one course',
+        slug: 'servicenow',
+      },
+      {
+        label: 'Know admin, want to code',
+        background: 'You know ServiceNow admin and want to code',
+        slug: 'servicenow-itsm-development',
+      },
+      { label: 'HR', background: 'You have an HR background', slug: 'servicenow-hrsd' },
+      {
+        label: 'Customer service or CRM',
+        background: 'You work in customer service or CRM',
+        slug: 'servicenow-crm',
+      },
+      {
+        label: 'Audit, risk or compliance',
+        background: 'You work in audit, risk or compliance',
+        slug: 'servicenow-grc',
+      },
+      {
+        label: 'Developer, into AI agents',
+        background: 'You are a developer and want to build AI agents',
+        slug: 'servicenow-fdse',
+      },
+      {
+        label: 'Analysis and requirements',
+        background: 'You prefer requirements and analysis to configuration',
+        slug: 'servicenow-ba',
+      },
     ],
     note: 'Freshers and graduates can start with ServiceNow Admin, ServiceNow Masters & AI or ServiceNow Business Analyst. No ServiceNow experience is needed for these three.',
   },
@@ -317,31 +374,48 @@ const servicenow: TrackHub = {
     intro:
       'Most people start with the Certified System Administrator (CSA) exam, which ServiceNow suggests before its implementation specialist (CIS) exams. They then add the developer exam (CAD) or the CIS exam for their module. Our courses prepare you for these exams, and you book them yourself through ServiceNow University.',
     rows: [
-      { name: 'ServiceNow Certified System Administrator (CSA)', slug: 'servicenow-admin-platform' },
-      { name: 'ServiceNow Certified Application Developer (CAD)', slug: 'servicenow-itsm-development' },
+      {
+        name: 'ServiceNow Certified System Administrator (CSA)',
+        slug: 'servicenow-admin-platform',
+        badge: '/images/certifications/csa.png',
+      },
+      {
+        name: 'ServiceNow Certified Application Developer (CAD)',
+        slug: 'servicenow-itsm-development',
+        badge: '/images/certifications/cad.png',
+      },
       {
         name: 'ServiceNow Certified Implementation Specialist – IT Service Management (CIS-ITSM)',
         slug: 'servicenow-itsm-development',
+        badge: '/images/certifications/cis-itsm.png',
       },
       {
         name: 'ServiceNow Certified Implementation Specialist – Human Resources (CIS-HR)',
         slug: 'servicenow-hrsd',
+        badge: '/images/certifications/cis-hr.png',
       },
       {
         name: 'ServiceNow Certified Implementation Specialist – Customer Service Management (CIS-CSM)',
         slug: 'servicenow-crm',
+        badge: '/images/certifications/cis-csm.png',
       },
       {
         name: 'ServiceNow Certified Implementation Specialist – Risk and Compliance (CIS-RC)',
         slug: 'servicenow-grc',
+        badge: '/images/certifications/cis-rc.png',
       },
       {
         name: 'ServiceNow Certified Implementation Specialist – Third-Party Risk Management (CIS-TPRM)',
         slug: 'servicenow-grc',
+        badge: '/images/certifications/cis-tprm.png',
       },
       { name: 'Now Assist Executive Micro-Certification', slug: 'servicenow' },
       { name: 'Agentic AI Executive Micro-Certification', slug: 'servicenow-fdse' },
-      { name: 'IIBA Entry Certificate in Business Analysis (ECBA)', slug: 'servicenow-ba' },
+      {
+        name: 'IIBA Entry Certificate in Business Analysis (ECBA)',
+        slug: 'servicenow-ba',
+        badge: '/images/certifications/ecba.png',
+      },
     ],
     note: 'Names from ServiceNow University and IIBA (November 2026). Each row shows the course that prepares you for the exam or leads on to it. ServiceNow sets the eligibility, prerequisites and fees: CIS-ITSM, for example, now also needs the CIS – Data Foundations (CMDB and CSDM) certification. ServiceNow has no full AI certification yet; its AI credentials are short executive micro-certifications.',
   },
@@ -372,20 +446,12 @@ const servicenow: TrackHub = {
       a: 'It depends on your background. Of our ServiceNow courses in Hyderabad, ServiceNow Admin and ServiceNow Masters & AI suit people new to ServiceNow, and ITSM Development suits admins who want to code. HRSD, CRM and GRC suit HR, customer service and risk professionals, FDSE suits developers, and Business Analyst suits people who prefer requirements to configuration. An advisor can help you choose.',
     },
     {
-      q: 'ServiceNow Admin or ServiceNow Masters & AI: which should I take?',
-      a: 'Take ServiceNow Admin if you want one focused course that leads to an administrator role and the CSA exam. Take ServiceNow Masters & AI if you want admin, development, HRSD and AI in one longer course, for a wider range of roles and the CSA, CAD and CIS-HR exams.',
-    },
-    {
       q: 'How do I learn ServiceNow from scratch?',
       a: 'Start with the platform basics: users and roles, tables and forms, ITSM processes and the service catalog. Then practise on a free Personal Developer Instance (PDI) from the ServiceNow Developer Program and build projects. ServiceNow Admin and ServiceNow Masters & AI both start from scratch, so no ServiceNow experience is needed.',
     },
     {
       q: 'Is there a ServiceNow course in Hyderabad for freshers?',
       a: 'Yes. ServiceNow Admin, ServiceNow Masters & AI and ServiceNow Business Analyst all suit freshers and graduates. Entry-level roles include ServiceNow administrator, platform support analyst and ServiceNow business analyst.',
-    },
-    {
-      q: 'Which ServiceNow courses need coding?',
-      a: 'ServiceNow Admin, HRSD, CRM, GRC and Business Analyst need no coding. ITSM Development teaches JavaScript and the Glide APIs, and ServiceNow Masters & AI teaches coding from the basics. FDSE is for people who can already program.',
     },
     {
       q: 'What is the difference between ServiceNow ITSM, HRSD, CSM and GRC?',
@@ -400,20 +466,12 @@ const servicenow: TrackHub = {
       a: 'Usually the Certified System Administrator (CSA), which ServiceNow suggests before its implementation specialist (CIS) exams. Developers then add CAD, and module specialists add the CIS exam for their area, such as CIS-HR, CIS-CSM or CIS-RC. CIS-ITSM now also needs the CIS – Data Foundations (CMDB and CSDM) certification.',
     },
     {
-      q: 'Which ServiceNow courses cover Now Assist and AI agents?',
-      a: 'ServiceNow Masters & AI and ServiceNow FDSE go deepest, with Now Assist skills, AI agents and AI Control Tower. ServiceNow CRM covers Now Assist for customer service, and ServiceNow Business Analyst covers Now Assist for analysts. ServiceNow has no full AI certification yet, only short executive micro-certifications.',
-    },
-    {
       q: 'Is ServiceNow a good career?',
       a: 'ServiceNow is used by many large companies, and IT services firms and capability centres in Hyderabad hire administrators, developers and consultants for it. A typical ServiceNow career path runs from administrator or analyst to developer or module specialist, then to technical consultant or architect. AmbitionBox lists ₹2.7 L to ₹10 L a year in India for ServiceNow administrators with 1 to 7 years of experience (November 2026).',
     },
     {
       q: 'What are the ServiceNow course fees in Hyderabad?',
       a: 'Fees depend on the course and the batch. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch dates.',
-    },
-    {
-      q: 'Are all ServiceNow courses taught live?',
-      a: 'Yes. Every ServiceNow course is taught live by an instructor on Zoom, and every class is recorded so you can revise or catch up. Our advisors are based in Madhapur, Hyderabad.',
     },
     {
       q: 'Do the ServiceNow courses include placement support?',
