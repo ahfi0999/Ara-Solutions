@@ -136,10 +136,11 @@ export function Stagger({
 export function CountUp({ value, suffix = '', className }: { value: number; suffix?: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: '0px 0px -10% 0px' });
-  const reduce = useReducedMotionSafe();
+  // Read straight away (not the hydration-safe version): it is only used in effects, which run in the
+  // browser, so a reduced-motion visitor never sees the number reset to 0 or count up.
+  const reduce = Boolean(usePrefersReducedMotion());
   const [display, setDisplay] = useState(value);
 
-  // Reduced motion is only known after mounting, so restore the final value then (no count-up).
   useEffect(() => {
     setDisplay(reduce ? value : 0);
   }, [reduce, value]);
