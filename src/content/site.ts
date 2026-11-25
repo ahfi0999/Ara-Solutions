@@ -46,12 +46,20 @@ export const site = {
  * Headline numbers: years from the client (two decades in the IT industry, Nov 2026), placements from ARA's
  * original website, screened profiles and shortlist time from ARA's pitch deck.
  */
-export const stats = [
-  { value: 20, suffix: '+', label: 'Years in the IT industry' },
+export type Stat = {
+  value: number;
+  suffix: string;
+  label: string;
+  /** Words shown in place of the counting number. */
+  text?: string;
+};
+
+export const stats: readonly Stat[] = [
+  { value: 20, suffix: '+', text: 'Two decades', label: 'In the IT industry' },
   { value: 10000, suffix: '+', label: 'Screened talent profiles' },
   { value: 1000, suffix: '+', label: 'Professionals placed' },
   { value: 48, suffix: ' hrs', label: 'To a targeted shortlist' },
-] as const;
+];
 
 /** A phone line: the number as shown, its tel: link and its WhatsApp number. */
 export type ContactLine = { phone: string; phoneHref: string; whatsapp: string };

@@ -3,7 +3,7 @@ import { ArrowRight, type LucideIcon } from 'lucide-react';
 import { trainingApproach } from '@/content/company';
 import { caseStudies } from '@/content/records';
 import { allPrograms } from '@/content/programs';
-import { stats } from '@/content/site';
+import { stats, type Stat } from '@/content/site';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { ButtonLink } from '@/components/ui/Button';
@@ -93,8 +93,8 @@ export function TrainingPillars() {
 }
 
 /** Training figures: real numbers only (from ARA's original website and the program list). */
-const CAREER_FIGURES = [
-  ...stats.filter((stat) => /placed|years/i.test(stat.label)),
+const CAREER_FIGURES: Stat[] = [
+  ...stats.filter((stat) => /placed|industry/i.test(stat.label)),
   { value: allPrograms.length, suffix: '', label: 'Career-focused courses' },
 ];
 
@@ -130,7 +130,7 @@ export function ResultsSplit() {
                     key={study.id}
                     className="flex flex-col gap-1 border-b sm:flex-row sm:items-baseline sm:gap-5 border-white/10 pb-6 last:border-0"
                   >
-                    <span className="shrink-0 text-[2rem] font-semibold tracking-tight sm:w-36 sm:text-4xl">
+                    <span className="shrink-0 text-[2rem] font-semibold tracking-tight sm:w-56 sm:text-4xl">
                       <Figure value={study.metrics[0].value} />
                     </span>
                     <span>
@@ -165,8 +165,8 @@ export function ResultsSplit() {
                     key={figure.label}
                     className="flex flex-col gap-1 border-b sm:flex-row sm:items-baseline sm:gap-5 border-white/15 pb-6 last:border-0"
                   >
-                    <span className="shrink-0 text-[2rem] font-semibold tracking-tight sm:w-36 sm:text-4xl">
-                      <CountUp value={figure.value} suffix={figure.suffix} />
+                    <span className="shrink-0 text-[2rem] font-semibold tracking-tight sm:w-56 sm:text-4xl">
+                      {figure.text ?? <CountUp value={figure.value} suffix={figure.suffix} />}
                     </span>
                     <span className="font-medium">{figure.label}</span>
                   </li>

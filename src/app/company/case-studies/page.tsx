@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 import { caseStudies } from '@/content/records';
 import { alumniCompanies } from '@/content/home';
 import { allPrograms } from '@/content/programs';
-import { stats } from '@/content/site';
+import { stats, type Stat } from '@/content/site';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 // Logo heights shared with the home page's logo bands.
 
 /** Training outcomes: real figures only (from ARA's original website and the program list). */
-const TRAINING_FIGURES = [
-  ...stats.filter((stat) => /placed|years/i.test(stat.label)),
+const TRAINING_FIGURES: Stat[] = [
+  ...stats.filter((stat) => /placed|industry/i.test(stat.label)),
   { value: allPrograms.length, suffix: '', label: 'Career-focused training courses' },
 ];
 
@@ -144,7 +144,7 @@ export default function CaseStudiesPage() {
               <Reveal key={figure.label} delay={index * 0.06}>
                 <div className="rounded-3xl bg-ink p-7 text-white">
                   <dd className="text-5xl font-semibold tracking-[-0.04em]">
-                    <CountUp value={figure.value} suffix={figure.suffix} />
+                    {figure.text ?? <CountUp value={figure.value} suffix={figure.suffix} />}
                   </dd>
                   <dt className="mt-6 text-white/60">{figure.label}</dt>
                 </div>

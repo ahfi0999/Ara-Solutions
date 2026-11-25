@@ -84,8 +84,7 @@ export default function AboutPage() {
               >
                 <div className="flex h-full flex-col justify-between rounded-3xl bg-ink p-7 text-white">
                   <dd className="text-5xl font-semibold tracking-[-0.04em]">
-                    {stat.value.toLocaleString('en-IN')}
-                    {stat.suffix}
+                    {stat.text ?? `${stat.value.toLocaleString('en-IN')}${stat.suffix}`}
                   </dd>
                   <dt className="mt-8 text-white/60">{stat.label}</dt>
                 </div>

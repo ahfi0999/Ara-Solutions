@@ -122,7 +122,7 @@ export function Hero() {
               )}
             >
               <dd className="order-1 text-3xl font-semibold tracking-tight sm:text-4xl">
-                <CountUp value={stat.value} suffix={stat.suffix} />
+                {stat.text ?? <CountUp value={stat.value} suffix={stat.suffix} />}
               </dd>
               <dt className="order-2 text-sm text-white/55">{stat.label}</dt>
             </div>

@@ -139,10 +139,10 @@ export function CountUp({ value, suffix = '', className }: { value: number; suff
   const reduce = useReducedMotionSafe();
   const [display, setDisplay] = useState(value);
 
+  // Reduced motion is only known after mounting, so restore the final value then (no count-up).
   useEffect(() => {
-    if (reduce) return;
-    setDisplay(0);
-  }, [reduce]);
+    setDisplay(reduce ? value : 0);
+  }, [reduce, value]);
 
   useEffect(() => {
     if (!inView || reduce) return;
