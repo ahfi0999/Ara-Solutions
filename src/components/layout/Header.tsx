@@ -140,9 +140,26 @@ function MenuLink({ item, compact = false }: { item: NavItem; compact?: boolean 
   );
 }
 
+/** The white card a dropdown sits in. */
+const MENU_CARD =
+  'flex overflow-hidden rounded-2xl border border-line bg-white text-text shadow-[0_24px_60px_-20px_rgb(0_0_0/0.55),0_0_0_1px_rgb(13_17_80/0.06)]';
+
+/** The section name, written sideways down a dropdown's left edge. */
+function MenuStrip({ text }: { text: string }) {
+  return (
+    <div aria-hidden className="flex w-12 shrink-0 items-center justify-center bg-brand">
+      <span className="rotate-180 font-mono text-[11px] font-semibold uppercase tracking-[0.35em] text-white [writing-mode:vertical-rl]">
+        {text}
+      </span>
+    </div>
+  );
+}
+
 /**
  * Two-panel dropdown (Training): categories down the left; pointing at one (or focusing it with the
  * keyboard) shows all its courses on the right. Opens on the category of the page you are on.
+ * Two cards: the categories, and the courses, whose card is as tall as its courses (smaller for a
+ * track with few, taller for a big one).
  */
 function CategoryMenu({ group }: { group: NavGroup & { categories: NonNullable<NavGroup['categories']> } }) {
   const pathname = usePathname();
@@ -157,36 +174,57 @@ function CategoryMenu({ group }: { group: NavGroup & { categories: NonNullable<N
   const [active, setActive] = useState(start);
   const current = group.categories[active];
   return (
-    <div className="flex min-w-0 flex-1">
-      <ul className="w-60 shrink-0 space-y-0.5 border-r border-line p-2">
-        {group.categories.map((category, index) => (
-          <li key={category.label}>
-            <Link
-              href={category.href}
-              onMouseEnter={() => setActive(index)}
-              onFocus={() => setActive(index)}
-              className={cn(
-                'flex items-center gap-2 rounded-xl px-3 py-2.5 transition-colors',
-                index === active ? 'bg-brand text-white' : 'text-ink hover:bg-canvas',
-              )}
-            >
-              <span className="min-w-0 flex-1">
-                <span className="block text-[15px] font-semibold leading-tight">{category.label}</span>
-                <span
-                  className={cn(
-                    'mt-0.5 block truncate text-[12px]',
-                    index === active ? 'text-white/75' : 'text-muted',
-                  )}
-                >
-                  {category.note}
+    <div className="flex items-start gap-2">
+      <div className={cn(MENU_CARD, 'shrink-0')}>
+        <MenuStrip text={group.strip} />
+        <ul className="w-60 space-y-0.5 p-2">
+          {group.categories.map((category, index) => (
+            <li key={category.label}>
+              <Link
+                href={category.href}
+                onMouseEnter={() => setActive(index)}
+                onFocus={() => setActive(index)}
+                className={cn(
+                  'flex items-center gap-2 rounded-xl px-3 py-2.5 transition-colors',
+                  index === active ? 'bg-brand text-white' : 'text-ink hover:bg-canvas',
+                )}
+              >
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[15px] font-semibold leading-tight">{category.label}</span>
+                  <span
+                    className={cn(
+                      'mt-0.5 block truncate text-[12px]',
+                      index === active ? 'text-white/75' : 'text-muted',
+                    )}
+                  >
+                    {category.note}
+                  </span>
                 </span>
-              </span>
-              <ChevronRight aria-hidden className="size-4 shrink-0" />
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div className="flex min-w-0 flex-1 flex-col p-2">
+                <ChevronRight aria-hidden className="size-4 shrink-0" />
+              </Link>
+            </li>
+          ))}
+          {/* Last row: every course on one page (the Training & Placement page). */}
+          {group.footer && (
+            <li className="border-t border-line pt-0.5">
+              <Link
+                href={group.footer.href}
+                className="group/all flex items-center gap-2 rounded-xl px-3 py-2.5 text-ink transition-colors hover:bg-ink hover:text-white"
+              >
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[15px] font-semibold leading-tight">{group.footer.label}</span>
+                  <span className="mt-0.5 block truncate text-[12px] text-muted group-hover/all:text-white/70">
+                    {group.categories.length} tracks
+                  </span>
+                </span>
+                <ArrowRight aria-hidden className="size-4 shrink-0 text-brand group-hover/all:text-white" />
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div>
+      {/* The courses card: as tall as its courses, so it is smaller for a track with few. */}
+      <div className={cn(MENU_CARD, 'min-w-0 flex-1 flex-col p-2')}>
         <p className="px-3 pb-1 pt-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-faint">
           {current.label}: all courses
         </p>
@@ -197,26 +235,16 @@ function CategoryMenu({ group }: { group: NavGroup & { categories: NonNullable<N
             </li>
           ))}
         </ul>
-        {/* One link at the bottom: the track's own page ("See all 8 ServiceNow courses"), or, for a track
-            with a single course, the Training page. */}
-        {current.items.length > 1 ? (
+        {/* At the bottom: the track's own page ("See all 8 ServiceNow courses"); a single-course track has none
+            ("View all courses" is on the left). */}
+        {current.items.length > 1 && (
           <Link
             href={current.href}
-            className="mt-auto flex items-center justify-between rounded-xl bg-canvas px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
+            className="mt-2 flex items-center justify-between rounded-xl bg-canvas px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
           >
             See all {current.items.length} {current.label} courses
             <ArrowRight aria-hidden className="size-4" />
           </Link>
-        ) : (
-          group.footer && (
-            <Link
-              href={group.footer.href}
-              className="mt-auto flex items-center justify-between rounded-xl bg-canvas px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
-            >
-              {group.footer.label}
-              <ArrowRight aria-hidden className="size-4" />
-            </Link>
-          )
         )}
       </div>
     </div>
@@ -309,17 +337,11 @@ function Dropdown({
               group.categories ? 'w-[min(780px,calc(100vw-2rem))]' : 'w-[420px]',
             )}
           >
-            <div className="flex overflow-hidden rounded-2xl border border-line bg-white text-text shadow-[0_24px_60px_-20px_rgb(0_0_0/0.55),0_0_0_1px_rgb(13_17_80/0.06)]">
-              {/* The section name, written sideways down the left edge. */}
-              <div aria-hidden className="flex w-12 shrink-0 items-center justify-center bg-brand">
-                <span className="rotate-180 font-mono text-[11px] font-semibold uppercase tracking-[0.35em] text-white [writing-mode:vertical-rl]">
-                  {group.strip}
-                </span>
-              </div>
-
-              {group.categories ? (
-                <CategoryMenu group={{ ...group, categories: group.categories }} />
-              ) : (
+            {group.categories ? (
+              <CategoryMenu group={{ ...group, categories: group.categories }} />
+            ) : (
+              <div className={MENU_CARD}>
+                <MenuStrip text={group.strip} />
                 <div className="min-w-0 flex-1 p-2">
                   <ul className="grid gap-0.5">
                     {group.items.map((item) => (
@@ -338,8 +360,8 @@ function Dropdown({
                     </Link>
                   )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

@@ -175,7 +175,7 @@ export const navigation: NavEntry[] = [
     href: '/training-placement/',
     categories: trainingCategories,
     items: trainingCategories.flatMap((category) => category.items),
-    footer: { label: 'All training programs', href: '/training-placement/' },
+    footer: { label: 'View all courses', href: '/training-placement/' },
   },
   { label: 'Careers', href: '/careers/' },
   { label: 'Contact', href: '/contact/' },
