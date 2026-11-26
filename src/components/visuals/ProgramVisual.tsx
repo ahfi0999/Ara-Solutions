@@ -420,7 +420,7 @@ function ServiceNowVisual() {
               s(4),
             )}
           >
-            <Sparkles aria-hidden className="size-4" /> Now Assist summarised INC0012 for the resolver group
+            <Sparkles aria-hidden className="size-4" /> ServiceNow Otto summarised INC0012 for the resolver group
           </div>
         </>
       )}

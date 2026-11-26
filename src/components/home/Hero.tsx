@@ -6,17 +6,15 @@ import { site, stats } from '@/content/site';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
-import { CountUp, EASE, Magnetic, SplitWords, useReducedMotionSafe } from '@/components/motion/primitives';
+import { CountUp, EASE, Magnetic, RiseWords, useReducedMotionSafe } from '@/components/motion/primitives';
 import { TalentOrbit } from '@/components/visuals/TalentOrbit';
 import { HeroNetwork } from '@/components/visuals/HeroNetwork';
 import { MediaBackground } from '@/components/motion/MediaBackground';
 import { cn } from '@/lib/cn';
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 18, filter: 'blur(6px)' },
-  animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
-  transition: { duration: 0.9, ease: EASE, delay },
-});
+// The headline, intro, buttons and figures are on screen from the very first paint and only rise into place
+// (CSS, no fade from invisible), so slow phones show them at once and Google counts the page as loaded straight away.
+const rise = (delay: number) => ({ animationDelay: `${delay}s` });
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -64,25 +62,25 @@ export function Hero() {
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 [&>*]:min-w-0">
         <motion.div style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}>
           <h1 className="text-balance text-[length:clamp(1.95rem,9.4vw,2.4rem)] font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-[length:clamp(2.6rem,min(4.2vw,7.4vh),4.1rem)] [@media(max-width:639px)_and_(max-height:600px)]:text-[length:clamp(1.7rem,8.4vw,2.05rem)]">
-            <SplitWords delay={0.15}>Empowering businesses through talent.</SplitWords>{' '}
-            <SplitWords
-              delay={0.45}
+            <RiseWords>Empowering businesses through talent.</RiseWords>{' '}
+            <RiseWords
+              delay={0.2}
               className="font-serif font-normal italic tracking-[-0.02em]"
               wordClassName="text-gradient pr-[0.06em]"
             >
               Transforming careers
-            </SplitWords>{' '}
-            <SplitWords delay={0.6}>through technology.</SplitWords>
+            </RiseWords>{' '}
+            <RiseWords delay={0.3}>through technology.</RiseWords>
           </h1>
 
-          <motion.p
-            {...fadeUp(0.75)}
-            className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 sm:text-lg [@media(max-height:760px)]:mt-4"
+          <p
+            className="rise-in mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 sm:text-lg [@media(max-height:760px)]:mt-4"
+            style={rise(0.4)}
           >
             {site.description}
-          </motion.p>
+          </p>
 
-          <motion.div {...fadeUp(0.9)} className="mt-9 flex flex-wrap gap-3 [@media(max-height:760px)]:mt-6">
+          <div className="rise-in mt-9 flex flex-wrap gap-3 [@media(max-height:760px)]:mt-6" style={rise(0.5)}>
             <Magnetic>
               <EnquiryButton size="lg" arrow interest="hiring" title="Tell us about the talent you need">
                 Hire talent
@@ -93,7 +91,7 @@ export function Hero() {
                 Explore training
               </ButtonLink>
             </Magnetic>
-          </motion.div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -107,9 +105,9 @@ export function Hero() {
       </Container>
 
       <Container className="mt-16 sm:mt-20">
-        <motion.dl
-          {...fadeUp(1.05)}
-          className="grid grid-cols-2 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur lg:grid-cols-4"
+        <dl
+          className="rise-in grid grid-cols-2 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur lg:grid-cols-4"
+          style={rise(0.6)}
         >
           {stats.map((stat, index) => (
             <div
@@ -127,7 +125,7 @@ export function Hero() {
               <dt className="order-2 text-sm text-white/55">{stat.label}</dt>
             </div>
           ))}
-        </motion.dl>
+        </dl>
       </Container>
     </section>
   );

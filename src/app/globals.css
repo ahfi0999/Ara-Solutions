@@ -115,6 +115,22 @@
   animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* A page's main headline and intro: a short rise only, never hidden. The text is on screen from the very first
+   paint, so Google counts the page as loaded at once (a fade from invisible waits for the scripts on slow phones). */
+@keyframes rise-in {
+  from {
+    transform: translateY(0.45em);
+  }
+}
+.rise-in {
+  animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    animation: none;
+  }
+}
+
 /* Soft aurora used behind dark heroes. */
 .aurora {
   background:

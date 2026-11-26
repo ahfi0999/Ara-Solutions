@@ -7,7 +7,7 @@ import { cn } from '@/lib/cn';
 import { Container } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { ProgramVisual } from '@/components/visuals/ProgramVisual';
-import { SplitWords, Tilt } from '@/components/motion/primitives';
+import { RiseWords, Tilt } from '@/components/motion/primitives';
 import { HeroPhoto } from '@/components/motion/HeroPhoto';
 import { DarkHeroBackdrop } from '@/components/motion/DarkHeroBackdrop';
 
@@ -74,9 +74,9 @@ export function ProgramHero({ program, track }: { program: Program; track?: Trac
               </p>
             </div>
             <h1 className="mt-6 text-balance text-[length:clamp(1.85rem,8.6vw,2.25rem)] font-semibold leading-[1.04] tracking-[-0.04em] sm:text-[length:clamp(2.6rem,min(6vw,7.6vh),3.75rem)] [@media(max-height:800px)]:mt-4 [@media(max-width:639px)_and_(max-height:600px)]:mt-0">
-              <SplitWords delay={0.15} stagger={0.06}>
+              <RiseWords delay={0.1} stagger={0.06}>
                 {program.h1 ?? program.name}
-              </SplitWords>
+              </RiseWords>
             </h1>
             <p className="fade-up mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 [animation-delay:180ms] sm:text-lg [@media(max-height:800px)]:mt-4">
               {program.summary}

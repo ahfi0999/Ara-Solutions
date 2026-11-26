@@ -1,15 +1,26 @@
 'use client';
 
-import { motion } from 'motion/react';
-import { useReducedMotionSafe } from '@/components/motion/primitives';
+import { motion, useReducedMotion } from 'motion/react';
+import { useEffect, useState } from 'react';
 
-/** Page transition: each page fades and rises in when you navigate. */
+/** True until the first page a visitor opens has been shown. */
+let firstPage = true;
+
+/**
+ * Page transition: when you move to another page, it fades and rises in. The first page a visitor opens is
+ * shown at once, never hidden: starting it invisible until the scripts load left phones on a blank screen for
+ * seconds and made Google count the page as slow. The wrapper stays the same element either way, so nothing
+ * is rebuilt after the page loads.
+ */
 export default function Template({ children }: { children: React.ReactNode }) {
-  const reduce = useReducedMotionSafe();
-  if (reduce) return children;
+  const prefersReduced = useReducedMotion();
+  const [fade] = useState(() => !firstPage);
+  useEffect(() => {
+    firstPage = false;
+  }, []);
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={fade && !prefersReduced ? { opacity: 0, y: 12 } : false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >

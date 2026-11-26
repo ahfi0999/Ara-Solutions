@@ -16,7 +16,7 @@ import {
   useTransform,
   type HTMLMotionProps,
 } from 'motion/react';
-import { Children, useEffect, useRef, useState, type ReactNode } from 'react';
+import { Children, Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
@@ -33,44 +33,35 @@ export function useReducedMotionSafe() {
   return mounted ? Boolean(prefers) : false;
 }
 
-/** Headline that reveals word by word: each word rises out of a mask and sharpens from a blur. */
-export function SplitWords({
+/**
+ * Headline that rises word by word. The words are visible from the very first paint (a CSS rise, no fade from
+ * invisible and no wait for the page's scripts), so slow phones show the headline at once and Google counts the
+ * page as loaded straight away. Screen readers read it as normal text.
+ */
+export function RiseWords({
   children,
   className,
   wordClassName,
   delay = 0,
   stagger = 0.045,
-  inView = false,
 }: {
   children: string;
   className?: string;
-  /** Classes for each word (e.g. gradient text, which must sit on the animated element). */
+  /** Classes for each word, e.g. gradient text (kept off the moving element, whose animation it would replace). */
   wordClassName?: string;
   delay?: number;
   stagger?: number;
-  /** Animate when scrolled into view (default: on mount, for above-the-fold text). */
-  inView?: boolean;
 }) {
-  const reduce = useReducedMotionSafe();
-  const ref = useRef<HTMLSpanElement>(null);
-  const visible = useInView(ref, { once: true, margin: '0px 0px -12% 0px' });
-  const show = !inView || visible;
   const words = children.split(' ');
-  if (reduce) return <span className={cn(className, wordClassName)}>{children}</span>;
   return (
-    <span ref={ref} className={className} aria-label={children}>
+    <span className={className}>
       {words.map((word, index) => (
-        <span key={`${word}-${index}`} aria-hidden className="inline-block overflow-hidden pb-[0.12em] align-top">
-          <motion.span
-            className={cn('inline-block will-change-transform', wordClassName)}
-            initial={{ y: '105%', opacity: 0, filter: 'blur(8px)' }}
-            animate={show ? { y: '0%', opacity: 1, filter: 'blur(0px)' } : undefined}
-            transition={{ duration: 0.9, ease: EASE, delay: delay + index * stagger }}
-          >
-            {word}
-            {index < words.length - 1 ? ' ' : ''}
-          </motion.span>
-        </span>
+        <Fragment key={`${word}-${index}`}>
+          <span className="rise-in inline-block" style={{ animationDelay: `${delay + index * stagger}s` }}>
+            {wordClassName ? <span className={cn('inline-block', wordClassName)}>{word}</span> : word}
+          </span>
+          {index < words.length - 1 ? ' ' : null}
+        </Fragment>
       ))}
     </span>
   );

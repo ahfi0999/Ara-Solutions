@@ -94,7 +94,7 @@ export function TrainingPillars() {
 
 /** Training figures: real numbers only (from ARA's original website and the program list). */
 const CAREER_FIGURES: Stat[] = [
-  ...stats.filter((stat) => /placed|industry/i.test(stat.label)),
+  ...stats.filter((stat) => /placed|experience/i.test(stat.label)),
   { value: allPrograms.length, suffix: '', label: 'Career-focused courses' },
 ];
 
