@@ -60,6 +60,23 @@ const FEATURED: Course[] = [
   ...COURSES.filter((course) => !programs.some((program) => program.slug === course.program.slug)),
 ];
 
+/**
+ * The white part of each track box, in the track's colour: a soft tint that deepens towards the bottom
+ * corner, and a dot pattern there (written out in full so Tailwind can detect the classes).
+ */
+const BODY_TINT: Record<Program['accent'], { bg: string; dots: string; icon: string }> = {
+  sky: { bg: 'from-sky-100/80 via-sky-50/50', dots: 'text-sky-500/25', icon: 'text-sky-500/[0.13]' },
+  emerald: {
+    bg: 'from-emerald-100/80 via-emerald-50/50',
+    dots: 'text-emerald-500/25',
+    icon: 'text-emerald-500/[0.13]',
+  },
+  violet: { bg: 'from-violet-100/80 via-violet-50/50', dots: 'text-violet-500/25', icon: 'text-violet-500/[0.13]' },
+  rose: { bg: 'from-rose-100/80 via-rose-50/50', dots: 'text-rose-500/25', icon: 'text-rose-500/[0.13]' },
+  amber: { bg: 'from-amber-100/80 via-amber-50/50', dots: 'text-amber-500/25', icon: 'text-amber-500/[0.15]' },
+  indigo: { bg: 'from-indigo-100/80 via-indigo-50/50', dots: 'text-indigo-500/25', icon: 'text-indigo-500/[0.13]' },
+};
+
 /** Text a visitor might search for: names, track, tools, roles and module titles. */
 const searchText = ({ program, track, label }: Course) =>
   [
@@ -264,13 +281,34 @@ export function ProgramExplorer({
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-1 flex-col px-6 pb-6 pt-4 sm:px-7 sm:pb-7">
+                <div className="relative isolate flex flex-1 flex-col overflow-hidden px-6 pb-6 pt-4 sm:px-7 sm:pb-7">
+                  {/* Colour for the white part: a tint and dots towards the bottom corner, and the track's icon,
+                      large and faint, floating there (it fills the space a shorter box has left). */}
+                  <div
+                    aria-hidden
+                    className={cn('absolute inset-0 -z-10 bg-gradient-to-tl to-paper', BODY_TINT[tone].bg)}
+                  />
+                  <div
+                    aria-hidden
+                    className={cn(
+                      'absolute inset-0 -z-10 bg-[radial-gradient(currentColor_1.2px,transparent_1.6px)] [background-size:18px_18px] [mask-image:radial-gradient(85%_75%_at_100%_100%,black,transparent)]',
+                      BODY_TINT[tone].dots,
+                    )}
+                  />
+                  <Icon
+                    aria-hidden
+                    strokeWidth={1.25}
+                    className={cn(
+                      'absolute -bottom-8 -right-8 -z-10 size-48 rotate-[-12deg] animate-float transition-[rotate,scale] duration-700 ease-out group-hover/track:rotate-0 group-hover/track:scale-110',
+                      BODY_TINT[tone].icon,
+                    )}
+                  />
                   <ul className="-mx-3 space-y-0.5">
                     {courses.map(({ program, isNew, label }) => (
                       <li key={program.slug}>
                         <Link
                           href={`/training-placement/${program.slug}/`}
-                          className="group/course flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-[15px] transition-colors hover:bg-canvas focus-visible:bg-canvas"
+                          className="group/course flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-[15px] transition-colors hover:bg-paper/90 focus-visible:bg-paper/90"
                         >
                           <span className="flex min-w-0 items-center gap-2">
                             <span className="font-medium text-text transition-colors group-hover/course:text-brand">
