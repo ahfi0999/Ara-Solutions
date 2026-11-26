@@ -28,7 +28,8 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     // "servicenow csa certification", "servicenow admin jobs for freshers". Hyderabad is the only location named.
     // The document's URL is /servicenow-admin/; the page keeps its existing slug.
     h1: 'ServiceNow Admin Course in Hyderabad',
-    tagline: 'Administer the ServiceNow platform: users, security, ITSM processes, the service catalog and flows.',
+    tagline:
+      'Administer the ServiceNow platform: users, security, ITSM processes, the service catalog and flows.',
     summary:
       'A ServiceNow administrator keeps the platform running for the whole company: users, security, IT processes and the requests employees raise every day. This ServiceNow administrator course goes beyond lists and forms: you secure data with ACLs, run incident, problem and change end to end, and automate a catalog request with Flow Designer, the skills the CSA exam and employers test.',
     prerequisites:
@@ -249,7 +250,8 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     projects: [
       {
         title: 'IT service desk setup',
-        problem: 'A service desk has no clear ownership of tickets, and sensitive data is visible to everyone.',
+        problem:
+          'A service desk has no clear ownership of tickets, and sensitive data is visible to everyone.',
         text: 'Set up users, groups and roles, configure incident assignment and secure records with ACLs.',
         result: 'Tickets reach the right group, and data is secured by role.',
         stack: ['User administration', 'ACLs', 'Incident Management'],
@@ -303,7 +305,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         text: 'Fixes platform issues and finds root causes.',
         level: 'Fresher to mid',
       },
-      { title: 'Junior ServiceNow Consultant', text: 'Configures ServiceNow for clients.', level: 'Fresher to mid' },
+      {
+        title: 'Junior ServiceNow Consultant',
+        text: 'Configures ServiceNow for clients.',
+        level: 'Fresher to mid',
+      },
       {
         title: 'ServiceNow ITSM Process Consultant',
         text: 'Improves incident, problem, change and catalog processes.',
@@ -321,7 +327,10 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         'Annual salary range from AmbitionBox (accessed November 2026). Actual pay depends on the company, city, skills and experience.',
       path: [
         { stage: 'Start (0 to 2 years)', roles: 'ServiceNow Administrator L1/L2, Platform Support Analyst' },
-        { stage: 'Grow (2 to 5 years)', roles: 'Senior Administrator, ITSM Process Consultant, ServiceNow Developer' },
+        {
+          stage: 'Grow (2 to 5 years)',
+          roles: 'Senior Administrator, ITSM Process Consultant, ServiceNow Developer',
+        },
         { stage: 'Lead (5+ years)', roles: 'Platform Owner, ServiceNow Architect' },
       ],
     },
@@ -380,7 +389,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What is the ServiceNow admin course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Does the ServiceNow admin course include placement support?',
@@ -611,9 +620,21 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
     ],
     roles: [
-      { title: 'ServiceNow Developer', text: 'Writes scripts and integrations for ITSM.', level: 'Junior to mid' },
-      { title: 'ServiceNow ITSM Developer', text: 'Builds and maintains ITSM automations.', level: 'Junior to mid' },
-      { title: 'ServiceNow Admin/Developer', text: 'Combines admin and development work.', level: 'Junior to mid' },
+      {
+        title: 'ServiceNow Developer',
+        text: 'Writes scripts and integrations for ITSM.',
+        level: 'Junior to mid',
+      },
+      {
+        title: 'ServiceNow ITSM Developer',
+        text: 'Builds and maintains ITSM automations.',
+        level: 'Junior to mid',
+      },
+      {
+        title: 'ServiceNow Admin/Developer',
+        text: 'Combines admin and development work.',
+        level: 'Junior to mid',
+      },
       {
         title: 'ServiceNow Integration Developer',
         text: 'Connects ServiceNow with other systems.',
@@ -703,7 +724,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What is the ServiceNow developer course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Does the ServiceNow developer course include placement support?',
@@ -936,7 +957,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         text: 'Designs and builds HRSD solutions for clients.',
         level: 'Experienced',
       },
-      { title: 'ServiceNow HRSD Consultant', text: 'Maps client HR processes to HRSD.', level: 'Mid to senior' },
+      {
+        title: 'ServiceNow HRSD Consultant',
+        text: 'Maps client HR processes to HRSD.',
+        level: 'Mid to senior',
+      },
       {
         title: 'ServiceNow HRSD Implementation Specialist',
         text: 'Sets up HRSD from Centers of Excellence to the employee portal.',
@@ -1017,7 +1042,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What is the ServiceNow HRSD course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Does the ServiceNow HRSD training in Hyderabad include placement support?',
@@ -1046,7 +1071,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       coding: 'No coding needed',
       location: 'Madhapur, Hyderabad',
     },
-    highlights: ['Case management & routing', 'Agent workspace & customer portal', 'CIS-CSM exam preparation'],
+    highlights: [
+      'Case management & routing',
+      'Agent workspace & customer portal',
+      'CIS-CSM exam preparation',
+    ],
     about: {
       paragraphs: [
         'Our ServiceNow CRM course in Hyderabad focuses on Customer Service Management (CSM), the ServiceNow product companies use to serve their own customers. CSM brings customer cases, agents, portals and channels together on one platform.',
@@ -1231,7 +1260,8 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         title: 'AI-assisted service desk',
         problem: 'Agents spend too long reading case history.',
         text: 'Add a Virtual Agent topic and Now Assist case summaries to the agent workspace.',
-        result: 'Agents read a short case summary instead of the full history, and Virtual Agent handles routine chats.',
+        result:
+          'Agents read a short case summary instead of the full history, and Virtual Agent handles routine chats.',
         stack: ['Virtual Agent', 'Now Assist', 'Configurable Workspace'],
       },
     ],
@@ -1255,7 +1285,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         text: 'Builds and configures CSM cases, workspace and portal.',
         level: 'Junior to mid',
       },
-      { title: 'ServiceNow CSM Consultant', text: 'Designs CSM solutions for clients.', level: 'Mid to senior' },
+      {
+        title: 'ServiceNow CSM Consultant',
+        text: 'Designs CSM solutions for clients.',
+        level: 'Mid to senior',
+      },
       {
         title: 'ServiceNow CRM Analyst',
         text: 'Supports and improves customer service on ServiceNow.',
@@ -1345,7 +1379,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What is the ServiceNow CRM course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Does the ServiceNow CSM training include placement support?',
@@ -1374,7 +1408,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       coding: 'No coding needed',
       location: 'Madhapur, Hyderabad',
     },
-    highlights: ['Policy, risk & audit', 'Continuous monitoring & third-party risk', 'CIS-RC exam preparation'],
+    highlights: [
+      'Policy, risk & audit',
+      'Continuous monitoring & third-party risk',
+      'CIS-RC exam preparation',
+    ],
     about: {
       paragraphs: [
         'Our ServiceNow GRC training in Hyderabad teaches Governance, Risk, and Compliance on ServiceNow, which ServiceNow also sells as Integrated Risk Management (IRM). Companies use it to manage policies, controls, risks and audits in one place, and GRC specialists help banks, insurers and other regulated firms prove they follow laws and standards.',
@@ -1583,7 +1621,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         text: 'Configures GRC applications and automations.',
         level: 'Junior to mid',
       },
-      { title: 'ServiceNow GRC Consultant', text: 'Designs GRC solutions for clients.', level: 'Mid to senior' },
+      {
+        title: 'ServiceNow GRC Consultant',
+        text: 'Designs GRC solutions for clients.',
+        level: 'Mid to senior',
+      },
       {
         title: 'ServiceNow IRM Analyst',
         text: 'Supports and improves risk and compliance processes.',
@@ -1595,7 +1637,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         text: 'Runs risk assessments and compliance checks.',
         level: 'Fresher to mid',
       },
-      { title: 'Vendor Risk Analyst', text: 'Assesses the risk that suppliers bring.', level: 'Fresher to mid' },
+      {
+        title: 'Vendor Risk Analyst',
+        text: 'Assesses the risk that suppliers bring.',
+        level: 'Fresher to mid',
+      },
     ],
     careers: {
       salaries: [
@@ -1665,7 +1711,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What is the ServiceNow GRC course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Does the ServiceNow GRC training in Hyderabad include placement support?',
@@ -1984,7 +2030,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What is the ServiceNow FDSE course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Does the ServiceNow FDSE course include placement support?',
@@ -2302,7 +2348,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What is the ServiceNow Business Analyst course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Does the ServiceNow Business Analyst course include placement support?',

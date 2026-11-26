@@ -13,11 +13,7 @@ import { aiDataCourses, type AiDataCourseSlug } from './ai-data';
 import { fullStackCourses, type FullStackCourseSlug } from './full-stack';
 
 export type CourseSlug =
-  | ServiceNowCourseSlug
-  | SalesforceCourseSlug
-  | WorkdayCourseSlug
-  | AiDataCourseSlug
-  | FullStackCourseSlug;
+  ServiceNowCourseSlug | SalesforceCourseSlug | WorkdayCourseSlug | AiDataCourseSlug | FullStackCourseSlug;
 
 export const courses = [
   ...servicenowCourses,

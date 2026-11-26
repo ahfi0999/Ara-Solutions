@@ -46,7 +46,10 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       ],
     },
     audience: [
-      { title: 'HR & payroll professionals', text: 'Move from HR operations into Workday roles that pay more.' },
+      {
+        title: 'HR & payroll professionals',
+        text: 'Move from HR operations into Workday roles that pay more.',
+      },
       { title: 'IT & HRIS professionals', text: 'Add Workday, a leading HR cloud platform, to your skills.' },
       { title: 'Freshers with an HR or MBA background', text: 'Start a career in HR technology.' },
     ],
@@ -230,8 +233,16 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
     ],
     roles: [
-      { title: 'Workday HCM Consultant', text: 'Configures Workday HCM for clients.', level: 'Fresher to mid' },
-      { title: 'Workday HRIS Analyst', text: 'Supports and improves Workday for an HR team.', level: 'Fresher to mid' },
+      {
+        title: 'Workday HCM Consultant',
+        text: 'Configures Workday HCM for clients.',
+        level: 'Fresher to mid',
+      },
+      {
+        title: 'Workday HRIS Analyst',
+        text: 'Supports and improves Workday for an HR team.',
+        level: 'Fresher to mid',
+      },
       { title: 'Workday Reporting Analyst', text: 'Builds reports and dashboards.', level: 'Fresher to mid' },
       { title: 'Workday Security Analyst', text: 'Manages Workday security.', level: 'Mid' },
       {
@@ -306,7 +317,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'What is the Workday HCM course fee?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Is this a Workday HCM course with placement support?',
@@ -333,7 +344,11 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       coding: 'No coding needed',
       location: 'Madhapur, Hyderabad',
     },
-    highlights: ['Foundation Data Model & worktags', 'Procure to pay & receivables', 'Month-end close & reporting'],
+    highlights: [
+      'Foundation Data Model & worktags',
+      'Procure to pay & receivables',
+      'Month-end close & reporting',
+    ],
     about: {
       paragraphs: [
         'Our Workday Finance course prepares you for finance systems roles on Workday Financial Management, often called Workday Financials. Workday Financials consultants set up how companies record transactions, buy and pay, bill and collect, and close their books each month.',
@@ -347,8 +362,14 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       ],
     },
     audience: [
-      { title: 'Finance & accounting professionals', text: 'Move from finance operations into Workday roles.' },
-      { title: 'CA, CMA & commerce graduates', text: 'Use your accounting knowledge as a Workday Finance consultant.' },
+      {
+        title: 'Finance & accounting professionals',
+        text: 'Move from finance operations into Workday roles.',
+      },
+      {
+        title: 'CA, CMA & commerce graduates',
+        text: 'Use your accounting knowledge as a Workday Finance consultant.',
+      },
       { title: 'ERP consultants', text: 'Add Workday Financials to your SAP or Oracle experience.' },
     ],
     outcomes: [
@@ -536,8 +557,16 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
         text: 'Configures Workday Financials for clients.',
         level: 'Fresher to mid',
       },
-      { title: 'Workday Finance Analyst', text: 'Supports and improves Workday for a finance team.', level: 'Fresher to mid' },
-      { title: 'Workday AP/AR Specialist', text: 'Runs payables and receivables in Workday.', level: 'Fresher to mid' },
+      {
+        title: 'Workday Finance Analyst',
+        text: 'Supports and improves Workday for a finance team.',
+        level: 'Fresher to mid',
+      },
+      {
+        title: 'Workday AP/AR Specialist',
+        text: 'Runs payables and receivables in Workday.',
+        level: 'Fresher to mid',
+      },
       {
         title: 'Workday Financials Reporting Analyst',
         text: 'Builds finance reports and dashboards.',
@@ -609,7 +638,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'What is the Workday Finance course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Is this a Workday Finance course with placement support?',
@@ -650,8 +679,14 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       ],
     },
     audience: [
-      { title: 'Developers & integration engineers', text: 'Specialise in Workday, where integration skills are scarce.' },
-      { title: 'Workday HCM or Finance consultants', text: 'Add the technical side to your functional Workday skills.' },
+      {
+        title: 'Developers & integration engineers',
+        text: 'Specialise in Workday, where integration skills are scarce.',
+      },
+      {
+        title: 'Workday HCM or Finance consultants',
+        text: 'Add the technical side to your functional Workday skills.',
+      },
       { title: 'ETL & middleware professionals', text: 'Bring your data and integration skills to Workday.' },
     ],
     outcomes: [
@@ -680,7 +715,14 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       {
         title: 'EIB',
         summary: 'Enterprise Interface Builder: the simplest and most used Workday integrations.',
-        topics: ['Inbound EIB', 'Outbound EIB', 'Data templates', 'EIB transformations', 'Scheduling', 'Error handling'],
+        topics: [
+          'Inbound EIB',
+          'Outbound EIB',
+          'Data templates',
+          'EIB transformations',
+          'Scheduling',
+          'Error handling',
+        ],
         lab: 'Build an outbound EIB that extracts data from a custom report.',
       },
       {
@@ -833,7 +875,11 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
         text: 'Supports integrations for an HR systems team.',
         level: 'Fresher to mid',
       },
-      { title: 'Workday Technical Consultant', text: 'Handles integrations, reports and data loads.', level: 'Mid' },
+      {
+        title: 'Workday Technical Consultant',
+        text: 'Handles integrations, reports and data loads.',
+        level: 'Mid',
+      },
       { title: 'Workday Studio Developer', text: 'Builds complex Studio integrations.', level: 'Mid' },
       {
         title: 'Middleware Developer (Workday)',
@@ -844,7 +890,11 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
     ],
     careers: {
       salaries: [
-        { role: 'Workday Integration Consultant (IT services)', experience: 'Varies', pay: '₹4.5 L to ₹20 L' },
+        {
+          role: 'Workday Integration Consultant (IT services)',
+          experience: 'Varies',
+          pay: '₹4.5 L to ₹20 L',
+        },
       ],
       salaryNote:
         'Annual salary range from AmbitionBox (accessed November 2026). Actual pay depends on the company, city, skills and experience.',
@@ -917,7 +967,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'What is the Workday Integration course fee in Hyderabad?',
-        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09226 for the current fees, EMI options and the next batch date.',
+        a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Is this a Workday Integration course with placement support?',

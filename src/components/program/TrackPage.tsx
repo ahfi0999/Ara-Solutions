@@ -238,9 +238,11 @@ function payRange(pay: string): [number, number] | null {
   return numbers.length >= 2 ? [numbers[0], numbers[1]] : null;
 }
 
+type Salary = TrackHub['careers']['salaries'][number];
+
 /** The salary bars' shared scale: the highest pay, rounded up to the next 5 lakh. */
-function salaryScale(hub: TrackHub) {
-  const top = Math.max(...hub.careers.salaries.map((row) => payRange(row.pay)?.[1] ?? 0));
+function salaryScale(salaries: Salary[]) {
+  const top = Math.max(...salaries.map((row) => payRange(row.pay)?.[1] ?? 0));
   return Math.max(5, Math.ceil(top / 5) * 5);
 }
 
@@ -357,62 +359,7 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
       <section id="careers" className="scroll-mt-24 bg-canvas py-20 sm:py-28">
         <Container>
           <SectionHeading eyebrow="Careers" title={hub.careers.title} intro={hub.careers.intro} />
-          <div className={tableWrap}>
-            <table className="w-full text-left md:min-w-[560px]">
-              <caption className="sr-only">{hub.careers.title}</caption>
-              <thead className="max-md:hidden">
-                <tr className="border-b border-line text-[13px] text-muted">
-                  <th scope="col" className={th}>
-                    Role
-                  </th>
-                  <th scope="col" className={th}>
-                    Experience
-                  </th>
-                  <th scope="col" className={th}>
-                    Annual salary in India
-                  </th>
-                  <th scope="col" className={cn(th, 'hidden w-[34%] md:table-cell')}>
-                    <span className="flex justify-between gap-4">
-                      <span>₹0</span>
-                      <span>₹{salaryScale(hub)} L a year</span>
-                    </span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {hub.careers.salaries.map((row, index) => {
-                  const range = payRange(row.pay);
-                  return (
-                    <tr
-                      key={row.role}
-                      className="border-b border-line transition-colors last:border-0 hover:bg-canvas/70 max-md:grid max-md:grid-cols-2 max-md:gap-x-4 max-md:gap-y-1 max-md:p-5"
-                    >
-                      <th
-                        scope="row"
-                        className="p-5 text-[15px] font-semibold tracking-tight max-md:col-span-2 max-md:p-0"
-                      >
-                        {row.role}
-                      </th>
-                      <td className={`${td} max-md:p-0 max-md:text-muted`}>{row.experience}</td>
-                      <td className={`${td} font-medium tabular-nums max-md:p-0 max-md:text-right`}>
-                        {row.pay}
-                      </td>
-                      <td className="p-5 align-middle max-md:col-span-2 max-md:p-0 max-md:pt-3">
-                        {range && (
-                          <SalaryBar
-                            min={range[0]}
-                            max={range[1]}
-                            scale={salaryScale(hub)}
-                            delay={index * 0.15}
-                          />
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <SalaryTable caption={hub.careers.title} salaries={hub.careers.salaries} />
           <p className="mt-4 text-sm text-faint">{hub.careers.salaryNote}</p>
 
           <h3 className="mt-14 text-xl font-semibold tracking-tight">Your {track.name} career path</h3>
@@ -504,41 +451,7 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
         </Container>
       </section>
 
-      {/* Why ARA */}
-      <section className="relative isolate overflow-hidden bg-ink py-20 text-white sm:py-28">
-        <DarkGlow />
-        <Container>
-          <SectionHeading tone="dark" eyebrow="Why ARA" title={hub.benefits.title} />
-          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {hub.benefits.items.map((item, index) => {
-              const Icon = BENEFIT_ICONS[index % BENEFIT_ICONS.length];
-              return (
-                <Reveal as="li" key={item.title} delay={index * 0.08} className="h-full">
-                  <Spotlight
-                    color="rgb(255 255 255 / 0.09)"
-                    className="group h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-[border-color,background-color,translate] duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.07] sm:p-7"
-                  >
-                    <span
-                      aria-hidden
-                      className="pointer-events-none absolute right-5 top-3 font-mono text-6xl font-semibold text-white/[0.06] transition-colors duration-300 group-hover:text-brand-300/20"
-                    >
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span
-                      aria-hidden
-                      className="relative flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-300 to-brand text-white shadow-[0_8px_28px_rgb(229_35_45/0.45)] transition-[rotate,scale] duration-300 group-hover:rotate-[-6deg] group-hover:scale-110"
-                    >
-                      <Icon className="size-5" />
-                    </span>
-                    <h3 className="relative mt-5 text-lg font-semibold tracking-tight">{item.title}</h3>
-                    <p className="relative mt-2 leading-relaxed text-white/65">{item.text}</p>
-                  </Spotlight>
-                </Reveal>
-              );
-            })}
-          </ul>
-        </Container>
-      </section>
+      <WhyAra title={hub.benefits.title} items={hub.benefits.items} />
 
       <AlumniMarquee className="border-y border-line bg-paper" />
       <Journey eyebrow="Training & placement" />
@@ -551,6 +464,100 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
         }
       />
     </>
+  );
+}
+
+/** Role, experience and annual pay, with each range drawn as a bar on one shared scale. */
+export function SalaryTable({ caption, salaries }: { caption: string; salaries: Salary[] }) {
+  const scale = salaryScale(salaries);
+  return (
+    <div className={tableWrap}>
+      <table className="w-full text-left md:min-w-[560px]">
+        <caption className="sr-only">{caption}</caption>
+        <thead className="max-md:hidden">
+          <tr className="border-b border-line text-[13px] text-muted">
+            <th scope="col" className={th}>
+              Role
+            </th>
+            <th scope="col" className={th}>
+              Experience
+            </th>
+            <th scope="col" className={th}>
+              Annual salary in India
+            </th>
+            <th scope="col" className={cn(th, 'hidden w-[34%] md:table-cell')}>
+              <span className="flex justify-between gap-4">
+                <span>₹0</span>
+                <span>₹{scale} L a year</span>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {salaries.map((row, index) => {
+            const range = payRange(row.pay);
+            return (
+              <tr
+                key={row.role}
+                className="border-b border-line transition-colors last:border-0 hover:bg-canvas/70 max-md:grid max-md:grid-cols-2 max-md:gap-x-4 max-md:gap-y-1 max-md:p-5"
+              >
+                <th
+                  scope="row"
+                  className="p-5 text-[15px] font-semibold tracking-tight max-md:col-span-2 max-md:p-0"
+                >
+                  {row.role}
+                </th>
+                <td className={`${td} max-md:p-0 max-md:text-muted`}>{row.experience}</td>
+                <td className={`${td} font-medium tabular-nums max-md:p-0 max-md:text-right`}>{row.pay}</td>
+                <td className="p-5 align-middle max-md:col-span-2 max-md:p-0 max-md:pt-3">
+                  {range && <SalaryBar min={range[0]} max={range[1]} scale={scale} delay={index * 0.15} />}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+/** The navy "Why ARA" section: one numbered card per point, with an icon in order (hiring, live, projects, placement). */
+export function WhyAra({ title, items }: { title: string; items: { title: string; text: string }[] }) {
+  return (
+    <section className="relative isolate overflow-hidden bg-ink py-20 text-white sm:py-28">
+      <DarkGlow />
+      <Container>
+        <SectionHeading tone="dark" eyebrow="Why ARA" title={title} />
+        <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item, index) => {
+            const Icon = BENEFIT_ICONS[index % BENEFIT_ICONS.length];
+            return (
+              <Reveal as="li" key={item.title} delay={index * 0.08} className="h-full">
+                <Spotlight
+                  color="rgb(255 255 255 / 0.09)"
+                  className="group h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-[border-color,background-color,translate] duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.07] sm:p-7"
+                >
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute right-5 top-3 font-mono text-6xl font-semibold text-white/[0.06] transition-colors duration-300 group-hover:text-brand-300/20"
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="relative flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-300 to-brand text-white shadow-[0_8px_28px_rgb(229_35_45/0.45)] transition-[rotate,scale] duration-300 group-hover:rotate-[-6deg] group-hover:scale-110"
+                  >
+                    <Icon className="size-5" />
+                  </span>
+                  <h3 className="relative mt-5 text-lg font-semibold tracking-tight">{item.title}</h3>
+                  <p className="relative mt-2 leading-relaxed text-white/65">{item.text}</p>
+                </Spotlight>
+              </Reveal>
+            );
+          })}
+        </ul>
+      </Container>
+    </section>
   );
 }
 

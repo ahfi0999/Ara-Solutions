@@ -71,7 +71,7 @@ export const tracks: Track[] = [
     slug: 'security',
     name: 'Security',
     intro: '',
-    courses: [{ kind: 'program', slug: 'cybersecurity', label: 'Cybersecurity & AI Agents' }],
+    courses: [{ kind: 'program', slug: 'cybersecurity', label: 'Cybersecurity' }],
     page: false,
   },
   {
@@ -84,7 +84,7 @@ export const tracks: Track[] = [
       { kind: 'program', slug: 'data-science', label: 'Data Science' },
       { kind: 'program', slug: 'data-engineering', label: 'Data Engineering' },
       { kind: 'program', slug: 'data-analytics', label: 'Data Analytics' },
-      { kind: 'program', slug: 'agentic-ai', label: 'AI Engineering' },
+      { kind: 'program', slug: 'agentic-ai', label: 'Agentic AI Engineering' },
       { kind: 'program', slug: 'ai-product-owner', label: 'AI Product Owner' },
     ],
     page: true,
@@ -100,7 +100,7 @@ export const tracks: Track[] = [
       {
         kind: 'program',
         slug: 'full-stack-ai',
-        label: 'MERN Stack with AI',
+        label: 'MERN Full Stack with AI',
         text: 'React + Node.js + databases',
       },
       { kind: 'program', slug: 'business-analyst-genai', label: 'Business Analyst with GenAI' },

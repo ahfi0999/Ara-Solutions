@@ -11,18 +11,21 @@ export const site = {
   description:
     'ARA Solutions connects growing businesses with the right talent while helping aspiring professionals build in-demand technology skills through practical training, hands-on learning, and placement assistance.',
   url: 'https://arasolutions.in',
-  /** Main line (staffing / services): the footer, WhatsApp and every page outside Training & Placement. */
+  /** The one phone and WhatsApp number for the whole site (client, 26 Nov 2026: one number site-wide). */
   phone: '+91 90100 09225',
   phoneHref: 'tel:+919010009225',
   email: 'info@arasolutions.in',
   emailHref: 'mailto:info@arasolutions.in',
   /** WhatsApp number, international format, digits only. */
   whatsapp: '919010009225',
-  /** Training & Placement line: used on the Training pages and for course enquiries (calls and WhatsApp). */
+  /**
+   * Training & Placement line: the same number as the main line for now (client, 26 Nov 2026). It had its own
+   * number (the one ending 9226); set it here again if the client brings a separate training line back.
+   */
   training: {
-    phone: '+91 90100 09226',
-    phoneHref: 'tel:+919010009226',
-    whatsapp: '919010009226',
+    phone: '+91 90100 09225',
+    phoneHref: 'tel:+919010009225',
+    whatsapp: '919010009225',
   },
   address: {
     area: 'Madhapur',
