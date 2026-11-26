@@ -36,7 +36,7 @@ const TRACK_COMPARE: Record<string, { bestFor: string; coding: string; ai: strin
   'servicenow-courses': {
     bestFor: 'IT, HR, customer service and risk platform careers',
     coding: 'No, except the developer and FDSE courses',
-    ai: 'Now Assist and AI agents',
+    ai: 'ServiceNow Otto and AI agents',
   },
   'salesforce-courses': {
     bestFor: 'CRM and enterprise application careers',
@@ -74,10 +74,14 @@ const trackLink = (track: Track) =>
   track.page ? trackHref(track) : courseHref(trackPrograms(track)[0]?.program.slug ?? '');
 const trackAccent = (track: Track) => accent[trackPrograms(track)[0]?.program.accent ?? 'indigo'];
 
+/** A course page's certification note that marks a later step, not an exam the course prepares you for. */
+const LATER_STEP = /^(a (natural )?next step|a later step|not covered|not required|optional|an optional)/i;
+
 /**
  * Every track's certifications, each with the courses that prepare you for it. A track with an overview page takes
  * them from that page (its certification list, plus the exams its comparison names for each course by code); a
- * track without one takes them from its courses.
+ * track without one takes them from its courses. Later steps are left out: this list is what the courses prepare
+ * you for.
  */
 function trackCertifications(track: Track) {
   const certs = new Map<string, Program[]>();
@@ -90,7 +94,7 @@ function trackCertifications(track: Track) {
   };
   const hub = getHub(track.slug);
   if (hub) {
-    for (const row of hub.certifications.rows) add(row.name, row.slug);
+    for (const row of hub.certifications.rows) if (!row.next) add(row.name, row.slug);
     for (const row of hub.compare)
       for (const code of row.certifications) {
         const cert = hub.certifications.rows.find((item) => item.name.endsWith(`(${code})`));
@@ -98,7 +102,8 @@ function trackCertifications(track: Track) {
       }
   } else {
     for (const { program } of trackPrograms(track))
-      for (const cert of program.certifications ?? []) add(cert.name, program.slug);
+      for (const cert of program.certifications ?? [])
+        if (!LATER_STEP.test(cert.note ?? '')) add(cert.name, program.slug);
   }
   return [...certs].map(([name, programs]) => ({ name, programs }));
 }
@@ -259,7 +264,9 @@ export default function TrainingPlacementPage() {
               >
                 <p className="text-[13px] font-medium text-muted">If</p>
                 <h3 className="mt-1 text-lg font-semibold tracking-tight">{row.background}</h3>
-                <p className="mt-5 text-[13px] font-medium text-muted">{'note' in row ? row.note : 'Start with'}</p>
+                <p className="mt-5 text-[13px] font-medium text-muted">
+                  {'note' in row ? row.note : 'Start with'}
+                </p>
                 <ul className="mt-2 flex flex-wrap gap-2">
                   {row.courses.map((slug) => {
                     const program = getProgram(slug);
@@ -375,7 +382,12 @@ export default function TrainingPlacementPage() {
           </>
         }
       />
-      <ClosingCta line="training" defaultInterest="not-sure" title={page.closing.title} intro={page.closing.intro} />
+      <ClosingCta
+        line="training"
+        defaultInterest="not-sure"
+        title={page.closing.title}
+        intro={page.closing.intro}
+      />
 
       {/* Every course, by track: a link to each course page. */}
       <section className="border-t border-line py-20 sm:py-24">

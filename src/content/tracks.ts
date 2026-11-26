@@ -7,8 +7,9 @@ import { getProgram, type PageSlug, type Program } from './programs';
  * track page, where visitors can ask an advisor about it. `label` is the client's name for the course
  * in the menu. Courses the client marked "(New)" get a New badge.
  *
- * Which flagship program page stands for which course is our mapping (to confirm), e.g. the
- * ServiceNow program page is shown as "ServiceNow Masters & AI".
+ * Labels match the courses' own short names, so a course has the same name in the menu, on the cards and on its
+ * page (Nov 2026: the old menu names "Salesforce Masters", another institute's brand, and "ServiceNow Masters & AI"
+ * were dropped).
  */
 
 export type TrackCourse =
@@ -32,9 +33,9 @@ export const tracks: Track[] = [
     intro:
       'ServiceNow courses for administrators, developers, consultants and analysts: from the core platform and ITSM to HR Service Delivery, CRM, GRC and AI.',
     courses: [
-      { kind: 'program', slug: 'servicenow-admin-platform', label: 'ServiceNow Admin Platform' },
+      { kind: 'program', slug: 'servicenow-admin-platform', label: 'ServiceNow Admin' },
       { kind: 'program', slug: 'servicenow-itsm-development', label: 'ServiceNow ITSM Development' },
-      { kind: 'program', slug: 'servicenow', label: 'ServiceNow Masters & AI' },
+      { kind: 'program', slug: 'servicenow', label: 'ServiceNow Masters' },
       { kind: 'program', slug: 'servicenow-hrsd', label: 'ServiceNow HRSD' },
       { kind: 'program', slug: 'servicenow-crm', label: 'ServiceNow CRM', isNew: true },
       { kind: 'program', slug: 'servicenow-grc', label: 'ServiceNow GRC' },
@@ -50,7 +51,7 @@ export const tracks: Track[] = [
       'Salesforce courses for administrators, developers and business analysts, including Agentforce, the platform’s AI agents.',
     courses: [
       { kind: 'program', slug: 'salesforce-admin', label: 'Salesforce Admin' },
-      { kind: 'program', slug: 'salesforce', label: 'Salesforce Masters & Agentforce' },
+      { kind: 'program', slug: 'salesforce', label: 'Salesforce Admin & Developer' },
       { kind: 'program', slug: 'salesforce-fde', label: 'Salesforce FDE', isNew: true },
       { kind: 'program', slug: 'salesforce-ba', label: 'Salesforce BA' },
     ],
@@ -61,7 +62,7 @@ export const tracks: Track[] = [
     name: 'Workday',
     intro: 'Workday courses for HCM, Finance and Integration roles.',
     courses: [
-      { kind: 'program', slug: 'workday-hcm', label: 'Workday Techno-functional (HCM)' },
+      { kind: 'program', slug: 'workday-hcm', label: 'Workday HCM' },
       { kind: 'program', slug: 'workday-finance', label: 'Workday Finance', isNew: true },
       { kind: 'program', slug: 'workday-integration', label: 'Workday Integration', isNew: true },
     ],
@@ -69,7 +70,7 @@ export const tracks: Track[] = [
   },
   {
     slug: 'security',
-    name: 'Security',
+    name: 'Cybersecurity',
     intro: '',
     courses: [{ kind: 'program', slug: 'cybersecurity', label: 'Cybersecurity' }],
     page: false,
@@ -80,7 +81,7 @@ export const tracks: Track[] = [
     intro:
       'Courses for the roles companies are hiring for in AI and data: machine learning, data science, data engineering, data analytics, AI engineering and AI product ownership.',
     courses: [
-      { kind: 'program', slug: 'ai-ml', label: 'AI/ML' },
+      { kind: 'program', slug: 'ai-ml', label: 'AI & Machine Learning' },
       { kind: 'program', slug: 'data-science', label: 'Data Science' },
       { kind: 'program', slug: 'data-engineering', label: 'Data Engineering' },
       { kind: 'program', slug: 'data-analytics', label: 'Data Analytics' },

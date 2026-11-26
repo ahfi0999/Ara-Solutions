@@ -44,7 +44,11 @@ export type TrackHub = {
     title: string;
     intro: string;
     /** badge: the official badge image in public/images/certifications/, where the issuer publishes one. */
-    rows: { name: string; slug: string; badge?: string }[];
+    /**
+     * next: a later step, not an exam the course prepares you for (the course page says so). Listed apart and
+     * not counted.
+     */
+    rows: { name: string; slug: string; badge?: string; next?: boolean }[];
     note: string;
   };
   benefits: { title: string; items: { title: string; text: string }[] };
@@ -74,14 +78,18 @@ const workday: TrackHub = {
       slug: 'workday-hcm',
       bestFor: 'HR, payroll and HRIS professionals',
       coding: 'No coding needed',
-      certifications: ['Workday Pro HCM Core', 'Workday Pro Security'],
+      certifications: ['Workday Pro HCM Core', 'Workday Pro Security', 'Workday Pro HCM Reporting'],
       roles: ['Workday HCM Consultant', 'Workday HRIS Analyst', 'Workday Reporting Analyst'],
     },
     {
       slug: 'workday-finance',
       bestFor: 'Finance and accounting professionals; CA, CMA and commerce graduates',
       coding: 'No coding needed',
-      certifications: ['Workday Pro Record to Report', 'Workday Pro Procure to Pay'],
+      certifications: [
+        'Workday Pro Record to Report',
+        'Workday Pro Procure to Pay',
+        'Workday Pro Contracts to Cash',
+      ],
       roles: ['Workday Financials Consultant', 'Workday Finance Analyst', 'Workday AP/AR Specialist'],
     },
     {
@@ -223,17 +231,17 @@ const servicenow: TrackHub = {
     // The site adds " | ARA Solutions" (47 characters in all).
     title: 'ServiceNow Courses in Hyderabad',
     description:
-      'ServiceNow courses in Hyderabad: Admin, ITSM Development, Masters & AI, HRSD, CRM, GRC, FDSE and BA. Live classes, projects, CSA/CIS prep and placement support.',
+      'ServiceNow courses in Hyderabad: Admin, ITSM Development, Masters, HRSD, CRM, GRC, FDSE and BA. Live classes, projects, CSA/CIS prep and placement support.',
   },
   hero: {
     title: 'ServiceNow courses in Hyderabad, from admin to AI',
     accent: 'from admin to AI',
     intro:
-      'Choose from eight ServiceNow courses in Hyderabad at ARA Solutions, Madhapur: ServiceNow Admin, ITSM Development, Masters & AI, HRSD, CRM, GRC, Forward Deployed Software Engineer (FDSE) and Business Analyst. Every course has live instructor-led classes, hands-on labs, real projects, certification guidance and placement support.',
+      'Choose from eight ServiceNow courses in Hyderabad at ARA Solutions, Madhapur: ServiceNow Admin, ITSM Development, Masters, HRSD, CRM, GRC, Forward Deployed Software Engineer (FDSE) and Business Analyst. Every course has live instructor-led classes, hands-on labs, real projects, certification guidance and placement support.',
   },
   why: {
     title: 'Why learn ServiceNow?',
-    text: 'ServiceNow runs IT, HR, customer service and risk workflows for many large companies. IT services firms and capability centres in Hyderabad hire ServiceNow administrators, developers and consultants to set up and run those workflows, and Now Assist and AI agents have added new AI work on the platform.',
+    text: 'ServiceNow runs IT, HR, customer service and risk workflows for many large companies. IT services firms and capability centres in Hyderabad hire ServiceNow administrators, developers and consultants to set up and run those workflows, and ServiceNow Otto (formerly Now Assist) and AI agents have added new AI work on the platform.',
   },
   compare: [
     {
@@ -259,7 +267,13 @@ const servicenow: TrackHub = {
       bestFor:
         'Freshers, graduates and IT support staff who want admin, development, HRSD and AI in one course',
       coding: 'Taught from the basics (JavaScript)',
-      certifications: ['CSA', 'CAD', 'CIS-HR', 'Now Assist and Agentic AI executive micro-certifications'],
+      certifications: [
+        'CSA',
+        'CAD',
+        'CIS-HR',
+        'Now Assist Executive Micro-Certification',
+        'Agentic AI Executive Micro-Certification',
+      ],
       roles: ['ServiceNow Administrator', 'ServiceNow Developer', 'ServiceNow HRSD Developer'],
     },
     {
@@ -291,7 +305,7 @@ const servicenow: TrackHub = {
       slug: 'servicenow-fdse',
       bestFor: 'ServiceNow developers and software developers',
       coding: 'Coding required; programming experience recommended',
-      certifications: ['CAD', 'Agentic AI executive micro-certification'],
+      certifications: ['CAD'],
       roles: ['Forward Deployed Software Engineer', 'ServiceNow AI Agent Developer', 'ServiceNow Developer'],
     },
     {
@@ -344,7 +358,7 @@ const servicenow: TrackHub = {
         slug: 'servicenow-ba',
       },
     ],
-    note: 'Freshers and graduates can start with ServiceNow Admin, ServiceNow Masters & AI or ServiceNow Business Analyst. No ServiceNow experience is needed for these three.',
+    note: 'Freshers and graduates can start with ServiceNow Admin, ServiceNow Masters or ServiceNow Business Analyst. No ServiceNow experience is needed for these three.',
   },
   careers: {
     title: 'ServiceNow careers and salaries in India',
@@ -408,13 +422,15 @@ const servicenow: TrackHub = {
         name: 'ServiceNow Certified Implementation Specialist – Third-Party Risk Management (CIS-TPRM)',
         slug: 'servicenow-grc',
         badge: '/images/certifications/cis-tprm.png',
+        next: true,
       },
       { name: 'Now Assist Executive Micro-Certification', slug: 'servicenow' },
-      { name: 'Agentic AI Executive Micro-Certification', slug: 'servicenow-fdse' },
+      { name: 'Agentic AI Executive Micro-Certification', slug: 'servicenow' },
       {
         name: 'IIBA Entry Certificate in Business Analysis (ECBA)',
         slug: 'servicenow-ba',
         badge: '/images/certifications/ecba.png',
+        next: true,
       },
     ],
     note: 'Names from ServiceNow University and IIBA (November 2026). Each row shows the course that prepares you for the exam or leads on to it. ServiceNow sets the eligibility, prerequisites and fees: CIS-ITSM, for example, now also needs the CIS – Data Foundations (CMDB and CSDM) certification. ServiceNow has no full AI certification yet; its AI credentials are short executive micro-certifications.',
@@ -443,15 +459,15 @@ const servicenow: TrackHub = {
   faqs: [
     {
       q: 'Which ServiceNow course is best for me?',
-      a: 'It depends on your background. Of our ServiceNow courses in Hyderabad, ServiceNow Admin and ServiceNow Masters & AI suit people new to ServiceNow, and ITSM Development suits admins who want to code. HRSD, CRM and GRC suit HR, customer service and risk professionals, FDSE suits developers, and Business Analyst suits people who prefer requirements to configuration. An advisor can help you choose.',
+      a: 'It depends on your background. Of our ServiceNow courses in Hyderabad, ServiceNow Admin and ServiceNow Masters suit people new to ServiceNow, and ITSM Development suits admins who want to code. HRSD, CRM and GRC suit HR, customer service and risk professionals, FDSE suits developers, and Business Analyst suits people who prefer requirements to configuration. An advisor can help you choose.',
     },
     {
       q: 'How do I learn ServiceNow from scratch?',
-      a: 'Start with the platform basics: users and roles, tables and forms, ITSM processes and the service catalog. Then practise on a free Personal Developer Instance (PDI) from the ServiceNow Developer Program and build projects. ServiceNow Admin and ServiceNow Masters & AI both start from scratch, so no ServiceNow experience is needed.',
+      a: 'Start with the platform basics: users and roles, tables and forms, ITSM processes and the service catalog. Then practise on a free Personal Developer Instance (PDI) from the ServiceNow Developer Program and build projects. ServiceNow Admin and ServiceNow Masters both start from scratch, so no ServiceNow experience is needed.',
     },
     {
       q: 'Is there a ServiceNow course in Hyderabad for freshers?',
-      a: 'Yes. ServiceNow Admin, ServiceNow Masters & AI and ServiceNow Business Analyst all suit freshers and graduates. Entry-level roles include ServiceNow administrator, platform support analyst and ServiceNow business analyst.',
+      a: 'Yes. ServiceNow Admin, ServiceNow Masters and ServiceNow Business Analyst all suit freshers and graduates. Entry-level roles include ServiceNow administrator, platform support analyst and ServiceNow business analyst.',
     },
     {
       q: 'What is the difference between ServiceNow ITSM, HRSD, CSM and GRC?',
@@ -532,7 +548,7 @@ const salesforce: TrackHub = {
       slug: 'salesforce-fde',
       bestFor: 'Salesforce developers, experienced admins and consultants, and software developers',
       coding: 'Coding required; programming experience recommended',
-      certifications: ['Agentforce Specialist', 'Platform Developer', 'Data 360 Consultant'],
+      certifications: ['Agentforce Specialist'],
       roles: ['Forward Deployed Engineer', 'Agentforce Developer', 'Salesforce AI Engineer'],
     },
     {
@@ -604,15 +620,15 @@ const salesforce: TrackHub = {
     rows: [
       { name: 'Salesforce Certified Platform Administrator', slug: 'salesforce-admin' },
       { name: 'Salesforce Certified Platform App Builder', slug: 'salesforce-admin' },
-      { name: 'Salesforce Certified Platform Administrator II', slug: 'salesforce-admin' },
+      { name: 'Salesforce Certified Platform Administrator II', slug: 'salesforce-admin', next: true },
       { name: 'Salesforce Certified Platform Administrator', slug: 'salesforce' },
       { name: 'Salesforce Certified Platform Developer', slug: 'salesforce' },
       { name: 'Salesforce Certified Agentforce Specialist', slug: 'salesforce' },
       { name: 'Salesforce Certified Agentforce Specialist', slug: 'salesforce-fde' },
-      { name: 'Salesforce Certified Platform Developer', slug: 'salesforce-fde' },
-      { name: 'Salesforce Certified Data 360 Consultant', slug: 'salesforce-fde' },
+      { name: 'Salesforce Certified Platform Developer', slug: 'salesforce-fde', next: true },
+      { name: 'Salesforce Certified Data 360 Consultant', slug: 'salesforce-fde', next: true },
       { name: 'Salesforce Certified Business Analyst', slug: 'salesforce-ba' },
-      { name: 'IIBA Entry Certificate in Business Analysis (ECBA)', slug: 'salesforce-ba' },
+      { name: 'IIBA Entry Certificate in Business Analysis (ECBA)', slug: 'salesforce-ba', next: true },
     ],
     note: 'Names from Salesforce Trailhead and IIBA (November 2026). Salesforce renamed Administrator to Platform Administrator and Platform Developer I to Platform Developer in July 2025, and Data Cloud Consultant is now Data 360 Consultant. Platform Administrator II and ECBA are next steps after the Admin and BA courses. Salesforce sets the exam rules and fees: Platform Administrator II needs Platform Administrator first.',
   },
@@ -751,7 +767,7 @@ const aiData: TrackHub = {
       slug: 'agentic-ai',
       bestFor: 'Software developers; AI and ML engineers',
       coding: 'Coding required (basic Python)',
-      certifications: ['AWS Certified Generative AI Developer – Professional', 'AI-103'],
+      certifications: ['AI-103'],
       roles: ['Agentic AI Engineer', 'AI Automation Engineer', 'AI Solutions Engineer'],
     },
     {
@@ -826,7 +842,7 @@ const aiData: TrackHub = {
     rows: [
       { name: 'AWS Certified Machine Learning Engineer – Associate', slug: 'ai-ml' },
       { name: 'Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)', slug: 'ai-ml' },
-      { name: 'Google Cloud Professional Machine Learning Engineer', slug: 'ai-ml' },
+      { name: 'Google Cloud Professional Machine Learning Engineer', slug: 'ai-ml', next: true },
       // Listed again so it also shows on the Data Science card (cards group rows by course).
       { name: 'AWS Certified Machine Learning Engineer – Associate', slug: 'data-science' },
       {
@@ -834,21 +850,29 @@ const aiData: TrackHub = {
         slug: 'data-science',
       },
       { name: 'Databricks Certified Data Engineer Associate', slug: 'data-engineering' },
-      { name: 'Microsoft Certified: Fabric Data Engineer Associate (DP-700)', slug: 'data-engineering' },
-      { name: 'AWS Certified Data Engineer – Associate', slug: 'data-engineering' },
+      {
+        name: 'Microsoft Certified: Fabric Data Engineer Associate (DP-700)',
+        slug: 'data-engineering',
+        next: true,
+      },
+      { name: 'AWS Certified Data Engineer – Associate', slug: 'data-engineering', next: true },
       { name: 'Microsoft Certified: Power BI Data Analyst Associate (PL-300)', slug: 'data-analytics' },
       { name: 'Salesforce Certified Tableau Data Analyst', slug: 'data-analytics' },
       // AI-103 is added to the Agentic AI card from its compare row.
-      { name: 'AWS Certified Generative AI Developer – Professional', slug: 'agentic-ai' },
-      { name: 'NVIDIA-Certified Associate: Generative AI LLMs (NCA-GENL)', slug: 'agentic-ai' },
+      { name: 'AWS Certified Generative AI Developer – Professional', slug: 'agentic-ai', next: true },
+      { name: 'NVIDIA-Certified Associate: Generative AI LLMs (NCA-GENL)', slug: 'agentic-ai', next: true },
       { name: 'Scrum.org Professional Scrum Product Owner I (PSPO I)', slug: 'ai-product-owner' },
-      { name: 'AI-Empowered SAFe Product Owner/Product Manager (POPM)', slug: 'ai-product-owner' },
+      {
+        name: 'AI-Empowered SAFe Product Owner/Product Manager (POPM)',
+        slug: 'ai-product-owner',
+        next: true,
+      },
       {
         name: 'Scrum.org Professional Scrum Product Owner – AI Essentials (PSPO-AI Essentials)',
         slug: 'ai-product-owner',
       },
     ],
-    note: 'Names from Microsoft Learn, AWS, Google Cloud, NVIDIA, Databricks, Salesforce Trailhead, Scrum.org and Scaled Agile (November 2026). Each card shows the course that prepares you for the exam or leads on to it. The issuers set the eligibility and exam rules: AWS and Google Cloud recommend hands-on experience before their professional exams, and AWS started a new version of the Machine Learning Engineer – Associate exam (MLA-C02) in September 2026.',
+    note: 'Names from Microsoft Learn, AWS, Google Cloud, NVIDIA, Databricks, Salesforce Trailhead, Scrum.org and Scaled Agile (November 2026). Each card shows the course that prepares you for the exam or leads on to it. The issuers set the eligibility and exam rules: AWS and Google Cloud recommend hands-on experience before their professional exams, and AWS is moving the Machine Learning Engineer – Associate exam to a new version (MLA-C02), in beta from September 2026.',
   },
   benefits: {
     title: 'Why choose ARA as your AI training institute in Hyderabad',
@@ -961,7 +985,7 @@ const fullStack: TrackHub = {
       slug: 'java-full-stack',
       bestFor: 'Freshers and graduates; Java developers who want Spring Boot, React and AI',
       coding: 'Taught from the basics (Java and JavaScript)',
-      certifications: ['OCP Java SE 21 Developer'],
+      certifications: ['1Z0-830'],
       roles: ['Java Full Stack Developer', 'Java Developer', 'Spring Boot Developer'],
     },
     {
@@ -975,7 +999,7 @@ const fullStack: TrackHub = {
       slug: 'business-analyst-genai',
       bestFor: 'Graduates from any field and working professionals who prefer analysis to coding',
       coding: 'No coding needed',
-      certifications: ['ECBA', 'PSPO I'],
+      certifications: ['ECBA'],
       roles: ['Business Analyst', 'IT Business Analyst', 'Product Analyst'],
     },
   ],
@@ -1040,9 +1064,13 @@ const fullStack: TrackHub = {
       { name: 'Oracle Certified Professional: Java SE 21 Developer (1Z0-830)', slug: 'java-full-stack' },
       { name: 'MongoDB Associate Developer (Node.js)', slug: 'full-stack-ai' },
       { name: 'IIBA Entry Certificate in Business Analysis (ECBA)', slug: 'business-analyst-genai' },
-      { name: 'Scrum.org Professional Scrum Product Owner I (PSPO I)', slug: 'business-analyst-genai' },
+      {
+        name: 'Scrum.org Professional Scrum Product Owner I (PSPO I)',
+        slug: 'business-analyst-genai',
+        next: true,
+      },
     ],
-    note: 'Names from each issuer’s site (November 2026). The Java course page also covers Oracle’s newer Java SE 25 Developer exam (1Z0-831). Later steps: AWS Certified Developer – Associate after any developer course (AWS recommends a year of hands-on AWS experience; its new DVA-C03 version starts on 1 December 2026); Spring Certified Professional 2024 (2V0-72.22) after the Java course (Broadcom also requires one of its approved Spring courses); and IIBA CCBA once you have 3,750 hours (two to three years) of business analysis work. The MERN course also covers much of the HTML, CSS, JavaScript and React in Meta’s Front-End Developer Professional Certificate, which you earn by completing Meta’s courses on Coursera.',
+    note: 'Names from each issuer’s site (November 2026). The Java course page also covers Oracle’s newer Java SE 25 Developer exam (1Z0-831). Later steps: AWS Certified Developer – Associate after any developer course (AWS recommends a year of hands-on AWS experience; its new version, DVA-C03, replaces DVA-C02 from 1 December 2026); Spring Certified Professional 2024 (2V0-72.22) after the Java course (Broadcom also requires one of its approved Spring courses); and IIBA CCBA once you have 3,750 hours (two to three years) of business analysis work. The MERN course also covers much of the HTML, CSS, JavaScript and React in Meta’s Front-End Developer Professional Certificate, which you earn by completing Meta’s courses on Coursera.',
   },
   benefits: {
     title: 'Why choose ARA as your full stack training institute',
@@ -1100,7 +1128,7 @@ const fullStack: TrackHub = {
     },
     {
       q: 'What is the salary of a full stack developer in Hyderabad?',
-      a: 'AmbitionBox lists ₹2 L to ₹14.5 L a year for full stack developers in Hyderabad, and ₹1.8 L to ₹15.4 L across India for 0 to 7 years of experience (November 2026). Pay depends on the company, skills and experience.',
+      a: 'AmbitionBox lists ₹2 L to ₹14.5 L a year for full stack developers in Hyderabad, and ₹1.8 L to ₹15.4 L in India for 0 to 7 years of experience (November 2026). Pay depends on the company, skills and experience.',
     },
     {
       q: 'Why is Business Analyst with GenAI part of the Full Stack with AI track?',

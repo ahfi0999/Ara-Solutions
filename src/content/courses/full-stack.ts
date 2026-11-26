@@ -852,7 +852,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
     capstone:
       'Act as the BA on a project in your chosen domain: elicitation, process models, backlog, data analysis and UAT, presented to a mock steering group.',
     certificationIntro:
-      'IIBA and Scrum.org run their own exams, and neither needs work experience or a set course. This course prepares you for the first two below: you book and pay for each exam with IIBA or Scrum.org. CCBA is a next step once you have worked as a business analyst.',
+      'IIBA and Scrum.org run their own exams, and neither needs work experience or a set course. This course prepares you for ECBA and gives you a start on PSPO I: you book and pay for each exam with IIBA or Scrum.org. CCBA is a next step once you have worked as a business analyst.',
     certifications: [
       {
         name: 'IIBA Entry Certificate in Business Analysis (ECBA)',

@@ -97,7 +97,7 @@ const pages: Record<string, PageSeo> = {
   '/training-placement/servicenow-crm/': {
     title: 'ServiceNow CSM Training in Hyderabad',
     description:
-      'ServiceNow CSM training in Hyderabad: a ServiceNow CRM course on cases, workspace, portal, Virtual Agent, Now Assist and CIS-CSM prep, with placement support.',
+      'ServiceNow CSM training in Hyderabad: a ServiceNow CRM course on cases, portal, Virtual Agent, ServiceNow Otto and CIS-CSM prep, with placement support.',
   },
   '/training-placement/servicenow-admin-platform/': {
     title: 'ServiceNow Admin Course in Hyderabad',

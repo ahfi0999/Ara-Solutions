@@ -46,7 +46,7 @@ export const site = {
 } as const;
 
 /**
- * Headline numbers: years from the client (two decades in the IT industry, Nov 2026), placements from ARA's
+ * Headline numbers: years from the client (2 decades in the IT industry, Nov 2026), placements from ARA's
  * original website, screened profiles and shortlist time from ARA's pitch deck.
  */
 export type Stat = {
@@ -58,7 +58,7 @@ export type Stat = {
 };
 
 export const stats: readonly Stat[] = [
-  { value: 20, suffix: '+', text: 'Two decades', label: 'In the IT industry' },
+  { value: 20, suffix: '+', text: '2 decades', label: 'In the IT industry' },
   { value: 10000, suffix: '+', label: 'Screened talent profiles' },
   { value: 1000, suffix: '+', label: 'Professionals placed' },
   { value: 48, suffix: ' hrs', label: 'To a targeted shortlist' },

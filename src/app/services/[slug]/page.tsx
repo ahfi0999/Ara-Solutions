@@ -15,6 +15,7 @@ import {
 import { ClosingCta } from '@/components/home/ClosingCta';
 import { Clientele } from '@/components/home/Clientele';
 import { Container, SectionHeading } from '@/components/ui/Section';
+import { shareImage } from '@/lib/share-image';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { title, description, url: path },
+    openGraph: { title, description, url: path, images: [shareImage] },
   };
 }
 

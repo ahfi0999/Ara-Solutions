@@ -385,7 +385,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What can I learn after the ServiceNow admin course?',
-        a: 'ServiceNow ITSM Development for scripting, a product course such as HRSD, CRM or GRC, or the full ServiceNow Masters & AI program.',
+        a: 'ServiceNow ITSM Development for scripting, a product course such as HRSD, CRM or GRC, or the full ServiceNow Masters program.',
       },
       {
         q: 'What is the ServiceNow admin course fee in Hyderabad?',
@@ -716,7 +716,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What can I learn after ServiceNow ITSM Development?',
-        a: 'A product course such as HRSD, CRM or GRC, ServiceNow FDSE for AI agents, or the full ServiceNow Masters & AI program.',
+        a: 'A product course such as HRSD, CRM or GRC, ServiceNow FDSE for AI agents, or the full ServiceNow Masters program.',
       },
       {
         q: 'Are the ServiceNow developer classes live or recorded?',
@@ -1063,7 +1063,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     h1: 'ServiceNow CSM Training in Hyderabad',
     tagline: 'Run customer service on ServiceNow: cases, agents, portals and AI.',
     summary:
-      'A ServiceNow CSM specialist builds the customer service operation companies use to resolve customer issues by email, chat and portal. This ServiceNow CSM training in Hyderabad goes beyond case forms: you route cases to the right agent, give customers a working self-service portal and use Now Assist to summarise cases and draft resolution notes.',
+      'A ServiceNow CSM specialist builds the customer service operation companies use to resolve customer issues by email, chat and portal. This ServiceNow CSM training in Hyderabad goes beyond case forms: you route cases to the right agent, give customers a working self-service portal and use ServiceNow Otto (formerly Now Assist) to summarise cases and draft resolution notes.',
     prerequisites:
       'ServiceNow admin knowledge (CSA level) is recommended. Customer service or CRM experience helps.',
     details: {
@@ -1079,13 +1079,13 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     about: {
       paragraphs: [
         'Our ServiceNow CRM course in Hyderabad focuses on Customer Service Management (CSM), the ServiceNow product companies use to serve their own customers. CSM brings customer cases, agents, portals and channels together on one platform.',
-        'You configure the customer data model, case management and routing, the agent workspace, a customer self-service portal, omnichannel and Virtual Agent, entitlements and SLAs, and Now Assist features that summarise cases and draft resolution notes. Classes are live and instructor-led, and the course prepares you for the ServiceNow CIS-CSM certification exam.',
+        'You configure the customer data model, case management and routing, the agent workspace, a customer self-service portal, omnichannel and Virtual Agent, entitlements and SLAs, and ServiceNow Otto features that summarise cases and draft resolution notes. Classes are live and instructor-led, and the course prepares you for the ServiceNow CIS-CSM certification exam.',
       ],
       whyTitle: 'Why learn ServiceNow CRM in 2026',
       why: [
         'Companies that run customer service on ServiceNow need people who can configure CSM.',
         'Customer service skills transfer: CRM, support and Salesforce experience all help.',
-        'AI is built in: the course covers Now Assist for CSM, ServiceNow’s generative AI for service agents.',
+        'AI is built in: the course covers ServiceNow Otto (formerly Now Assist) in CSM, ServiceNow’s generative AI for service agents.',
       ],
     },
     audience: [
@@ -1110,7 +1110,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       'Set up the CSM Configurable Workspace with playbooks',
       'Build a customer self-service portal with knowledge and catalog items',
       'Connect email, chat and Virtual Agent channels',
-      'Configure entitlements and SLAs, and use Now Assist for case summaries',
+      'Configure entitlements and SLAs, and use ServiceNow Otto for case summaries',
     ],
     modules: [
       {
@@ -1191,15 +1191,15 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         title: 'Entitlements, SLAs & AI',
-        summary: 'Make service measurable, with Now Assist to help agents.',
+        summary: 'Make service measurable, with ServiceNow Otto to help agents.',
         topics: [
           'Entitlements and contracts',
           'SLAs for customer cases',
-          'Now Assist case summarisation',
+          'Case summaries with ServiceNow Otto',
           'Resolution notes and knowledge generation',
           'Service reports and dashboards',
         ],
-        lab: 'Configure an entitlement and SLA and test Now Assist case summaries.',
+        lab: 'Configure an entitlement and SLA and test ServiceNow Otto case summaries.',
       },
       {
         title: 'Certification & career readiness',
@@ -1225,7 +1225,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       'Virtual Agent',
       'Playbooks',
       'Service Level Agreements (SLA)',
-      'Now Assist for CSM',
+      'ServiceNow Otto (formerly Now Assist)',
       'Performance Analytics',
       'Personal Developer Instance (PDI)',
     ],
@@ -1238,7 +1238,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       'Knowledge management',
       'Virtual Agent',
       'Entitlements and SLAs',
-      'Now Assist for CSM',
+      'ServiceNow Otto (formerly Now Assist)',
       'Service reporting',
     ],
     projects: [
@@ -1259,10 +1259,10 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       {
         title: 'AI-assisted service desk',
         problem: 'Agents spend too long reading case history.',
-        text: 'Add a Virtual Agent topic and Now Assist case summaries to the agent workspace.',
+        text: 'Add a Virtual Agent topic and ServiceNow Otto case summaries to the agent workspace.',
         result:
           'Agents read a short case summary instead of the full history, and Virtual Agent handles routine chats.',
-        stack: ['Virtual Agent', 'Now Assist', 'Configurable Workspace'],
+        stack: ['Virtual Agent', 'ServiceNow Otto', 'Configurable Workspace'],
       },
     ],
     capstone:
@@ -1362,8 +1362,8 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         a: 'The agent workspace where service agents see cases, customer details and recommended actions in one place.',
       },
       {
-        q: 'Does the course cover Now Assist for CSM?',
-        a: 'Yes. Module 7 uses Now Assist for CSM to summarise cases, draft resolution notes and create knowledge articles from cases.',
+        q: 'Does the course cover ServiceNow Otto (formerly Now Assist) in CSM?',
+        a: 'Yes. Module 7 uses ServiceNow Otto to summarise cases, draft resolution notes and create knowledge articles from cases.',
       },
       {
         q: 'What does a ServiceNow CSM developer do?',
@@ -1997,11 +1997,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         a: 'ServiceNow’s tool for building AI agents. You define each agent’s role, instructions and the tools it can use, then combine agents into agentic workflows. Module 6 is built around it.',
       },
       {
-        q: 'What is Now Assist Skill Kit in ServiceNow?',
+        q: 'What is AI Skill Kit (formerly Now Assist Skill Kit) in ServiceNow?',
         a: 'ServiceNow’s tool for building custom generative AI skills, now called AI Skill Kit. You set the inputs, the prompt and where the output appears, then test the skill before deploying it. Module 5 covers it.',
       },
       {
-        q: 'What is ServiceNow AI Control Tower?',
+        q: 'What is Super Intelligence Control Tower (formerly AI Control Tower)?',
         a: 'ServiceNow’s hub for tracking and governing the AI agents, models and skills a company runs. ServiceNow now calls it Super Intelligence Control Tower, and module 7 uses it to review agents before go-live.',
       },
       {

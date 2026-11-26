@@ -247,26 +247,29 @@ function salaryScale(salaries: Salary[]) {
 }
 
 /**
- * Certifications grouped by the course that prepares you for them, in the order they first appear. A course also
- * gets the exams the comparison table lists for it by code (ServiceNow Masters: CSA, CAD and CIS-HR), first, so a
- * course that covers several modules shows every exam it prepares you for, not only the ones listed under it.
+ * Certifications grouped by course, in the comparison's course order. A course gets the exams its comparison row
+ * lists by code (ServiceNow Masters: CSA, CAD and CIS-HR, which are listed under other courses), first, then the
+ * rows listed under it. Rows marked `next` are later steps: kept apart and not counted, so the count matches the
+ * comparison's "exams it prepares you for".
  */
 function certificationGroups(hub: TrackHub) {
   type Cert = TrackHub['certifications']['rows'][number];
-  const groups: { slug: string; certs: Cert[] }[] = [];
-  for (const row of hub.certifications.rows) {
-    const group = groups.find((item) => item.slug === row.slug);
-    if (group) group.certs.push(row);
-    else groups.push({ slug: row.slug, certs: [row] });
-  }
-  for (const group of groups) {
-    const codes = hub.compare.find((row) => row.slug === group.slug)?.certifications ?? [];
-    const extra = codes
-      .map((code) => hub.certifications.rows.find((row) => row.name.endsWith(`(${code})`)))
-      .filter((cert): cert is Cert => cert !== undefined && !group.certs.includes(cert));
-    group.certs = [...extra, ...group.certs];
-  }
-  return groups;
+  const slugs = [
+    ...new Set([...hub.compare.map((row) => row.slug), ...hub.certifications.rows.map((row) => row.slug)]),
+  ];
+  return slugs
+    .map((slug) => {
+      const own = hub.certifications.rows.filter((row) => row.slug === slug);
+      const codes = hub.compare.find((row) => row.slug === slug)?.certifications ?? [];
+      const extra = codes
+        .map((code) => hub.certifications.rows.find((row) => row.name.endsWith(`(${code})`)))
+        .filter((cert): cert is Cert => cert !== undefined && !own.includes(cert));
+      const certs = [...extra, ...own.filter((cert) => !cert.next)].filter(
+        (cert, index, all) => all.findIndex((item) => item.name === cert.name) === index,
+      );
+      return { slug, certs, next: own.filter((cert) => cert.next) };
+    })
+    .filter((group) => group.certs.length + group.next.length > 0);
 }
 
 const tableWrap =
@@ -443,6 +446,25 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
                       </li>
                     ))}
                   </ul>
+                  {/* Later steps the course leads on to, apart from the exams it prepares you for. */}
+                  {group.next.length > 0 && (
+                    <div className="border-t border-line px-5 pb-5 pt-4">
+                      <p className="text-[12.5px] font-medium text-faint">
+                        {group.next.length === 1 ? 'Next step' : 'Next steps'} after the course
+                      </p>
+                      <ul className="mt-2 grid gap-2">
+                        {group.next.map((cert) => (
+                          <li
+                            key={cert.name}
+                            className="flex items-start gap-2 text-[14px] leading-snug text-muted"
+                          >
+                            <ArrowRight aria-hidden className="mt-0.5 size-4 shrink-0 text-faint" />
+                            {cert.name}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </Reveal>
               );
             })}

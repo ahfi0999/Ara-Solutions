@@ -94,7 +94,7 @@ export const programs: Program<ProgramSlug>[] = [
     // Name and short name kept. The client's page document calls the course "Salesforce Masters" in its headings,
     // which is also the name of another Hyderabad training institute (salesforcemasters.in): to confirm with the client.
     name: 'Salesforce Admin & Developer with Agentforce',
-    shortName: 'Salesforce',
+    shortName: 'Salesforce Admin & Developer',
     // From the client's page document "Salesforce Admin & Developer with Agentforce" (Nov 2026), written for the
     // keywords chosen on 26 Nov 2026: primary "salesforce training in hyderabad"; secondary "salesforce training in
     // hyderabad with placement", "salesforce admin and developer course", "salesforce developer course". Hyderabad
@@ -473,7 +473,7 @@ export const programs: Program<ProgramSlug>[] = [
     h1: 'ServiceNow training in Hyderabad: admin, development, HRSD and AI',
     tagline: 'Run, build and extend ServiceNow, then put governed AI agents to work on it.',
     summary:
-      'This ServiceNow training in Hyderabad takes you from your first login to building on the ServiceNow AI Platform. You learn administration, development and HR Service Delivery (HRSD), then build Now Assist skills and AI agents and govern them in AI Control Tower.',
+      'This ServiceNow training in Hyderabad takes you from your first login to building on the ServiceNow AI Platform. You learn administration, development and HR Service Delivery (HRSD), then build ServiceNow Otto (formerly Now Assist) skills and AI agents and govern them in Super Intelligence Control Tower.',
     accent: 'emerald',
     prerequisites:
       'No prior ServiceNow experience needed. A basic understanding of IT concepts helps, and any exposure to programming makes the development modules easier.',
@@ -486,7 +486,7 @@ export const programs: Program<ProgramSlug>[] = [
     about: {
       paragraphs: [
         'ServiceNow Masters is our complete ServiceNow training and placement course in Hyderabad. It is ServiceNow admin and developer training, extended with HR Service Delivery (HRSD) and AI: four courses in one, so you can apply for administrator, developer, HRSD and AI roles from a single course.',
-        'You start by running the platform, move into JavaScript, integrations and custom applications, then deliver HR services and finish by building Now Assist skills and AI agents, governed in AI Control Tower. Every module has a hands-on lab, and the course doubles as ServiceNow certification training for the CSA, CAD and CIS-HR exams and ServiceNow’s AI micro-certifications.',
+        'You start by running the platform, move into JavaScript, integrations and custom applications, then deliver HR services and finish by building ServiceNow Otto skills and AI agents, governed in Super Intelligence Control Tower (formerly AI Control Tower). Every module has a hands-on lab, and the course doubles as ServiceNow certification training for the CSA, CAD and CIS-HR exams and ServiceNow’s AI micro-certifications.',
         'Classes are live and instructor-led on Zoom, and every class is recorded. Placement support covers your resume and LinkedIn, mock interviews and job referrals through ARA’s IT staffing clients and partner companies. Offers depend on your interview performance.',
       ],
       whyTitle: 'Why learn ServiceNow with AI in 2026',
@@ -518,7 +518,7 @@ export const programs: Program<ProgramSlug>[] = [
       'Integrate ServiceNow with REST APIs and import data',
       'Build a scoped application and a Service Portal widget',
       'Configure HRSD: HR cases, services, SLAs and lifecycle events',
-      'Build Now Assist skills and AI agents, and govern them in AI Control Tower',
+      'Build ServiceNow Otto skills and AI agents, and govern them in Super Intelligence Control Tower',
       'Prepare for the CSA, CAD and CIS-HR exams',
     ],
     modules: [
@@ -850,44 +850,44 @@ export const programs: Program<ProgramSlug>[] = [
         topics: [
           'Predictive, generative and agentic AI on ServiceNow',
           'Large language models (LLMs) and how ServiceNow uses them',
-          'Now Assist panel and Now Assist context menu',
-          'Now Assist Admin console: activating skills',
+          'The ServiceNow Otto panel and context menu',
+          'Activating skills in the admin console',
           'AI roles and access',
           'AI use cases by workflow',
         ],
-        lab: 'Switch on Now Assist skills in the Now Assist Admin console and test them as a user.',
+        lab: 'Switch on ServiceNow Otto skills in the admin console and test them as a user.',
       },
       {
-        title: 'Now Assist for ITSM, HRSD and developers',
+        title: 'ServiceNow Otto for ITSM, HRSD and developers',
         summary: 'Put ready-made AI skills to work in the processes you know.',
         topics: [
           'Incident and HR case summarisation',
           'Resolution notes and knowledge article generation',
-          'Now Assist in Virtual Agent',
-          'Now Assist for Creator: code, flow and catalog generation',
+          'Otto in Virtual Agent',
+          'Generating code, flows and catalog items with Otto',
           'Reviewing and testing AI-generated work',
-          'Measuring results with Now Assist Analytics',
+          'Measuring the results of AI skills',
         ],
-        lab: 'Use Now Assist to summarise incidents and HR cases and generate a knowledge article.',
+        lab: 'Use Otto to summarise incidents and HR cases and generate a knowledge article.',
       },
       {
-        title: 'Custom AI skills with Now Assist Skill Kit',
+        title: 'Custom AI skills with AI Skill Kit',
         summary: 'Build your own skill when the built-in ones do not fit.',
         topics: [
           'When to build a custom skill',
           'Skill inputs, prompts and output',
           'Writing and refining prompts',
           'Testing skills with instance data',
-          'Evaluation datasets with Now Assist Data Kit',
+          'Evaluation datasets with AI Data Kit',
           'Deploying and activating a skill',
         ],
-        lab: 'Build a custom skill in Now Assist Skill Kit and test it with a dataset.',
+        lab: 'Build a custom skill in AI Skill Kit and test it with a dataset.',
       },
       {
         title: 'AI agents and agentic workflows with AI Agent Studio',
         summary: 'Agents that take a goal, plan the steps and carry out the work.',
         topics: [
-          'Now Assist skills vs AI agents',
+          'AI skills vs AI agents',
           'An agent’s role, instructions and tools',
           'Giving agents tools: flows, scripts and skills',
           'Agentic workflows, AI Agent Orchestrator and human approvals',
@@ -897,17 +897,17 @@ export const programs: Program<ProgramSlug>[] = [
         lab: 'Build an AI agent with tools and combine two agents into an agentic workflow.',
       },
       {
-        title: 'AI governance with AI Control Tower',
+        title: 'AI governance with Super Intelligence Control Tower',
         summary: 'Keep AI visible, monitored and safe for production.',
         topics: [
           'Why AI governance matters',
-          'AI Control Tower: an inventory of agents and skills',
+          'Super Intelligence Control Tower (formerly AI Control Tower): an inventory of agents and skills',
           'Monitoring AI performance and usage',
           'Ownership, approvals and risk tracking',
-          'Now Assist Guardian: offensive content and prompt-injection protection',
+          'Guardian: offensive content and prompt-injection protection',
           'Responsible AI practices for ServiceNow teams',
         ],
-        lab: 'Review your agents in AI Control Tower and add a Guardian protection.',
+        lab: 'Review your agents in Super Intelligence Control Tower and add a Guardian protection.',
       },
       {
         title: 'Certification and career readiness',
@@ -934,10 +934,10 @@ export const programs: Program<ProgramSlug>[] = [
       'Service Portal',
       'Update sets',
       'HR Service Delivery (HRSD)',
-      'Now Assist',
-      'Now Assist Skill Kit',
+      'ServiceNow Otto (formerly Now Assist)',
+      'AI Skill Kit (formerly Now Assist Skill Kit)',
       'AI Agent Studio',
-      'AI Control Tower',
+      'Super Intelligence Control Tower',
     ],
     skills: [
       'Platform administration and security',
@@ -948,8 +948,8 @@ export const programs: Program<ProgramSlug>[] = [
       'Scoped application development',
       'Service Portal widgets',
       'HRSD configuration',
-      'Now Assist and AI agents',
-      'AI governance with AI Control Tower',
+      'ServiceNow Otto and AI agents',
+      'AI governance with Super Intelligence Control Tower',
     ],
     projects: [
       {
@@ -973,8 +973,8 @@ export const programs: Program<ProgramSlug>[] = [
         problem: 'HR teams are buried in onboarding tasks and repeat questions.',
         text: 'Configure HR services, SLAs and an onboarding lifecycle event, then add an AI agent that triages HR cases.',
         result:
-          'Onboarding runs automatically and an AI agent triages HR cases, governed in AI Control Tower.',
-        stack: ['HRSD', 'AI Agent Studio', 'AI Control Tower'],
+          'Onboarding runs automatically and an AI agent triages HR cases, governed in Super Intelligence Control Tower.',
+        stack: ['HRSD', 'AI Agent Studio', 'Super Intelligence Control Tower'],
       },
     ],
     capstone:
@@ -1040,8 +1040,8 @@ export const programs: Program<ProgramSlug>[] = [
         level: 'Experienced',
       },
       {
-        title: 'ServiceNow Now Assist Developer',
-        text: 'Builds and governs Now Assist skills and AI agents.',
+        title: 'ServiceNow AI Developer',
+        text: 'Builds and governs ServiceNow Otto (formerly Now Assist) skills and AI agents.',
         level: 'Experienced',
       },
     ],
@@ -1064,7 +1064,7 @@ export const programs: Program<ProgramSlug>[] = [
         },
         {
           stage: 'Lead (5+ years)',
-          roles: 'Technical Consultant, Now Assist Developer, ServiceNow Architect',
+          roles: 'Technical Consultant, ServiceNow AI Developer, ServiceNow Architect',
         },
       ],
     },
@@ -1075,7 +1075,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'What is the ServiceNow training syllabus?',
-        a: '31 modules: administration and ITSM (modules 1 to 10), development with JavaScript, the Glide APIs, integrations and scoped apps (11 to 18), HR Service Delivery (19 to 25), ServiceNow AI with Now Assist, AI agents and AI Control Tower (26 to 30), then certification and career readiness. Every module has a hands-on lab.',
+        a: '31 modules: administration and ITSM (modules 1 to 10), development with JavaScript, the Glide APIs, integrations and scoped apps (11 to 18), HR Service Delivery (19 to 25), ServiceNow AI with ServiceNow Otto (formerly Now Assist), AI agents and Super Intelligence Control Tower (26 to 30), then certification and career readiness. Every module has a hands-on lab.',
       },
       {
         q: 'Does ServiceNow Masters include admin and developer training?',
@@ -1094,16 +1094,16 @@ export const programs: Program<ProgramSlug>[] = [
         a: 'Certified System Administrator (CSA), Certified Application Developer (CAD) and Certified Implementation Specialist – Human Resources (CIS-HR), plus the Now Assist and Agentic AI executive micro-certifications. ServiceNow runs the exams through ServiceNow University: you complete any training ServiceNow requires, then register and pay for each exam with ServiceNow.',
       },
       {
-        q: 'What will I learn about Now Assist?',
-        a: 'Now Assist is ServiceNow’s generative AI. It summarises incidents and HR cases, drafts notes and knowledge articles, and helps developers generate scripts and flows. You switch skills on in the Now Assist Admin console, use them in ITSM and HRSD, and build your own with Now Assist Skill Kit.',
+        q: 'What will I learn about ServiceNow Otto (formerly Now Assist)?',
+        a: 'ServiceNow Otto (formerly Now Assist) is ServiceNow’s generative AI. It summarises incidents and HR cases, drafts notes and knowledge articles, and helps developers generate scripts and flows. You switch skills on in the admin console, use them in ITSM and HRSD, and build your own with AI Skill Kit (formerly Now Assist Skill Kit).',
       },
       {
-        q: 'How is a Now Assist skill different from an AI agent?',
-        a: 'A Now Assist skill suggests and drafts, for example a case summary. An AI agent takes a goal, plans the steps and carries out the work using tools such as flows, scripts and skills, with human approval where you need it.',
+        q: 'How is an AI skill different from an AI agent in ServiceNow?',
+        a: 'An AI skill suggests and drafts, for example a case summary. An AI agent takes a goal, plans the steps and carries out the work using tools such as flows, scripts and skills, with human approval where you need it.',
       },
       {
-        q: 'Why does the course teach AI Control Tower?',
-        a: 'AI Control Tower is where companies keep an inventory of their AI agents and skills, monitor how they perform, assign owners and manage risk. Companies let AI run only when they can govern it, so the course ends with governance, not just building.',
+        q: 'Why does the course teach Super Intelligence Control Tower?',
+        a: 'Super Intelligence Control Tower (formerly AI Control Tower) is where companies keep an inventory of their AI agents and skills, monitor how they perform, assign owners and manage risk. Companies let AI run only when they can govern it, so the course ends with governance, not just building.',
       },
       {
         q: 'Why does ServiceNow Masters include HRSD?',
@@ -1111,7 +1111,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'Can I practise ServiceNow, including the AI modules, at home?',
-        a: 'Mostly, yes. ServiceNow gives developers a free Personal Developer Instance (PDI), which you set up in module 1 and use for the admin, development and HRSD labs. Now Assist, AI Agent Studio and AI Control Tower are licensed features that a free PDI does not include, so ask an advisor how the AI labs run in your batch.',
+        a: 'Mostly, yes. ServiceNow gives developers a free Personal Developer Instance (PDI), which you set up in module 1 and use for the admin, development and HRSD labs. ServiceNow Otto, AI Agent Studio and Super Intelligence Control Tower are licensed features that a free PDI does not include, so ask an advisor how the AI labs run in your batch.',
       },
       {
         q: 'What projects will I build in ServiceNow Masters?',
@@ -1363,7 +1363,7 @@ export const programs: Program<ProgramSlug>[] = [
     certifications: [
       {
         name: 'AWS Certified Machine Learning Engineer – Associate',
-        note: 'Shows you can build, deploy and monitor machine learning on AWS. Modules 2 to 7 cover the ML skills it tests. AWS started a new version of the exam (MLA-C02) in September 2026 and recommends at least a year of hands-on experience with Amazon SageMaker AI.',
+        note: 'Shows you can build, deploy and monitor machine learning on AWS. Modules 2 to 7 cover the ML skills it tests. AWS is moving the exam to a new version (MLA-C02), in beta from September 2026, and recommends at least a year of hands-on experience with Amazon SageMaker AI.',
       },
       {
         name: 'Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)',
@@ -2356,7 +2356,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         name: 'AWS Certified Developer – Associate',
-        note: 'A next step once you build on AWS: AWS recommends at least a year of hands-on AWS experience. Its updated version (DVA-C03) starts on 1 December 2026.',
+        note: 'A next step once you build on AWS: AWS recommends at least a year of hands-on AWS experience. Its new version, DVA-C03, replaces DVA-C02 from 1 December 2026.',
       },
     ],
     roles: [

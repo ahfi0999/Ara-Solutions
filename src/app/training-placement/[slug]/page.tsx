@@ -17,6 +17,7 @@ import { Faq } from '@/components/home/Faq';
 import { ClosingCta } from '@/components/home/ClosingCta';
 import { ProgramCard } from '@/components/home/ProgramShowcase';
 import { Container, SectionHeading } from '@/components/ui/Section';
+import { shareImage } from '@/lib/share-image';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       alternates: { canonical: path },
-      openGraph: { title, description, url: path },
+      openGraph: { title, description, url: path, images: [shareImage] },
       // A track whose courses have no full program page yet stays out of Google until one exists.
       ...(trackPrograms(track).length === 0 && { robots: { index: false, follow: true } }),
     };
@@ -62,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { title, description, url: path },
+    openGraph: { title, description, url: path, images: [shareImage] },
   };
 }
 
@@ -171,11 +172,7 @@ export default async function ProgramPage({ params }: Props) {
   // flagship programs, so the list stays short however many courses exist.
   const sameTrack = programTrack ? trackPrograms(programTrack).map(({ program: item }) => item) : [];
   const related = [
-    ...new Set([
-      ...sameTrack,
-      ...allPrograms.filter((item) => item.family === program.family),
-      ...programs,
-    ]),
+    ...new Set([...sameTrack, ...allPrograms.filter((item) => item.family === program.family), ...programs]),
   ]
     .filter((item) => item.slug !== program.slug)
     .slice(0, 3);
@@ -183,7 +180,10 @@ export default async function ProgramPage({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {program.faqs.length > 0 && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
