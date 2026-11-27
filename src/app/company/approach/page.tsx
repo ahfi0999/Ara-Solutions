@@ -27,7 +27,7 @@ export default function ApproachPage() {
             One standard for every hire <em>and every learner.</em>
           </>
         }
-        intro="A disciplined, transparent process for companies hiring with us, and a hands-on path from first class to placement for professionals training with us."
+        intro="A disciplined, transparent process for companies hiring with us, and a hands-on path from first class to placement for individuals training with us."
       >
         <div className="flex flex-wrap gap-3">
           <ButtonLink href="#how-we-hire" size="lg" arrow>
@@ -121,9 +121,9 @@ export default function ApproachPage() {
         </Container>
       </section>
 
-      {/* For professionals */}
+      {/* For individuals */}
       <div className="border-t border-line">
-        <Journey id="how-we-train" eyebrow="For professionals: how we train">
+        <Journey id="how-we-train" eyebrow="For individuals: how we train">
           <p className="mt-6 text-lg leading-relaxed text-muted">{trainingApproach.paragraphs[0]}</p>
           <ul className="mt-6 flex flex-wrap gap-2">
             {trainingApproach.points.map((point) => (

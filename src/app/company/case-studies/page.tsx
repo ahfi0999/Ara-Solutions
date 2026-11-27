@@ -127,7 +127,7 @@ export default function CaseStudiesPage() {
         <Container>
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow="For professionals: training outcomes"
+              eyebrow="For individuals: training outcomes"
               title={
                 <>
                   Careers built <em>with ARA</em>

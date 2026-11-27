@@ -9,7 +9,7 @@ import { Spotlight } from '@/components/motion/primitives';
  * "Choose your path": each card points to its own section further down the home page
  * (the service and program links live there, so they are not repeated here).
  * Both cards carry the same weight: each shows its own photo under the same dark overlay,
- * and keeps its colour in the icon and button (navy for businesses, red for professionals).
+ * and keeps its colour in the icon and button (navy for businesses, red for individuals).
  */
 const DIVISIONS = [
   {
@@ -25,7 +25,7 @@ const DIVISIONS = [
   {
     key: 'training',
     icon: GraduationCap,
-    eyebrow: 'For professionals',
+    eyebrow: 'For individuals',
     title: 'Training & Placement',
     text: 'Career-focused IT training with practical learning, real-world projects, interview preparation and placement assistance.',
     cta: { label: 'Explore training programs', href: '#programs' },

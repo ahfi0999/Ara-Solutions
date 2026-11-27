@@ -16,7 +16,7 @@ const COMPANY_NOTES = `
   placed and 10,000+ screened talent profiles. Global hubs: US, EU and Asia; clients in India, the USA and the UK.
   Tagline: "${site.tagline}".
 - Core capabilities: ${capabilities.map((item) => `${item.title} (${item.text.replace(/\.$/, '')})`).join('; ')}.
-- Two divisions: (1) Staffing for businesses (IT and non-IT), (2) Training & Placement for professionals.
+- Two divisions: (1) Staffing for businesses (IT and non-IT), (2) Training & Placement for individuals.
 - Organisations ARA has recruited for (you may name these, but do not add details about them):
   ${clientele.map((client) => client.name).join(', ')}.
 - Four pillars: ${pillars.map((pillar) => `${pillar.title}: ${pillar.text}`).join(' ')}

@@ -7,7 +7,7 @@ import { cn } from '@/lib/cn';
 
 const PARTS = [
   { key: 'business', label: 'For businesses', target: 'for-businesses', icon: Building2 },
-  { key: 'training', label: 'For professionals', target: 'for-professionals', icon: GraduationCap },
+  { key: 'training', label: 'For individuals', target: 'for-professionals', icon: GraduationCap },
 ] as const;
 
 /** After this long without scrolling, a tucked-away switch comes back. */

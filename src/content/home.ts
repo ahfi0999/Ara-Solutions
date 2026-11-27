@@ -197,7 +197,7 @@ export const hiringFaqs = [
   },
 ] as const;
 
-/** For professionals (home Training tab). */
+/** For individuals (home Training tab). */
 export const trainingFaqs = [
   {
     q: 'What IT training programs are available at ARA Solutions?',

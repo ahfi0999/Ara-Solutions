@@ -13,7 +13,7 @@ import { MediaBackground } from '@/components/motion/MediaBackground';
 import { TrainingPillarCards } from '@/components/home/TrainingPillarCards';
 
 /**
- * A header band that starts one audience's half of the home page ("For businesses" / "For professionals"),
+ * A header band that starts one audience's half of the home page ("For businesses" / "For individuals"),
  * so each visitor can see where their part begins.
  */
 export function AudienceBand({
@@ -157,7 +157,7 @@ export function ResultsSplit() {
                 className="absolute -right-24 -top-24 -z-10 size-80 rounded-full bg-[radial-gradient(circle,rgb(255_110_118/0.35),transparent_65%)] blur-2xl"
               />
               <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-white/75">
-                For professionals
+                For individuals
               </p>
               <h3 className="mt-2 text-2xl font-semibold tracking-tight">Careers built</h3>
               <ul className="mt-8 space-y-6">

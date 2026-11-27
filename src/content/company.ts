@@ -49,7 +49,7 @@ export const about = {
     ],
   },
   forProfessionals: {
-    title: 'For professionals and teams: training and placement',
+    title: 'For individuals: training and placement',
     text: 'We prepare people for the roles employers hire for. Individuals learn Salesforce, ServiceNow, Workday, AI and Data, Cybersecurity and Full Stack through live labs and real projects, with resume help, mock interviews and job referrals. Companies can also train their teams with our corporate training.',
   },
   oneRoof: [

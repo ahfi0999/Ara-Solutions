@@ -31,7 +31,7 @@ const faqJsonLd = {
   })),
 };
 
-/** The home page gives staffing and training equal weight: one half for businesses, one for professionals. */
+/** The home page gives staffing and training equal weight: one half for businesses, one for individuals. */
 export default function HomePage() {
   return (
     <>
@@ -75,10 +75,10 @@ export default function HomePage() {
       <HiringFlow />
       <WhyAra />
 
-      {/* ── For professionals ── */}
+      {/* ── For individuals ── */}
       <AudienceBand
         id="for-professionals"
-        label="For professionals"
+        label="For individuals"
         title="Build the career companies hire for"
         text="Six career-focused programs with real projects, interview preparation and placement assistance."
         href="/training-placement/"
