@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react';
 import { alumniCompanies, clientele } from '@/content/home';
 import { cn } from '@/lib/cn';
 import { Container, SectionHeading } from '@/components/ui/Section';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
+import { ButtonLink } from '@/components/ui/Button';
 import { LogoMarquee, type MarqueeLogo } from '@/components/home/LogoMarquee';
 
 export const ALUMNI_HEIGHT = { sm: 24, md: 28, lg: 38 } as const;
@@ -26,9 +28,26 @@ const ALUMNI: MarqueeLogo[] = alumniCompanies
 /**
  * Proof in one place: organisations ARA has recruited for (from ARA's pitch deck), rolling one way,
  * and the companies where professionals trained by ARA now work, rolling the other way.
- * `alumni={false}` shows the client row only (used on the staffing service pages).
+ * `alumni={false}` shows the client row only (used on the staffing service pages). The About page passes its
+ * own heading and labels, links "Hire with ARA" to the services page and adds a link under the logos.
  */
-export function Clientele({ alumni = true, className }: { alumni?: boolean; className?: string }) {
+export function Clientele({
+  alumni = true,
+  className,
+  title,
+  alumniLabel = 'And where the professionals we trained now work',
+  hireHref,
+  more,
+}: {
+  alumni?: boolean;
+  className?: string;
+  title?: ReactNode;
+  alumniLabel?: string;
+  /** Link "Hire with ARA" to this page instead of opening the enquiry form. */
+  hireHref?: string;
+  /** Shown centred under the logos. */
+  more?: ReactNode;
+}) {
   return (
     <section id="clients" className={cn('py-20 sm:py-28', className)}>
       <Container>
@@ -36,15 +55,23 @@ export function Clientele({ alumni = true, className }: { alumni?: boolean; clas
           <SectionHeading
             eyebrow="Clientele"
             title={
-              <>
-                Organisations we have <em>recruited for</em>
-              </>
+              title ?? (
+                <>
+                  Organisations we have <em>recruited for</em>
+                </>
+              )
             }
             intro="Clients in India, the USA and the UK trust ARA Solutions with their IT and non‑IT hiring."
           />
-          <EnquiryButton size="lg" arrow interest="hiring" className="shrink-0 self-start lg:self-auto">
-            Hire with ARA
-          </EnquiryButton>
+          {hireHref ? (
+            <ButtonLink href={hireHref} size="lg" arrow className="shrink-0 self-start lg:self-auto">
+              Hire with ARA
+            </ButtonLink>
+          ) : (
+            <EnquiryButton size="lg" arrow interest="hiring" className="shrink-0 self-start lg:self-auto">
+              Hire with ARA
+            </EnquiryButton>
+          )}
         </div>
 
         <div className="mt-12">
@@ -55,7 +82,7 @@ export function Clientele({ alumni = true, className }: { alumni?: boolean; clas
           <>
             <p className="mt-14 flex items-center gap-4 text-center font-mono text-[12px] uppercase tracking-[0.2em] text-muted">
               <span aria-hidden className="h-px flex-1 bg-text/15" />
-              And where the professionals we trained now work
+              {alumniLabel}
               <span aria-hidden className="h-px flex-1 bg-text/15" />
             </p>
             <div className="mt-8">
@@ -68,6 +95,7 @@ export function Clientele({ alumni = true, className }: { alumni?: boolean; clas
             </div>
           </>
         )}
+        {more && <div className="mt-12 flex justify-center">{more}</div>}
       </Container>
     </section>
   );

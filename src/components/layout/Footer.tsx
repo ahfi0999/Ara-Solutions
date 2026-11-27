@@ -62,8 +62,8 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 hover:text-white"
                 >
-                  <MapPin aria-hidden className="size-4 text-brand-300" /> {site.address.area},{' '}
-                  {site.address.city}, {site.address.region}
+                  <MapPin aria-hidden className="size-4 text-brand-300" /> {site.address.city},{' '}
+                  {site.address.region}
                 </a>
               </li>
             </ul>

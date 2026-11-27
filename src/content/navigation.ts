@@ -134,6 +134,7 @@ export const navigation: NavEntry[] = [
     label: 'Company',
     strip: 'Company',
     match: '/company',
+    href: '/company/about/',
     items: [
       {
         label: 'About us',

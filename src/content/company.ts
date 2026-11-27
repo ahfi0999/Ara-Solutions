@@ -3,21 +3,114 @@
  * and ARA's pitch deck.
  */
 
+import { site } from './site';
+
+/**
+ * About Us page, from the client's "ARA Solutions About Us page content" document (Nov 2026), in the order the
+ * sections appear. Items the document left for the client to fill in (founder cards, social links, figure
+ * periods) are not shown until they are supplied.
+ */
 export const about = {
-  intro:
-    'A recruitment, technology training and IT consulting company based in Hyderabad, India: we find the right people for companies, and we train professionals for the roles companies hire for.',
-  whoWeAre: [
-    'ARA Solutions is a professional recruitment, staffing and workforce solutions company based in Hyderabad, India, serving clients across domestic and international markets.',
-    'We bridge the gap between organisational ambition and the people who make it real, with workforce models designed around the reality of each hire. Alongside staffing, our Training & Placement programs build job-ready talent in the technologies companies hire for.',
-  ],
-  hiringChallenge: {
-    title: 'Hiring is getting harder to get right',
-    paragraphs: [
-      'The problem in modern recruitment is rarely a lack of candidates. Job boards and automated platforms have made it easier than ever to generate volume. The real challenge is finding professionals with the right technical capability, the right context and the right commitment.',
-      'That requires more than an algorithm. It requires human discernment, market context, and a partner who stays accountable through joining, not just through the resume submission.',
-    ],
-    points: ['Quality over quantity', 'Right talent, right context', 'Accountability till joining'],
+  seo: {
+    title: 'About ARA Solutions | IT Staffing & Training in Hyderabad',
+    description:
+      'ARA Solutions is a Hyderabad company that hires IT and non-IT talent for businesses and trains professionals for jobs, with placement support.',
   },
+  h1: 'IT Staffing and Training Company in Hyderabad',
+  tagline: 'Built for ambition. Powered by people.',
+  lead: 'Hiring the right people. Growing the right careers.',
+  intro:
+    'ARA Solutions is a Hyderabad-based staffing, training and placement company. We help businesses hire the right people, and we train people for the roles those businesses hire for.',
+  story: [
+    'ARA Solutions is a Hyderabad-based staffing, training and placement company, founded in 2022. We help businesses hire the right people, and we train people and help them build careers in IT.',
+    'Our founders bring 30 years of combined experience in the IT industry. They know what employers look for, and that shapes everything we do.',
+    'We believe learning is the surest way to grow as technology keeps changing. We support our clients and learners at every step, from the first conversation to the first day on the job.',
+  ],
+  forBusinesses: {
+    title: 'For businesses: staffing and recruitment',
+    intro: 'We provide IT and non-IT talent through the model that suits you.',
+    services: [
+      {
+        slug: 'fulltime-staffing',
+        name: 'Fulltime staffing',
+        text: 'Permanent hires across technology, sales, HR, finance and operations.',
+      },
+      { slug: 'corp-to-corp', name: 'Contract staffing (C2C)', text: 'Skilled consultants for project work.' },
+      {
+        slug: 'rpo',
+        name: 'Recruitment process outsourcing (RPO)',
+        text: 'A dedicated recruitment team that works as an extension of yours.',
+      },
+      {
+        slug: 'international-consulting',
+        name: 'International consulting',
+        text: 'Cross-border sourcing, screening and verification.',
+      },
+    ],
+  },
+  forProfessionals: {
+    title: 'For professionals and teams: training and placement',
+    text: 'We prepare people for the roles employers hire for. Individuals learn Salesforce, ServiceNow, Workday, AI and Data, Cybersecurity and Full Stack through live labs and real projects, with resume help, mock interviews and job referrals. Companies can also train their teams with our corporate training.',
+  },
+  oneRoof: [
+    {
+      title: 'We know what employers ask for.',
+      text: 'We recruit every day, so our courses follow real hiring needs.',
+    },
+    {
+      title: 'We know what candidates can do.',
+      text: 'We train people ourselves, so we know their real skills.',
+    },
+    {
+      title: 'One team, one standard.',
+      text: 'Employers and learners speak to the same people, before and after the hire.',
+    },
+  ],
+  howWeWork: [
+    {
+      title: 'Listen first.',
+      text: 'We understand the role, the team and the goal before we suggest anything.',
+    },
+    {
+      title: 'Screen properly.',
+      text: 'Candidates are checked for skills and communication before we share their profile.',
+    },
+    { title: 'Train by doing.', text: 'Learners build real projects and practise interviews.' },
+    { title: 'Stay until it works.', text: 'We follow up through joining and after.' },
+  ],
+  /** The founders' combined experience, as the document words it (the other figures come from `stats`). */
+  experience: { value: '30 years', label: 'Combined founder experience in the IT industry' },
+  faqs: [
+    {
+      q: 'Where is ARA Solutions based?',
+      a: 'We are based in Hyderabad, Telangana. We recruit for companies in India, the USA and the UK, and our training runs live online across India.',
+    },
+    {
+      q: 'Is ARA Solutions a staffing company or a training institute?',
+      a: 'Both. We recruit talent for businesses, and we train people and help place them in jobs. One team does both.',
+    },
+    {
+      q: 'What kind of companies do you recruit for?',
+      a: 'We recruit for IT and non-IT roles for companies in India, the USA and the UK. See the staffing services page for the options.',
+    },
+    {
+      q: 'Do you offer training for companies?',
+      a: 'Yes. We provide corporate training that upskills your teams on the technologies they work with.',
+    },
+    {
+      q: 'Who can join your training programs?',
+      a: 'Freshers, working IT professionals and career changers. Each course page lists its prerequisites, and our advisors can help you choose.',
+    },
+    {
+      q: 'Do you guarantee a job after training?',
+      a: 'We give placement support: resume building, mock interviews and job referrals. Offers depend on your interview performance.',
+    },
+    {
+      q: 'How can I talk to someone at ARA Solutions?',
+      a: `Call or WhatsApp ${site.phone}, email ${site.email}, or request a callback.`,
+    },
+  ],
+  closing: 'Hiring, or building your career? Talk to us.',
 };
 
 /** ARA's core capabilities, from the pitch deck (slide 2). */
@@ -52,21 +145,6 @@ export const afterJoining = [
   { title: 'Proactive engagement', text: 'Feedback after placement and early sight of your next hires.' },
   { title: 'Continued commitment', text: 'Ongoing support as your workforce needs change.' },
 ] as const;
-
-export const principles = [
-  {
-    title: 'The right talent',
-    text: 'Candidates selected for capability, adaptability and context, not just keyword matches on a CV.',
-  },
-  {
-    title: 'The right model',
-    text: 'The engagement structure that matches your operational and financial reality, whether that is contract, fulltime, RPO or consulting.',
-  },
-  {
-    title: 'The right moment',
-    text: 'Speed when speed matters, thoroughness always. A process that respects timelines without cutting corners on qualification.',
-  },
-];
 
 export const deliveryStructures = [
   {

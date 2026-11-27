@@ -3,7 +3,7 @@
 import { useId, useState, type FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { CheckCircle2, Loader2, MessageCircle, Phone } from 'lucide-react';
-import { INTERESTS, enquirySummary, validateEnquiry, type FieldErrors } from '@/lib/enquiry';
+import { BACKGROUNDS, INTERESTS, enquirySummary, validateEnquiry, type FieldErrors } from '@/lib/enquiry';
 import { lineFor, staffingLine, trainingLine, whatsappLink, type ContactLine } from '@/content/site';
 import { cn } from '@/lib/cn';
 
@@ -31,8 +31,7 @@ function Field({
         htmlFor={id}
         className="mb-1.5 flex items-baseline justify-between text-sm font-medium text-text"
       >
-        {label}
-        {optional && <span className="text-xs font-normal text-faint">Optional</span>}
+        {label} {optional && <span className="text-xs font-normal text-faint">Optional</span>}
       </label>
       {children}
       {error && (
@@ -227,6 +226,24 @@ export function EnquiryForm({
           className={invalid('email')}
         />
       </Field>
+      {/* Who is asking, when no button or page has already said what the visitor came about. */}
+      {!defaultInterest && (
+        <fieldset>
+          <legend className="mb-1.5 text-sm font-medium text-text">
+            I am a <span className="ml-1 text-xs font-normal text-faint">Optional</span>
+          </legend>
+          <div className="flex flex-wrap gap-2">
+            {BACKGROUNDS.map((item) => (
+              <label key={item.value} className="cursor-pointer">
+                <input type="radio" name="background" value={item.value} className="peer sr-only" />
+                <span className="inline-flex rounded-full border border-line bg-paper px-3 py-1.5 text-[13px] text-muted transition-colors hover:border-text/30 peer-checked:border-navy peer-checked:bg-navy peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy">
+                  {item.label}
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
       {/* What the visitor came about (the course or service of the button or page), sent without asking. */}
       {defaultInterest && defaultInterest !== 'not-sure' && (
         <input type="hidden" name="interest" value={defaultInterest} />

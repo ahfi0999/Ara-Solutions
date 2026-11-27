@@ -14,7 +14,7 @@ function Wordmark({ name }: { name: string }) {
   const [first, ...rest] = name.split(' ');
   return (
     <span className="text-center leading-tight">
-      <span className="block text-[18px] font-bold tracking-tight text-ink">{first}</span>
+      <span className="block text-[18px] font-bold tracking-tight text-ink">{first}</span>{' '}
       {rest.length > 0 && (
         <span className="mt-0.5 block text-[9.5px] font-semibold uppercase tracking-[0.16em] text-muted">
           {rest.join(' ')}

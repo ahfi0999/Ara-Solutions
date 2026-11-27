@@ -1,5 +1,6 @@
-import { Clock, MessageCircle, Phone } from 'lucide-react';
-import { staffingLine, trainingLine, whatsappLink } from '@/content/site';
+import type { ReactNode } from 'react';
+import { Clock, Mail, MessageCircle, Phone } from 'lucide-react';
+import { site, staffingLine, trainingLine, whatsappLink } from '@/content/site';
 import { Container } from '@/components/ui/Section';
 import { EnquiryForm } from '@/components/enquiry/EnquiryForm';
 import { MediaBackground } from '@/components/motion/MediaBackground';
@@ -10,12 +11,18 @@ export function ClosingCta({
   intro = 'Hiring for your team or starting your tech career? Share a few details and our team will call you back.',
   defaultInterest,
   line = 'staffing',
+  actions,
+  email = false,
 }: {
   title?: string;
   intro?: string;
   defaultInterest?: string;
   /** Which phone line to show: the training line on Training & Placement pages, the main line elsewhere. */
   line?: 'staffing' | 'training';
+  /** Buttons under the intro (the About page's "Hire talent" and "Find the right course"). */
+  actions?: ReactNode;
+  /** Also list the email address with the phone and WhatsApp. */
+  email?: boolean;
 }) {
   const contact = line === 'training' ? trainingLine : staffingLine;
   const message =
@@ -39,6 +46,7 @@ export function ClosingCta({
             {title}
           </h2>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/65">{intro}</p>
+          {actions}
           <ul className="mt-10 space-y-4">
             <li>
               <a href={contact.phoneHref} className="group flex items-center gap-4">
@@ -46,7 +54,7 @@ export function ClosingCta({
                   <Phone aria-hidden className="size-5" />
                 </span>
                 <span>
-                  <span className="block text-sm text-white/50">Call us</span>
+                  <span className="block text-sm text-white/50">Call us</span>{' '}
                   <span className="text-lg font-medium">{contact.phone}</span>
                 </span>
               </a>
@@ -62,11 +70,24 @@ export function ClosingCta({
                   <MessageCircle aria-hidden className="size-5" />
                 </span>
                 <span>
-                  <span className="block text-sm text-white/50">WhatsApp</span>
+                  <span className="block text-sm text-white/50">WhatsApp</span>{' '}
                   <span className="text-lg font-medium">Chat with our team</span>
                 </span>
               </a>
             </li>
+            {email && (
+              <li>
+                <a href={`mailto:${site.email}`} className="group flex items-center gap-4">
+                  <span className="flex size-11 items-center justify-center rounded-full bg-white/[0.07] text-white transition-colors group-hover:bg-white group-hover:text-ink">
+                    <Mail aria-hidden className="size-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm text-white/50">Email</span>{' '}
+                    <span className="text-lg font-medium">{site.email}</span>
+                  </span>
+                </a>
+              </li>
+            )}
             <li className="flex items-center gap-4 text-white/60">
               <span className="flex size-11 items-center justify-center rounded-full bg-white/[0.07]">
                 <Clock aria-hidden className="size-5" />
