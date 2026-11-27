@@ -19,6 +19,7 @@ import { trainingLine, whatsappLink } from '@/content/site';
 import { accent } from '@/lib/accent';
 import { cn } from '@/lib/cn';
 import { Reveal } from '@/components/ui/Reveal';
+import { LinkedText } from '@/components/ui/LinkedText';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 
 function Block({
@@ -86,7 +87,7 @@ function GlanceCard({ program }: { program: Program }) {
       </dl>
       <div className="mt-5 rounded-2xl bg-canvas p-4 text-[13px] leading-relaxed text-muted">
         <span className="font-medium text-text">Prerequisites: </span>
-        {program.prerequisites}
+        <LinkedText>{program.prerequisites}</LinkedText>
       </div>
       <div className="mt-6 grid gap-2.5">
         <EnquiryButton
@@ -345,7 +346,9 @@ export function ProgramBody({ program, chooser }: { program: Program; chooser?: 
                   <Award aria-hidden className={cn('size-6 shrink-0', a.text)} />
                   <div>
                     <p className="font-semibold tracking-tight">{cert.name}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">{cert.note}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-muted">
+                      <LinkedText>{cert.note}</LinkedText>
+                    </p>
                   </div>
                 </li>
               ))}

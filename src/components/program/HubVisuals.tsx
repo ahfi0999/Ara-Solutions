@@ -18,6 +18,7 @@ import {
 import { AnimatePresence, motion, useInView } from 'motion/react';
 import { EASE, useReducedMotionSafe } from '@/components/motion/primitives';
 import { ButtonLink } from '@/components/ui/Button';
+import { LinkedText } from '@/components/ui/LinkedText';
 import { cn } from '@/lib/cn';
 
 /*
@@ -441,7 +442,9 @@ export function CareerFlow({ rows, note }: { rows: FlowRow[]; note: string }) {
           </motion.li>
         ))}
       </ol>
-      <p className="mt-5 text-[15px] text-muted">{note}</p>
+      <p className="mt-5 text-[15px] text-muted">
+        <LinkedText>{note}</LinkedText>
+      </p>
     </div>
   );
 }

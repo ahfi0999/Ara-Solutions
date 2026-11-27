@@ -470,7 +470,7 @@ export const programs: Program<ProgramSlug>[] = [
     // primary "servicenow training in hyderabad"; secondary "servicenow training and placement in hyderabad",
     // "servicenow admin and developer training", "servicenow certification training". Hyderabad is the only
     // location named. "ServiceNow courses" belongs to the track page and AI agent developer keywords to FDSE.
-    h1: 'ServiceNow training in Hyderabad: admin, development, HRSD and AI',
+    h1: 'ServiceNow Masters training in Hyderabad: admin, development, HRSD and AI',
     tagline: 'Run, build and extend ServiceNow, then put governed AI agents to work on it.',
     summary:
       'This ServiceNow training in Hyderabad takes you from your first login to building on the ServiceNow AI Platform. You learn administration, development and HR Service Delivery (HRSD), then build ServiceNow Otto (formerly Now Assist) skills and AI agents and govern them in Super Intelligence Control Tower.',
@@ -1807,7 +1807,7 @@ export const programs: Program<ProgramSlug>[] = [
     // "soc analyst course in hyderabad", "comptia security+ training in hyderabad". The site has no Cybersecurity
     // overview page, so this page owns the broad cyber security keywords. CompTIA launched Security+ SY0-801 on
     // 17 Nov 2026 (SY0-701 retires in English on 11 Jun 2027); "Azure Entra ID" is Microsoft Entra ID.
-    h1: 'Cyber Security Course in Hyderabad with Placement Support',
+    h1: 'Cybersecurity Course in Hyderabad with Placement Support',
     tagline: 'Detect, investigate and stop attacks: network, cloud, identity and SOC skills.',
     summary:
       'A cyber security analyst in a security operations centre (SOC) watches a company’s systems for attacks and helps stop them before damage is done. This cyber security course in Hyderabad trains you for that work: you triage alerts in a SIEM, review a cloud account for risks, run a vulnerability assessment and handle an incident from detection to report.',

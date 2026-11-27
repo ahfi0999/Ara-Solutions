@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { ArrowRight, type LucideIcon } from 'lucide-react';
 import { trainingApproach } from '@/content/company';
 import { caseStudies } from '@/content/records';
@@ -27,7 +28,7 @@ export function AudienceBand({
   id: string;
   label: string;
   title: string;
-  text: string;
+  text: ReactNode;
   href: string;
   cta: string;
   icon: LucideIcon;

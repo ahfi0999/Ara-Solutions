@@ -359,7 +359,8 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
     ...salesforce,
     slug: 'salesforce-fde',
     name: 'Salesforce Forward Deployed Engineer (FDE)',
-    shortName: 'Salesforce FDE',
+    // Menu and breadcrumb name starts with the heading's words, so the page a visitor lands on matches the link.
+    shortName: 'Agentforce (Salesforce FDE)',
     // From the client's page document (Nov 2026), written for the keywords chosen on 26 Nov 2026: primary
     // "agentforce training in hyderabad"; secondary "salesforce forward deployed engineer", "agentforce
     // specialist certification", "agentforce developer". Hyderabad is the only location named. Product names

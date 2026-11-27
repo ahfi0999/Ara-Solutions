@@ -18,6 +18,7 @@ import { getHub, type TrackHub } from '@/content/hubs';
 import { trackHref, trackListedCourses, trackPrograms, tracks, type Track } from '@/content/tracks';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container, SectionHeading } from '@/components/ui/Section';
+import { LinkedText } from '@/components/ui/LinkedText';
 import { ProgramCard } from '@/components/home/ProgramShowcase';
 import { EnquiryButton } from '@/components/enquiry/EnquiryProvider';
 import { ClosingCta } from '@/components/home/ClosingCta';
@@ -469,7 +470,9 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
               );
             })}
           </ul>
-          <p className="mt-5 text-sm text-faint">{hub.certifications.note}</p>
+          <p className="mt-5 text-sm text-faint">
+            <LinkedText>{hub.certifications.note}</LinkedText>
+          </p>
         </Container>
       </section>
 

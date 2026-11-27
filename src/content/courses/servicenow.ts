@@ -1053,8 +1053,10 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
   {
     ...servicenow,
     slug: 'servicenow-crm',
-    name: 'ServiceNow CRM & Customer Service Management',
-    shortName: 'ServiceNow CRM',
+    name: 'ServiceNow CSM (Customer Service Management)',
+    shortName: 'ServiceNow CSM',
+    // Named CSM everywhere a visitor sees the course (menu, breadcrumb, heading); "CRM" stays in the text as
+    // the other name people search for, and in the address (/servicenow-crm/) so existing links keep working.
     // From the client's page document (Nov 2026), written for the keywords chosen on 24 Nov 2026: primary
     // "servicenow csm training"; secondary "servicenow crm course", "servicenow cis-csm certification",
     // "servicenow csm jobs in hyderabad". The document's syllabus covers Customer Service Management only
@@ -1081,7 +1083,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         'Our ServiceNow CRM course in Hyderabad focuses on Customer Service Management (CSM), the ServiceNow product companies use to serve their own customers. CSM brings customer cases, agents, portals and channels together on one platform.',
         'You configure the customer data model, case management and routing, the agent workspace, a customer self-service portal, omnichannel and Virtual Agent, entitlements and SLAs, and ServiceNow Otto features that summarise cases and draft resolution notes. Classes are live and instructor-led, and the course prepares you for the ServiceNow CIS-CSM certification exam.',
       ],
-      whyTitle: 'Why learn ServiceNow CRM in 2026',
+      whyTitle: 'Why learn ServiceNow CSM in 2026',
       why: [
         'Companies that run customer service on ServiceNow need people who can configure CSM.',
         'Customer service skills transfer: CRM, support and Salesforce experience all help.',
@@ -1378,7 +1380,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         a: 'Expect questions on accounts, contacts and consumers, case states and assignment, Advanced Work Assignment, entitlements and SLAs, the Configurable Workspace and the customer portal. Module 8 covers common CSM interview questions and ends with mock interviews.',
       },
       {
-        q: 'What is the ServiceNow CRM course fee in Hyderabad?',
+        q: 'What is the ServiceNow CSM course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
@@ -1723,7 +1725,8 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     ...servicenow,
     slug: 'servicenow-fdse',
     name: 'ServiceNow Forward Deployed Software Engineer (FDSE)',
-    shortName: 'ServiceNow FDSE',
+    // Menu and breadcrumb name starts with the heading's words, so the page a visitor lands on matches the link.
+    shortName: 'ServiceNow AI Agents (FDSE)',
     // From the client's page document (Nov 2026), written for the keywords chosen on 24 Nov 2026: primary
     // "servicenow ai agents course"; secondary "servicenow ai agent developer", "servicenow forward deployed
     // engineer", "servicenow ai certification". "servicenow cad certification" belongs to the ITSM Development

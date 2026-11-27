@@ -1,5 +1,6 @@
 import { Plus } from 'lucide-react';
 import { Container, SectionHeading } from '@/components/ui/Section';
+import { LinkedText } from '@/components/ui/LinkedText';
 
 /** Accessible FAQ built on native <details>, so it works without JavaScript. */
 export function FaqList({ items }: { items: readonly { q: string; a: string }[] }) {
@@ -13,7 +14,9 @@ export function FaqList({ items }: { items: readonly { q: string; a: string }[] 
               <Plus aria-hidden className="size-4" />
             </span>
           </summary>
-          <p className="-mt-2 pb-6 pr-12 leading-relaxed text-muted">{item.a}</p>
+          <p className="-mt-2 pb-6 pr-12 leading-relaxed text-muted">
+            <LinkedText>{item.a}</LinkedText>
+          </p>
         </details>
       ))}
     </div>

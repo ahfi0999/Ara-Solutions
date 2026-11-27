@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Building2, GraduationCap } from 'lucide-react';
 import { hiringFaqs, trainingFaqs } from '@/content/home';
 import { Hero } from '@/components/home/Hero';
@@ -14,6 +15,7 @@ import { AudienceBand, ResultsSplit, TrainingPillars } from '@/components/home/A
 import { FaqTabs } from '@/components/home/FaqTabs';
 import { AudienceSwitch } from '@/components/home/AudienceSwitch';
 import { ClosingCta } from '@/components/home/ClosingCta';
+import { INLINE_LINK } from '@/lib/internal-links';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -44,7 +46,27 @@ export default function HomePage() {
         id="for-businesses"
         label="For businesses"
         title="Hire the right people, faster"
-        text="Staffing for IT and non-IT roles: contract, permanent, outsourced and international."
+        text={
+          <>
+            Staffing for IT and non-IT roles:{' '}
+            <Link href="/services/corp-to-corp/" className={INLINE_LINK}>
+              contract
+            </Link>
+            ,{' '}
+            <Link href="/services/fulltime-staffing/" className={INLINE_LINK}>
+              permanent
+            </Link>
+            ,{' '}
+            <Link href="/services/rpo/" className={INLINE_LINK}>
+              outsourced
+            </Link>{' '}
+            and{' '}
+            <Link href="/services/international-consulting/" className={INLINE_LINK}>
+              international
+            </Link>
+            .
+          </>
+        }
         href="/services/"
         cta="Explore staffing services"
         icon={Building2}
