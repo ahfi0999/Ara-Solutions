@@ -28,7 +28,6 @@ export const site = {
     whatsapp: '919010009225',
   },
   address: {
-    area: 'Madhapur',
     city: 'Hyderabad',
     region: 'Telangana',
     country: 'India',

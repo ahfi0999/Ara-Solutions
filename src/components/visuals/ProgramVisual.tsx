@@ -259,7 +259,7 @@ function GenAiVisual() {
               s(6),
             )}
           >
-            New joiners receive the annual leave set out in the HR policy, prorated from their joining date.
+            New joiners receive the annual leave set out in the HR policy, pro-rated from their joining date.
             <span className="ml-1 rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-violet-200">
               [1]
             </span>
@@ -358,7 +358,7 @@ function ServiceNowVisual() {
   ];
   const flow = ['Request', 'Approval', 'Fulfilment', 'Closed'];
   return (
-    <Frame title="IT Service Desk · Incident & Request" steps={4}>
+    <Frame title="IT service desk · Incident & request" steps={4}>
       {(s) => (
         <>
           <ul className="space-y-1.5">
@@ -439,7 +439,7 @@ function CyberVisual() {
   ];
   const max = Math.max(...EVENTS);
   return (
-    <Frame title="Security Operations Centre · Live alerts" steps={4}>
+    <Frame title="Security operations centre · Live alerts" steps={4}>
       {(s) => (
         <>
           <div className={cn('grid grid-cols-[auto_1fr] gap-3', s(0))}>

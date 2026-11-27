@@ -30,7 +30,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Core HCM configuration', 'Reports & calculated fields', 'Security & EIB'],
     about: {
@@ -217,7 +217,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
     capstone:
       'Configure Workday HCM for a sample company: organisations, staffing, a hire process, compensation, security, reports and a data load, presented as a client walkthrough.',
     certificationIntro:
-      'Workday certifications are issued only by Workday, to people working at Workday customers and partners, so no training institute can certify you directly. This course prepares you for the skills these Workday HCM certifications test, and you take the exam once you work at a customer or partner.',
+      'Workday certifications are issued only by Workday, to people working at Workday customers and partners, so no training institute can certify you directly. This course builds the skills these Workday HCM certifications test, and you take the exams once you work at a customer or partner.',
     certifications: [
       {
         name: 'Workday Pro HCM Core Certification',
@@ -277,7 +277,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'Are the Workday HCM classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'Do I need HR experience?',
@@ -305,7 +305,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'Can freshers get Workday HCM jobs?',
-        a: 'Yes. Entry roles such as Workday HRIS Analyst or Reporting Analyst suit freshers with HR, MBA or technical degrees.',
+        a: 'Yes. Entry roles such as Workday HRIS analyst or reporting analyst suit freshers with HR, MBA or technical degrees.',
       },
       {
         q: 'Is Workday HCM a good career?',
@@ -313,7 +313,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'What can I learn after Workday HCM?',
-        a: 'Workday Integrations, Workday Financials, or advanced HCM areas such as compensation and recruiting.',
+        a: 'Workday Integration, Workday Finance or advanced HCM areas such as compensation and recruiting.',
       },
       {
         q: 'What is the Workday HCM course fee?',
@@ -342,17 +342,17 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: [
       'Foundation Data Model & worktags',
-      'Procure to pay & receivables',
+      'Procure-to-pay & receivables',
       'Month-end close & reporting',
     ],
     about: {
       paragraphs: [
         'Our Workday Finance course prepares you for finance systems roles on Workday Financial Management, often called Workday Financials. Workday Financials consultants set up how companies record transactions, buy and pay, bill and collect, and close their books each month.',
-        'You design the Foundation Data Model (FDM) and worktags, configure the general ledger, procure to pay, receivables, banking, assets and expenses, run the period-end close and secure finance business processes. Classes are live and instructor-led, and the course suits commerce, CA, CMA and finance professionals moving into technology.',
+        'You design the Foundation Data Model (FDM) and worktags, configure the general ledger, procure-to-pay, receivables, banking, assets and expenses, run the period-end close and secure finance business processes. Classes are live and instructor-led, and the course suits commerce, CA, CMA and finance professionals moving into technology.',
       ],
       whyTitle: 'Why learn Workday Finance in 2026',
       why: [
@@ -411,7 +411,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         title: 'Procurement & payables',
-        summary: 'How companies buy and pay: the procure to pay process.',
+        summary: 'How companies buy and pay: the procure-to-pay process.',
         topics: [
           'Suppliers',
           'Supplier contracts',
@@ -502,7 +502,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       'Foundation Data Model',
       'Worktags',
       'General ledger',
-      'Procure to pay',
+      'Procure-to-pay',
       'Receivables and billing',
       'Banking and reconciliation',
       'Business assets',
@@ -519,10 +519,10 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
         stack: ['FDM', 'Worktags', 'General ledger'],
       },
       {
-        title: 'Procure to pay process',
+        title: 'Procure-to-pay process',
         problem: 'Supplier invoices are paid late and without proper approvals.',
         text: 'Configure suppliers, purchase orders, supplier invoices and payments with approvals.',
-        result: 'A controlled procure to pay process with approvals.',
+        result: 'A controlled procure-to-pay process with approvals.',
         stack: ['Procurement', 'Payables'],
       },
       {
@@ -534,9 +534,9 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
     ],
     capstone:
-      'Configure Workday Financials for a sample company: FDM, ledger, procure to pay, receivables, close and reporting, presented to a mock finance team.',
+      'Configure Workday Financials for a sample company: FDM, ledger, procure-to-pay, receivables, close and reporting, presented to a mock finance team.',
     certificationIntro:
-      'Workday certifications are issued only by Workday, to people working at Workday customers and partners, so no training institute can certify you directly. This course builds the core skills these Workday Financial Management certifications test, and you take the exam once you work at a customer or partner. The exams also cover advanced areas such as revenue recognition and allocations, which Workday teaches in the courses it recommends for each exam.',
+      'Workday certifications are issued only by Workday, to people working at Workday customers and partners, so no training institute can certify you directly. This course builds the core skills these Workday Financial Management certifications test, and you take the exams once you work at a customer or partner. The exams also cover advanced areas such as revenue recognition and allocations, which Workday teaches in the courses it recommends for each exam.',
     certifications: [
       {
         name: 'Workday Pro Record to Report Certification',
@@ -597,8 +597,8 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
         a: 'Labels such as cost centre, project or region attached to transactions, used for reporting and posting.',
       },
       {
-        q: 'What is the procure to pay process in Workday?',
-        a: 'The process from requesting a purchase to paying the supplier: requisition, purchase order, receipt, supplier invoice and payment. You configure it end to end in module 3 and the procure to pay project.',
+        q: 'What is the procure-to-pay process in Workday?',
+        a: 'The process from requesting a purchase to paying the supplier: requisition, purchase order, receipt, supplier invoice and payment. You configure it end to end in module 3 and the procure-to-pay project.',
       },
       {
         q: 'Is Workday Finance good for CA, CMA or commerce students?',
@@ -614,7 +614,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'Are the Workday Finance classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'Will I practise Workday Finance on a tenant?',
@@ -622,19 +622,19 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'What projects will I build in the Workday Finance course?',
-        a: 'A chart of accounts and FDM design, a procure to pay process and a month-end close pack, plus a capstone that configures Workday Financials for a sample company.',
+        a: 'A chart of accounts and FDM design, a procure-to-pay process and a month-end close pack, plus a capstone that configures Workday Financials for a sample company.',
       },
       {
         q: 'How do I become a Workday Finance consultant?',
-        a: 'Learn Workday Financials configuration on top of your accounting knowledge, build projects you can show, then start in a role such as Workday Finance Analyst or AP/AR Specialist. A typical path leads to Workday Financials Consultant or Financial Systems Analyst in 2 to 5 years, and to Senior Financials Consultant or Finance Solution Architect after 5 years.',
+        a: 'Learn Workday Financials configuration on top of your accounting knowledge, build projects you can show, then start in a role such as Workday finance analyst or AP/AR specialist. A typical path leads to Workday Financials consultant or financial systems analyst in 2 to 5 years, and to senior Financials consultant or finance solution architect after 5 years.',
       },
       {
         q: 'Can freshers get Workday Finance jobs in Hyderabad?',
-        a: 'Yes. IT services firms and capability centres in Hyderabad hire for entry roles such as Workday Finance Analyst, AP/AR Specialist and Financials Reporting Analyst, which suit freshers with a commerce, CA or CMA background.',
+        a: 'Yes. IT services firms and capability centres in Hyderabad hire for entry roles such as Workday finance analyst, AP/AR specialist and Financials reporting analyst, which suit freshers with a commerce, CA or CMA background.',
       },
       {
         q: 'What can I learn after Workday Finance?',
-        a: 'Workday Integrations, Workday Adaptive Planning, or advanced Financials areas.',
+        a: 'Workday Integration, Workday Adaptive Planning or advanced Financials areas.',
       },
       {
         q: 'What is the Workday Finance course fee in Hyderabad?',
@@ -649,7 +649,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
   {
     ...workday,
     slug: 'workday-integration',
-    name: 'Workday Integrations',
+    name: 'Workday Integration',
     shortName: 'Workday Integration',
     // From the client's page document (Nov 2026), written for the keywords chosen on 24 Nov 2026:
     // primary "workday integration course"; secondary "workday integration training in hyderabad",
@@ -657,13 +657,13 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
     h1: 'Workday Integration Course in Hyderabad',
     tagline: 'Connect Workday with payroll, finance and other systems using EIB, Studio and APIs.',
     summary:
-      'A Workday Integration consultant builds the connections that move worker and finance data between Workday and the other systems a company runs. This Workday Integration training in Hyderabad goes beyond EIB uploads: you build a payroll feed with Core Connectors, transform data with XSLT, develop a Workday Studio integration and expose live employee data through Workday APIs.',
+      'A Workday integration consultant builds the connections that move worker and finance data between Workday and the other systems a company runs. This Workday Integration training in Hyderabad goes beyond EIB uploads: you build a payroll feed with Core Connectors, transform data with XSLT, develop a Workday Studio integration and expose live employee data through Workday APIs.',
     prerequisites:
       'Some technical background helps, such as XML, SQL or programming basics. No prior Workday experience needed.',
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Taught in the course (XML, XSLT, APIs)',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['EIB, Core Connectors & Studio', 'XML, XSLT & Document Transformation', 'SOAP, REST & RaaS'],
     about: {
@@ -739,7 +739,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
         lab: 'Configure Core Connector: Worker with change detection.',
       },
       {
-        title: 'XML, XSLT & document transformation',
+        title: 'XML, XSLT & Document Transformation',
         summary: 'Turn Workday data into the formats other systems need.',
         topics: [
           'XML and XPath',
@@ -939,7 +939,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'Are the Workday Integration classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'Will I practise Workday Studio on a tenant?',
@@ -959,7 +959,7 @@ export const workdayCourses: Program<WorkdayCourseSlug>[] = [
       },
       {
         q: 'Are there Workday integration jobs in Hyderabad?',
-        a: 'Yes. IT services firms and capability centres in Hyderabad hire Workday integration consultants, HRIS integration analysts and Studio developers. Entry roles such as HRIS Integration Analyst suit freshers with a technical degree.',
+        a: 'Yes. IT services firms and capability centres in Hyderabad hire Workday integration consultants, HRIS integration analysts and Studio developers. Entry roles such as HRIS integration analyst suit freshers with a technical degree.',
       },
       {
         q: 'What can I learn after Workday Integration?',

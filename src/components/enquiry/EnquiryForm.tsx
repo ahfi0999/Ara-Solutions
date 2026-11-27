@@ -32,7 +32,7 @@ function Field({
         htmlFor={id}
         className="mb-1.5 flex items-baseline justify-between text-sm font-medium text-text"
       >
-        {label} {optional && <span className="text-xs font-normal text-faint">Optional</span>}
+        {label} {optional && <span className="text-xs font-normal text-faint">(optional)</span>}
       </label>
       {children}
       {error && (
@@ -84,7 +84,7 @@ export function EnquiryForm({
     setErrors({});
     const group = INTERESTS.find((item) => item.value === data.interest)?.group;
     setLine(
-      group === 'Training & placement'
+      group === 'Training & Placement'
         ? trainingLine
         : group === 'Hire talent'
           ? staffingLine
@@ -232,7 +232,7 @@ export function EnquiryForm({
       {!defaultInterest && (
         <fieldset>
           <legend className="mb-1.5 text-sm font-medium text-text">
-            I am a <span className="ml-1 text-xs font-normal text-faint">Optional</span>
+            I am a… <span className="ml-1 text-xs font-normal text-faint">(optional)</span>
           </legend>
           <div className="flex flex-wrap gap-2">
             {BACKGROUNDS.map((item) => (
@@ -263,15 +263,14 @@ export function EnquiryForm({
             id={id('consent')}
             name="consent"
             type="checkbox"
-            defaultChecked
             aria-invalid={!!errors.consent}
             aria-describedby={describedBy('consent')}
             className="mt-0.5 size-4 shrink-0 rounded border-line accent-brand"
           />
           <span>
-            I agree to be contacted by ARA Solutions by phone, WhatsApp or email about my enquiry. See our{' '}
+            I agree to ARA Solutions using my details to respond to my enquiry, as described in the{' '}
             <a href="/privacy/" className="underline underline-offset-2 hover:text-text">
-              privacy notice
+              Privacy Notice
             </a>
             .
           </span>

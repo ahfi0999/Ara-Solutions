@@ -8,7 +8,7 @@ import { Container } from '@/components/ui/Section';
 const extraCompanyLinks = [
   { label: 'Careers', href: '/careers/' },
   { label: 'Contact', href: '/contact/' },
-  { label: 'Privacy notice', href: '/privacy/' },
+  { label: 'Privacy Notice', href: '/privacy/' },
 ];
 
 export function Footer() {

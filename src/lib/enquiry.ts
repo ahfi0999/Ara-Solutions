@@ -6,7 +6,7 @@ import { tracks, trackPrograms } from '@/content/tracks';
 export type Interest = {
   value: string;
   label: string;
-  group: 'Hire talent' | 'Training & placement' | 'Other';
+  group: 'Hire talent' | 'Training & Placement' | 'Other';
   /** Sub-heading in the form's list, e.g. "ServiceNow courses" (defaults to the group). */
   section?: string;
 };
@@ -17,7 +17,7 @@ const trainingInterests: Interest[] = [
     trackPrograms(track).map(({ entry, program }) => ({
       value: program.slug,
       label: entry.label ?? program.name,
-      group: 'Training & placement' as const,
+      group: 'Training & Placement' as const,
       section: `${track.name} courses`,
     })),
   ),
@@ -25,7 +25,7 @@ const trainingInterests: Interest[] = [
 // Anything not listed in a track still gets an option.
 for (const program of allPrograms)
   if (!trainingInterests.some((item) => item.value === program.slug))
-    trainingInterests.push({ value: program.slug, label: program.name, group: 'Training & placement' });
+    trainingInterests.push({ value: program.slug, label: program.name, group: 'Training & Placement' });
 
 /** Options come straight from the service and program lists, so they never get out of sync. */
 export const INTERESTS: readonly Interest[] = [

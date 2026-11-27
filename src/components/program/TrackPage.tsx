@@ -479,7 +479,7 @@ function HubSections({ track, hub }: { track: Track; hub: TrackHub }) {
       <WhyAra title={hub.benefits.title} items={hub.benefits.items} />
 
       <AlumniMarquee className="border-y border-line bg-paper" />
-      <Journey eyebrow="Training & placement" />
+      <Journey eyebrow="Training & Placement" />
       <Faq
         items={hub.faqs}
         title={

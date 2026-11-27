@@ -244,7 +244,10 @@ function ChatPanel({
           </button>
         </form>
         <p className="mt-2 text-center text-[11px] text-faint">
-          AI can make mistakes. Please don&apos;t share sensitive personal details.
+          AI can make mistakes. Please do not type personal details.{' '}
+          <a href="/privacy/" className="underline underline-offset-2 hover:text-text">
+            Privacy Notice
+          </a>
         </p>
       </div>
     </motion.section>

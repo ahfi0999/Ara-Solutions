@@ -56,7 +56,7 @@ const pages: Record<string, PageSeo> = {
   '/training-placement/ai-ml/': {
     title: 'AI and Machine Learning Course in Hyderabad',
     description:
-      'AI and machine learning course in Hyderabad: Python, ML, deep learning, LLMs, RAG and fine-tuning, with deployed projects, live classes and placement support.',
+      'AI and Machine Learning course in Hyderabad: Python, ML, deep learning, LLMs, RAG and fine-tuning, with deployed projects, live classes and placement support.',
   },
   '/training-placement/agentic-ai/': {
     title: 'Agentic AI Course in Hyderabad',
@@ -64,9 +64,9 @@ const pages: Record<string, PageSeo> = {
       'Agentic AI course in Hyderabad: build AI agents with tools, MCP, memory, LangGraph and CrewAI, plus guardrails, evaluation and deployment. Placement support.',
   },
   '/training-placement/cybersecurity/': {
-    title: 'Cyber Security Course in Hyderabad',
+    title: 'Cybersecurity Course in Hyderabad',
     description:
-      'Cyber security course in Hyderabad for SOC analyst roles: network, cloud and identity security, Splunk, Sentinel, Security+ prep and placement support.',
+      'Cybersecurity course in Hyderabad for SOC analyst roles: network, cloud and identity security, Splunk, Sentinel, Security+ prep and placement support.',
   },
   '/training-placement/full-stack-ai/': {
     title: 'MERN Stack Course in Hyderabad with AI',
@@ -77,12 +77,12 @@ const pages: Record<string, PageSeo> = {
   '/training-placement/workday-hcm/': {
     title: 'Workday HCM Course in Hyderabad',
     description:
-      'Workday HCM techno-functional course in Hyderabad: Core HCM, staffing, compensation, security, reports, calculated fields and EIB, with placement support.',
+      'Workday HCM Techno-Functional course in Hyderabad: Core HCM, staffing, compensation, security, reports, calculated fields and EIB, with placement support.',
   },
   '/training-placement/workday-finance/': {
     title: 'Workday Finance Course in Hyderabad',
     description:
-      'Workday Finance course in Hyderabad: FDM, worktags, general ledger, procure to pay, receivables and month-end close, with hands-on labs and placement support.',
+      'Workday Finance course in Hyderabad: FDM, worktags, general ledger, procure-to-pay, receivables and month-end close, with hands-on labs and placement support.',
   },
   '/training-placement/workday-integration/': {
     title: 'Workday Integration Course in Hyderabad',
@@ -102,12 +102,12 @@ const pages: Record<string, PageSeo> = {
   '/training-placement/servicenow-admin-platform/': {
     title: 'ServiceNow Admin Course in Hyderabad',
     description:
-      'ServiceNow admin course in Hyderabad: users, ACLs, incident, problem and change, service catalog and Flow Designer, with CSA exam prep and placement support.',
+      'ServiceNow Admin course in Hyderabad: users, ACLs, incident, problem and change, service catalog and Flow Designer, with CSA exam prep and placement support.',
   },
   '/training-placement/servicenow-itsm-development/': {
     title: 'ServiceNow Developer Course in Hyderabad',
     description:
-      'ServiceNow developer course in Hyderabad: JavaScript, Glide API, ITSM scripting, integrations and portals, with CAD and CIS-ITSM prep and placement support.',
+      'ServiceNow Developer course in Hyderabad: JavaScript, Glide API, ITSM scripting, integrations and portals, with CAD and CIS-ITSM prep and placement support.',
   },
   '/training-placement/servicenow-grc/': {
     title: 'ServiceNow GRC Training in Hyderabad',
@@ -117,7 +117,7 @@ const pages: Record<string, PageSeo> = {
   '/training-placement/servicenow-fdse/': {
     title: 'ServiceNow AI Agents Course in Hyderabad',
     description:
-      'ServiceNow AI agents course in Hyderabad: build apps, AI skills and agents with AI Agent Studio and AI Skill Kit, with CAD exam prep and placement support.',
+      'ServiceNow AI Agents course in Hyderabad: build apps, AI skills and agents with AI Agent Studio and AI Skill Kit, with CAD exam prep and placement support.',
   },
   '/training-placement/servicenow-ba/': {
     title: 'ServiceNow Business Analyst Course Hyderabad',
@@ -127,42 +127,42 @@ const pages: Record<string, PageSeo> = {
   '/training-placement/data-science/': {
     title: 'Data Science Course in Hyderabad',
     description:
-      'Data science course in Hyderabad: Python, statistics, machine learning, forecasting and model deployment, with 3 projects, live classes and placement support.',
+      'Data Science course in Hyderabad: Python, statistics, machine learning, forecasting and model deployment, with 3 projects, live classes and placement support.',
   },
   '/training-placement/data-engineering/': {
     title: 'Data Engineering Course in Hyderabad',
     description:
-      'Data engineering course in Hyderabad: SQL, PySpark, Databricks, Airflow, dbt, Kafka and cloud data services, with Databricks exam prep and placement support.',
+      'Data Engineering course in Hyderabad: SQL, PySpark, Databricks, Airflow, dbt, Kafka and cloud data services, with Databricks exam prep and placement support.',
   },
   '/training-placement/data-analytics/': {
     title: 'Data Analytics Course in Hyderabad',
     description:
-      'Data analytics course in Hyderabad: Excel, SQL, Power BI with DAX, Tableau, Python and Copilot, with PL-300 exam prep, live classes and placement support.',
+      'Data Analytics course in Hyderabad: Excel, SQL, Power BI with DAX, Tableau, Python and Copilot, with PL-300 exam prep, live classes and placement support.',
   },
   '/training-placement/ai-product-owner/': {
     title: 'AI Product Owner Course in Hyderabad',
     description:
-      'AI product owner course in Hyderabad: Scrum, AI use cases, backlogs, prototypes, AI metrics and responsible AI. No coding, with PSPO prep and placement support.',
+      'AI Product Owner course in Hyderabad: Scrum, AI use cases, backlogs, prototypes, AI metrics and responsible AI. No coding, with PSPO prep and placement support.',
   },
   '/training-placement/python-full-stack/': {
     title: 'Python Full Stack Course in Hyderabad',
     description:
-      'Python full stack course in Hyderabad: Django, FastAPI, React, PostgreSQL and AI features with RAG, plus PCAP exam prep, live classes and placement support.',
+      'Python Full Stack course in Hyderabad: Django, FastAPI, React, PostgreSQL and AI features with RAG, plus PCAP exam prep, live classes and placement support.',
   },
   '/training-placement/java-full-stack/': {
     title: 'Java Full Stack Course in Hyderabad',
     description:
-      'Java full stack course in Hyderabad: Spring Boot, Spring Security, microservices, React and Spring AI, with Oracle Java exam prep and placement support.',
+      'Java Full Stack course in Hyderabad: Spring Boot, Spring Security, microservices, React and Spring AI, with Oracle Java exam prep and placement support.',
   },
   '/training-placement/business-analyst-genai/': {
     title: 'Business Analyst Course in Hyderabad with AI',
     description:
-      'Business analyst course in Hyderabad with GenAI: requirements, BPMN, Agile user stories, SQL, Power BI and AI tools, with ECBA prep and placement support.',
+      'Business Analyst course in Hyderabad with GenAI: requirements, BPMN, Agile user stories, SQL, Power BI and AI tools, with ECBA prep and placement support.',
   },
   '/training-placement/salesforce-admin/': {
     title: 'Salesforce Admin Course in Hyderabad',
     description:
-      'Salesforce admin course in Hyderabad: security, Flow, Sales and Service Cloud and reports. No coding, with Platform Administrator prep and placement support.',
+      'Salesforce Admin course in Hyderabad: security, Flow, Sales and Service Cloud and reports. No coding, with Platform Administrator prep and placement support.',
   },
   '/training-placement/salesforce-fde/': {
     title: 'Salesforce Agentforce Training in Hyderabad',

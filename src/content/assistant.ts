@@ -11,8 +11,8 @@ import { lmsFeatures } from './lms';
  * to let it answer those. It is told never to invent anything that is not written here.
  */
 const COMPANY_NOTES = `
-- ARA Solutions is a recruitment, technology training and IT consulting company based in ${site.address.area},
-  ${site.address.city}. Founded in 2022 by industry veterans, with 2 decades in the IT industry, 1,000+ professionals
+- ARA Solutions is a recruitment, technology training and IT consulting company based in ${site.address.city},
+  ${site.address.region}. Founded in 2022 by industry veterans, with 2 decades in the IT industry, 1,000+ professionals
   placed and 10,000+ screened talent profiles. Global hubs: US, EU and Asia; clients in India, the USA and the UK.
   Tagline: "${site.tagline}".
 - Core capabilities: ${capabilities.map((item) => `${item.title} (${item.text.replace(/\.$/, '')})`).join('; ')}.
@@ -81,7 +81,7 @@ CONTACT
 Phone (staffing / hiring): ${site.phone}
 Phone (training & placement): ${site.training.phone}
 Email: ${site.email}
-Location: ${site.address.area}, ${site.address.city}, ${site.address.region}`;
+Location: ${site.address.city}, ${site.address.region}`;
 
 /** Suggested first questions shown when the chat opens. */
 export const STARTER_QUESTIONS = [

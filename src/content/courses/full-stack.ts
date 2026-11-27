@@ -28,19 +28,19 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Taught from the basics',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Django, FastAPI & React', 'AI features with LLMs & RAG', 'PCAP certification prep'],
     about: {
       paragraphs: [
-        'Our Python full stack course in Hyderabad teaches you to build web applications end to end with Python, a language also widely used for AI and data work. You learn Django for complete web apps, FastAPI for fast APIs and React for the front end.',
-        'As a Python full stack with AI course, it also teaches you to add LLM and RAG features to your apps. You work with PostgreSQL, authentication, REST APIs, testing with pytest and deployment with Docker, and finish with three deployed projects and a capstone. Classes are live and instructor-led, and the course prepares you for the Python Institute PCAP certification.',
+        'Our Python Full Stack course in Hyderabad teaches you to build web applications end to end with Python, a language also widely used for AI and data work. You learn Django for complete web apps, FastAPI for fast APIs and React for the front end.',
+        'As a Python Full Stack with AI course, it also teaches you to add LLM and RAG features to your apps. You work with PostgreSQL, authentication, REST APIs, testing with pytest and deployment with Docker, and finish with three deployed projects and a capstone. Classes are live and instructor-led, and the course prepares you for the Python Institute PCAP certification.',
       ],
       whyTitle: 'Why learn Python full stack in 2026',
       why: [
         'Python is one of the most widely used programming languages, and one of the easier ones to learn.',
         'One language for web apps and AI opens two career paths.',
-        'Django and FastAPI are widely used by start-ups and product companies.',
+        'Django and FastAPI are widely used by startups and product companies.',
       ],
     },
     audience: [
@@ -61,7 +61,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
       'Build responsive web pages with HTML, CSS and JavaScript, and manage code with Git and GitHub',
       'Write clean, structured Python with modules, classes and error handling',
       'Design PostgreSQL databases and run migrations with an ORM',
-      'Build complete web apps with Django, Django admin and Django REST Framework',
+      'Build complete web apps with Django, Django admin and Django REST framework',
       'Build fast, documented APIs with FastAPI and Pydantic',
       'Build React front ends that call your own APIs',
       'Add AI features to your apps with LLM APIs and RAG',
@@ -115,7 +115,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
           'Django admin',
           'Authentication',
           'Forms',
-          'Django REST Framework',
+          'Django REST framework',
           'Django signals',
         ],
         lab: 'Build a Django app with login and admin.',
@@ -175,7 +175,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
     tools: [
       'Python',
       'Django',
-      'Django REST Framework',
+      'Django REST framework',
       'FastAPI',
       'Pydantic',
       'PostgreSQL',
@@ -191,7 +191,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
       'Python programming',
       'SQL and PostgreSQL',
       'Django',
-      'Django REST Framework',
+      'Django REST framework',
       'FastAPI',
       'React',
       'Authentication',
@@ -275,11 +275,11 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
         a: 'A developer who builds a web application end to end with Python: the database, the back end with Django or FastAPI, and the front end people use, usually built with React.',
       },
       {
-        q: 'What is the Python full stack course syllabus?',
+        q: 'What is the Python Full Stack course syllabus?',
         a: 'Eight modules: web foundations, Python programming, databases and SQL, Django, APIs with FastAPI, front end with React, AI in Python apps, and testing, deployment and career readiness. Every module has a hands-on lab.',
       },
       {
-        q: 'Do I need coding experience to join the Python full stack course?',
+        q: 'Do I need coding experience to join the Python Full Stack course?',
         a: 'No. The course starts from the basics. Logical thinking and regular practice matter more than your background.',
       },
       {
@@ -292,42 +292,42 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
       },
       {
         q: 'Does the course teach Django and React together?',
-        a: 'Yes. You build back ends with Django and Django REST Framework and front ends with React, then connect them in the job portal project.',
+        a: 'Yes. You build back ends with Django and Django REST framework and front ends with React, then connect them in the job portal project.',
       },
       {
-        q: 'How is AI used in this Python full stack with AI course?',
+        q: 'How is AI used in this Python Full Stack with AI course?',
         a: 'Module 7 teaches you to call LLM APIs from Python, design prompts and build retrieval-augmented generation (RAG) with vector search. You use these skills to build the AI document assistant and the AI feature in your capstone.',
       },
       {
-        q: 'Which certifications does the Python full stack course prepare me for?',
+        q: 'Which certifications does the Python Full Stack course prepare me for?',
         a: 'Python Institute PCAP – Certified Associate Python Programmer and GitHub Foundations. AWS Certified Developer – Associate is a next step once you have hands-on AWS experience. You book and pay for each exam with its issuer.',
       },
       {
-        q: 'What projects are in the Python full stack course?',
+        q: 'What projects are in the Python Full Stack course?',
         a: 'A Django and React job portal, an AI document assistant built with FastAPI and RAG, and a SaaS-style dashboard you deploy to the cloud with Docker, plus a capstone you present as a portfolio piece.',
       },
       {
         q: 'Can freshers get Python full stack developer jobs in Hyderabad?',
-        a: 'Yes. Entry roles such as Python Developer, Junior Full Stack Developer and Back-end Developer (Python) are open to freshers who can show working projects. IT services firms, product companies and global capability centres in Hyderabad hire Python developers.',
+        a: 'Yes. Entry roles such as Python developer, junior full stack developer and back-end developer (Python) are open to freshers who can show working projects. IT services firms, product companies and global capability centres in Hyderabad hire Python developers.',
       },
       {
-        q: 'Is Python full stack developer a good career?',
-        a: 'It can be. Python is used for web apps, automation, data and AI, so your skills carry across roles. AmbitionBox lists Full Stack Developer salaries of ₹1.8 L to ₹15.4 L a year in India for 0 to 7 years of experience (November 2026). From there you can grow into senior developer, tech lead or AI application roles.',
+        q: 'Is Python full stack development a good career?',
+        a: 'It can be. Python is used for web apps, automation, data and AI, so your skills carry across roles. AmbitionBox lists full stack developer salaries of ₹1.8 L to ₹15.4 L a year in India for 0 to 7 years of experience (November 2026). From there you can grow into senior developer, tech lead or AI application roles.',
       },
       {
-        q: 'What can I learn after the Python full stack course?',
-        a: 'AI & Machine Learning, Agentic AI or Data Engineering. You already know Python and have built AI features, which is a good base for each of them.',
+        q: 'What can I learn after the Python Full Stack course?',
+        a: 'AI & Machine Learning, Agentic AI Engineering or Data Engineering. You already know Python and have built AI features, which is a good base for each of them.',
       },
       {
-        q: 'Are the Python full stack classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the Python Full Stack classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'What is the Python full stack course fee in Hyderabad?',
+        q: 'What is the Python Full Stack course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Is this a Python full stack course with placement support?',
+        q: 'Is this a Python Full Stack course with placement support?',
         a: 'Yes. It includes resume and LinkedIn help, mock interviews and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -348,7 +348,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Taught from the basics',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: [
       'Spring Boot, microservices & React',
@@ -357,7 +357,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
     ],
     about: {
       paragraphs: [
-        'Our Java full stack course in Hyderabad prepares you for the developer roles that large companies, banks and IT services firms hire for. You learn Java and Spring Boot for the back end, React for the front end and microservices for large systems, with AI features through Spring AI.',
+        'Our Java Full Stack course in Hyderabad prepares you for the developer roles that large companies, banks and IT services firms hire for. You learn Java and Spring Boot for the back end, React for the front end and microservices for large systems, with AI features through Spring AI.',
         'You build secure REST APIs, work with MySQL and JPA, secure apps with Spring Security and JWT, split systems into microservices, add AI features and deploy with Docker. Classes are live and instructor-led, and the course prepares you for the Oracle Certified Professional: Java SE 21 Developer exam.',
       ],
       whyTitle: 'Why learn Java full stack in 2026',
@@ -541,7 +541,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
     certifications: [
       {
         name: 'Oracle Certified Professional: Java SE 21 Developer',
-        note: 'Prepared in this course, mainly in the Core Java and advanced Java modules, with practice in module 8. Exam 1Z0-830, booked with Oracle University. Oracle also offers a newer Java SE 25 Developer exam (1Z0-831).',
+        note: 'Prepared in this course, mainly in the Core Java and Advanced Java modules, with practice in module 8. Exam 1Z0-830, booked with Oracle University. Oracle also offers a newer Java SE 25 Developer exam (1Z0-831).',
       },
       {
         name: 'Spring Certified Professional 2024',
@@ -587,8 +587,8 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
         a: 'A Java full stack developer builds the whole application: the database and the Java back end with Spring Boot, and the front end with React. In large companies they also build secure APIs and microservices.',
       },
       {
-        q: 'What is the Java full stack course syllabus?',
-        a: 'Eight modules: Core Java, advanced Java and SQL, Spring Boot, security, web foundations and React, microservices, AI in Java apps, and testing, deployment and career readiness. Every module has a hands-on lab.',
+        q: 'What is the Java Full Stack course syllabus?',
+        a: 'Eight modules: Core Java, Advanced Java and SQL, Spring Boot, security, web foundations and React, microservices, AI in Java apps, and testing, deployment and career readiness. Every module has a hands-on lab.',
       },
       {
         q: 'Is Java hard to learn if I have never coded?',
@@ -603,7 +603,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
         a: 'An application split into small services that each do one job and can be deployed separately. You split an e-commerce system into product, order and payment services in module 6.',
       },
       {
-        q: 'How is AI used in the Java full stack with AI course?',
+        q: 'How is AI used in the Java Full Stack with AI course?',
         a: 'You add AI features to Java apps with Spring AI: LLM calls, prompt templates, chat endpoints and retrieval-augmented generation (RAG). You also use AI coding assistants while building, and review what they produce.',
       },
       {
@@ -615,31 +615,31 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
         a: 'Yes. It prepares you for the Oracle Certified Professional: Java SE 21 Developer exam (1Z0-830), with certification practice in module 8. You book and pay for the exam with Oracle University. Spring Certified Professional and AWS Certified Developer – Associate are later options.',
       },
       {
-        q: 'What projects are in the Java full stack course?',
+        q: 'What projects are in the Java Full Stack course?',
         a: 'An online banking app with Spring Boot, Spring Security and React, an e-commerce system split into microservices, and an AI help-desk assistant with Spring AI, plus an enterprise-style capstone with tests and documentation.',
       },
       {
         q: 'Can freshers get Java full stack developer jobs in Hyderabad?',
-        a: 'Yes. Entry roles such as Java Developer, Junior Full Stack Developer and Software Engineer are open to freshers with strong Core Java and working projects. IT services firms, banks and global capability centres in Hyderabad hire Java developers.',
+        a: 'Yes. Entry roles such as Java developer, junior full stack developer and software engineer are open to freshers with strong Core Java and working projects. IT services firms, banks and global capability centres in Hyderabad hire Java developers.',
       },
       {
         q: 'Is Java full stack in demand?',
-        a: 'Yes. Banks, insurers and IT services firms run large Java systems and hire Java developers steadily. AmbitionBox lists Full Stack Developer salaries of ₹1.8 L to ₹15.4 L a year in India for 0 to 7 years of experience (November 2026).',
+        a: 'Yes. Banks, insurers and IT services firms run large Java systems and hire Java developers steadily. AmbitionBox lists full stack developer salaries of ₹1.8 L to ₹15.4 L a year in India for 0 to 7 years of experience (November 2026).',
       },
       {
-        q: 'What can I learn after the Java full stack course?',
-        a: 'A cloud certification such as AWS Certified Developer – Associate, or our Agentic AI course to build AI agents.',
+        q: 'What can I learn after the Java Full Stack course?',
+        a: 'A cloud certification such as AWS Certified Developer – Associate, or our Agentic AI Engineering course to build AI agents.',
       },
       {
-        q: 'Are the Java full stack classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the Java Full Stack classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'What is the Java full stack course fee in Hyderabad?',
+        q: 'What is the Java Full Stack course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Is this a Java full stack course with placement support?',
+        q: 'Is this a Java Full Stack course with placement support?',
         a: 'Yes. It includes resume and LinkedIn help, mock interviews and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -663,12 +663,12 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Requirements, BPMN & Agile', 'SQL, Power BI & GenAI', 'IIBA ECBA prep'],
     about: {
       paragraphs: [
-        'Our business analyst course in Hyderabad prepares you to work out what businesses need and make sure IT teams build the right thing. Business analysts work in every industry, and generative AI tools now help them draft, summarise and check their work faster.',
+        'Our Business Analyst course in Hyderabad prepares you to work out what businesses need and make sure IT teams build the right thing. Business analysts work in every industry, and generative AI tools now help them draft, summarise and check their work faster.',
         'You learn elicitation and requirements, BPMN process modelling, Agile and Scrum, data analysis with SQL and Power BI, generative AI for business analysts, testing and delivery, and domain knowledge in banking, healthcare and retail. Every module has a hands-on lab, and the course prepares you for the IIBA Entry Certificate in Business Analysis (ECBA).',
         'Classes are live and instructor-led on Zoom, and every class is recorded. Placement support covers your resume and LinkedIn, mock interviews and job referrals through ARA’s IT staffing clients and partner companies. Offers depend on your interview performance.',
       ],
@@ -860,7 +860,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
       },
       {
         name: 'Scrum.org Professional Scrum Product Owner I (PSPO I)',
-        note: 'Shows you understand product ownership in Scrum. Module 4 covers Scrum roles, events and backlog work; the exam goes deeper (85% is needed to pass), so plan extra study; the AI Product Owner course prepares for it in full.',
+        note: 'Shows you understand product ownership in Scrum. Module 4 covers Scrum roles, events and backlog work; the exam goes deeper (85% is needed to pass), so plan extra study; the AI Product Owner course prepares you for it in full.',
       },
       {
         name: 'IIBA Certification of Capability in Business Analysis (CCBA)',
@@ -884,6 +884,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
       { title: 'Business Systems Analyst', text: 'Analyses and improves business systems.', level: 'Mid' },
     ],
     careers: {
+      field: 'Business analyst',
       salaries: [
         { role: 'Business Analyst', experience: '1+ years', pay: '₹3 L to ₹17 L' },
         { role: 'IT Business Analyst', experience: 'Varies', pay: '₹3 L to ₹19 L' },
@@ -902,19 +903,19 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
         a: 'A business analyst talks to stakeholders, writes requirements and user stories, models processes and checks that the delivered work meets the need. In an Agile team the BA also helps refine the backlog and supports testing.',
       },
       {
-        q: 'What is the business analyst course syllabus?',
+        q: 'What is the Business Analyst course syllabus?',
         a: 'Eight modules, each with a hands-on lab: business analysis foundations, elicitation and requirements, modelling and design, Agile and Scrum, data for analysts, generative AI for business analysts, testing and delivery, and domains and career readiness. Three projects and a capstone bring them together.',
       },
       {
-        q: 'Is this business analyst course in Hyderabad good for freshers?',
-        a: 'Yes. Graduates from any field can join, and no coding is needed. The course starts from the BA role itself, and freshers with strong communication and analytical skills do well. Entry roles include Business Analyst and IT Business Analyst.',
+        q: 'Is this Business Analyst course in Hyderabad good for freshers?',
+        a: 'Yes. Graduates from any field can join, and no coding is needed. The course starts from the BA role itself, and freshers with strong communication and analytical skills do well. Entry roles include business analyst and IT business analyst.',
       },
       {
-        q: 'Does business analyst work require coding?',
+        q: 'Does business analysis work require coding?',
         a: 'No. BA work is about understanding needs and communicating clearly. Basic SQL and data skills help, and the course teaches them, but you do not write application code.',
       },
       {
-        q: 'How does this business analyst course use generative AI?',
+        q: 'How does this Business Analyst course use generative AI?',
         a: 'Module 6 teaches you to use ChatGPT and Microsoft Copilot to summarise interviews and draft user stories and test cases, then review the output for accuracy. It also covers data privacy and confidentiality, so you know what not to share with an AI tool.',
       },
       {
@@ -930,7 +931,7 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
         a: 'Business Process Model and Notation, a standard way to draw business processes so business and IT teams read them the same way. You draw BPMN models in module 3 and in the loan application project.',
       },
       {
-        q: 'Which domains does the business analyst course cover?',
+        q: 'Which domains does the Business Analyst course cover?',
         a: 'Banking and payments, healthcare, and retail and e-commerce. Module 8 uses case studies from these domains, and in the capstone you choose your own.',
       },
       {
@@ -942,15 +943,15 @@ export const fullStackCourses: Program<FullStackCourseSlug>[] = [
         a: 'You can specialise in a platform with Salesforce BA or ServiceNow BA, or move towards product roles with AI Product Owner.',
       },
       {
-        q: 'What is the business analyst course fee in Hyderabad?',
+        q: 'What is the Business Analyst course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Are the business analyst classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the Business Analyst classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'Does the business analyst course in Hyderabad include placement support?',
+        q: 'Does the Business Analyst course in Hyderabad include placement support?',
         a: 'Yes. Alongside the training you get resume and LinkedIn help, technical and HR mock interviews, and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],

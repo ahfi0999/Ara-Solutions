@@ -63,6 +63,8 @@ export type Program<Slug extends string = PageSlug> = {
   certificationIntro?: string;
   /** Salaries (with their source) and a career path, shown with the roles. */
   careers?: {
+    /** What the careers heading is about, when not the course name ("Business analyst careers and salaries"). */
+    field?: string;
     salaries: { role: string; experience: string; pay: string }[];
     salaryNote: string;
     path: { stage: string; roles: string }[];
@@ -100,7 +102,7 @@ export const programs: Program<ProgramSlug>[] = [
     // hyderabad with placement", "salesforce admin and developer course", "salesforce developer course". Hyderabad
     // is the only location named. "Salesforce courses" belongs to the track page; admin-only, FDE (Agentforce
     // developer) and BA keywords belong to their course pages. Certification names checked on Trailhead.
-    h1: 'Salesforce training in Hyderabad: admin, developer and Agentforce',
+    h1: 'Salesforce Training in Hyderabad: Admin, Developer and Agentforce',
     tagline: 'Configure, code and extend Salesforce, then put Agentforce AI agents to work on it.',
     summary:
       'This Salesforce training in Hyderabad takes you from your first login to building AI agents with Agentforce. You learn to configure and secure an org, automate it with Flow, write Apex and Lightning Web Components, connect it to other systems and launch an Agentforce agent.',
@@ -110,7 +112,7 @@ export const programs: Program<ProgramSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Apex and LWC taught from the basics',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Admin, Apex, LWC & Agentforce', 'Prep for 3 Salesforce exams', 'Placement support'],
     about: {
@@ -397,7 +399,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'What is the Salesforce training syllabus?',
-        a: '8 modules: CRM foundations, administration and security, Flow automation, Apex programming, Lightning Web Components, integration, Agentforce AI agents, and a capstone with career readiness. Every module ends with a hands-on lab, and you build three projects and a capstone.',
+        a: 'Eight modules: CRM foundations, administration and security, Flow automation, Apex programming, Lightning Web Components, integration, Agentforce AI agents, and a capstone with career readiness. Every module ends with a hands-on lab, and you build three projects and a capstone.',
       },
       {
         q: 'Is this a Salesforce developer course as well as an admin course?',
@@ -421,7 +423,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'Can I practise Salesforce admin, Apex and Agentforce for free?',
-        a: 'Yes. You work in your own free Salesforce Developer Edition org, which now includes Agentforce and Data 360 (formerly Data Cloud), and in Trailhead playgrounds. You set up your org in module 1 and use it for every lab.',
+        a: 'Yes. You work in your own free Salesforce Developer Edition org, which now includes Agentforce and Data 360 (formerly Data Cloud), and in Trailhead Playgrounds. You set up your org in module 1 and use it for every lab.',
       },
       {
         q: 'What projects will I build in Salesforce Admin & Developer with Agentforce?',
@@ -429,15 +431,15 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'Which Salesforce developer jobs can freshers apply for after this course?',
-        a: 'Freshers usually start as a Salesforce Administrator, Junior Salesforce Developer or Admin/Developer. With experience you can move to Salesforce Developer, Agentforce Developer, Integration Developer or Consultant, and later to Technical Lead or Architect. IT services firms, product companies and capability centres hire for these roles.',
+        a: 'Freshers usually start as a Salesforce administrator, junior Salesforce developer or admin/developer. With experience you can move to Salesforce developer, Agentforce developer, integration developer or consultant, and later to technical lead or architect. IT services firms, product companies and capability centres hire for these roles.',
       },
       {
         q: 'What should I learn after Salesforce Admin & Developer with Agentforce?',
-        a: 'Many learners add Platform App Builder, Data 360 (formerly Data Cloud) or a cloud such as Service Cloud, or move on to our Salesforce FDE course to build AI agents with customers.',
+        a: 'Many learners add Platform App Builder, Data 360 (formerly Data Cloud) or a cloud such as Service Cloud, or move on to our Agentforce (Salesforce FDE) course to build AI agents with customers.',
       },
       {
         q: 'How is Salesforce Admin & Developer with Agentforce different from Salesforce Admin?',
-        a: 'Salesforce Admin covers administration only, with no coding. This course adds Apex, LWC, integration and Agentforce, so it prepares you for admin, developer and Admin/Developer roles. Salesforce FDE is for people who already code and want to build AI agents with customers.',
+        a: 'Salesforce Admin covers administration only, with no coding. This course adds Apex, LWC, integration and Agentforce, so it prepares you for admin, developer and admin/developer roles. Agentforce (Salesforce FDE) is for people who already code and want to build AI agents with customers.',
       },
       {
         q: 'How long does it take to learn Salesforce admin and development?',
@@ -449,7 +451,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'Is the Salesforce training in Hyderabad live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'What does Salesforce training with placement in Hyderabad include?',
@@ -470,7 +472,7 @@ export const programs: Program<ProgramSlug>[] = [
     // primary "servicenow training in hyderabad"; secondary "servicenow training and placement in hyderabad",
     // "servicenow admin and developer training", "servicenow certification training". Hyderabad is the only
     // location named. "ServiceNow courses" belongs to the track page and AI agent developer keywords to FDSE.
-    h1: 'ServiceNow Masters training in Hyderabad: admin, development, HRSD and AI',
+    h1: 'ServiceNow Masters Training in Hyderabad: Admin, Development, HRSD and AI',
     tagline: 'Run, build and extend ServiceNow, then put governed AI agents to work on it.',
     summary:
       'This ServiceNow training in Hyderabad takes you from your first login to building on the ServiceNow AI Platform. You learn administration, development and HR Service Delivery (HRSD), then build ServiceNow Otto (formerly Now Assist) skills and AI agents and govern them in Super Intelligence Control Tower.',
@@ -480,7 +482,7 @@ export const programs: Program<ProgramSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'JavaScript taught from the basics',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Admin, development, HRSD & AI', 'CSA, CAD & CIS-HR prep', 'Placement support'],
     about: {
@@ -540,7 +542,7 @@ export const programs: Program<ProgramSlug>[] = [
         summary: 'Find your way around menus, lists, forms and dashboards.',
         topics: [
           'Next Experience UI: All menu, Favorites and History',
-          'Global search and the application navigator',
+          'Global search and the Application Navigator',
           'Lists: filters, sorting, grouping and breadcrumbs',
           'Forms, form sections and related lists',
           'Personalising lists and forms',
@@ -578,7 +580,7 @@ export const programs: Program<ProgramSlug>[] = [
         title: 'Access control lists (ACLs)',
         summary: 'Protect data so people see only what they should.',
         topics: [
-          'How ACLs work and the order they are evaluated',
+          'How ACLs work and the order in which they are evaluated',
           'Table-level and field-level ACLs',
           'Read, write, create and delete operations',
           'Roles and conditions in ACLs',
@@ -596,7 +598,7 @@ export const programs: Program<ProgramSlug>[] = [
           'Categories, subcategories and assignment groups',
           'Priority from impact and urgency',
           'Assignment rules and notifications',
-          'Resolving, closing and major incidents',
+          'Resolving and closing incidents, and major incidents',
         ],
         lab: 'Configure categories, assignment rules and priority for incidents.',
       },
@@ -752,7 +754,7 @@ export const programs: Program<ProgramSlug>[] = [
           'Tables, forms and modules for a custom app',
           'Update sets: capture, preview and commit',
           'Automated Test Framework (ATF) basics',
-          'Development best practices and instance scan',
+          'Development best practices and Instance Scan',
         ],
         lab: 'Build a scoped app in ServiceNow Studio and move it with an update set.',
       },
@@ -1119,7 +1121,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'What ServiceNow admin and developer jobs can I apply for?',
-        a: 'Freshers usually start as a ServiceNow Administrator (L1/L2) or Admin/Developer. With experience you can move to ServiceNow Developer, HRSD Developer or Integration Developer, and later to Technical Consultant or ServiceNow Architect. IT services firms and capability centres in Hyderabad hire for these roles.',
+        a: 'Freshers usually start as a ServiceNow administrator (L1/L2) or admin/developer. With experience you can move to ServiceNow developer, HRSD developer or integration developer, and later to technical consultant or ServiceNow architect. IT services firms and capability centres in Hyderabad hire for these roles.',
       },
       {
         q: 'What is the ServiceNow training fee in Hyderabad?',
@@ -1127,7 +1129,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'Is the ServiceNow training in Hyderabad live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'What does ServiceNow training and placement in Hyderabad include?',
@@ -1150,22 +1152,22 @@ export const programs: Program<ProgramSlug>[] = [
     // in hyderabad", "generative ai course in hyderabad", "ai ml course with placement in hyderabad".
     // Hyderabad is the only location named. "AI courses" belongs to the AI & Data track page, and the AI
     // agents and AI engineering keywords to Agentic AI.
-    h1: 'AI and machine learning course in Hyderabad, from ML to generative AI',
+    h1: 'AI and Machine Learning Course in Hyderabad, from ML to Generative AI',
     tagline: 'From Python and machine learning to LLMs, RAG and deployed AI apps.',
     summary:
-      'This AI and machine learning course in Hyderabad takes you from Python basics to AI apps people can use. You train classic machine learning models, build a retrieval-augmented generation (RAG) app on a large language model, fine-tune and evaluate a model, and deploy it as an API.',
+      'This AI and Machine Learning course in Hyderabad takes you from Python basics to AI apps people can use. You train classic machine learning models, build a retrieval-augmented generation (RAG) app on a large language model, fine-tune and evaluate a model, and deploy it as an API.',
     accent: 'violet',
     prerequisites:
       'Basic programming helps, but Python is taught from the essentials. School-level maths is enough to start.',
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Python taught from the basics',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Machine learning + generative AI', 'LLMs, RAG & fine-tuning', 'Placement support'],
     about: {
       paragraphs: [
-        'Our AI and machine learning course in Hyderabad takes you from Python basics to building and deploying AI applications. You learn classic machine learning, which predicts outcomes from data, and generative AI with large language models (LLMs), which many new AI roles now ask for.',
+        'Our AI and Machine Learning course in Hyderabad takes you from Python basics to building and deploying AI applications. You learn classic machine learning, which predicts outcomes from data, and generative AI with large language models (LLMs), which many new AI roles now ask for.',
         'You train models with scikit-learn and PyTorch, see how transformers work, build RAG apps with LangChain and a vector database, fine-tune and evaluate a model, and deploy it as an API with FastAPI and Docker. Every module has a hands-on lab, and the course builds the machine learning and generative AI skills tested in the AWS Machine Learning Engineer and Microsoft AI-103 exams.',
         'Classes are live and instructor-led on Zoom, and every class is recorded. Placement support covers your resume and LinkedIn, mock interviews and job referrals through ARA’s IT staffing clients and partner companies. Offers depend on your interview performance.',
       ],
@@ -1410,11 +1412,11 @@ export const programs: Program<ProgramSlug>[] = [
     },
     faqs: [
       {
-        q: 'What is the AI ML course syllabus?',
-        a: '8 modules: Python for AI, machine learning foundations, deep learning and transformers, LLMs and prompt engineering, retrieval-augmented generation (RAG), fine-tuning and evaluation, building and deploying AI apps, then a capstone with career readiness. Every module has a hands-on lab.',
+        q: 'What is the AI & ML course syllabus?',
+        a: 'Eight modules: Python for AI, machine learning foundations, deep learning and transformers, LLMs and prompt engineering, retrieval-augmented generation (RAG), fine-tuning and evaluation, building and deploying AI apps, then a capstone with career readiness. Every module has a hands-on lab.',
       },
       {
-        q: 'Is this AI ML course in Hyderabad suitable for freshers?',
+        q: 'Is this AI & ML course in Hyderabad suitable for freshers?',
         a: 'Yes. Python is taught from the essentials, school-level maths is enough to start, and you do not need a computer science degree: graduates from science, commerce and engineering join. Basic programming helps, and regular practice matters most.',
       },
       {
@@ -1458,15 +1460,15 @@ export const programs: Program<ProgramSlug>[] = [
         a: 'Freshers usually start as AI application developers, generative AI developers or junior ML engineers. With experience you can move to AI engineer, ML engineer or NLP engineer, and later to senior AI engineer, AI architect or MLOps lead.',
       },
       {
-        q: 'What is the AI and machine learning course fee in Hyderabad?',
+        q: 'What is the AI and Machine Learning course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Is the AI and machine learning course in Hyderabad live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Is the AI and Machine Learning course in Hyderabad live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'Is there placement support with this AI ML course in Hyderabad?',
+        q: 'Is there placement support with this AI & ML course in Hyderabad?',
         a: 'Yes. You get resume and LinkedIn help, technical and HR mock interviews, and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -1482,22 +1484,22 @@ export const programs: Program<ProgramSlug>[] = [
     // course", "agentic ai course with placement in hyderabad". Hyderabad is the only location named.
     // Generative AI, LLM and RAG course keywords belong to AI & ML, and "AI courses" to the AI & Data track
     // page.
-    h1: 'Agentic AI course in Hyderabad: AI agents, MCP and multi-agent systems',
+    h1: 'Agentic AI Course in Hyderabad: AI Agents, MCP and Multi-Agent Systems',
     tagline: 'Build AI agents that plan, use tools and work together, safely and in production.',
     summary:
-      'This agentic AI course in Hyderabad teaches you to build AI agents that plan steps, use tools and finish real tasks. Your agents call real systems through the Model Context Protocol (MCP), remember context, work as a team, pass evaluation and guardrail checks and run as production services.',
+      'This Agentic AI course in Hyderabad teaches you to build AI agents that plan steps, use tools and finish real tasks. Your agents call real systems through the Model Context Protocol (MCP), remember context, work as a team, pass evaluation and guardrail checks and run as production services.',
     accent: 'rose',
     prerequisites:
       'Basic Python needed. The AI & Machine Learning course, or similar experience with LLMs, is recommended.',
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Python required (basic level)',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Agents, tools & MCP', 'LangGraph, CrewAI & multi-agent', 'Placement support'],
     about: {
       paragraphs: [
-        'Our agentic AI course in Hyderabad, Agentic AI Engineering, is an AI engineering course built around AI agents that plan, use tools and complete real tasks. Agents go beyond chatbots: they read data, call APIs, take actions and work together, so companies that build them need engineers who can make them safe and reliable.',
+        'Our Agentic AI course in Hyderabad, Agentic AI Engineering, is an AI engineering course built around AI agents that plan, use tools and complete real tasks. Agents go beyond chatbots: they read data, call APIs, take actions and work together, so companies that build them need engineers who can make them safe and reliable.',
         'You learn agent design, tools and the Model Context Protocol (MCP), memory and retrieval, LangGraph and CrewAI, multi-agent systems, evaluation, guardrails and observability, and how to deploy agents as reliable services. Every module has a hands-on lab, and the course covers the agent, RAG and guardrail skills tested in the AWS Generative AI Developer – Professional and Microsoft AI-103 exams.',
         'Classes are live and instructor-led on Zoom, and every class is recorded. Placement support covers your resume and LinkedIn, mock interviews and job referrals through ARA’s IT staffing clients and partner companies. Offers depend on your interview performance.',
       ],
@@ -1686,7 +1688,7 @@ export const programs: Program<ProgramSlug>[] = [
     capstone:
       'Design, build and deploy a production-style agentic system for a business process, with tools, memory, evaluation, guardrails and monitoring.',
     certificationIntro:
-      'AWS, Microsoft and NVIDIA run these exams. The course teaches the agent, RAG, evaluation and guardrail skills they test using open tools, with practice questions in module 8. The AWS and Microsoft exams test those skills on their own platforms, Amazon Bedrock and Microsoft Foundry, so plan extra hands-on practice there. You register and pay for each exam with the provider.',
+      'AWS, Microsoft and NVIDIA run these exams. The course teaches the agent, RAG, evaluation and guardrail skills they test, using open tools, with practice questions in module 8. The AWS and Microsoft exams test those skills on their own platforms, Amazon Bedrock and Microsoft Foundry, so plan extra hands-on practice there. You register and pay for each exam with the provider.',
     certifications: [
       {
         name: 'AWS Certified Generative AI Developer – Professional (AIP-C01)',
@@ -1740,7 +1742,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'What is the difference between agentic AI and generative AI?',
-        a: 'Generative AI creates content such as text, images or code. Agentic AI uses generative models to plan and take actions toward a goal: an agent reads data, calls tools and checks its own results.',
+        a: 'Generative AI creates content such as text, images or code. Agentic AI uses generative models to plan and take actions towards a goal: an agent reads data, calls tools and checks its own results.',
       },
       {
         q: 'What is MCP (Model Context Protocol)?',
@@ -1748,7 +1750,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'What is the Agentic AI course syllabus?',
-        a: '8 modules: agent foundations; tools, APIs and MCP; memory and knowledge; agent frameworks (LangGraph and CrewAI); multi-agent systems; evaluation, guardrails and observability; deploying agents; then a capstone with career readiness. Every module has a hands-on lab.',
+        a: 'Eight modules: agent foundations; tools, APIs and MCP; memory and knowledge; agent frameworks (LangGraph and CrewAI); multi-agent systems; evaluation, guardrails and observability; deploying agents; then a capstone with career readiness. Every module has a hands-on lab.',
       },
       {
         q: 'Which agent frameworks does the course teach?',
@@ -1776,7 +1778,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'What agentic AI jobs can I apply for?',
-        a: 'Developers with Python and LLM basics usually start as AI automation engineers or LLM application developers. With experience they move into agentic AI engineer and AI solutions engineer roles, and later AI platform lead or AI architect.',
+        a: 'Developers with Python and LLM basics usually start as AI automation engineers or LLM application developers. With experience they move into agentic AI engineer and AI solutions engineer roles, and later into AI platform lead or AI architect roles.',
       },
       {
         q: 'How is this course different from Salesforce FDE or ServiceNow FDSE?',
@@ -1787,11 +1789,11 @@ export const programs: Program<ProgramSlug>[] = [
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Is the agentic AI course in Hyderabad live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Is the Agentic AI course in Hyderabad live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'Does the agentic AI course in Hyderabad include placement support?',
+        q: 'Does the Agentic AI course in Hyderabad include placement support?',
         a: 'Yes. You get resume and LinkedIn help, technical and HR mock interviews, and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -1810,13 +1812,13 @@ export const programs: Program<ProgramSlug>[] = [
     h1: 'Cybersecurity Course in Hyderabad with Placement Support',
     tagline: 'Detect, investigate and stop attacks: network, cloud, identity and SOC skills.',
     summary:
-      'A cyber security analyst in a security operations centre (SOC) watches a company’s systems for attacks and helps stop them before damage is done. This cyber security course in Hyderabad trains you for that work: you triage alerts in a SIEM, review a cloud account for risks, run a vulnerability assessment and handle an incident from detection to report.',
+      'A cybersecurity analyst in a security operations centre (SOC) watches a company’s systems for attacks and helps stop them before damage is done. This Cybersecurity course in Hyderabad trains you for that work: you triage alerts in a SIEM, review a cloud account for risks, run a vulnerability assessment and handle an incident from detection to report.',
     accent: 'amber',
     prerequisites: 'No security experience needed. Basic networking and computer skills help.',
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['SOC, SIEM & incident response', 'Security+, SC-200 & CC prep', 'Placement support'],
     about: {
@@ -1825,17 +1827,17 @@ export const programs: Program<ProgramSlug>[] = [
         'You cover security fundamentals, network and cloud security, identity and access management, SIEM and SOC operations with Splunk and Microsoft Sentinel, vulnerability management and incident response. Every module has a hands-on lab, and the course prepares you for CompTIA Security+, Microsoft SC-200 and ISC2 Certified in Cybersecurity (CC).',
         'Classes are live and instructor-led on Zoom, and every class is recorded. Placement support covers your resume and LinkedIn, mock interviews and job referrals through ARA’s IT staffing clients and partner companies. Offers depend on your interview performance.',
       ],
-      whyTitle: 'Why learn cyber security in 2026',
+      whyTitle: 'Why learn cybersecurity in 2026',
       why: [
-        'Every organisation that runs on IT needs security, from banks to start-ups.',
-        'SOC Analyst is a clear entry role, with a path to L2, L3 and security engineering.',
+        'Every organisation that runs on IT needs security, from banks to startups.',
+        'SOC analyst is a clear entry role, with a path to L2, L3 and security engineering.',
         'Recognised certifications such as CompTIA Security+ can help freshers get shortlisted.',
       ],
     },
     audience: [
       {
         title: 'Freshers and graduates',
-        text: 'Start in security through a clear entry role: SOC Analyst L1.',
+        text: 'Start in security through a clear entry role: SOC analyst L1.',
       },
       {
         title: 'Network and system administrators',
@@ -2006,7 +2008,7 @@ export const programs: Program<ProgramSlug>[] = [
     capstone:
       'Act as the SOC team for a simulated company: monitor, detect, investigate and respond to an attack, then write the incident report and lessons learned.',
     certificationIntro:
-      'CompTIA, Microsoft and ISC2 run their own exams. This course prepares you for the three below: you book and pay for each exam with the vendor. CompTIA launched a new Security+ exam, SY0-801, on 17 November 2026, and the English SY0-701 exam stays available until 11 June 2027. An advisor can help you choose the version and the order.',
+      'CompTIA, Microsoft and ISC2 run their own exams. This course prepares you for the first three below: you book and pay for each exam with the vendor. CompTIA launched a new Security+ exam, SY0-801, on 17 November 2026, and the English SY0-701 exam stays available until 11 June 2027. An advisor can help you choose the version and the order.',
     certifications: [
       {
         name: 'CompTIA Security+ (SY0-701 / SY0-801)',
@@ -2021,7 +2023,7 @@ export const programs: Program<ProgramSlug>[] = [
         note: 'An entry-level certification with no work experience required. Its domains (security principles, governance, identity, network and cloud security, and security operations) are covered by modules 1 to 7. ISC2’s free exam offer closed to new learners in May 2026.',
       },
       {
-        name: 'CompTIA Cybersecurity Analyst (CySA+), CS0-004',
+        name: 'CompTIA Cybersecurity Analyst, CySA+ (CS0-004)',
         note: 'A next step once you work in a SOC. CompTIA recommends about four years in a SOC or vulnerability analyst role before this exam.',
       },
     ],
@@ -2065,15 +2067,15 @@ export const programs: Program<ProgramSlug>[] = [
         a: 'Yes. It works as a SOC analyst course in Hyderabad: module 5 trains you in monitoring and alert triage, module 6 in vulnerability management and module 7 in incident response, and module 8 covers SOC interview questions. The capstone puts you in a simulated SOC.',
       },
       {
-        q: 'What is the cyber security course syllabus?',
+        q: 'What is the Cybersecurity course syllabus?',
         a: 'Eight modules, each with a hands-on lab: security fundamentals, network security, cloud security, identity and access management, SIEM and security monitoring, vulnerability management, incident response, and certification and career readiness. Three projects and a SOC capstone bring them together.',
       },
       {
-        q: 'Is this cyber security course in Hyderabad suitable for freshers?',
-        a: 'Yes. No security experience is needed, and the course starts with the fundamentals; basic networking and computer skills help. SOC Analyst L1 roles hire freshers, and strong labs plus a certification such as Security+ can help you get shortlisted.',
+        q: 'Is this Cybersecurity course in Hyderabad suitable for freshers?',
+        a: 'Yes. No security experience is needed, and the course starts with the fundamentals; basic networking and computer skills help. SOC analyst L1 roles are open to freshers, and strong labs plus a certification such as Security+ can help you get shortlisted.',
       },
       {
-        q: 'Does cyber security require coding?',
+        q: 'Does cybersecurity require coding?',
         a: 'Not for SOC and analyst roles. You write search queries in Splunk and Microsoft Sentinel and use basic Linux commands, but no programming. Scripting helps later if you move into security engineering.',
       },
       {
@@ -2081,11 +2083,11 @@ export const programs: Program<ProgramSlug>[] = [
         a: 'Basics help but are not required. Module 2 refreshes TCP/IP and DNS before moving on to firewalls, VPNs and traffic analysis with Wireshark.',
       },
       {
-        q: 'Is cyber security a good career?',
-        a: 'For people who enjoy investigation and problem-solving, yes. Every organisation that runs on IT needs security, and there is a clear path from SOC Analyst L1 to L2 and L3, security engineer and security architect. AmbitionBox lists SOC analyst salaries of ₹3 L to ₹8.9 L a year for 1 to 5 years of experience.',
+        q: 'Is cybersecurity a good career?',
+        a: 'For people who enjoy investigation and problem-solving, yes. Every organisation that runs on IT needs security, and there is a clear path from SOC analyst L1 to L2 and L3, security engineer and security architect. AmbitionBox lists SOC analyst salaries of ₹3 L to ₹8.9 L a year for 1 to 5 years of experience.',
       },
       {
-        q: 'Which certifications does this cyber security course prepare me for?',
+        q: 'Which certifications does this Cybersecurity course prepare me for?',
         a: 'CompTIA Security+, Microsoft SC-200 (Security Operations Analyst Associate) and ISC2 Certified in Cybersecurity (CC), with CompTIA CySA+ as a next step once you have SOC experience. You book and pay for each exam with CompTIA, Microsoft or ISC2.',
       },
       {
@@ -2109,15 +2111,15 @@ export const programs: Program<ProgramSlug>[] = [
         a: 'Cloud security in more depth, ServiceNow GRC for governance, risk and compliance roles, or a next-step certification such as CompTIA CySA+ once you have SOC experience.',
       },
       {
-        q: 'What is the cyber security course fee in Hyderabad?',
+        q: 'What is the Cybersecurity course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Are the cyber security classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the Cybersecurity classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'Does the cyber security course include placement support?',
+        q: 'Does the Cybersecurity course include placement support?',
         a: 'Yes. Alongside the training you get resume and LinkedIn help, technical and HR mock interviews, and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -2134,7 +2136,7 @@ export const programs: Program<ProgramSlug>[] = [
     // "react and node js course", "full stack development with ai course". Hyderabad is the only location named.
     // "Full stack developer course in Hyderabad" belongs to the track page, and the Python and Java full stack
     // keywords to their own pages.
-    h1: 'MERN stack course in Hyderabad: full stack development with AI',
+    h1: 'MERN Stack Course in Hyderabad: Full Stack Development with AI',
     tagline: 'Build and ship full stack web apps with React, Node.js and MongoDB, with AI built in.',
     summary:
       'This MERN stack course in Hyderabad teaches you to build complete web apps in JavaScript: React and Next.js on the front end, Node.js and Express on the back end and MongoDB for data. You add AI features with LLM APIs, learn to use AI coding tools well and deploy your apps live with Docker and CI.',
@@ -2144,7 +2146,7 @@ export const programs: Program<ProgramSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Taught from the basics (JavaScript)',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['React, Node.js & MongoDB', 'AI features & deployed apps', 'Placement support'],
     about: {
@@ -2371,11 +2373,11 @@ export const programs: Program<ProgramSlug>[] = [
         level: 'Fresher to mid',
       },
       {
-        title: 'Front End (React) Developer',
+        title: 'Front-End (React) Developer',
         text: 'Builds user interfaces with React.',
         level: 'Fresher to mid',
       },
-      { title: 'Back End / API Developer', text: 'Builds APIs and server logic.', level: 'Fresher to mid' },
+      { title: 'Back-End / API Developer', text: 'Builds APIs and server logic.', level: 'Fresher to mid' },
       { title: 'AI Application Developer', text: 'Adds AI features to apps.', level: 'Junior' },
       {
         title: 'Next.js Developer',
@@ -2447,7 +2449,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'What can I learn after the MERN stack course?',
-        a: 'You can go deeper into AI with our Agentic AI Engineering course, work towards AWS Certified Developer – Associate, or move into mobile development.',
+        a: 'You can go deeper into AI with our Agentic AI Engineering course, work towards the AWS Certified Developer – Associate certification, or move into mobile development.',
       },
       {
         q: 'What is the MERN stack course fee in Hyderabad?',
@@ -2455,7 +2457,7 @@ export const programs: Program<ProgramSlug>[] = [
       },
       {
         q: 'Is the MERN stack course in Hyderabad live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'Does the MERN stack course include placement support?',

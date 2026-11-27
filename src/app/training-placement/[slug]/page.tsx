@@ -120,7 +120,12 @@ export default async function ProgramPage({ params }: Props) {
           trackHref: trackHref(programTrack),
           rows: trackHub.chooser.rows.map((row) => ({
             ...row,
-            name: getProgram(row.slug)?.name ?? row.slug,
+            name:
+              programTrack.courses.flatMap((course) =>
+                course.kind === 'program' && course.slug === row.slug ? [course.label] : [],
+              )[0] ??
+              getProgram(row.slug)?.shortName ??
+              row.slug,
           })),
         }
       : undefined;

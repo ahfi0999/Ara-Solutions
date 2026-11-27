@@ -11,7 +11,7 @@ import { ButtonLink } from '@/components/ui/Button';
 export const metadata: Metadata = {
   title: 'Careers',
   description:
-    'Join ARA Solutions: open roles for recruiters, account managers, trainers and technology professionals in Hyderabad, Bangalore and remote.',
+    'Join ARA Solutions: open roles for recruiters, account managers, trainers and technology professionals in Hyderabad and Bangalore, or remote.',
   alternates: { canonical: '/careers/' },
 };
 
@@ -74,7 +74,11 @@ export default function CareersPage() {
               <a href={site.emailHref} className="font-medium text-text underline underline-offset-2">
                 {site.email}
               </a>
-              .
+              . Our{' '}
+              <a href="/privacy/" className="font-medium text-text underline underline-offset-2">
+                Privacy Notice
+              </a>{' '}
+              explains how we handle your CV.
             </p>
           </div>
           <div className="divide-y divide-line border-y border-line">

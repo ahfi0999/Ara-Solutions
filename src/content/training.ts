@@ -12,7 +12,7 @@ export const trainingPage = {
     accent: 'Courses in Hyderabad',
     /** `{courses}` and `{tracks}` are filled in from the course data. */
     intro:
-      'ARA Solutions offers job-focused IT training and placement support from Madhapur, Hyderabad. Choose from {courses} courses across {tracks} tracks: Salesforce, ServiceNow, Workday, AI and Data, Cybersecurity and Full Stack with AI.',
+      'ARA Solutions offers job-focused IT training and placement support from Hyderabad. Choose from {courses} courses across {tracks} tracks: Salesforce, ServiceNow, Workday, AI and Data, Cybersecurity and Full Stack with AI.',
   },
   tracks: {
     title: 'Choose your training track',
@@ -92,7 +92,7 @@ export const trainingPage = {
     },
     {
       q: 'Where is ARA Solutions located?',
-      a: 'Our office is in Madhapur, Hyderabad. Classes run live on Zoom, and every class is recorded.',
+      a: 'Our office is in Hyderabad. Classes run live on Zoom, and every class is recorded.',
     },
     {
       q: 'Are the IT training classes online or in a classroom?',

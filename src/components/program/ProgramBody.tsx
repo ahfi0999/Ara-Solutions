@@ -365,7 +365,7 @@ export function ProgramBody({ program, chooser }: { program: Program; chooser?: 
         <Block
           id="careers"
           eyebrow="Career outcomes"
-          title={program.careers ? `${program.shortName} careers and salaries` : 'Roles this program prepares you for'}
+          title={program.careers ? `${program.careers.field ?? program.shortName} careers and salaries` : 'Roles this program prepares you for'}
         >
           <ul className="grid gap-3 sm:grid-cols-2">
             {program.roles.map((role) => (
@@ -388,7 +388,7 @@ export function ProgramBody({ program, chooser }: { program: Program; chooser?: 
               <h3 className="mt-12 text-xl font-semibold tracking-tight">Salary snapshot</h3>
               <div className="mt-5 overflow-x-auto rounded-2xl border border-line bg-paper">
                 <table className="w-full min-w-[480px] text-left">
-                  <caption className="sr-only">{program.shortName} salaries in India</caption>
+                  <caption className="sr-only">{program.careers?.field ?? program.shortName} salaries in India</caption>
                   <thead>
                     <tr className="border-b border-line text-[13px] text-muted">
                       <th scope="col" className="p-4 font-medium">Role</th>

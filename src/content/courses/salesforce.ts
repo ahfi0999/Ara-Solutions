@@ -30,12 +30,12 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Security & sharing', 'Flow automation', 'Platform Administrator exam prep'],
     about: {
       paragraphs: [
-        'Our Salesforce admin course in Hyderabad prepares you for a common way into the Salesforce ecosystem: the administrator role. Salesforce administrators keep Salesforce working for sales and service teams. They manage users and access, automate processes, keep data clean and build the reports managers rely on.',
+        'Our Salesforce Admin course in Hyderabad prepares you for a common way into the Salesforce ecosystem: the administrator role. Salesforce administrators keep Salesforce working for sales and service teams. They manage users and access, automate processes, keep data clean and build the reports managers rely on.',
         'You learn through hands-on labs in your own free Salesforce Developer Edition org, from designing a data model to securing it, automating it with Flow and setting up Sales Cloud and Service Cloud. Classes are live and instructor-led, no coding is needed, and the course prepares you for the Salesforce Certified Platform Administrator exam, with Platform App Builder as a second exam.',
       ],
       whyTitle: 'Why learn Salesforce administration in 2026',
@@ -127,10 +127,10 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
         topics: [
           'Leads, accounts, contacts and opportunities',
           'Sales process and opportunity stages',
-          'Web-to-lead and lead assignment rules',
+          'Web-to-Lead and lead assignment rules',
           'Cases, queues and assignment rules',
           'Escalation rules and entitlements',
-          'Email-to-case and web-to-case',
+          'Email-to-Case and Web-to-Case',
         ],
         lab: 'Configure a sales process, opportunity stages, case queues and escalation rules.',
       },
@@ -294,7 +294,7 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
         a: 'A Salesforce admin adds users and manages access, builds automations with Flow, fixes data issues, creates reports and dashboards, and helps sales and service teams get more from Salesforce.',
       },
       {
-        q: 'What is the Salesforce admin course syllabus?',
+        q: 'What is the Salesforce Admin course syllabus?',
         a: 'Eight modules: Salesforce foundations, data model, users and security, automation with Flow, Sales Cloud and Service Cloud, data and reporting, user experience and AI, and release and career readiness. Every module has a hands-on lab.',
       },
       {
@@ -315,11 +315,11 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
       },
       {
         q: 'Can freshers get Salesforce admin jobs?',
-        a: 'Yes. Entry roles such as Salesforce Administrator, Salesforce Support Analyst and CRM Analyst suit freshers who know the platform. The Platform Administrator certification and the projects you build in this course make your profile stronger.',
+        a: 'Yes. Entry roles such as Salesforce administrator, Salesforce support analyst and CRM analyst suit freshers who know the platform. The Platform Administrator certification and the projects you build in this course make your profile stronger.',
       },
       {
         q: 'Is Salesforce admin a good career?',
-        a: 'Many companies run sales and service on Salesforce and need admins to keep it secure and useful. AmbitionBox lists Salesforce Administrator salaries of ₹2.5 L to ₹12 L a year in India for 1 to 6 years of experience (November 2026). From admin you can grow into consulting, business analysis or architecture.',
+        a: 'Many companies run sales and service on Salesforce and need admins to keep it secure and useful. AmbitionBox lists Salesforce administrator salaries of ₹2.5 L to ₹12 L a year in India for 1 to 6 years of experience (November 2026). From admin you can grow into consulting, business analysis or architecture.',
       },
       {
         q: 'Can I become a Salesforce admin without an IT background?',
@@ -334,20 +334,20 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
         a: 'Yes. Salesforce offers free Developer Edition orgs and Trailhead Playgrounds, which you use for the labs. Developer Edition orgs have no sandboxes, so ask an advisor how the change set lab in module 8 runs for your batch.',
       },
       {
-        q: 'Will I learn Agentforce in the Salesforce admin course?',
+        q: 'Will I learn Agentforce in the Salesforce Admin course?',
         a: 'Yes, the basics. Module 7 covers setting up Agentforce and Einstein features as an admin. Salesforce Admin & Developer with Agentforce goes deeper.',
       },
       {
-        q: 'What can I learn after the Salesforce admin course?',
+        q: 'What can I learn after the Salesforce Admin course?',
         a: 'Platform App Builder and Platform Administrator II, Salesforce development in our Salesforce Admin & Developer with Agentforce program, or the Salesforce Business Analyst course.',
       },
       {
         q: 'Are the Salesforce Admin classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'How much is the Salesforce admin course fee in Hyderabad?',
-        a: 'The Salesforce admin course cost depends on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
+        q: 'How much is the Salesforce Admin course fee in Hyderabad?',
+        a: 'The Salesforce Admin course cost depends on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
         q: 'Does the Salesforce Admin course include placement support?',
@@ -378,7 +378,7 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Coding required (Apex)',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: [
       'Agentforce Builder & Prompt Builder',
@@ -654,7 +654,7 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
       },
       {
         q: 'What does an Agentforce developer do?',
-        a: 'Builds the actions, prompts and data connections that agents use: Apex and Flow actions, Prompt Builder templates and grounding in Data 360. Then tests the agent and deploys it. Most Agentforce developer roles ask for some Salesforce development experience.',
+        a: 'Builds the actions, prompts and data connections that agents use: Apex and Flow actions, Prompt Builder templates and grounding in Data 360, then tests the agent and deploys it. Most Agentforce developer roles ask for some Salesforce development experience.',
       },
       {
         q: 'Does this course prepare me for the Agentforce Specialist certification?',
@@ -690,7 +690,7 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
       },
       {
         q: 'Are the Salesforce FDE classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'What is the Salesforce forward deployed engineer course fee?',
@@ -721,7 +721,7 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Discovery & process mapping', 'User stories & UAT', 'Business Analyst exam prep'],
     about: {
@@ -971,7 +971,7 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
         a: 'A Salesforce BA works out what the business needs. They run discovery workshops and interviews, map current and future processes, write user stories with acceptance criteria, and check through UAT that the delivered solution works for users.',
       },
       {
-        q: 'Who should join this Salesforce business analyst course?',
+        q: 'Who should join this Salesforce Business Analyst course?',
         a: 'Business and operations professionals, Salesforce admins who want to move into consulting, and MBA, BBA or BCom graduates. No coding is needed, and experience in sales, service or operations helps.',
       },
       {
@@ -1004,7 +1004,7 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
       },
       {
         q: 'Are there Salesforce business analyst jobs in Hyderabad?',
-        a: 'Yes. IT services firms and consultancies in Hyderabad post Salesforce business analyst roles. Entry roles include Salesforce Business Analyst, CRM Business Analyst and UAT Analyst.',
+        a: 'Yes. IT services firms and consultancies in Hyderabad post Salesforce business analyst roles. Entry roles include Salesforce business analyst, CRM business analyst and UAT analyst.',
       },
       {
         q: 'What Salesforce business analyst interview questions should I prepare for?',
@@ -1020,7 +1020,7 @@ export const salesforceCourses: Program<SalesforceCourseSlug>[] = [
       },
       {
         q: 'Are the Salesforce BA classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'What is the Salesforce Business Analyst course fee in Hyderabad?',

@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 const TRACK_COMPARE: Record<string, { bestFor: string; coding: string; ai: string }> = {
   'servicenow-courses': {
     bestFor: 'IT, HR, customer service and risk platform careers',
-    coding: 'No, except the developer and FDSE courses',
+    coding: 'No, except the ITSM Development and FDSE courses',
     ai: 'ServiceNow Otto and AI agents',
   },
   'salesforce-courses': {
@@ -119,7 +119,7 @@ export default function TrainingPlacementPage() {
     <>
       <TrainingJsonLd />
       <PageHero
-        eyebrow="Training & placement"
+        eyebrow="Training & Placement"
         title={
           <>
             {page.hero.title.slice(0, at)}

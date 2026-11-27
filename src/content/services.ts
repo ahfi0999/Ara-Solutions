@@ -370,7 +370,7 @@ export const roleCoverage = {
     'Cloud & DevOps Architecture',
     'Data Engineering, BI & Analytics',
     'AI / ML & Advanced Automation',
-    'Cyber Security & InfoSec',
+    'Cybersecurity & InfoSec',
     'Enterprise Platforms (ServiceNow, Salesforce)',
   ],
   nonIt: [

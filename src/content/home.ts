@@ -150,9 +150,9 @@ export const roleGroups = [
   {
     title: 'IT & niche technology',
     groups: [
-      { name: 'AI & Data', roles: 'AI, ML & GenAI · Data engineering & BI' },
-      { name: 'Cloud & Security', roles: 'Cloud, DevOps & SRE · Cybersecurity, GRC & IAM' },
-      { name: 'Enterprise & Software', roles: 'ERP, Salesforce & ServiceNow · Full stack & QA' },
+      { name: 'AI & data', roles: 'AI, ML & GenAI · Data engineering & BI' },
+      { name: 'Cloud & security', roles: 'Cloud, DevOps & SRE · Cybersecurity, GRC & IAM' },
+      { name: 'Enterprise & software', roles: 'ERP, Salesforce & ServiceNow · Full stack & QA' },
     ],
   },
   {
@@ -177,10 +177,10 @@ export const roleGroups = [
 export const hiringFaqs = [
   {
     q: 'What recruitment and staffing services does ARA Solutions offer?',
-    a: 'ARA Solutions offers fulltime staffing, contract staffing (Corp-to-Corp / C2C), IT and Non-IT recruitment, international recruitment support and background verification services.',
+    a: 'ARA Solutions offers fulltime staffing, contract staffing (Corp-to-Corp / C2C), IT and non-IT recruitment, international recruitment support and background verification services.',
   },
   {
-    q: 'Does ARA Solutions recruit for both IT and Non-IT positions?',
+    q: 'Does ARA Solutions recruit for both IT and non-IT positions?',
     a: 'Yes. We support recruitment across technology, software development, enterprise platforms, AI, data, cloud, cybersecurity, finance, HR, sales, healthcare, engineering and other business functions.',
   },
   {
@@ -217,7 +217,7 @@ export const trainingFaqs = [
   },
   {
     q: 'Does ARA Solutions provide certification preparation?',
-    a: 'Selected programs include preparation for relevant certification examinations, such as ServiceNow CSA and Salesforce Administrator, depending on the course structure.',
+    a: 'Selected programs include preparation for relevant certification examinations, such as ServiceNow CSA and Salesforce Platform Administrator, depending on the course structure.',
   },
 ] as const;
 
@@ -241,7 +241,7 @@ export const trainingPillars = [
   },
   {
     title: 'Certification preparation',
-    text: 'Prepare for official exams such as Salesforce Administrator and ServiceNow CSA, where the program has one.',
+    text: 'Prepare for official exams such as Salesforce Platform Administrator and ServiceNow CSA, where the program has one.',
   },
   {
     title: 'Interview preparation',

@@ -1,25 +1,21 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { FileSearch, HandHeart, Mail, Phone, ShieldCheck, UserCheck } from 'lucide-react';
+import { Building2, Mail, MapPin, Phone } from 'lucide-react';
 import { site } from '@/content/site';
-import { privacy, type Privacy, type PrivacyBlock } from '@/content/privacy';
+import { privacy, privacyRequestHref, type PrivacyBlock } from '@/content/privacy';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container } from '@/components/ui/Section';
 import { OnThisPage } from '@/components/ui/OnThisPage';
+import { cn } from '@/lib/cn';
 
 export const metadata: Metadata = {
-  title: 'Privacy Notice',
+  title: { absolute: 'Privacy Notice | ARA Solutions Hyderabad' },
   description:
-    'How ARA Solutions collects, uses and protects your personal information, and your rights under India’s Digital Personal Data Protection Act, 2023.',
+    'How ARA Solutions collects, uses and protects your personal data across our website, training, placement and staffing services. Your rights and how to contact us.',
   alternates: { canonical: '/privacy/' },
 };
 
-const SUMMARY_ICONS: Record<Privacy['summary'][number]['icon'], typeof FileSearch> = {
-  collect: FileSearch,
-  use: HandHeart,
-  sell: ShieldCheck,
-  control: UserCheck,
-};
+const address = `${site.address.city}, ${site.address.region}, ${site.address.country}`;
 
 /** Turns **bold** and [label](href) in the notice text into markup. */
 function rich(text: string): ReactNode[] {
@@ -49,36 +45,102 @@ function rich(text: string): ReactNode[] {
   });
 }
 
+/** Section 13: who to contact, including for complaints, and a button that starts a privacy request email. */
 function ContactCard() {
   const rows = [
-    { icon: Mail, label: 'Email', value: site.email, href: site.emailHref },
+    { icon: Building2, label: 'Company', value: site.legalName },
+    {
+      icon: Mail,
+      label: 'Email',
+      value: `${site.email} (subject line: “Privacy request”)`,
+      href: privacyRequestHref,
+    },
     { icon: Phone, label: 'Phone', value: site.phone, href: site.phoneHref },
+    { icon: MapPin, label: 'Address', value: address },
   ];
   return (
     <div className="rounded-3xl bg-ink p-6 text-white shadow-lift sm:p-8">
-      <p className="text-lg font-semibold tracking-tight">{site.legalName}</p>
-      <p className="mt-1 text-[15px] text-white/60">
-        {site.address.area}, {site.address.city}, {site.address.region}, {site.address.country}
-      </p>
-      <dl className="mt-6 grid gap-3 sm:grid-cols-2">
+      <dl className="grid gap-4 sm:grid-cols-2">
         {rows.map((row) => (
-          <div key={row.label}>
-            <dt className="sr-only">{row.label}</dt>
-            <dd>
-              <a
-                href={row.href}
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-[15px] font-medium transition-colors hover:border-white/25 hover:bg-white/[0.08]"
-              >
-                <row.icon aria-hidden className="size-4 shrink-0 text-brand-300" />
-                {row.value}
-              </a>
-            </dd>
+          <div key={row.label} className="flex gap-3">
+            <row.icon aria-hidden className="mt-1 size-4 shrink-0 text-brand-300" />
+            <div className="min-w-0">
+              <dt className="text-[13px] text-white/50">{row.label}</dt>
+              <dd className="mt-0.5 text-[15px] font-medium">
+                {row.href ? (
+                  <a
+                    href={row.href}
+                    className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+                  >
+                    {row.value}
+                  </a>
+                ) : (
+                  row.value
+                )}
+              </dd>
+            </div>
           </div>
         ))}
       </dl>
-      <p className="mt-6 text-[14px] leading-relaxed text-white/60">
-        We will acknowledge your request promptly and respond within the time the law requires.
-      </p>
+      <a
+        href={privacyRequestHref}
+        className="mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-brand px-6 text-[15px] font-medium text-white transition-colors hover:bg-brand-600"
+      >
+        <Mail aria-hidden className="size-4" />
+        Send a privacy request
+      </a>
+    </div>
+  );
+}
+
+function Table({ block }: { block: Extract<PrivacyBlock, { kind: 'table' }> }) {
+  const rowHead = block.rowHead ?? 'bold';
+  return (
+    // Phones scroll the table sideways, so the text keeps its size.
+    <div className="overflow-x-auto rounded-2xl border border-line bg-paper">
+      <table
+        className={cn(
+          'w-full text-left text-[15px] leading-relaxed',
+          block.head.length > 2 && 'min-w-[40rem]',
+        )}
+      >
+        <caption className="sr-only">{block.caption}</caption>
+        <thead className="bg-canvas text-[13px] text-muted">
+          <tr>
+            {block.head.map((head) => (
+              <th key={head} scope="col" className="px-4 py-3 font-medium">
+                {head}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-line">
+          {block.rows.map((row) => (
+            <tr key={row[0]} className="align-top">
+              {row.map((cell, j) =>
+                j === 0 ? (
+                  <th
+                    key={j}
+                    scope="row"
+                    className={cn(
+                      'px-4 py-3.5 text-text',
+                      rowHead === 'code' && 'whitespace-nowrap font-mono text-[13px] font-medium',
+                      rowHead === 'bold' && 'font-medium',
+                      rowHead === 'plain' && 'font-normal',
+                    )}
+                  >
+                    {rich(cell)}
+                  </th>
+                ) : (
+                  <td key={j} className="px-4 py-3.5">
+                    {rich(cell)}
+                  </td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -91,70 +153,15 @@ function Block({ block }: { block: PrivacyBlock }) {
       return (
         <ul className="space-y-3">
           {block.items.map((item) => (
-            <li key={item.text} className="relative pl-6">
+            <li key={item} className="relative pl-6">
               <span aria-hidden className="absolute left-0.5 top-[0.72em] size-1.5 rounded-full bg-brand" />
-              {item.lead && <strong className="font-semibold text-text">{item.lead}. </strong>}
-              {rich(item.text)}
+              {rich(item)}
             </li>
           ))}
         </ul>
       );
     case 'table':
-      return (
-        <>
-          <div className="hidden overflow-hidden rounded-2xl border border-line bg-paper sm:block">
-            <table className="w-full text-left text-[15px] leading-relaxed">
-              <caption className="sr-only">{block.caption}</caption>
-              <thead className="bg-canvas text-[13px] text-muted">
-                <tr>
-                  {block.head.map((head) => (
-                    <th key={head} scope="col" className="px-4 py-3 font-medium">
-                      {head}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-line">
-                {block.rows.map((row) => (
-                  <tr key={row[0]} className="align-top">
-                    {row.map((cell, j) =>
-                      j === 0 ? (
-                        <th
-                          key={j}
-                          scope="row"
-                          className="whitespace-nowrap px-4 py-3.5 font-mono text-[13px] font-medium text-text"
-                        >
-                          {cell}
-                        </th>
-                      ) : (
-                        <td key={j} className={j === 2 ? 'px-4 py-3.5' : 'whitespace-nowrap px-4 py-3.5'}>
-                          {cell}
-                        </td>
-                      ),
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {/* Phones: one card per row instead of a squeezed table. */}
-          <ul className="space-y-3 sm:hidden" aria-label={block.caption}>
-            {block.rows.map((row) => (
-              <li key={row[0]} className="rounded-2xl border border-line bg-paper p-4 text-[15px]">
-                <p className="font-mono text-[13px] font-medium text-text">{row[0]}</p>
-                <dl className="mt-2 space-y-1.5">
-                  {row.slice(1).map((cell, j) => (
-                    <div key={j} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-2">
-                      <dt className="text-[13px] leading-6 text-faint">{block.head[j + 1]}</dt>
-                      <dd className="leading-relaxed">{cell}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </li>
-            ))}
-          </ul>
-        </>
-      );
+      return <Table block={block} />;
     case 'contact':
       return <ContactCard />;
   }
@@ -167,19 +174,21 @@ export default function PrivacyPage() {
         eyebrow="Legal"
         title={
           <>
-            Privacy <em>notice</em>
+            Privacy <em>Notice</em>
           </>
         }
         intro={privacy.intro}
       >
         <dl className="flex flex-wrap gap-x-8 gap-y-2 text-[15px]">
           <div className="flex gap-2">
-            <dt className="text-white/50">Last updated</dt>
-            <dd className="font-medium text-white">{privacy.updated}</dd>
+            <dt className="text-white/50">Company</dt>
+            <dd className="font-medium text-white">
+              {site.legalName}, {address}
+            </dd>
           </div>
           <div className="flex gap-2">
-            <dt className="text-white/50">Applies to</dt>
-            <dd className="font-medium text-white">{privacy.appliesTo}</dd>
+            <dt className="text-white/50">Last updated</dt>
+            <dd className="font-medium text-white">{privacy.updated}</dd>
           </div>
         </dl>
       </PageHero>
@@ -192,23 +201,18 @@ export default function PrivacyPage() {
             </aside>
 
             <div className="min-w-0 max-w-3xl">
-              <div className="rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+              <div className="rounded-3xl border border-line bg-canvas p-6 sm:p-8">
                 <h2 className="text-lg font-semibold tracking-tight">Privacy at a glance</h2>
-                <ul className="mt-6 grid gap-6 sm:grid-cols-2">
-                  {privacy.summary.map((item) => {
-                    const Icon = SUMMARY_ICONS[item.icon];
-                    return (
-                      <li key={item.title} className="flex gap-4">
-                        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-                          <Icon aria-hidden className="size-5" />
-                        </span>
-                        <div>
-                          <p className="font-semibold tracking-tight">{item.title}</p>
-                          <p className="mt-1 text-[15px] leading-relaxed text-muted">{item.text}</p>
-                        </div>
-                      </li>
-                    );
-                  })}
+                <ul className="mt-5 space-y-3 text-[16px] leading-relaxed text-muted">
+                  {privacy.glance.map((item) => (
+                    <li key={item} className="relative pl-6">
+                      <span
+                        aria-hidden
+                        className="absolute left-0.5 top-[0.68em] size-1.5 rounded-full bg-brand"
+                      />
+                      {rich(item)}
+                    </li>
+                  ))}
                 </ul>
               </div>
 

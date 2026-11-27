@@ -37,12 +37,12 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Users, roles & ACLs', 'Incident, problem & change', 'CSA certification prep'],
     about: {
       paragraphs: [
-        'Our ServiceNow admin course in Hyderabad prepares you for a common way into enterprise IT: the ServiceNow administrator role. ServiceNow administrators keep the platform running. They manage users and access, secure data, configure IT service processes and automate the requests employees raise every day.',
+        'Our ServiceNow Admin course in Hyderabad prepares you for a common way into enterprise IT: the ServiceNow administrator role. ServiceNow administrators keep the platform running. They manage users and access, secure data, configure IT service processes and automate the requests employees raise every day.',
         'You practise on your own free ServiceNow Personal Developer Instance (PDI), from navigation and the data model to ACLs, incident, problem and change management, the service catalog and Flow Designer. Classes are live and instructor-led, and the course prepares you for the ServiceNow Certified System Administrator (CSA) exam.',
       ],
       whyTitle: 'Why learn ServiceNow administration in 2026',
@@ -133,7 +133,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         title: 'Access control lists (ACLs)',
         summary: 'Protect data so people see only what they should.',
         topics: [
-          'How ACLs work and the order they are evaluated',
+          'How ACLs work and the order in which they are evaluated',
           'Table-level and field-level ACLs',
           'Read, write, create and delete operations',
           'Roles and conditions in ACLs',
@@ -222,7 +222,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
     ],
     tools: [
-      'ServiceNow platform',
+      'ServiceNow Platform',
       'Personal Developer Instance (PDI)',
       'Next Experience UI',
       'Application Navigator',
@@ -340,7 +340,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         a: 'A ServiceNow admin manages users, groups and roles, secures data with ACLs, configures lists and forms, and sets up catalog items, flows and IT processes such as incident, problem and change.',
       },
       {
-        q: 'What is the ServiceNow admin course syllabus?',
+        q: 'What is the ServiceNow Admin course syllabus?',
         a: 'Eleven modules: introduction to ServiceNow, the user interface, data model and architecture, user administration, ACLs, incident management, problem management, change management, the service catalog, Flow Designer, and certification and career readiness. Every module has a hands-on lab.',
       },
       {
@@ -357,11 +357,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'Can freshers get ServiceNow admin jobs?',
-        a: 'Yes. Entry roles such as ServiceNow Administrator L1/L2 and Platform Support Analyst suit freshers who know the platform. The CSA certification and the projects you build in this course make your profile stronger.',
+        a: 'Yes. Entry roles such as ServiceNow administrator L1/L2 and platform support analyst suit freshers who know the platform. The CSA certification and the projects you build in this course make your profile stronger.',
       },
       {
-        q: 'Is ServiceNow admin a good career?',
-        a: 'Many large companies run IT and business workflows on ServiceNow, and ServiceNow partners and capability centres in Hyderabad hire administrators. AmbitionBox lists ServiceNow Administrator salaries of ₹2.7 L to ₹10 L a year in India for 1 to 7 years of experience (November 2026). From admin you can grow into development, consulting or architecture.',
+        q: 'Is ServiceNow administration a good career?',
+        a: 'Many large companies run IT and business workflows on ServiceNow, and ServiceNow partners and capability centres in Hyderabad hire administrators. AmbitionBox lists ServiceNow administrator salaries of ₹2.7 L to ₹10 L a year in India for 1 to 7 years of experience (November 2026). From admin you can grow into development, consulting or architecture.',
       },
       {
         q: 'Can non-IT graduates learn ServiceNow administration?',
@@ -380,19 +380,19 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         a: 'Yes. ServiceNow offers a free Personal Developer Instance (PDI) through its developer program. You set it up in module 1 and use it for every lab.',
       },
       {
-        q: 'Are the ServiceNow admin classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the ServiceNow Admin classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'What can I learn after the ServiceNow admin course?',
-        a: 'ServiceNow ITSM Development for scripting, a product course such as HRSD, CRM or GRC, or the full ServiceNow Masters program.',
+        q: 'What can I learn after the ServiceNow Admin course?',
+        a: 'ServiceNow ITSM Development for scripting, a product course such as HRSD, CSM or GRC, or the full ServiceNow Masters program.',
       },
       {
-        q: 'What is the ServiceNow admin course fee in Hyderabad?',
+        q: 'What is the ServiceNow Admin course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Does the ServiceNow admin course include placement support?',
+        q: 'Does the ServiceNow Admin course include placement support?',
         a: 'Yes. It includes resume and LinkedIn help, mock interviews and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -416,12 +416,12 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Coding required, taught from the essentials',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['JavaScript & Glide API', 'ITSM automation & integrations', 'CAD and CIS-ITSM prep'],
     about: {
       paragraphs: [
-        'Our ServiceNow developer course in Hyderabad is the next step for ServiceNow admins and developers who want to build, not just configure. You learn to write the JavaScript, integrations and automations that make IT service management work at enterprise scale.',
+        'Our ServiceNow Developer course in Hyderabad is the next step for ServiceNow admins and developers who want to build, not just configure. You learn to write the JavaScript, integrations and automations that make IT service management work at enterprise scale.',
         'You script client and server logic for incident, problem and change with the Glide API, automate assignment and escalation, connect ServiceNow to monitoring and DevOps tools, build Service Portal widgets and move changes safely with update sets and automated tests. Classes are live and instructor-led, and the course prepares you for the CAD and CIS-ITSM certifications.',
       ],
       whyTitle: 'Why learn ServiceNow ITSM development in 2026',
@@ -557,7 +557,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
     ],
     tools: [
-      'ServiceNow platform',
+      'ServiceNow Platform',
       'Personal Developer Instance (PDI)',
       'JavaScript',
       'Glide API',
@@ -671,7 +671,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         a: 'It is recommended. CSA-level knowledge of tables, forms and roles makes development much easier. If you are new to ServiceNow, start with our ServiceNow Admin course; module 1 here also recaps the ITSM tables.',
       },
       {
-        q: 'What is the ServiceNow developer course syllabus?',
+        q: 'What is the ServiceNow Developer course syllabus?',
         a: 'Eight modules: ITSM processes for developers, JavaScript and the Glide API, client-side scripting, server-side scripting, incident, problem and change automation, integrations, Service Portal, and testing with career readiness. Every module has a hands-on lab.',
       },
       {
@@ -708,26 +708,26 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'Are there ServiceNow developer jobs in Hyderabad?',
-        a: 'Yes. IT services firms and global capability centres in Hyderabad hire ServiceNow developers. Entry roles such as ServiceNow Developer or Admin/Developer suit people with admin skills who can script.',
+        a: 'Yes. IT services firms and global capability centres in Hyderabad hire ServiceNow developers. Entry roles such as ServiceNow developer or admin/developer suit people with admin skills who can script.',
       },
       {
-        q: 'Is ServiceNow developer a good career?',
-        a: 'Developer roles pay more than admin roles. AmbitionBox lists ServiceNow Developer salaries of ₹5.5 L to ₹13.6 L a year in India for 1 to 3 years of experience, and ₹7.8 L to ₹21.2 L for 3 to 6 years (November 2026). You can grow into integration, technical consulting or architect roles.',
+        q: 'Is ServiceNow development a good career?',
+        a: 'Developer roles pay more than admin roles. AmbitionBox lists ServiceNow developer salaries of ₹5.5 L to ₹13.6 L a year in India for 1 to 3 years of experience, and ₹7.8 L to ₹21.2 L for 3 to 6 years (November 2026). You can grow into integration, technical consulting or architect roles.',
       },
       {
         q: 'What can I learn after ServiceNow ITSM Development?',
-        a: 'A product course such as HRSD, CRM or GRC, ServiceNow FDSE for AI agents, or the full ServiceNow Masters program.',
+        a: 'A product course such as HRSD, CSM or GRC, ServiceNow FDSE for AI agents, or the full ServiceNow Masters program.',
       },
       {
-        q: 'Are the ServiceNow developer classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the ServiceNow Developer classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'What is the ServiceNow developer course fee in Hyderabad?',
+        q: 'What is the ServiceNow Developer course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Does the ServiceNow developer course include placement support?',
+        q: 'Does the ServiceNow Developer course include placement support?',
         a: 'Yes. It includes resume and LinkedIn help, mock interviews and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -752,7 +752,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['HR cases & SLAs', 'Lifecycle events & onboarding', 'CIS-HR exam preparation'],
     about: {
@@ -889,11 +889,11 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       'ServiceNow Platform',
       'HR Service Delivery (HRSD)',
       'HR Case Management',
-      'HR Services',
-      'HR Criteria',
-      'Record Producers',
-      'Lifecycle Events',
-      'Service Level Agreements (SLA)',
+      'HR services',
+      'HR criteria',
+      'Record producers',
+      'Lifecycle events',
+      'Service level agreements (SLAs)',
       'Employee Center (formerly Employee Service Center)',
       'Personal Developer Instance (PDI)',
     ],
@@ -915,7 +915,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         problem: 'New joiners wait for laptops, access and HR tasks because nothing is coordinated.',
         text: 'Configure onboarding with ordered activities for HR, IT and the manager.',
         result: 'Onboarding runs in order, with every task assigned to HR, IT or the manager.',
-        stack: ['Lifecycle Events', 'HR Services', 'Service Activities'],
+        stack: ['Lifecycle events', 'HR services', 'Service activities'],
       },
       {
         title: 'HR case management system',
@@ -926,10 +926,10 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         title: 'Employee Center portal',
-        problem: 'Employees cannot find HR information and raise duplicate requests.',
+        problem: 'Employees cannot find HR information, so they raise duplicate requests.',
         text: 'Set up the portal where employees find HR services and raise requests.',
         result: 'A self-service portal where employees find answers and raise the right request.',
-        stack: ['Employee Center', 'Record Producers', 'HR Criteria'],
+        stack: ['Employee Center', 'Record producers', 'HR criteria'],
       },
     ],
     capstone:
@@ -1010,7 +1010,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'Are the ServiceNow HRSD classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'How is ServiceNow HRSD different from ITSM?',
@@ -1030,7 +1030,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What does a ServiceNow HRSD developer do?',
-        a: 'An HRSD developer builds and configures HR cases, HR services, record producers and lifecycle events, and keeps the employee portal working. Many start as a ServiceNow HR Administrator or junior HRSD developer and grow into consultant roles.',
+        a: 'An HRSD developer builds and configures HR cases, HR services, record producers and lifecycle events, and keeps the employee portal working. Many start as a ServiceNow HR administrator or junior HRSD developer and grow into consultant roles.',
       },
       {
         q: 'Are there ServiceNow HRSD jobs in Hyderabad?',
@@ -1071,7 +1071,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: [
       'Case management & routing',
@@ -1226,7 +1226,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       'Knowledge Management',
       'Virtual Agent',
       'Playbooks',
-      'Service Level Agreements (SLA)',
+      'Service level agreements (SLAs)',
       'ServiceNow Otto (formerly Now Assist)',
       'Performance Analytics',
       'Personal Developer Instance (PDI)',
@@ -1345,7 +1345,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'Are the ServiceNow CSM classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'How is ServiceNow CSM different from ITSM?',
@@ -1369,7 +1369,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What does a ServiceNow CSM developer do?',
-        a: 'A CSM developer builds and configures customer cases, the agent workspace, the customer portal and Virtual Agent conversations. Many start as a ServiceNow CRM Analyst or customer service platform administrator and grow into CSM developer roles.',
+        a: 'A CSM developer builds and configures customer cases, the agent workspace, the customer portal and Virtual Agent conversations. Many start as a ServiceNow CRM analyst or customer service platform administrator and grow into CSM developer roles.',
       },
       {
         q: 'Are there ServiceNow CSM jobs in Hyderabad?',
@@ -1408,7 +1408,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: [
       'Policy, risk & audit',
@@ -1701,7 +1701,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'What ServiceNow GRC jobs can I apply for after the course?',
-        a: 'Entry roles include IRM Analyst, Risk and Compliance Analyst and Vendor Risk Analyst. With experience come GRC Developer, GRC Implementation Specialist and GRC Consultant roles. Banks, insurers, consulting firms and IT services companies that implement ServiceNow for regulated clients hire for them.',
+        a: 'Entry roles include IRM analyst, risk and compliance analyst and vendor risk analyst. With experience come GRC developer, GRC implementation specialist and GRC consultant roles. Banks, insurers, consulting firms and IT services companies that implement ServiceNow for regulated clients hire for them.',
       },
       {
         q: 'What ServiceNow GRC interview questions should I prepare for?',
@@ -1709,7 +1709,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'Are the ServiceNow GRC classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'What is the ServiceNow GRC course fee in Hyderabad?',
@@ -1736,18 +1736,18 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     h1: 'ServiceNow AI Agents Course in Hyderabad (FDSE)',
     tagline: 'Build apps, AI skills and agents on ServiceNow, side by side with customers.',
     summary:
-      'A ServiceNow Forward Deployed Software Engineer works with customers to turn their problems into working apps and AI agents on the ServiceNow AI Platform. This course goes past switching on ServiceNow Otto: you build a custom app, a custom AI skill and an agentic workflow, connect them to outside systems and govern them in Super Intelligence Control Tower.',
+      'A ServiceNow forward deployed software engineer works with customers to turn their problems into working apps and AI agents on the ServiceNow AI Platform. This course goes past switching on ServiceNow Otto: you build a custom app, a custom AI skill and an agentic workflow, connect them to outside systems and govern them in Super Intelligence Control Tower.',
     prerequisites:
       'Programming experience (JavaScript or another language) and ServiceNow basics are recommended. The course suits developers and experienced ServiceNow professionals.',
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Coding required (JavaScript)',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['AI Agent Studio & AI Skill Kit', 'Apps & integrations', 'CAD exam preparation'],
     about: {
       paragraphs: [
-        'Our ServiceNow AI agents course is for developers who want to build apps and AI solutions directly with customers, the way a ServiceNow forward deployed engineer does. Forward deployed software engineers (FDSEs) turn a customer’s problem into a working ServiceNow solution quickly, from custom apps to AI agents.',
+        'Our ServiceNow AI Agents course is for developers who want to build apps and AI solutions directly with customers, the way a ServiceNow forward deployed engineer does. Forward deployed software engineers (FDSEs) turn a customer’s problem into a working ServiceNow solution quickly, from custom apps to AI agents.',
         'You run discovery, build scoped apps in ServiceNow Studio, integrate outside systems, create custom skills in AI Skill Kit (formerly Now Assist Skill Kit), build agentic workflows in AI Agent Studio and govern them in Super Intelligence Control Tower (formerly AI Control Tower). Classes are live and instructor-led, and the course prepares you for the Certified Application Developer (CAD) exam.',
       ],
       whyTitle: 'Why learn ServiceNow AI agents in 2026',
@@ -1988,7 +1988,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         a: 'A forward deployed software engineer (FDSE) works directly with a customer’s team to turn a problem into a working ServiceNow solution quickly, from a custom app to AI agents. The role mixes coding, problem solving and customer communication.',
       },
       {
-        q: 'Who is this ServiceNow AI agents course for?',
+        q: 'Who is this ServiceNow AI Agents course for?',
         a: 'Developers and experienced ServiceNow professionals. It is not a first ServiceNow course: if you are new to the platform, start with ServiceNow Platform Administration; an advisor can suggest a path.',
       },
       {
@@ -2029,7 +2029,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'Are the ServiceNow FDSE classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'What is the ServiceNow FDSE course fee in Hyderabad?',
@@ -2054,12 +2054,12 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
     h1: 'ServiceNow Business Analyst Course in Hyderabad',
     tagline: 'Turn business needs into ServiceNow solutions: processes, user stories and testing.',
     summary:
-      'A ServiceNow Business Analyst decides what the ServiceNow team builds, by turning how a business works into clear requirements. In this course you run discovery for a real ITSM process, map it to ServiceNow features, write user stories developers can build from and take the release through testing.',
+      'A ServiceNow business analyst decides what the ServiceNow team builds, by turning how a business works into clear requirements. In this course you run discovery for a real ITSM process, map it to ServiceNow features, write user stories developers can build from and take the release through testing.',
     prerequisites: 'No coding needed. Business, IT support or process experience helps.',
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['ITSM processes & discovery', 'User stories & UAT', 'CSA exam practice'],
     about: {
@@ -2087,7 +2087,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       'Walk through incident, problem, change and request on ServiceNow',
       'Run discovery workshops and stakeholder interviews',
       'Map as-is and to-be processes and find the gaps',
-      'Write user stories with acceptance criteria, out of the box first',
+      'Write user stories with acceptance criteria, out-of-the-box first',
       'Manage a backlog and plan sprints in Agile Development 2.0 or Jira',
       'Write UAT scripts, log defects and check go-live readiness',
       'Plan user training and measure adoption with dashboards',
@@ -2306,7 +2306,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
         a: 'A ServiceNow BA runs discovery with the business, maps current and future processes, writes requirements and user stories, manages the backlog with the product owner, and checks through UAT that the delivered solution meets the need.',
       },
       {
-        q: 'Who should join this ServiceNow business analyst course?',
+        q: 'Who should join this ServiceNow Business Analyst course?',
         a: 'Business analysts, IT support and service desk staff, and graduates with business degrees. No coding is needed; business, IT support or process experience helps, and freshers with that exposure do well.',
       },
       {
@@ -2339,7 +2339,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'Are there ServiceNow business analyst jobs in Hyderabad?',
-        a: 'Yes. IT services firms and consultancies in Hyderabad post ServiceNow business analyst and ITSM analyst roles. Entry roles include ServiceNow Business Analyst, ITSM Business Analyst and UAT Analyst.',
+        a: 'Yes. IT services firms and consultancies in Hyderabad post ServiceNow business analyst and ITSM analyst roles. Entry roles include ServiceNow business analyst, ITSM business analyst and UAT analyst.',
       },
       {
         q: 'What ServiceNow business analyst interview questions should I prepare for?',
@@ -2347,7 +2347,7 @@ export const servicenowCourses: Program<ServiceNowCourseSlug>[] = [
       },
       {
         q: 'Are the ServiceNow BA classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
         q: 'What is the ServiceNow Business Analyst course fee in Hyderabad?',

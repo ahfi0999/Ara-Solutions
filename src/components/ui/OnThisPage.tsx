@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
@@ -15,6 +15,8 @@ const READ_LINE = 140;
  */
 export function OnThisPage({ items }: { items: Item[] }) {
   const [active, setActive] = useState<string | undefined>(items[0]?.id);
+  const [open, setOpen] = useState(false);
+  const listId = useId();
 
   useEffect(() => {
     let frame = 0;
@@ -43,8 +45,8 @@ export function OnThisPage({ items }: { items: Item[] }) {
     };
   }, [items]);
 
-  const list = (compact: boolean) => (
-    <ol className={cn('border-l border-line', compact ? 'mt-3 space-y-0.5' : 'mt-4 space-y-0.5')}>
+  const list = () => (
+    <ol className="mt-3 space-y-0.5 border-l border-line lg:mt-4">
       {items.map((item, index) => {
         const current = item.id === active;
         return (
@@ -53,10 +55,7 @@ export function OnThisPage({ items }: { items: Item[] }) {
               href={`#${item.id}`}
               aria-current={current ? 'location' : undefined}
               // On phones, fold the list away once a section is picked.
-              onClick={(event) => {
-                const details = event.currentTarget.closest('details');
-                if (details) details.open = false;
-              }}
+              onClick={() => setOpen(false)}
               className={cn(
                 '-ml-px flex gap-3 border-l-2 py-1.5 pl-4 text-[14px] leading-snug transition-colors',
                 current
@@ -75,22 +74,31 @@ export function OnThisPage({ items }: { items: Item[] }) {
     </ol>
   );
 
+  // One list for every screen: beside the text on large screens, folded behind a button on phones and tablets.
   return (
-    <>
-      <details className="group rounded-2xl border border-line bg-paper p-4 lg:hidden">
-        <summary className="flex cursor-pointer list-none items-center justify-between text-[15px] font-medium [&::-webkit-details-marker]:hidden">
-          On this page
-          <ChevronDown aria-hidden className="size-4 text-muted transition-transform group-open:rotate-180" />
-        </summary>
-        {list(true)}
-      </details>
-      <nav
-        aria-label="On this page"
-        className="hidden lg:sticky lg:top-32 lg:block lg:transition-[top] lg:duration-500 [[data-header-hidden]_&]:lg:top-12"
+    <nav
+      aria-label="On this page"
+      className="rounded-2xl border border-line bg-paper p-4 lg:sticky lg:top-32 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:transition-[top] lg:duration-500 [[data-header-hidden]_&]:lg:top-12"
+    >
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={listId}
+        onClick={() => setOpen((value) => !value)}
+        className="flex w-full items-center justify-between text-[15px] font-medium lg:hidden"
       >
-        <p className="text-[13px] font-medium text-faint">On this page</p>
-        {list(false)}
-      </nav>
-    </>
+        On this page
+        <ChevronDown
+          aria-hidden
+          className={cn('size-4 text-muted transition-transform', open && 'rotate-180')}
+        />
+      </button>
+      <p aria-hidden className="hidden text-[13px] font-medium text-faint lg:block">
+        On this page
+      </p>
+      <div id={listId} className={cn('lg:block', !open && 'hidden')}>
+        {list()}
+      </div>
+    </nav>
   );
 }

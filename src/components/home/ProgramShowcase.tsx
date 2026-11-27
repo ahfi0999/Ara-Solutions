@@ -96,7 +96,7 @@ function Heading() {
   return (
     <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
       <SectionHeading
-        eyebrow="Training & placement"
+        eyebrow="Training & Placement"
         title={
           <>
             Build your <em>technology career</em>

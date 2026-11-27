@@ -581,7 +581,7 @@ export function WhyAraBento() {
           </span>
           <h3 className="mt-5 text-xl font-semibold tracking-tight">Global hubs: US, EU and Asia</h3>
           <p className="mt-2 leading-relaxed text-white/65">
-            {`Based in ${site.address.area}, Hyderabad, with clients in India, the USA and the UK, and recruitment coverage across European markets.`}
+            {`Based in ${site.address.city}, with clients in India, the USA and the UK, and recruitment coverage across European markets.`}
           </p>
           <SceneFrame scene={HubsScene} replayOn={hovers.hubs ?? 0} className="mt-auto pt-4" />
         </Card>

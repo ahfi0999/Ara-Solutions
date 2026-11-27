@@ -30,12 +30,12 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'Python taught from the basics',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Python, SQL & statistics', 'Machine learning & forecasting', 'Deploy models as apps'],
     about: {
       paragraphs: [
-        'Our data science course in Hyderabad teaches you to turn business data into predictions and decisions. Data scientists answer questions such as which customers will leave, how much stock to order and which marketing works, using statistics and machine learning.',
+        'Our Data Science course in Hyderabad teaches you to turn business data into predictions and decisions. Data scientists answer questions such as which customers will leave, how much stock to order and which marketing works, using statistics and machine learning.',
         'You learn Python and SQL, statistics, exploratory analysis, supervised and unsupervised machine learning, forecasting, model explainability and deployment with Streamlit and FastAPI, and you use LLMs to speed up analysis. Classes are live and instructor-led, and you finish with three projects, a capstone and certification practice.',
       ],
       whyTitle: 'Why learn data science in 2026',
@@ -199,7 +199,7 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         title: 'Customer churn prediction',
         problem: 'A telecom company loses customers without warning.',
         text: 'Predict which customers will leave and explain why.',
-        result: 'A churn model that flags at-risk customers and the reasons.',
+        result: 'A churn model that flags at-risk customers and explains why.',
         stack: ['scikit-learn', 'XGBoost'],
       },
       {
@@ -259,7 +259,10 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
       salaryNote:
         'Annual salary ranges from AmbitionBox (accessed November 2026). Actual pay depends on the company, city, skills and experience.',
       path: [
-        { stage: 'Start (0 to 2 years)', roles: 'Junior Data Scientist, Data Analyst, Analytics Associate' },
+        {
+          stage: 'Start (0 to 2 years)',
+          roles: 'Junior Data Scientist, Data Analyst, Business Analytics Associate',
+        },
         { stage: 'Grow (2 to 5 years)', roles: 'Data Scientist, Decision Scientist' },
         { stage: 'Lead (5+ years)', roles: 'Senior Data Scientist, Analytics Manager' },
       ],
@@ -270,11 +273,11 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'A data scientist uses data, statistics and machine learning to predict outcomes and help a business decide, for example which customers may leave or how much stock to order. The work runs from framing the question and cleaning data to building, explaining and deploying a model.',
       },
       {
-        q: 'What is the data science course syllabus?',
-        a: 'Our data science course in Hyderabad has eight modules: Python for data science, statistics and probability, exploratory data analysis, supervised machine learning, unsupervised learning, time series and forecasting, AI and deployment, and capstone and career readiness. Every module has a hands-on lab.',
+        q: 'What is the Data Science course syllabus?',
+        a: 'Our Data Science course in Hyderabad has eight modules: Python for data science, statistics and probability, exploratory data analysis, supervised machine learning, unsupervised learning, time series and forecasting, AI and deployment, and capstone and career readiness. Every module has a hands-on lab.',
       },
       {
-        q: 'What is the eligibility for the data science course?',
+        q: 'What is the eligibility for the Data Science course?',
         a: 'The course suits graduates in science, maths, engineering or commerce, data and business analysts, and software developers. You need basic maths and logical thinking. No coding experience is needed, because Python is taught from the start. An advisor can check whether it suits your background.',
       },
       {
@@ -283,22 +286,22 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
       },
       {
         q: 'Can freshers get data science jobs?',
-        a: 'Yes, usually through entry roles. Freshers often start as a Data Analyst, Business Analytics Associate or Junior Data Scientist and grow into Data Scientist roles in 2 to 5 years. The three projects and the capstone you build give you work to show in interviews.',
+        a: 'Yes, usually through entry roles. Freshers often start as a data analyst, business analytics associate or junior data scientist and grow into data scientist roles in 2 to 5 years. The three projects and the capstone you build give you work to show in interviews.',
       },
       {
         q: 'Is data science a good career?',
-        a: 'Companies in many industries use data science, and employers look for people who can also deploy models and use AI, which this course covers. AmbitionBox lists Data Scientist salaries of ₹3.8 L to ₹27.9 L a year in India for 1 to 8 years of experience (November 2026).',
+        a: 'Companies in many industries use data science, and employers look for people who can also deploy models and use AI, which this course covers. AmbitionBox lists data scientist salaries of ₹3.8 L to ₹27.9 L a year in India for 1 to 8 years of experience (November 2026).',
       },
       {
-        q: 'Does the data science course include AI?',
+        q: 'Does the Data Science course include AI?',
         a: 'Yes. In module 7 you use LLMs to speed up analysis and learn where they help and where they mislead, alongside model explainability and deployment. For deep learning and generative AI applications, see our AI & Machine Learning course.',
       },
       {
-        q: 'Which certifications does this data science course prepare me for?',
-        a: 'It builds the machine learning skills behind the AWS Certified Machine Learning Engineer – Associate and Microsoft’s Machine Learning Operations Engineer Associate (exam AI-300, which replaced DP-100), with certification practice in the final module. Both exams also test the provider’s own cloud services, so plan extra practice on that platform. You book and pay for the exam with the provider.',
+        q: 'Which certifications does this Data Science course prepare me for?',
+        a: 'It builds the machine learning skills behind the AWS Certified Machine Learning Engineer – Associate and Microsoft’s Machine Learning Operations Engineer Associate (exam AI-300, which replaced DP-100), with certification practice in the final module. Each exam also tests its provider’s own cloud services, so plan extra practice on that platform. You book and pay for each exam with the provider.',
       },
       {
-        q: 'What projects will I build in the data science course?',
+        q: 'What projects will I build in the Data Science course?',
         a: 'A customer churn prediction model, monthly sales forecasts by store and product, and a customer segmentation app, plus an end-to-end capstone that you present to a mock business team.',
       },
       {
@@ -310,19 +313,19 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'Data Science focuses on statistics, analysis, classic machine learning and forecasting for business problems. The AI & Machine Learning course goes further into deep learning and generative AI applications.',
       },
       {
-        q: 'Are the data science classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the Data Science classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'What can I learn after data science?',
+        q: 'What can I learn after the Data Science course?',
         a: 'AI & Machine Learning, Agentic AI Engineering or Data Engineering.',
       },
       {
-        q: 'What are the data science course fees in Hyderabad?',
+        q: 'What are the Data Science course fees in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Does this data science training in Hyderabad include placement support?',
+        q: 'Does this Data Science training in Hyderabad include placement support?',
         a: 'Yes. It includes resume and LinkedIn help, mock interviews and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -346,12 +349,12 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'SQL and Python taught from the essentials',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['SQL, Python & PySpark', 'Databricks lakehouse', 'Airflow, dbt & Kafka pipelines'],
     about: {
       paragraphs: [
-        'Our data engineering course in Hyderabad trains you to build the pipelines and platforms that analytics and AI teams depend on. Data engineers collect data from many sources, clean and model it, and deliver it reliably to dashboards, data scientists and AI systems.',
+        'Our Data Engineering course in Hyderabad trains you to build the pipelines and platforms that analytics and AI teams depend on. Data engineers collect data from many sources, clean and model it, and deliver it reliably to dashboards, data scientists and AI systems.',
         'You learn advanced SQL and Python, data modelling, Apache Spark with PySpark, a Databricks lakehouse with Delta Lake and Unity Catalog, Airflow and dbt pipelines, Kafka streaming and Azure and AWS data services, with data quality and CI/CD. Classes are live and instructor-led, and the course prepares you for the Databricks Certified Data Engineer Associate exam.',
       ],
       whyTitle: 'Why learn data engineering in 2026',
@@ -580,7 +583,7 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'A data engineer builds the pipelines that collect, clean and deliver data to analysts, data scientists and AI systems, and keeps them reliable with tests and monitoring.',
       },
       {
-        q: 'What is the data engineering course syllabus?',
+        q: 'What is the Data Engineering course syllabus?',
         a: 'Eight modules: SQL and Python for data, data modelling and warehousing, big data with Spark, lakehouse with Databricks, pipelines and orchestration, streaming, cloud data platforms, and quality, DevOps and career readiness. Every module has a hands-on lab.',
       },
       {
@@ -589,10 +592,10 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
       },
       {
         q: 'Can freshers get data engineer jobs?',
-        a: 'Yes, usually through entry roles such as ETL Developer or Junior Data Engineer, which suit graduates with programming basics. SQL, PySpark and the projects you build in this course make your profile stronger.',
+        a: 'Yes, usually through entry roles such as ETL developer or junior data engineer, which suit graduates with programming basics. SQL, PySpark and the projects you build in this course make your profile stronger.',
       },
       {
-        q: 'Does the data engineering course teach PySpark?',
+        q: 'Does the Data Engineering course teach PySpark?',
         a: 'Yes. Module 3 teaches Apache Spark with PySpark: DataFrames, Spark SQL, transformations and actions, partitioning and performance tuning. You use PySpark again on Databricks and for streaming.',
       },
       {
@@ -600,11 +603,11 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'Yes. Module 4 is a Databricks lakehouse module: the workspace, Delta Lake, the medallion architecture, Unity Catalog, Lakeflow Jobs and Lakeflow pipelines (formerly Delta Live Tables). The retail lakehouse project is built on Databricks.',
       },
       {
-        q: 'Does this course prepare me for the Databricks Data Engineer Associate certification?',
+        q: 'Does this course prepare me for the Databricks Certified Data Engineer Associate certification?',
         a: 'Yes. The Spark and Databricks modules cover what the Databricks Certified Data Engineer Associate exam tests, and module 8 includes certification practice. You register and pay for the exam with Databricks. There is no formal prerequisite, but Databricks recommends at least six months of hands-on experience.',
       },
       {
-        q: 'Which cloud does the data engineering course use?',
+        q: 'Which cloud does the Data Engineering course use?',
         a: 'Azure and AWS: Azure Data Factory and Azure data services, and AWS S3, Glue and Redshift, with Databricks and Snowflake on top. The core skills (SQL, Spark and Airflow) work on any cloud.',
       },
       {
@@ -621,22 +624,22 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
       },
       {
         q: 'Is data engineering a good career?',
-        a: 'Every analytics and AI project needs reliable data, so data engineers are hired across industries. AmbitionBox lists Data Engineer salaries of ₹3.9 L to ₹22 L a year in India (November 2026), and the path leads to senior data engineer and data architect roles.',
+        a: 'Every analytics and AI project needs reliable data, so data engineers are hired across industries. AmbitionBox lists data engineer salaries of ₹3.9 L to ₹22 L a year in India (November 2026), and the path leads to senior data engineer and data architect roles.',
       },
       {
-        q: 'What can I learn after the data engineering course?',
+        q: 'What can I learn after the Data Engineering course?',
         a: 'Data Science, AI & Machine Learning, or a cloud certification such as the AWS Certified Data Engineer – Associate.',
       },
       {
-        q: 'What are the data engineer course fees in Hyderabad?',
+        q: 'What are the Data Engineering course fees in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Are the data engineering classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the Data Engineering classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'Does the data engineering course in Hyderabad include placement support?',
+        q: 'Does the Data Engineering course in Hyderabad include placement support?',
         a: 'Yes. It includes resume and LinkedIn help, mock interviews and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],
@@ -652,17 +655,17 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
     h1: 'Data Analytics Course in Hyderabad',
     tagline: 'Turn raw data into dashboards and decisions with Excel, SQL, Power BI and Tableau.',
     summary:
-      'A data analyst turns raw business data into the dashboards and answers managers use to decide what to do next. This data analytics course goes beyond tool features: you clean messy data, query it with SQL, build Power BI and Tableau dashboards and present a clear recommendation from them.',
+      'A data analyst turns raw business data into the dashboards and answers managers use to decide what to do next. This Data Analytics course goes beyond tool features: you clean messy data, query it with SQL, build Power BI and Tableau dashboards and present a clear recommendation from them.',
     prerequisites: 'No coding experience needed. Basic Excel helps.',
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No prior coding needed; SQL and Python are taught from scratch',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: ['Excel, SQL & Power BI', 'Tableau & Python for analysts', 'PL-300 certification prep'],
     about: {
       paragraphs: [
-        'Our data analytics course in Hyderabad is a practical way into a data career, with no coding background needed. Data analysts turn raw business data into dashboards and answers that managers use to decide what to do next.',
+        'Our Data Analytics course in Hyderabad is a practical way into a data career, with no coding background needed. Data analysts turn raw business data into dashboards and answers that managers use to decide what to do next.',
         'You learn Excel and Power Query, SQL, statistics, Power BI with DAX, Tableau, Python for analysts and AI tools such as Copilot, and finish by presenting a data story. If you came looking for a Power BI course in Hyderabad, Power BI has a full module, from data modelling and DAX to the Power BI service and row-level security. Classes are live and instructor-led, and the course prepares you for Microsoft’s PL-300 exam for the Power BI Data Analyst Associate certification.',
       ],
       whyTitle: 'Why learn data analytics in 2026',
@@ -880,7 +883,7 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'A data analyst collects, cleans and analyses business data, then builds reports and dashboards that answer questions such as which products are growing or why customers leave. Managers use those answers to decide what to do next.',
       },
       {
-        q: 'What is the data analytics course syllabus?',
+        q: 'What is the Data Analytics course syllabus?',
         a: 'Eight modules: Excel for analysis, SQL for data analysis, statistics for analysts, Power BI, Tableau, Python for analysts, AI for analysts, and storytelling and career readiness. Every module has a hands-on lab, and you build three projects and a capstone.',
       },
       {
@@ -908,31 +911,31 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'Yes. You use Copilot in Power BI and Excel, and LLMs to draft SQL and summaries, and you learn to check their answers and keep private data safe.',
       },
       {
-        q: 'What projects will I build in the data analytics course?',
+        q: 'What projects will I build in the Data Analytics course?',
         a: 'A Power BI sales performance dashboard, an HR attrition analysis and an e-commerce customer story in Tableau, plus a capstone where you answer a real business question end to end.',
       },
       {
         q: 'Can freshers get data analyst jobs?',
-        a: 'Yes. Entry roles such as Data Analyst, MIS Analyst and Reporting Analyst suit freshers, and no coding background is needed to start. Your projects, a Tableau Public portfolio and the PL-300 certification make your profile stronger.',
+        a: 'Yes. Entry roles such as data analyst, MIS analyst and reporting analyst suit freshers, and no coding background is needed to start. Your projects, a Tableau Public portfolio and the PL-300 certification make your profile stronger.',
       },
       {
         q: 'Is data analytics a good career?',
-        a: 'Businesses in every industry use data to make decisions, so analysts work in many sectors. AmbitionBox lists Data Analyst salaries of ₹2 L to ₹13.9 L a year in India for 0 to 6 years of experience (November 2026). From analyst roles you can grow into BI, Power BI development or analytics leadership.',
+        a: 'Businesses in every industry use data to make decisions, so analysts work in many sectors. AmbitionBox lists data analyst salaries of ₹2 L to ₹13.9 L a year in India for 0 to 6 years of experience (November 2026). From analyst roles you can grow into BI, Power BI development or analytics leadership.',
       },
       {
         q: 'Is Power BI enough to get a data analyst job?',
         a: 'Power BI with SQL and Excel covers the core of many analyst job posts, and this course teaches all three, plus Tableau and Python.',
       },
       {
-        q: 'What can I learn after data analytics?',
+        q: 'What can I learn after the Data Analytics course?',
         a: 'Data Science to build predictive models, Data Engineering to build data pipelines, or AI Product Owner to lead AI products.',
       },
       {
-        q: 'Are the data analytics classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the Data Analytics classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'What is the data analytics course fee in Hyderabad?',
+        q: 'What is the Data Analytics course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
@@ -954,13 +957,13 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
     h1: 'AI Product Owner Course in Hyderabad',
     tagline: 'Decide which AI features to build, how to measure them and how to ship them responsibly.',
     summary:
-      'An AI product owner decides which AI features a team builds, why they matter and how success is measured. This AI product owner course goes beyond buzzwords: you find real AI use cases, write backlogs an AI team can build, test a clickable prototype with users and set the metrics and guardrails for release.',
+      'An AI product owner decides which AI features a team builds, why they matter and how success is measured. This AI Product Owner course goes beyond buzzwords: you find real AI use cases, write backlogs an AI team can build, test a clickable prototype with users and set the metrics and guardrails for release.',
     prerequisites:
       'No coding needed. Experience as a business analyst, product owner, project manager or in a business role helps.',
     details: {
       mode: 'Live classes on Zoom, every class recorded',
       coding: 'No coding needed',
-      location: 'Madhapur, Hyderabad',
+      location: 'Hyderabad',
     },
     highlights: [
       'AI use cases & backlogs',
@@ -969,7 +972,7 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
     ],
     about: {
       paragraphs: [
-        'Our AI product owner course in Hyderabad prepares business analysts, product owners and project managers to lead AI products. AI product owners decide which AI features to build, how to measure them and how to release them responsibly.',
+        'Our AI Product Owner course in Hyderabad prepares business analysts, product owners and project managers to lead AI products. AI product owners decide which AI features to build, how to measure them and how to release them responsibly.',
         'You learn how AI and LLMs work in plain terms, product ownership with Scrum, AI use-case discovery, backlogs for AI features, no-code prototyping, AI metrics and responsible AI. If you are looking for product owner training in Hyderabad, module 2 teaches the product owner role in Scrum from the start. Classes are live and instructor-led, and the course prepares you for two Scrum.org certifications: PSPO I and PSPO-AI Essentials.',
       ],
       whyTitle: 'Why learn AI product ownership in 2026',
@@ -1129,7 +1132,7 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         stack: ['Jira', 'Miro'],
       },
       {
-        title: 'Use case portfolio',
+        title: 'Use-case portfolio',
         problem: 'Leadership has many AI ideas but no priorities.',
         text: 'Find and rank 10 AI use cases for a company, with business cases.',
         result: 'A ranked AI use-case portfolio with business cases.',
@@ -1187,7 +1190,7 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'No. Product owners decide what to build and why; engineers build it. This course teaches enough about how AI works to make good product decisions and talk with engineers, without writing code.',
       },
       {
-        q: 'Who is this AI product owner course for?',
+        q: 'Who is this AI Product Owner course for?',
         a: 'Business analysts, product owners, project managers and domain experts moving into AI. If you are new to Scrum, module 2 teaches the product owner role from the start. Freshers can ask an advisor whether the course suits their background.',
       },
       {
@@ -1200,7 +1203,7 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
       },
       {
         q: 'Can a business analyst become a product owner?',
-        a: 'Yes, and it is a common move. Business analysts already gather requirements and write user stories; product owners also order the backlog and decide what to build. A typical path starts as an AI Business Analyst or Product Owner, grows into AI Product Owner or AI Product Manager in 2 to 5 years, and leads to roles such as Head of AI Products or AI Transformation Lead after 5 years or more.',
+        a: 'Yes, and it is a common move. Business analysts already gather requirements and write user stories; product owners also order the backlog and decide what to build. You typically start as an AI business analyst or product owner, grow into an AI product owner or AI product manager role in 2 to 5 years, and can move into roles such as head of AI products or AI transformation lead after 5 years or more.',
       },
       {
         q: 'Which AI product owner certification does this course prepare me for?',
@@ -1219,7 +1222,7 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'ChatGPT, Claude, Gemini and no-code AI builders, plus Jira, Figma and Miro.',
       },
       {
-        q: 'What projects will I build in the AI product owner course?',
+        q: 'What projects will I build in the AI Product Owner course?',
         a: 'An AI support assistant plan, a ranked AI use-case portfolio and a clickable AI prototype, plus a capstone that takes an AI product from idea to release plan.',
       },
       {
@@ -1235,15 +1238,15 @@ export const aiDataCourses: Program<AiDataCourseSlug>[] = [
         a: 'Agentic AI Engineering for a deeper technical view of AI agents, or Business Analyst with GenAI.',
       },
       {
-        q: 'Are the AI product owner classes live or recorded?',
-        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Madhapur, Hyderabad.',
+        q: 'Are the AI Product Owner classes live or recorded?',
+        a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded so you can revise or catch up. ARA Solutions is based in Hyderabad.',
       },
       {
-        q: 'What is the AI product owner course fee in Hyderabad?',
+        q: 'What is the AI Product Owner course fee in Hyderabad?',
         a: 'Fees depend on the batch and payment option. Call or WhatsApp +91 90100 09225 for the current fees, EMI options and the next batch date.',
       },
       {
-        q: 'Does the AI product owner course include placement support?',
+        q: 'Does the AI Product Owner course include placement support?',
         a: 'Yes. It includes resume and LinkedIn help, mock interviews and job referrals through ARA’s IT staffing clients and partner companies until you land your first offer. Offers depend on your interview performance.',
       },
     ],

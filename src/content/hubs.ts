@@ -64,10 +64,10 @@ const workday: TrackHub = {
       'Workday courses in Hyderabad: HCM, Financials and Integrations. Live classes, hands-on projects, certification guidance and placement support.',
   },
   hero: {
-    title: 'Workday courses in Hyderabad with placement support',
+    title: 'Workday Courses in Hyderabad with Placement Support',
     accent: 'placement support',
     intro:
-      'Learn Workday HCM, Financials or Integrations with ARA Solutions in Madhapur, Hyderabad. Every Workday course includes live instructor-led classes, hands-on projects, certification guidance and placement support.',
+      'Learn Workday HCM, Financials or Integrations with ARA Solutions in Hyderabad. Every Workday course includes live instructor-led classes, hands-on projects, certification guidance and placement support.',
   },
   why: {
     title: 'Why learn Workday?',
@@ -180,7 +180,7 @@ const workday: TrackHub = {
   faqs: [
     {
       q: 'Which Workday course should I choose?',
-      a: 'Choose by background: Workday HCM if you come from HR, payroll or HRIS; Workday Financials if you come from accounting or finance; Workday Integrations if you come from development or other technical work. An advisor can help if you are unsure.',
+      a: 'Choose by background: Workday HCM if you come from HR, payroll or HRIS; Workday Finance if you come from accounting or finance; Workday Integration if you come from development or other technical work. An advisor can help if you are unsure.',
     },
     {
       q: 'How do I learn Workday from scratch?',
@@ -192,7 +192,7 @@ const workday: TrackHub = {
     },
     {
       q: 'Are the Workday classes live or recorded?',
-      a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded for revision. Our advisors are based in Madhapur, Hyderabad.',
+      a: 'Both. Classes are live and instructor-led on Zoom, and every class is recorded for revision. Our advisors are based in Hyderabad.',
     },
     {
       q: 'What are the Workday course fees?',
@@ -216,7 +216,7 @@ const workday: TrackHub = {
     },
     {
       q: 'Do I need coding for Workday?',
-      a: 'Not for Workday HCM or Financials. Workday Integrations uses XML, XSLT and APIs, which are taught in the course.',
+      a: 'Not for Workday HCM or Workday Finance. Workday Integration uses XML, XSLT and APIs, which are taught in the course.',
     },
   ],
   closing: {
@@ -231,13 +231,13 @@ const servicenow: TrackHub = {
     // The site adds " | ARA Solutions" (47 characters in all).
     title: 'ServiceNow Courses in Hyderabad',
     description:
-      'ServiceNow courses in Hyderabad: Admin, ITSM Development, Masters, HRSD, CRM, GRC, FDSE and BA. Live classes, projects, CSA/CIS prep and placement support.',
+      'ServiceNow courses in Hyderabad: Admin, ITSM Development, Masters, HRSD, CSM, GRC, FDSE and BA. Live classes, projects, CSA/CIS prep and placement support.',
   },
   hero: {
-    title: 'ServiceNow courses in Hyderabad, from admin to AI',
+    title: 'ServiceNow Courses in Hyderabad, from Admin to AI',
     accent: 'from admin to AI',
     intro:
-      'Choose from eight ServiceNow courses in Hyderabad at ARA Solutions, Madhapur: ServiceNow Admin, ITSM Development, Masters, HRSD, CRM, GRC, Forward Deployed Software Engineer (FDSE) and Business Analyst. Every course has live instructor-led classes, hands-on labs, real projects, certification guidance and placement support.',
+      'Choose from eight ServiceNow courses in Hyderabad at ARA Solutions: ServiceNow Admin, ITSM Development, Masters, HRSD, CSM, GRC, Forward Deployed Software Engineer (FDSE) and Business Analyst. Every course has live instructor-led classes, hands-on labs, real projects, certification guidance and placement support.',
   },
   why: {
     title: 'Why learn ServiceNow?',
@@ -319,7 +319,7 @@ const servicenow: TrackHub = {
   chooser: {
     title: 'How to learn ServiceNow: start from your background',
     intro:
-      'Pick the course that builds on what you already know. HRSD, CRM and GRC are easier with ServiceNow admin basics, so an advisor can tell you whether to take ServiceNow Admin first.',
+      'Pick the course that builds on what you already know. HRSD, CSM and GRC are easier with ServiceNow admin basics, so an advisor can tell you whether to take ServiceNow Admin first.',
     rows: [
       {
         label: 'New to ServiceNow',
@@ -386,7 +386,7 @@ const servicenow: TrackHub = {
   certifications: {
     title: 'ServiceNow certification path: what each course prepares you for',
     intro:
-      'Most people start with the Certified System Administrator (CSA) exam, which ServiceNow suggests before its implementation specialist (CIS) exams. They then add the developer exam (CAD) or the CIS exam for their module. Our courses prepare you for these exams, and you book them yourself through ServiceNow University.',
+      'Most people start with the Certified System Administrator (CSA) exam, which ServiceNow suggests before its Certified Implementation Specialist (CIS) exams. They then add the developer exam (CAD) or the CIS exam for their module. Our courses prepare you for these exams, and you book them yourself through ServiceNow University.',
     rows: [
       {
         name: 'ServiceNow Certified System Administrator (CSA)',
@@ -419,7 +419,7 @@ const servicenow: TrackHub = {
         badge: '/images/certifications/cis-rc.png',
       },
       {
-        name: 'ServiceNow Certified Implementation Specialist – Third-Party Risk Management (CIS-TPRM)',
+        name: 'ServiceNow Certified Implementation Specialist – Third-party Risk Management (CIS-TPRM)',
         slug: 'servicenow-grc',
         badge: '/images/certifications/cis-tprm.png',
         next: true,
@@ -459,7 +459,7 @@ const servicenow: TrackHub = {
   faqs: [
     {
       q: 'Which ServiceNow course is best for me?',
-      a: 'It depends on your background. Of our ServiceNow courses in Hyderabad, ServiceNow Admin and ServiceNow Masters suit people new to ServiceNow, and ITSM Development suits admins who want to code. HRSD, CRM and GRC suit HR, customer service and risk professionals, FDSE suits developers, and Business Analyst suits people who prefer requirements to configuration. An advisor can help you choose.',
+      a: 'It depends on your background. Of our ServiceNow courses in Hyderabad, ServiceNow Admin and ServiceNow Masters suit people new to ServiceNow, and ITSM Development suits admins who want to code. HRSD, CSM and GRC suit HR, customer service and risk professionals, FDSE suits developers, and Business Analyst suits people who prefer requirements to configuration. An advisor can help you choose.',
     },
     {
       q: 'How do I learn ServiceNow from scratch?',
@@ -479,7 +479,7 @@ const servicenow: TrackHub = {
     },
     {
       q: 'Which ServiceNow certification should I take first?',
-      a: 'Usually the Certified System Administrator (CSA), which ServiceNow suggests before its implementation specialist (CIS) exams. Developers then add CAD, and module specialists add the CIS exam for their area, such as CIS-HR, CIS-CSM or CIS-RC. CIS-ITSM now also needs the CIS – Data Foundations (CMDB and CSDM) certification.',
+      a: 'Usually the Certified System Administrator (CSA), which ServiceNow suggests before its Certified Implementation Specialist (CIS) exams. Developers then add CAD, and module specialists add the CIS exam for their area, such as CIS-HR, CIS-CSM or CIS-RC. CIS-ITSM now also needs the CIS – Data Foundations (CMDB and CSDM) certification.',
     },
     {
       q: 'Is ServiceNow a good career?',
@@ -519,10 +519,10 @@ const salesforce: TrackHub = {
       'Salesforce courses in Hyderabad: Admin, Admin & Developer with Agentforce, FDE and Business Analyst. Live classes, projects, exam prep and placement support.',
   },
   hero: {
-    title: 'Salesforce courses in Hyderabad, from admin to Agentforce',
+    title: 'Salesforce Courses in Hyderabad, from Admin to Agentforce',
     accent: 'from admin to Agentforce',
     intro:
-      'Choose from four Salesforce courses in Hyderabad at ARA Solutions, Madhapur: Salesforce Admin, Salesforce Admin & Developer with Agentforce, Salesforce Forward Deployed Engineer (FDE) and Salesforce Business Analyst. Every course has live instructor-led classes, hands-on labs in your own Salesforce org, real projects, certification guidance and placement support.',
+      'Choose from four Salesforce courses in Hyderabad at ARA Solutions: Salesforce Admin, Salesforce Admin & Developer with Agentforce, Salesforce Forward Deployed Engineer (FDE) and Salesforce Business Analyst. Every course has live instructor-led classes, hands-on labs in your own Salesforce org, real projects, certification guidance and placement support.',
   },
   why: {
     title: 'Why learn Salesforce?',
@@ -725,10 +725,10 @@ const aiData: TrackHub = {
       'AI and data courses in Hyderabad: AI & ML, Agentic AI, Data Science, Data Engineering, Data Analytics and AI Product Owner. Live classes and placement support.',
   },
   hero: {
-    title: 'AI and data courses in Hyderabad, from analytics to AI agents',
+    title: 'AI and Data Courses in Hyderabad, from Analytics to AI Agents',
     accent: 'from analytics to AI agents',
     intro:
-      'Choose from six AI and data courses in Hyderabad at ARA Solutions, Madhapur: AI & Machine Learning, Agentic AI Engineering, Data Science, Data Engineering, Data Analytics and AI Product Owner. Every course has live instructor-led classes, hands-on projects, certification guidance and placement support.',
+      'Choose from six AI and data courses in Hyderabad at ARA Solutions: AI & Machine Learning, Agentic AI Engineering, Data Science, Data Engineering, Data Analytics and AI Product Owner. Every course has live instructor-led classes, hands-on projects, certification guidance and placement support.',
   },
   why: {
     title: 'Why learn AI and data skills?',
@@ -964,10 +964,10 @@ const fullStack: TrackHub = {
       'Full stack developer course in Hyderabad: MERN, Python or Java with AI, plus Business Analyst with GenAI. Live classes, real projects and placement support.',
   },
   hero: {
-    title: 'Full stack developer course in Hyderabad: MERN, Python or Java',
+    title: 'Full Stack Developer Course in Hyderabad: MERN, Python or Java',
     accent: 'MERN, Python or Java',
     intro:
-      'Choose a full stack developer course in Hyderabad in the stack you want to work in: JavaScript (MERN), Python or Java, each with AI features built in. ARA Solutions in Madhapur also offers Business Analyst with GenAI for people who want to work on software projects without coding. Every course has live instructor-led classes, hands-on labs, three projects and a capstone, certification preparation and placement support.',
+      'Choose a full stack developer course in Hyderabad in the stack you want to work in: JavaScript (MERN), Python or Java, each with AI features built in. ARA Solutions also offers Business Analyst with GenAI for people who want to work on software projects without coding. Every course has live instructor-led classes, hands-on labs, three projects and a capstone, certification preparation and placement support.',
   },
   why: {
     title: 'Why learn full stack development?',
@@ -993,7 +993,7 @@ const fullStack: TrackHub = {
       bestFor: 'Freshers and graduates; front-end or back-end developers who want to go full stack',
       coding: 'Taught from the basics (JavaScript)',
       certifications: ['MongoDB Associate Developer'],
-      roles: ['Full Stack Developer', 'MERN Stack Developer', 'Front End (React) Developer'],
+      roles: ['Full Stack Developer', 'MERN Stack Developer', 'Front-End (React) Developer'],
     },
     {
       slug: 'business-analyst-genai',
@@ -1034,7 +1034,7 @@ const fullStack: TrackHub = {
   careers: {
     title: 'Full stack developer careers and salaries',
     intro:
-      'Is full stack developer a good career? Startups, product companies and IT services firms hire full stack developers at every level, and developers who can add AI features and deploy their own apps stand out. Typical annual salaries from AmbitionBox, for India and for Hyderabad:',
+      'Is full stack development a good career? Startups, product companies and IT services firms hire full stack developers at every level, and developers who can add AI features and deploy their own apps stand out. Typical annual salaries from AmbitionBox, for India and for Hyderabad:',
     salaries: [
       { role: 'Full Stack Developer', experience: '0 to 7 years', pay: '₹1.8 L to ₹15.4 L' },
       { role: 'Full Stack Developer (Hyderabad)', experience: 'Varies', pay: '₹2 L to ₹14.5 L' },
@@ -1123,7 +1123,7 @@ const fullStack: TrackHub = {
       a: 'Yes. Startups, product companies and IT services firms hire freshers as junior full stack, React, Java or Python developers. Deployed projects and a GitHub portfolio help a fresher stand out.',
     },
     {
-      q: 'Is full stack developer a good career?',
+      q: 'Is full stack development a good career?',
       a: 'It can be. Full stack developers are hired at every level, from startups to large IT services firms, and can grow into senior engineer, tech lead or solution architect roles. Adding AI skills and deployment experience makes a stronger profile.',
     },
     {

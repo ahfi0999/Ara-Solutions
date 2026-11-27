@@ -75,13 +75,13 @@ const organisationJsonLd = {
     {
       '@type': 'ContactPoint',
       contactType: 'admissions',
-      name: 'Training & placement',
+      name: 'Training & Placement',
       telephone: site.training.phone,
     },
   ],
   address: {
     '@type': 'PostalAddress',
-    addressLocality: `${site.address.area}, ${site.address.city}`,
+    addressLocality: site.address.city,
     addressRegion: site.address.region,
     addressCountry: 'IN',
   },

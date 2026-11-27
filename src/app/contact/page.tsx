@@ -7,7 +7,7 @@ import { EnquiryForm } from '@/components/enquiry/EnquiryForm';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: `Talk to an ARA Solutions advisor about Salesforce, ServiceNow, AI, Cybersecurity and Full Stack training. Call ${site.phone} (staffing) or ${trainingLine.phone} (training), or visit us in Madhapur, Hyderabad.`,
+  description: `Talk to an ARA Solutions advisor about Salesforce, ServiceNow, AI, cybersecurity and full stack training. Call ${site.phone}, or visit us in Hyderabad.`,
   alternates: { canonical: '/contact/' },
 };
 
@@ -15,7 +15,7 @@ const CHANNELS = [
   { icon: Phone, label: 'Staffing & services', value: site.phone, href: site.phoneHref },
   {
     icon: GraduationCap,
-    label: 'Training & placement',
+    label: 'Training & Placement',
     value: trainingLine.phone,
     href: trainingLine.phoneHref,
   },
@@ -29,7 +29,7 @@ const CHANNELS = [
   {
     icon: MapPin,
     label: 'Visit',
-    value: `${site.address.area}, ${site.address.city}, ${site.address.region}`,
+    value: `${site.address.city}, ${site.address.region}`,
     href: site.mapsUrl,
   },
 ];

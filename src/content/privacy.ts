@@ -1,56 +1,51 @@
 import { site } from './site';
 
 /**
- * The privacy notice (/privacy/), written for India's Digital Personal Data Protection Act, 2023.
- * It describes what this website really does today, so update it whenever a form, tool or tracking tag
- * changes (and change `updated`). Have a legal adviser review it.
+ * The privacy notice (/privacy/), from the client's "Privacy notice" document (Nov 2026), written for India's
+ * Digital Personal Data Protection Act, 2023. It must describe what the site and the team really do, so update
+ * it whenever a form, tool or tracking tag changes (and change `updated`). The document asks for a lawyer's
+ * review before it is final.
  *
- * Text supports **bold** and [links](https://example.com).
+ * Facts the client still has to supply are left out rather than guessed (see the document's "Confirm before
+ * publishing" list): registered office address and CIN, the grievance contact's name, response times, retention
+ * periods, office hours, and whether advertising tags are used. Add them here when they arrive.
+ * Ask ARA's provider (Groq) is taken from the site's settings; check it if the provider changes.
+ *
+ * Text supports **bold** and [links](https://example.com); table cells too.
  */
 
 export type PrivacyBlock =
   | { kind: 'text'; text: string }
-  | { kind: 'list'; items: { lead?: string; text: string }[] }
-  | { kind: 'table'; caption: string; head: string[]; rows: string[][] }
+  | { kind: 'list'; items: string[] }
+  /** `rowHead`: how the first column looks: names in code type (cookies), bold, or plain. */
+  | { kind: 'table'; caption: string; head: string[]; rows: string[][]; rowHead?: 'code' | 'bold' | 'plain' }
   | { kind: 'contact' };
 
 export type PrivacySection = { id: string; title: string; blocks: PrivacyBlock[] };
 
 export type Privacy = {
   updated: string;
-  appliesTo: string;
   intro: string;
-  /** The four-point summary at the top; `icon` picks the picture shown beside it. */
-  summary: { icon: 'collect' | 'use' | 'sell' | 'control'; title: string; text: string }[];
+  /** "Privacy at a glance": the short version, at the top. */
+  glance: string[];
   sections: PrivacySection[];
 };
 
+const email = `[${site.email}](${site.emailHref})`;
+const privacyEmail = `[${site.email}](${site.emailHref}?subject=Privacy%20request)`;
+
+export const privacyRequestHref = `${site.emailHref}?subject=Privacy%20request`;
+
 export const privacy: Privacy = {
-  updated: '19 November 2026',
-  appliesTo: 'arasolutions.in',
+  updated: '27 November 2026',
   intro:
-    'How ARA Solutions collects, uses and protects your personal information when you use our website or get in touch with us.',
-  summary: [
-    {
-      icon: 'collect',
-      title: 'Only what we need',
-      text: 'The details you choose to share, such as your name and phone number, and basic information about how the site is used.',
-    },
-    {
-      icon: 'use',
-      title: 'Used to help you',
-      text: 'To answer your enquiry, discuss hiring or training with you, and improve our website.',
-    },
-    {
-      icon: 'sell',
-      title: 'Never sold',
-      text: 'We do not sell your personal information or share it for others to market to you.',
-    },
-    {
-      icon: 'control',
-      title: 'You stay in control',
-      text: 'Ask us to see, correct or delete your information, or withdraw your consent, at any time.',
-    },
+    'This notice explains what personal information ARA Solutions collects, why we collect it, who sees it, how long we keep it, and what you can do about it. It applies to arasolutions.in and to the training, placement and staffing work we do through it, on the phone, on WhatsApp and by email.',
+  glance: [
+    'We collect only what we need to help you: your name, contact details, what you are looking for, and basic website usage.',
+    'We use it to answer your enquiry, run our training and placement, consider candidates for roles, and help employers hire.',
+    'We never sell your personal information, and we do not hand it to others so that they can market to you.',
+    'A candidate’s profile goes to an employer only after the candidate agrees to it for that role.',
+    `You can ask to see, correct or delete your data, or withdraw your consent, at any time. Write to ${email}.`,
   ],
   sections: [
     {
@@ -59,77 +54,110 @@ export const privacy: Privacy = {
       blocks: [
         {
           kind: 'text',
-          text: `${site.legalName} ("ARA Solutions", "we", "us" or "our") provides IT and non-IT staffing, recruitment and consulting services, and industry-focused training with placement assistance. We are based in ${site.address.area}, ${site.address.city}, ${site.address.region}, ${site.address.country}.`,
+          text: `${site.legalName} (“ARA”, “we”, “us”) is a company in ${site.address.city}, ${site.address.region}, ${site.address.country}. We provide IT training with placement support, corporate training, and IT and non-IT staffing and recruitment.`,
         },
         {
           kind: 'text',
-          text: 'This notice explains how we handle personal information when you visit arasolutions.in (the "website"), send us an enquiry, use our Ask ARA assistant, apply for a job with us, or contact us by phone, WhatsApp or email. Under India\'s Digital Personal Data Protection Act, 2023, ARA Solutions is the **Data Fiduciary** for this information.',
+          text: 'Under India’s Digital Personal Data Protection Act, 2023 (“DPDP Act”), ARA is the **Data Fiduciary** for the personal data described here. That means we decide why and how it is used, and we are responsible for looking after it.',
         },
       ],
     },
     {
-      id: 'information-we-collect',
-      title: 'Information we collect',
+      id: 'which-part',
+      title: 'Which part applies to you',
       blocks: [
-        { kind: 'text', text: '**Information you give us**' },
         {
-          kind: 'list',
-          items: [
-            {
-              lead: 'Enquiries',
-              text: 'When you send an enquiry form: your name, phone or WhatsApp number, email address (optional), the service or program you are interested in, your background (optional), any message you write, and the page you sent the form from.',
-            },
-            {
-              lead: 'Ask ARA conversations',
-              text: 'The questions you type into our Ask ARA assistant.',
-            },
-            {
-              lead: 'Job applications',
-              text: 'When you apply for a role at ARA Solutions by email: your resume and the details you include, such as your name, phone number, LinkedIn profile, experience and qualifications.',
-            },
-            {
-              lead: 'Calls, WhatsApp and email',
-              text: 'Your phone number or email address, and what you tell us when you contact us directly.',
-            },
+          kind: 'table',
+          caption: 'Which sections of this notice apply to you',
+          head: ['If you are…', 'What we hold', 'Read sections'],
+          rows: [
+            [
+              'Visiting the website',
+              'Technical and usage data, cookies',
+              '[3](#what-we-collect), [4](#cookies)',
+            ],
+            [
+              'Sending an enquiry or using Ask ARA',
+              'Your details and what you tell us',
+              '[3](#what-we-collect), [4](#cookies)',
+            ],
+            [
+              'A candidate or jobseeker',
+              'Your CV and career details',
+              '[3](#what-we-collect), [6](#sharing)',
+            ],
+            [
+              'A learner or course applicant',
+              'Your enrolment, progress and placement records',
+              '[3](#what-we-collect), [6](#sharing)',
+            ],
+            [
+              'An employer or client',
+              'Your business contact details and hiring needs',
+              '[3](#what-we-collect), [6](#sharing)',
+            ],
           ],
         },
-        {
-          kind: 'text',
-          text: '**Information collected automatically.** When you browse the website, we and our service providers collect technical information such as your IP address, browser and device type, the pages you visit, how you reached our site, and the date and time of your visit. Some of it is collected through cookies (see [Cookies and analytics](#cookies)).',
-        },
-        {
-          kind: 'text',
-          text: 'Please do not share sensitive information, such as bank details, government ID numbers or health information, through our forms or the Ask ARA assistant. We do not need it to respond to you.',
-        },
+        { kind: 'text', text: 'Sections 5 to 13 apply to everyone.' },
       ],
     },
     {
-      id: 'how-we-use',
-      title: 'How we use your information',
+      id: 'what-we-collect',
+      title: 'What we collect, why, and who sees it',
       blocks: [
         {
-          kind: 'list',
-          items: [
-            {
-              text: 'To respond to your enquiry and contact you about it by phone, WhatsApp or email, as you agreed when you sent it.',
-            },
-            {
-              text: 'To discuss and provide our staffing, recruitment, consulting, training and placement services.',
-            },
-            { text: 'To consider you for roles at ARA Solutions when you apply for a job.' },
-            { text: 'To answer your questions through the Ask ARA assistant.' },
-            {
-              text: 'To understand how visitors use the website, so we can improve it and measure how well our marketing works.',
-            },
-            {
-              text: 'To keep the website secure, prevent spam and abuse (for example, by limiting how many messages can be sent in a short time), and fix problems.',
-            },
-            { text: 'To meet our legal obligations and protect our legal rights.' },
+          kind: 'text',
+          text: 'We list each kind of information, the reason we collect it, and who inside or outside ARA can see it.',
+        },
+        {
+          kind: 'table',
+          caption: 'What we collect, why we need it and who sees it',
+          head: ['What you give us', 'Why we need it', 'Who sees it'],
+          rowHead: 'plain',
+          rows: [
+            [
+              '**Enquiry form:** your name, phone or WhatsApp number, the service you are interested in and, if you choose, your email, background, message and the page you came from',
+              'To reply, discuss training or hiring, and follow up',
+              'Our counsellors and recruiters handling your enquiry',
+            ],
+            [
+              '**Ask ARA assistant:** the questions you type',
+              'To produce an answer',
+              'Our AI provider, Groq. We do not store these conversations on our servers',
+            ],
+            [
+              '**Candidates:** CV, contact details, experience, qualifications, skills, LinkedIn profile if you share it, and notes from our conversations with you',
+              'To assess your fit, match you to roles, and put you forward when you agree',
+              'Our recruitment team. An employer, only as set out in [section 6](#sharing)',
+            ],
+            [
+              '**Learners:** name, contact details, education and work background, CV, enrolment details, attendance and assessment records, and placement-support records',
+              'To run your course, track your progress and support your job search',
+              'Your trainers, our placement team and our administrators',
+            ],
+            [
+              '**Employers and clients:** your name, role, company, work email and phone, and the roles or skills you need',
+              'To understand your brief, find suitable candidates and manage our work with you',
+              'Our client-engagement and recruitment teams',
+            ],
+            [
+              '**Calls, WhatsApp and email:** your contact details and what you tell us',
+              'To answer you and keep a record of what we agreed',
+              'The team member handling your conversation',
+            ],
           ],
         },
         {
           kind: 'text',
-          text: 'We use your information with your consent, which you give when you send a form or contact us, or where the law otherwise allows it. You can withdraw your consent at any time (see [Your rights](#your-rights)). This does not affect what we did before you withdrew it, but we may no longer be able to help with your enquiry.',
+          text: 'Please do not send us bank details, government ID numbers (such as Aadhaar or PAN) or health information unless we have specifically asked for them for a stated reason. If a CV contains them, we will remove them.',
+        },
+        {
+          kind: 'text',
+          text: '**Collected automatically when you visit the site:** your IP address, browser and device type, the pages you view, how you reached us, and the date and time of your visit. We use this to keep the site secure, stop spam and abuse (including rate limiting), fix problems and understand how the site is used.',
+        },
+        {
+          kind: 'text',
+          text: '**Ask ARA.** Ask ARA is an AI assistant. What you type is passed to our AI provider so it can write a reply. We do not keep the conversation on our servers. Because the provider handles it under its own terms, please do not type personal details, such as your phone number or CV, into the chat. Use the enquiry form for that.',
         },
       ],
     },
@@ -139,40 +167,64 @@ export const privacy: Privacy = {
       blocks: [
         {
           kind: 'text',
-          text: 'Cookies are small files that a website stores in your browser. We use a small number of them, mainly to understand how the website is used.',
+          text: 'Cookies are small files that a website stores in your browser. We use only the following.',
         },
         {
           kind: 'table',
           caption: 'Cookies and browser storage used on this website',
-          head: ['Name', 'Provider', 'Purpose', 'Kept for'],
+          head: ['Name', 'Set by', 'What it does', 'How long it lasts'],
+          rowHead: 'code',
           rows: [
             [
               'Google Tag Manager',
               'Google',
-              'Loads our measurement tools on the website. It does not set cookies itself.',
-              'Not stored',
+              'Loads our measurement tools. Sets no cookies of its own',
+              'Nothing is stored',
             ],
             [
               '_ga, _ga_*',
               'Google Analytics',
-              'Counts visits and shows, in combined reports, how people find and use the website.',
+              'Counts visits and builds combined reports on how the site is used',
               'Up to 2 years',
             ],
             [
               'ara-dock-min',
               'ARA Solutions',
-              'Remembers whether you minimised the contact panel. Stays in your browser and is never sent to us.',
-              'Until you close the tab',
+              'Remembers whether you minimised the contact panel',
+              'Until you close the tab. Never sent to us',
             ],
           ],
         },
         {
           kind: 'text',
-          text: 'Google handles this information under its own privacy policy. Read [how Google uses information from sites that use its services](https://policies.google.com/technologies/partner-sites), or opt out of Google Analytics on every website with the [Google Analytics opt-out browser add-on](https://tools.google.com/dlpage/gaoptout).',
+          text: 'You can block or delete cookies in your browser settings, or install Google’s [Analytics opt-out add-on](https://tools.google.com/dlpage/gaoptout). The site works without them. For how Google handles data, see [Google’s own privacy policy](https://policies.google.com/privacy).',
+        },
+      ],
+    },
+    {
+      id: 'why-we-use',
+      title: 'Why we may use your information',
+      blocks: [
+        {
+          kind: 'text',
+          text: 'We use your information with your consent. You give it when you submit a form, contact us, apply for a role or enrol on a course. You can withdraw it at any time ([section 10](#your-rights)).',
         },
         {
           kind: 'text',
-          text: 'You can also block or delete cookies in your browser settings. The website still works if you do.',
+          text: 'Some uses do not need consent because the law allows them. For example, we may keep records or share information where a law, court or government authority requires it, or to protect rights, safety or property.',
+        },
+        { kind: 'text', text: 'We use your information for these purposes, and no others:' },
+        {
+          kind: 'list',
+          items: [
+            'replying to your enquiry and contacting you by phone, WhatsApp or email about it;',
+            'running training and placement, and delivering staffing, recruitment and consulting services;',
+            'considering candidates for roles and putting them forward;',
+            'answering your questions in Ask ARA;',
+            'measuring and improving the website and our marketing;',
+            'keeping our systems secure and preventing spam and abuse;',
+            'meeting our legal obligations and protecting our legal rights.',
+          ],
         },
       ],
     },
@@ -180,34 +232,55 @@ export const privacy: Privacy = {
       id: 'sharing',
       title: 'Who we share it with',
       blocks: [
+        { kind: 'text', text: 'We never sell your personal information.' },
         {
-          kind: 'text',
-          text: 'We do not sell your personal information. We share it only as described below.',
-        },
-        {
-          kind: 'list',
-          items: [
-            {
-              lead: 'Service providers',
-              text: 'Companies that help us run the website and our business, such as our hosting provider (Amazon Web Services), our email and customer-management tools, Google Analytics, and the AI provider that powers Ask ARA. They may use your information only to provide their services to us.',
-            },
-            {
-              lead: 'Employers and clients',
-              text: 'If you are a candidate or student, we share your profile with prospective employers only for roles you have agreed to be considered for.',
-            },
-            {
-              lead: 'Legal reasons',
-              text: 'Government authorities, courts or regulators, where the law requires it, or to protect the rights, safety and property of ARA Solutions, our users or others.',
-            },
-            {
-              lead: 'Business changes',
-              text: 'A buyer or successor, if ARA Solutions is involved in a merger, acquisition or sale of assets. Your information would stay protected by this notice.',
-            },
+          kind: 'table',
+          caption: 'Who we share personal information with',
+          head: ['Who', 'What they receive', 'Why'],
+          rows: [
+            [
+              'Employers and clients',
+              'A candidate’s profile (CV and relevant details)',
+              'Only for a role the candidate has agreed to be put forward for',
+            ],
+            [
+              'Service providers',
+              'Only what they need to do their job',
+              'Website hosting (Amazon Web Services, Mumbai region), Google Sheets and our email and customer-management tools, Google Analytics, and our Ask ARA provider (Groq)',
+            ],
+            [
+              'Authorities and advisers',
+              'Information the law requires, or that we need to protect our rights',
+              'Legal, regulatory or court requirements, and our professional advisers, under a duty of confidentiality',
+            ],
+            [
+              'A successor business',
+              'Relevant records',
+              'If ARA is merged with, or sold to, another business. We will tell you, and this notice will keep applying',
+            ],
           ],
         },
         {
           kind: 'text',
-          text: 'Some of our service providers may store or process information outside India. When they do, we take steps to keep it protected as this notice describes and as Indian law requires.',
+          text: 'Our service providers act on our instructions and may not use your information for their own purposes.',
+        },
+        {
+          kind: 'text',
+          text: '**Candidates.** Before we send your profile to an employer, we tell you the role and the company, or describe the company if its name is confidential, and ask whether you want to be considered. We go ahead only when you say yes, by call, WhatsApp or email. You can say no, and you can withdraw later.',
+        },
+      ],
+    },
+    {
+      id: 'storage',
+      title: 'Where your information is stored',
+      blocks: [
+        {
+          kind: 'text',
+          text: 'Our website is hosted by Amazon Web Services in its Mumbai region, in India. Some of our providers, such as Google and our AI provider, may process information outside India, including in the United States. Where that happens, we choose providers with established security practices and rely on the protections in our agreements with them.',
+        },
+        {
+          kind: 'text',
+          text: 'If you contact us from outside India, for example from the UK or EU, local law may give you additional rights. Tell us and we will respond to your request in line with the law that applies to you.',
         },
       ],
     },
@@ -217,11 +290,37 @@ export const privacy: Privacy = {
       blocks: [
         {
           kind: 'text',
-          text: 'We keep personal information only for as long as we need it for the purposes in this notice. For example, we keep enquiry details while we help you and follow up, and job applications while the role is open. We then delete or anonymise it, unless the law requires us to keep it longer. Analytics data is kept according to the retention settings of our Google Analytics account.',
+          text: 'We keep information only for as long as we need it for the purpose it was collected for. After that we delete or anonymise it, unless the law requires us to keep it longer.',
         },
         {
-          kind: 'text',
-          text: 'We do not store Ask ARA conversations. Your messages are sent to our AI provider to write a reply and are not saved on our servers. The provider handles them under its own terms.',
+          kind: 'table',
+          caption: 'How long we keep each kind of information',
+          head: ['Information', 'How long we keep it'],
+          rows: [
+            [
+              'Enquiry details',
+              'While we help you with your enquiry and follow up. You can ask us to delete them sooner',
+            ],
+            [
+              'Candidate CVs and profiles',
+              'While you are an active candidate, and longer only if you ask us to keep you on file for future roles. You can ask us to delete it sooner',
+            ],
+            [
+              'Learner records',
+              'While you are on the course and while we support your placement, so we can confirm your course details',
+            ],
+            [
+              'Employer and client contacts',
+              'While we work together, and afterwards only as long as our records need',
+            ],
+            [
+              'Website server logs (including IP addresses)',
+              'Only as long as we need them to keep the site secure and fix problems',
+            ],
+            ['Analytics data', 'As set in our Google Analytics account'],
+            ['Ask ARA conversations', 'Not stored by us. Held by the AI provider under its own terms'],
+            ['Records we must keep by law, such as accounts', 'For the period the law requires'],
+          ],
         },
       ],
     },
@@ -231,7 +330,11 @@ export const privacy: Privacy = {
       blocks: [
         {
           kind: 'text',
-          text: 'We use reasonable security safeguards to protect your information. The website is served only over encrypted connections (HTTPS), access to enquiries is limited to the people who need it, and we work with established service providers. No method of sending or storing information is completely secure, but if a personal data breach ever happens, we will inform you and the authorities as the law requires.',
+          text: 'We use reasonable security safeguards. The site is served only over HTTPS. Only the staff who need an enquiry, CV or learner record to do their work can open it. We use established, reputable providers and review who has access.',
+        },
+        {
+          kind: 'text',
+          text: 'If a personal-data breach affects you, we will tell you and the authorities as the law requires.',
         },
       ],
     },
@@ -239,35 +342,39 @@ export const privacy: Privacy = {
       id: 'your-rights',
       title: 'Your rights',
       blocks: [
-        {
-          kind: 'text',
-          text: "Under India's Digital Personal Data Protection Act, 2023, you have the right to:",
-        },
+        { kind: 'text', text: 'You can ask us to:' },
         {
           kind: 'list',
           items: [
-            {
-              lead: 'Access',
-              text: 'get a summary of the personal information we hold about you and how we use it.',
-            },
-            {
-              lead: 'Correction and erasure',
-              text: 'have inaccurate or incomplete information corrected or updated, and information we no longer need deleted.',
-            },
-            { lead: 'Withdraw consent', text: 'at any time, as easily as you gave it.' },
-            {
-              lead: 'Grievance redressal',
-              text: 'raise a complaint with us about how we handle your information.',
-            },
-            {
-              lead: 'Nominate',
-              text: 'choose someone to exercise these rights for you in the event of your death or incapacity.',
-            },
+            'show you a summary of the personal data we hold about you, and who we have shared it with;',
+            'correct, complete or update anything that is wrong or out of date;',
+            'erase your data, unless the law requires us to keep it;',
+            'withdraw your consent at any time. This will not affect what we did before you withdrew it. It may mean we can no longer provide a service that needs your data;',
+            'deal with a complaint about how we have handled your data;',
+            'nominate another person to exercise your rights if you die or become unable to act for yourself.',
           ],
         },
         {
           kind: 'text',
-          text: `To use any of these rights, email [${site.email}](${site.emailHref}) with the name and the phone number or email address you used with us, so we can confirm the request is yours. If you are not satisfied with our response, you can complain to the Data Protection Board of India.`,
+          text: `**How to make a request.** Email ${privacyEmail} with the subject line “Privacy request”, or call [${site.phone}](${site.phoneHref}). Tell us your name and the phone number or email you used with us, so that we can find your records and confirm it is you. There is no charge.`,
+        },
+        {
+          kind: 'text',
+          text: '**How quickly we reply.** We acknowledge your request promptly and reply as soon as we can. If we need longer, we will tell you why. The law allows up to 90 days for grievances, and we will never take longer.',
+        },
+        {
+          kind: 'text',
+          text: '**If you are not satisfied.** Contact us first ([section 13](#contact)). If we have not resolved your complaint, you can complain to the Data Protection Board of India.',
+        },
+      ],
+    },
+    {
+      id: 'marketing',
+      title: 'Calls, WhatsApp, email and marketing',
+      blocks: [
+        {
+          kind: 'text',
+          text: 'We contact you about what you asked us about. If we also send you information about other courses or roles, every message will tell you how to stop. You can also tell us on a call, by WhatsApp or by email, and we will stop. Stopping marketing does not stop messages we need to send about a course or role you have already joined or applied for.',
         },
       ],
     },
@@ -277,38 +384,23 @@ export const privacy: Privacy = {
       blocks: [
         {
           kind: 'text',
-          text: 'Our website and services are meant for people aged 18 and over, and we do not knowingly collect personal information from children. If you are under 18, please ask a parent or guardian to contact us for you. If you believe a child has shared information with us, contact us and we will delete it.',
-        },
-      ],
-    },
-    {
-      id: 'other-websites',
-      title: 'Links to other websites',
-      blocks: [
-        {
-          kind: 'text',
-          text: 'Our website links to services run by others, such as WhatsApp and Google Maps. Their own privacy policies apply when you use them.',
-        },
-      ],
-    },
-    {
-      id: 'changes',
-      title: 'Changes to this notice',
-      blocks: [
-        {
-          kind: 'text',
-          text: 'We may update this notice from time to time, for example when we add features to the website or the law changes. We will post the new version on this page and update the "Last updated" date at the top. If the changes are significant, we will make that clear on the website.',
+          text: `Our services are for people aged 18 and over. We do not knowingly collect personal data from anyone under 18. If you believe a child has given us their information, email ${email} and we will delete it, unless the law requires us to keep it.`,
         },
       ],
     },
     {
       id: 'contact',
-      title: 'Contact us',
+      title: 'Other websites, changes and contact',
       blocks: [
         {
           kind: 'text',
-          text: 'Questions about this notice or how we handle your information, or want to use your rights? Contact us:',
+          text: '**Links to other sites.** Our site links to services such as WhatsApp and Google Maps. They have their own privacy policies, and this notice does not cover them.',
         },
+        {
+          kind: 'text',
+          text: '**Changes to this notice.** If we change how we use your data, we will update this page and its “Last updated” date. For a significant change, we will show a notice on the site, and we will ask for your consent again if the law requires it.',
+        },
+        { kind: 'text', text: '**Contact us, and our grievance contact**' },
         { kind: 'contact' },
       ],
     },

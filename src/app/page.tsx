@@ -80,7 +80,7 @@ export default function HomePage() {
         id="for-professionals"
         label="For individuals"
         title="Build the career companies hire for"
-        text="Six career-focused programs with real projects, interview preparation and placement assistance."
+        text="Six career tracks with real projects, interview preparation and placement assistance."
         href="/training-placement/"
         cta="Explore all programs"
         icon={GraduationCap}
