@@ -10,11 +10,13 @@ import {
   type ComponentProps,
   type ReactNode,
 } from 'react';
+import { flushSync } from 'react-dom';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { snoozeNudge } from '@/lib/visit-memory';
 import { EnquiryForm } from './EnquiryForm';
 
-type OpenOptions = { interest?: string; title?: string };
+export type OpenOptions = { interest?: string; title?: string; intro?: string };
 type EnquiryContextValue = { open: (options?: OpenOptions) => void };
 
 const EnquiryContext = createContext<EnquiryContextValue | null>(null);
@@ -33,8 +35,11 @@ export function EnquiryProvider({ children }: { children: ReactNode }) {
   const [formKey, setFormKey] = useState(0);
 
   const open = useCallback((next: OpenOptions = {}) => {
-    setOptions(next);
-    setFormKey((key) => key + 1);
+    // Put the new heading and a fresh form in place before the dialog shows, so it never flashes the old ones.
+    flushSync(() => {
+      setOptions(next);
+      setFormKey((key) => key + 1);
+    });
     dialogRef.current?.showModal();
   }, []);
   const close = useCallback(() => dialogRef.current?.close(), []);
@@ -45,6 +50,8 @@ export function EnquiryProvider({ children }: { children: ReactNode }) {
     if (!dialog) return;
     const observer = new MutationObserver(() => {
       document.documentElement.style.overflow = dialog.open ? 'hidden' : '';
+      // However the form is closed (cross, Esc, outside click, after sending), the timed pop-up waits 2 minutes.
+      if (!dialog.open) snoozeNudge();
     });
     observer.observe(dialog, { attributes: true, attributeFilter: ['open'] });
     return () => observer.disconnect();
@@ -77,6 +84,7 @@ export function EnquiryProvider({ children }: { children: ReactNode }) {
               {options.title}
             </h2>
           )}
+          {options.intro && <p className="mt-2 pr-10 text-muted">{options.intro}</p>}
           <div className="mt-6">
             <EnquiryForm key={formKey} defaultInterest={options.interest} compact onDone={close} />
           </div>

@@ -6,6 +6,7 @@ import { CheckCircle2, Loader2, MessageCircle, Phone } from 'lucide-react';
 import { BACKGROUNDS, INTERESTS, enquirySummary, validateEnquiry, type FieldErrors } from '@/lib/enquiry';
 import { lineFor, staffingLine, trainingLine, whatsappLink, type ContactLine } from '@/content/site';
 import { cn } from '@/lib/cn';
+import { markEnquirySent } from '@/lib/visit-memory';
 
 type Status = 'idle' | 'sending' | 'sent' | 'fallback';
 
@@ -100,6 +101,7 @@ export function EnquiryForm({
       });
       const result = await response.json().catch(() => ({}));
       if (response.ok && result.ok) {
+        markEnquirySent(); // the timed pop-up never shows again
         setStatus('sent');
         return;
       }

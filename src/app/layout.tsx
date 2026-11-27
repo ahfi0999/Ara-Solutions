@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google';
 import { site } from '@/content/site';
 import { homeSeo } from '@/content/seo';
 import { EnquiryProvider } from '@/components/enquiry/EnquiryProvider';
+import { EnquiryNudge } from '@/components/enquiry/EnquiryNudge';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ContactDock } from '@/components/layout/ContactDock';
@@ -104,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         <ScrollProgress />
         <EnquiryProvider>
+          <EnquiryNudge />
           <Header />
           <main id="main">{children}</main>
           <Footer />
