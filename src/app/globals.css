@@ -131,6 +131,48 @@
   }
 }
 
+/* Career path walker (PathWalker in HubVisuals): legs and arms swing while it walks, one arm waves at the end. */
+@keyframes walker-swing {
+  from {
+    transform: rotate(26deg);
+  }
+  to {
+    transform: rotate(-26deg);
+  }
+}
+@keyframes walker-bob {
+  to {
+    transform: translateY(-1.5px);
+  }
+}
+@keyframes walker-wave {
+  from {
+    transform: rotate(-98deg);
+  }
+  to {
+    transform: rotate(-128deg);
+  }
+}
+.walker-leg {
+  transform-origin: 12px 27px;
+}
+.walker-arm {
+  transform-origin: 12px 19px;
+}
+.walker-walking {
+  animation: walker-bob 0.17s ease-in-out infinite alternate;
+}
+.walker-walking .walker-a {
+  animation: walker-swing 0.34s ease-in-out infinite alternate;
+}
+.walker-walking .walker-b {
+  animation: walker-swing 0.34s ease-in-out infinite alternate-reverse;
+}
+.walker-waving .walker-wave {
+  transform: rotate(-110deg);
+  animation: walker-wave 0.4s ease-in-out infinite alternate;
+}
+
 /* Soft aurora used behind dark heroes. */
 .aurora {
   background:

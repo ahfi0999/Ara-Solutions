@@ -15,7 +15,7 @@ import {
   Terminal,
   TrendingUp,
 } from 'lucide-react';
-import { AnimatePresence, motion, useInView } from 'motion/react';
+import { AnimatePresence, motion, useAnimate, useInView } from 'motion/react';
 import { EASE, useReducedMotionSafe } from '@/components/motion/primitives';
 import { ButtonLink } from '@/components/ui/Button';
 import { LinkedText } from '@/components/ui/LinkedText';
@@ -289,7 +289,7 @@ export function PathSteps({ steps }: { steps: { stage: string; roles: string }[]
   const reduce = useReducedMotionSafe();
   const inView = { once: true, margin: '0px 0px -12% 0px' } as const;
   return (
-    <ol className="relative mt-8 grid gap-5 md:grid-cols-3">
+    <ol className="relative mt-8 grid gap-5 md:mt-16 md:grid-cols-3">
       {/* The line between the step numbers (wide screens, where the steps sit side by side). */}
       <span
         aria-hidden
@@ -302,15 +302,8 @@ export function PathSteps({ steps }: { steps: { stage: string; roles: string }[]
           viewport={inView}
           transition={{ duration: 1.6, ease: EASE, delay: 0.2 }}
         />
-        {!reduce && (
-          <motion.span
-            className="absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_10px_3px_rgb(229_35_45/0.65)]"
-            initial={{ left: '0%', opacity: 0 }}
-            animate={{ left: ['0%', '99%'], opacity: [0, 1, 1, 0] }}
-            transition={{ duration: 2.4, ease: 'easeInOut', repeat: Infinity, repeatDelay: 0.8, delay: 2 }}
-          />
-        )}
       </span>
+      <PathWalker />
       {steps.map((step, index) => (
         <motion.li
           key={step.stage}
@@ -352,6 +345,180 @@ export function PathSteps({ steps }: { steps: { stage: string; roles: string }[]
         </motion.li>
       ))}
     </ol>
+  );
+}
+
+type WalkerMode = 'still' | 'walking' | 'waving';
+
+/**
+ * A small figure that walks the career path on wide screens. It hops onto each step number and changes as it
+ * goes: a backpack at 1 (start), a laptop bag at 2 (grow), a crown and a wave at 3 (lead), then starts again.
+ * Drawn in code, no image. With reduced motion it stands still on step 3; on phones (no line) it is hidden.
+ */
+function PathWalker() {
+  const reduce = useReducedMotionSafe();
+  const [scope, animate] = useAnimate<HTMLSpanElement>();
+  const seen = useInView(scope, { once: true, margin: '0px 0px -12% 0px' });
+  const [stage, setStage] = useState(0);
+  const [mode, setMode] = useState<WalkerMode>('still');
+
+  useEffect(() => {
+    if (!seen || reduce) return;
+    let live = true;
+    const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+    (async () => {
+      animate('.walker-body', { x: 0, y: -28 }, { duration: 0 });
+      await pause(1900); // let the line draw first
+      while (live) {
+        setStage(0);
+        animate('.walker-track', { x: '0%' }, { duration: 0 });
+        await animate('.walker-body', { opacity: 1 }, { duration: 0.4 });
+        for (const [to, next] of [
+          ['50%', 1],
+          ['100%', 2],
+        ] as const) {
+          await pause(800);
+          if (!live) return;
+          // Hop down off the number, walk to the next one, hop up onto it.
+          await animate(
+            '.walker-body',
+            { x: [0, 20, 40], y: [-28, -34, 0] },
+            {
+              duration: 0.45,
+              ease: ['easeOut', 'easeIn'],
+            },
+          );
+          setMode('walking');
+          await Promise.all([
+            animate('.walker-track', { x: to }, { duration: 2.4, ease: 'linear' }),
+            animate('.walker-body', { x: -40 }, { duration: 2.4, ease: 'linear' }),
+          ]);
+          setMode('still');
+          await animate(
+            '.walker-body',
+            { x: [-40, -20, 0], y: [0, -36, -28] },
+            {
+              duration: 0.45,
+              ease: ['easeOut', 'easeIn'],
+            },
+          );
+          setStage(next);
+        }
+        setMode('waving');
+        await pause(2000);
+        setMode('still');
+        await animate('.walker-body', { opacity: 0 }, { duration: 0.4 });
+        await pause(700);
+      }
+    })();
+    return () => {
+      live = false;
+    };
+  }, [seen, reduce, animate]);
+
+  return (
+    <span
+      ref={scope}
+      aria-hidden
+      className="pointer-events-none absolute left-[16%] right-[16%] top-7 z-20 hidden h-0.5 md:block"
+    >
+      <span
+        className="walker-track absolute inset-x-0 top-0 block h-0"
+        style={reduce ? { transform: 'translateX(100%)' } : undefined}
+      >
+        <span
+          className="walker-body absolute bottom-0 left-0 -ml-3 block"
+          style={reduce ? { transform: 'translateY(-28px)' } : { opacity: 0 }}
+        >
+          <KidFigure stage={reduce ? 2 : stage} mode={reduce ? 'still' : mode} />
+        </span>
+      </span>
+    </span>
+  );
+}
+
+/** The walker: a kid facing right. Stage 0 carries a backpack, 1 a laptop bag, 2 wears a crown. */
+function KidFigure({ stage, mode }: { stage: number; mode: WalkerMode }) {
+  const only = (on: boolean) => cn('transition-opacity duration-300', on ? 'opacity-100' : 'opacity-0');
+  const skin = '#f1c19c';
+  return (
+    <svg
+      viewBox="0 0 24 38"
+      width="24"
+      height="38"
+      className={cn(
+        'block overflow-visible',
+        mode === 'walking' && 'walker-walking',
+        mode === 'waving' && 'walker-waving',
+      )}
+    >
+      {/* Back arm and both legs sit behind the body. */}
+      <g className="walker-arm walker-b">
+        <path d="M12 19v6" className="stroke-brand-600" strokeWidth="2.6" strokeLinecap="round" />
+        <circle cx="12" cy="26.2" r="1.4" fill={skin} />
+      </g>
+      <path
+        d="M12 27v8.5h3"
+        className="walker-leg walker-a stroke-ink"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <path
+        d="M12 27v8.5h3"
+        className="walker-leg walker-b stroke-ink"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <rect
+        x="3.2"
+        y="17.5"
+        width="5.8"
+        height="8.5"
+        rx="2"
+        className={cn('fill-sky-500', only(stage === 0))}
+      />
+      <rect x="7.5" y="17" width="9" height="11" rx="3.5" className="fill-brand" />
+      <path
+        d="M10 17.6v6.2"
+        className={cn('stroke-sky-700', only(stage === 0))}
+        strokeWidth="1.3"
+        strokeLinecap="round"
+      />
+      <g className={only(stage === 1)}>
+        <path d="M9 17.6 16 24" className="stroke-ink" strokeWidth="1.1" strokeLinecap="round" />
+        <rect x="14" y="23.5" width="7.5" height="5.5" rx="1.2" className="fill-ink" />
+      </g>
+      {/* Head, hair and face. */}
+      <circle cx="12" cy="11" r="6" fill={skin} />
+      <path
+        d="M6 11.2A6 6 0 0 1 18 10.4C16.6 8.6 14 7.8 11.6 8.6 9.6 9.3 7.6 10.2 6 11.2Z"
+        className="fill-ink"
+      />
+      <path d="M6.1 10.6A6 6 0 0 0 8.4 15.8L9 11.2Z" className="fill-ink" />
+      <circle cx="14.8" cy="11.4" r="0.95" className="fill-ink" />
+      <path
+        d="M13.6 13.9q1.3 1.1 2.7 0"
+        className="stroke-ink"
+        strokeWidth="0.9"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M7.6 6.2 8.3 2.2 10.4 4.4 12 1.4 13.6 4.4 15.7 2.2 16.4 6.2Z"
+        className={cn('fill-amber-400 stroke-amber-500', only(stage === 2))}
+        strokeWidth="0.6"
+        strokeLinejoin="round"
+      />
+      {/* Front arm: swings while walking, waves at the end. */}
+      <g className="walker-arm walker-a walker-wave">
+        <path d="M12 19v6" className="stroke-brand-600" strokeWidth="2.6" strokeLinecap="round" />
+        <circle cx="12" cy="26.2" r="1.4" fill={skin} />
+      </g>
+    </svg>
   );
 }
 
